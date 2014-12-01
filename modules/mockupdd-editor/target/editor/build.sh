@@ -1,0 +1,1 @@
+java -jar "D:\Software\ClosureCompiler\compiler.jar" --js_output_file mockupddEngine.js --js `cat filelist.txt` --formatting PRETTY_PRINT

@@ -1,0 +1,53 @@
+.mockupdd-tagger-highlighted-element {
+	box-shadow: 0px 0px 5px red;
+}
+
+.mockupdd-tagger-menu {
+	position: absolute;
+	background-color: #366092;
+	box-shadow: 2px 2px 10px black;
+}
+
+.mockupdd-tagger-menu-item {
+	padding: 3px;
+	color: white;
+	cursor: pointer;
+}
+
+.mockupdd-tagger-selected-overlay {
+	border: 2px solid #366092;
+	position: absolute;
+}
+
+ul.mockupdd-tagger-menu {
+	list-style: none;
+	z-index: 102;
+}
+
+.mockupdd-tag-widget {
+	position: absolute;
+	background-color: #366092;
+	color: white;
+	padding: 2px;
+	box-shadow: 2px 2px 10px black;
+	z-index: 100;
+}
+
+.mockupdd-tag-widget-editing-mode {
+	z-index: 101;
+	padding: 5px;
+}
+
+.mockupdd-data-tag {
+	background-color: #E36C09;
+	color: white;
+}
+
+.mockupdd-action-tag {
+	background-color: #76923C;
+	color: white;
+}
+
+.mockupdd-tag-cancel-button, .mockupdd-tag-ok-button, .mockupdd-tag-delete-button {
+	margin: 3px;
+}
