@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+<title>MockupDD - New Invoice</title>
+
+<script src="../../libs/jquery.js"></script>
+<script src=",,/../libs/bootstrap3.min.js"></script>
+
+<link rel="stylesheet" href="../../css/bootstrap3.min.css">
+
+<style type="text/css"></style>
+
+<script>
+
+    function getParameterByName(name) {
+    	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+    	return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+	$(document).ready(function() {
+		$("iframe").load(function() {
+			$("iframe").css("height", ($("iframe").contents().height() + 300) + "px");	
+		})
+		$("iframe").attr("src", getParameterByName("page"));
+	});
+	
+
+
+</script>
+</head>
+<body>
+
+  <nav class="navbar navbar-default" role="navigation">
+    <a class="navbar-brand">MockupDD</a>
+    <ul class="nav navbar-nav">
+      <li><a href="../MyInvoices.html">&lt; Back</a></li>
+    </ul>
+    
+  </nav>
+
+
+  <div class="container">
+
+   <iframe src="" style="border: none; width: 100%;"></iframe>
+
+  </div>
+
+  
+
+  </div>
+
+
+</body>
+</html>
