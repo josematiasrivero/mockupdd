@@ -1,5 +1,6 @@
 package com.mockupdd.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
@@ -8,7 +9,7 @@ public class Project {
 	private List<Mockup> mockups;
 	
 	public Project(){
-		
+		mockups = new ArrayList<Mockup>();
 	}
 	
 	public Long getId() {
