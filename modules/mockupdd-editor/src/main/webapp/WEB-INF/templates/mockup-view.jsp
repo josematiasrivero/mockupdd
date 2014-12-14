@@ -13,6 +13,10 @@
 <script src="/libs/bootstrap3.min.js"></script>
 <script src="/libs/jcrop.min.js"></script>
 
+<script src="/libs/class.js" type="text/javascript"></script>
+
+<script src="/scripts/mockupdd-image-tagging/Tag.js" type="text/javascript"></script>
+
 <link rel="stylesheet" href="/css/jcrop.min.css">
 <link rel="stylesheet" href="/css/image-mockup-tagging.css">
 <link rel="stylesheet" href="/css/bootstrap3.min.css">
@@ -74,7 +78,13 @@
 				$(".menu-item").click(function() {
 					var menuEntry = $(this).data("menu-entry");
 					if (menuEntry != "close") {
-						buildHighlightAt(lastCoords, menuEntry);
+						new Tag($("body"), {
+							type: menuEntry, 
+							x: lastCoords.x, 
+							y: lastCoords.y, 
+							width: lastCoords.w, 
+							height: lastCoords.h});
+						//buildHighlightAt(lastCoords, menuEntry);
 					}
 					lastHighlight.remove();
 					$("#menu").hide();
