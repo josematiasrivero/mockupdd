@@ -3,21 +3,14 @@ package com.mockupdd.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project {
-	private Long id;
+public class Project extends Entity<Long> {
 	private String name;
 	private List<Mockup> mockups;
 	
 	public Project(){
 		mockups = new ArrayList<Mockup>();
 	}
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}

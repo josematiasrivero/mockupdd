@@ -1,7 +1,6 @@
 package com.mockupdd.model;
 
-public class Mockup {
-	private Long id;
+public class Mockup  extends Entity<Long>{
 	private String name;
 	private String jsonData;
 	
@@ -9,12 +8,6 @@ public class Mockup {
 		
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
