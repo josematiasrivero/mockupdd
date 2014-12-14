@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html;charset=UTF-8"%> 
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
 
 
     <form id="zipUploadForm" enctype="multipart/form-data">
-      
+
       <input id="zipFile" type="file" name="file" style="display: none">
 
       <button id="uploadZip" class="btn btn-info btn-sm">
@@ -35,26 +35,23 @@
       </button>
 
     </form>
-    
+
     <h4>Projects</h4>
     <hr />
 
     <ul id="list" class="list-group">
-      <li class="list-group-item"><pan class="pink"><a class="btn btn-link" href="/projects/MyInvoices.html">My Invoices</a></pan></li>
-  	  <c:forEach var="project" items="${projects}" >
-	  <li class="list-group-item">
-        <span class="pink">
-          <a href="/projects/<c:out value="${project.id}" class="btn btn-link">
-            <c:out value="${project.name}" />
-          </a>        
-        </span>    
-      </li>
+      <li class="list-group-item"><span class="pink"> <a class="btn btn-link" href="/projects/MyInvoices.html">My Invoices</a>
+      </span></li>
+      <c:forEach var="project" items="${projects}">
+        <li class="list-group-item"><span class="pink"> <a href="/projects/${project.id}" class="btn btn-link"> <c:out value="${project.name}" />
+          </a>
+        </span></li>
       </c:forEach>
     </ul>
 
   </div>
 
-  
+
 
   </div>
 
