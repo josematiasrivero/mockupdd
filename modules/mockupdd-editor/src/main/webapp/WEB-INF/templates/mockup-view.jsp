@@ -15,7 +15,13 @@
 
 <script src="/libs/class.js" type="text/javascript"></script>
 
-<script src="/scripts/mockupdd-image-tagging/Tag.js" type="text/javascript"></script>
+<script src="/scripts/mockupdd-image-tagging/ui/Widget.js" type="text/javascript"></script>
+<script src="/scripts/mockupdd-image-tagging/ui/TagWidget.js" type="text/javascript"></script>
+
+<script src="/scripts/mockupdd-image-tagging/model/Mockup.js" type="text/javascript"></script>
+
+<script src="/scripts/mockupdd-image-tagging/store/MockupModelLocalStorageStore.js" type="text/javascript"></script>
+
 
 <link rel="stylesheet" href="/css/jcrop.min.css">
 <link rel="stylesheet" href="/css/image-mockup-tagging.css">
@@ -34,6 +40,10 @@
 			var lastHighlight;
 			var lastCoords;
 			var menuOffset = {x: 11, y: 110};
+			
+			var store = new MockupModelLocalStorageStore();
+			var mockupId = 1;
+			var model = new Mockup();
 
 			function buildHighlightAt(coords, label) {
 				var highlight = label ? $('<div class="item-highlight-with-label">') : $('<div class="item-highlight">');
@@ -61,6 +71,23 @@
 					top : coords.y + coords.h + menuOffset.y
 				})
 			}
+			
+			function deleteTag(tag) {
+				console.log(tag);	
+			}
+			
+			function createTagWidget(tag) {
+				return new TagWidget($("body"), tag).on("delete", function(tag) {
+					console.log(tag);
+					saveModel();
+				});
+			}
+			
+			function saveModel() {
+				store.saveModel(mockupId, model, function() {
+					console.log("Model saved");
+				})
+			}
 
 			$(document).ready(function() {
 
@@ -78,16 +105,31 @@
 				$(".menu-item").click(function() {
 					var menuEntry = $(this).data("menu-entry");
 					if (menuEntry != "close") {
-						new Tag($("body"), {
+						var tag = {
 							type: menuEntry, 
 							x: lastCoords.x, 
 							y: lastCoords.y, 
 							width: lastCoords.w, 
-							height: lastCoords.h});
-						//buildHighlightAt(lastCoords, menuEntry);
+							height: lastCoords.h
+						};
+						var tagWidget = createTagWidget(tag);
+						model.addTag(tag);
+						saveModel();
 					}
+					
 					lastHighlight.remove();
 					$("#menu").hide();
+				});
+				
+				store.getModel(mockupId, function(mockupModel) {
+					if (!mockupModel) {
+						return;
+					}
+					var tags = mockupModel.getTags();
+					model = mockupModel;
+					for (i in tags) {
+						createTagWidget(tags[i]);
+					}
 				})
 
 			});
