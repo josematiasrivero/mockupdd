@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.DefaultValue;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.QueryParam;
 
 import com.mockupdd.model.Mockup;
@@ -33,6 +35,18 @@ public class ProjectsController {
 		ModelAndView mv = new ModelAndView("projects-list");
 		mv.addObject("projects",this.projectService.getProjects((page-1)*PAGE_SIZE, page*PAGE_SIZE));
 		return mv;
+	}
+	
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	public ModelAndView createProject( @FormParam("name") String name){
+		Project project = this.projectService.createProject(name);
+		return new ModelAndView("redirect:/projects/"+project.getId());
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public ModelAndView deleteProject( @FormParam("id") Long id){
+		this.projectService.deleteProject(id);
+		return new ModelAndView("redirect:/projects/");
 	}
 	
 	@RequestMapping("/{projectId}")

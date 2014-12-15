@@ -11,13 +11,12 @@ CREATE TABLE `user` (
 
 CREATE TABLE `project` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`user_id` bigint(20) NOT NULL,
+	`user_id` bigint(20) ,
 	`name` varchar(128) NOT NULL,
-	PRIMARY KEY(`id`),
-	CONSTRAINT FK_project_user FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+	PRIMARY KEY(`id`)
 );
 
-CREATE TABLE `mockupdd` (
+CREATE TABLE `mockup` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`project_id` bigint(20) NOT NULL,
 	`name` varchar(128) NOT NULL,
