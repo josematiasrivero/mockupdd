@@ -7,7 +7,7 @@ package com.mockupdd.model;
  * @param <K> The type of the identifier
  */
 public abstract class Entity<K> {
-	private K id;
+	protected K id;
 
 	public K getId() {
 		return id;
@@ -16,4 +16,5 @@ public abstract class Entity<K> {
 	public void setId(K id) {
 		this.id = id;
 	}
+	
 }

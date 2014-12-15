@@ -11,6 +11,7 @@
 	
 	<context:component-scan base-package="com.mockupdd.web.controllers" />
 	
+	
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	

@@ -5,8 +5,8 @@
 <hibernate-mapping default-access="field" package="com.mockupdd.model">
 
 	<class name="Project" table="project">
-		<id name="id" column="id">
-			<generator class="native" />
+		<id type="long" name="id" column="id">
+			<generator class="native" ></generator>
 		</id>
 		
 		<property name="name" column="name" />
@@ -17,8 +17,8 @@
 	</class>
 	
 	<class name="User" table="user">
-		<id name="id" column="id">
-			<generator class="native" />
+		<id type="long" name="id" column="id">
+			<generator class="native" ></generator>
 		</id>
 		
 		<bag  name="projects">
@@ -27,9 +27,9 @@
 		</bag>
 	</class>
 	
-	<class name="Mockup" table="mockup"">
-		<id name="id" column="id">
-			<generator class="native" />
+	<class name="Mockup" table="mockup">
+		<id type="long" name="id" column="id">
+			<generator class="native" ></generator>
 		</id>
 		
 		<property name="jsonData" column="json" />

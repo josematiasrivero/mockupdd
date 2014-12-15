@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.mockupdd.model.Entity;
 
-public abstract class GenericRepository<E extends Entity<K>,K> {
+public abstract class GenericRepository<E extends Entity<K>, K> {
 	 
 	protected SessionFactory sessionFactory;
 	
