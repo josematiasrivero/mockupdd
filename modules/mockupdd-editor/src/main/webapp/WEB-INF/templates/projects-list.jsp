@@ -41,7 +41,7 @@
 
     <ul id="list" class="list-group">
       <li class="list-group-item"><span class="pink"><a class="btn btn-link" href="/projects/MyInvoices/MyInvoices.html">My Invoices</a></pan></li>
-  	  <c:forEach var="project" items="${projects}" >
+  	  <c:forEach var="project" items="${projects.items}" >
 	  <li class="list-group-item">
         <span class="pink">
           <a href="/projects/<c:out value="${project.id}" />" class="btn btn-link"> 

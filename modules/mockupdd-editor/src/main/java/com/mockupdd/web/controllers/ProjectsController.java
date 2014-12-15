@@ -3,30 +3,35 @@ package com.mockupdd.web.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.QueryParam;
+
 import com.mockupdd.model.Mockup;
 import com.mockupdd.model.Project;
+import com.mockupdd.services.ProjectService;
 
 @Controller
 @RequestMapping("/projects")
 public class ProjectsController {
 	
+	private static int PAGE_SIZE = 5;
+	
+	@Autowired
+	private ProjectService projectService;
+	
 	@RequestMapping("/")
-	public ModelAndView listProjects(){
+	public ModelAndView listProjects( @QueryParam("page") Integer page){
+		if(page == null){
+			page = 1;
+		}
 		ModelAndView mv = new ModelAndView("projects-list");
-		List<Project> projects = new ArrayList<Project>();
-		Project p1 = new Project();
-		p1.setId(1L);
-		p1.setName("Test project 1");
-		projects.add(p1);
-		Project p2 = new Project();
-		p2.setId(2L);
-		p2.setName("Test project 2");
-		projects.add(p2);
-		mv.addObject("projects",projects);
+		mv.addObject("projects",this.projectService.getProjects((page-1)*PAGE_SIZE, page*PAGE_SIZE));
 		return mv;
 	}
 	

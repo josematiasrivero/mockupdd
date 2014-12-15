@@ -26,7 +26,7 @@ public abstract class GenericRepository<E extends Entity<K>, K> {
 	
 	@SuppressWarnings("unchecked")
 	protected ListPage<E> buildPageFromCriteria(Criteria criteria, int from,int to){
-		int count = (int) criteria.setProjection(Projections.rowCount()).uniqueResult();
+		long count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 		List<E> items = (List<E>) criteria.setProjection(null)
 							.setResultTransformer(criteria.ROOT_ENTITY)
 							.setFirstResult(from)
@@ -40,6 +40,10 @@ public abstract class GenericRepository<E extends Entity<K>, K> {
 		return (E) this.getCriteria()
 				.add(Restrictions.idEq(id))
 				.uniqueResult();
+	}
+	
+	public ListPage<E> getPage(int from, int to){
+		return this.buildPageFromCriteria(this.getCriteria(), from, to);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -6,6 +6,8 @@
         http://www.springframework.org/schema/context    http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/tx  		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
+	<tx:annotation-driven />
+	
 	<context:property-placeholder location="classpath:application.properties"  />
 	<import resource="classpath:hibernate/datasource.xml" />
 	<import resource="classpath:hibernate/hibernate.xml" />
@@ -17,5 +19,11 @@
 	</bean>
 	
 	<bean id="projectRepository" class="com.mockupdd.repositories.ProjectRepository" parent="genericRepository" />
+	
+	<!-- Services -->
+	
+	<bean id="projectService" class="com.mockupdd.services.ProjectService">
+		<constructor-arg ref="projectRepository" />
+	</bean>
 
 </beans>

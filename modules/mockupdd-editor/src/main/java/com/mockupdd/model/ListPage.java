@@ -6,9 +6,9 @@ import java.util.List;
 public class ListPage<T> {
 
 	private List<T> items;
-	private int totalCount;
+	private long totalCount;
 
-	public ListPage(List<T> items, int totalCount){
+	public ListPage(List<T> items, long totalCount){
 		this.items = new ArrayList<T>(items);
 		this.totalCount = totalCount;
 	}
@@ -17,7 +17,7 @@ public class ListPage<T> {
 		return items;
 	}
 
-	public int getTotalCount() {
+	public long getTotalCount() {
 		return totalCount;
 	}
 	

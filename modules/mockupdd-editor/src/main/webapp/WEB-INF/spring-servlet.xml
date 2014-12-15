@@ -16,6 +16,7 @@
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	
 	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/fonts/**" location="/fonts/" />
 	<mvc:resources mapping="/scripts/**" location="/scripts/" />
 	<mvc:resources mapping="/libs/**" location="/libs/" />
 	<mvc:resources mapping="/projects/MyInvoices/**" location="/projects/MyInvoices/" />
