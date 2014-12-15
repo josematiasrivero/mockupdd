@@ -1,5 +1,6 @@
 package com.mockupdd.model;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,4 +18,5 @@ public class User extends Entity<Long>{
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
+
 }

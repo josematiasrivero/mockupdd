@@ -1,0 +1,23 @@
+.item-highlight {
+	border: 2px solid red;
+	box-shadow: 0px 0px 5px red;
+	position: absolute;
+}
+
+.item-highlight-with-label {
+	border: 2px solid red;
+	box-shadow: 0px 0px 5px red;
+	position: absolute;
+	background-color: rgba(255, 0, 0, 0.6);
+	color: white;
+	font-weight: bold;
+	padding-left: 5px;
+}
+
+.list-group-item {
+	cursor: pointer;
+}
+
+.list-group-item:hover {
+	background-color: #eee;
+}

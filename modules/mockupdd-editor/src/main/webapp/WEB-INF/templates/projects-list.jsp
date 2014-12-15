@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html;charset=UTF-8"%> 
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
 
 
     <form id="zipUploadForm" enctype="multipart/form-data">
-      
+
       <input id="zipFile" type="file" name="file" style="display: none">
 
       <button id="uploadZip" class="btn btn-info btn-sm">
@@ -35,7 +35,7 @@
       </button>
 
     </form>
-    
+
     <h4>Projects</h4>
     <hr />
 
@@ -49,12 +49,13 @@
           </a>        
         </span>    
       </li>
+
       </c:forEach>
     </ul>
 
   </div>
 
-  
+
 
   </div>
 
