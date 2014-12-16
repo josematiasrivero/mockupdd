@@ -17,9 +17,6 @@
   <mvc:resources mapping="/libs/**" location="/libs/" />
   <mvc:resources mapping="/projects/MyInvoices/**" location="/projects/MyInvoices/" />
 
-
-
-
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix">
       <value>/WEB-INF/templates/</value>
@@ -28,5 +25,6 @@
       <value>.jsp</value>
     </property>
   </bean>
+
 
 </beans>

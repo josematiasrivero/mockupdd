@@ -1,30 +1,22 @@
 package com.mockupdd.model;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User extends Entity<Long>{
+	private List<Project> projects;
 
-  private Long id;
-  private List<Project> projects;
+	public User(){
+		this.projects = new ArrayList<Project>();
+	}
 
-  public User() {
-    this.projects = new ArrayList<Project>();
-  }
+	public List<Project> getProjects() {
+		return projects;
+	}
 
-  public Long getId() {
-    return id;
-  }
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public List<Project> getProjects() {
-    return projects;
-  }
-
-  public void setProjects(List<Project> projects) {
-    this.projects = projects;
-  }
 }
