@@ -2,6 +2,7 @@ package com.mockupdd.security.social;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
@@ -21,8 +22,8 @@ public class SignInAdapterImpl implements SignInAdapter {
 	@Override
 	public String signIn(String userId, Connection<?> connection, NativeWebRequest request) {
 		User user = this.userService.getUserById(Long.parseLong(userId));
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, connection, user.getAuthorities()));
-		return "/projects";
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getId(), "", user.getAuthorities()));
+		return "/projects/";
 	}
 	
 }
