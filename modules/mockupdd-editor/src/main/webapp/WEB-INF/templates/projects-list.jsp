@@ -16,6 +16,7 @@
 
 <style type="text/css"></style>
 
+
 <script type="text/javascript">
 	$(function(){
 		$("#newProjectModal").modal({
@@ -101,7 +102,6 @@
 
 
 	</div>
-
 
 </body>
 </html>
