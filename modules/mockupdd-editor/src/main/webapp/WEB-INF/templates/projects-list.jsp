@@ -41,7 +41,7 @@
 
 			<div class="form-group error">
 				<label for="newProjectName" class="control-label">Name </label>
-				<input id="newProjectName" name="name" placeholder="Enter new project name" class=" form-control"/>
+				<input id="newProjectName" name="name" placeholder="Enter new project name" class="form-control"/>
 			</div>
 
 			</div>

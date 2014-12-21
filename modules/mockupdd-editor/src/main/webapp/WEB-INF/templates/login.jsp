@@ -1,53 +1,48 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- saved from url=(0050)http://administracion.colegioscm.com.ar/Login.aspx -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet" />
-<link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script src="libs/jquery.js" type="text/javascript"></script>
+<link href="/css/bootstrap3.min.css" type="text/css" rel="stylesheet" />
+<link href="/css/font-awesome.css" rel="stylesheet">
+<link href="/css/bootstrap-social.css" type="text/css" rel="stylesheet" />
+<script src="/libs/jquery.js"></script>
+<script src="/libs/bootstrap3.min.js"></script>
 <title>Login</title>
-<style type="text/css"></style>
 
-<script>
-	$(document).ready(function() {
-		$("#submitButton").click(function(e) {
-			e.preventDefault();
-			if ($("#username").val() == "matias" && $("#password").val() == "mockupdd") {
-				window.location = "/projects/";
-				return;
-			} 
-			alert("Wrong username/password combination");
-			$("#username").val("");
-			$("#password").val("");
-		});
-	})
-</script>
+<style>
+.login-button{
+	width: 100%;
+}
+</style>
+
 
 </head>
 <body>
-  <form name="" method="post" action="" class="hero-unit login">
-    
 
-    <div class="logo span3"></div>
-    <div>
+	<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 whiteBackground well" id="pan" style="min-width: 340px;">
       <h1>MockupDD</h1>
-
-      <div class="field">
-        <label id="usernameLabel" class="control-label" for="username">Username:</label> <input type="text" name="username" id="username"> <span id="rfvUsername"
-          style="visibility: hidden; color: Red;">*</span>
-      </div>
-      <div class="field">
-        <label id="passwordLabel" class="control-label" for="password">Password:</label> <input type="password" name="password" id="password"> <span id="rfvPassword"
-          style="visibility: hidden; color: Red;">*</span>
-      </div>
-      <div class="toolbar">
-        <input id="submitButton" type="submit" name="login" value="Login" onclick="WebForm_DoPostback(&quot;login&quot;,&quot;&quot;,null,false,true,false,false,&quot;&quot;)" id="login" class="btn">
-      </div>
+      <hr>
+      	<label>Login with:</label>
+      	<div class="row">
+        <form action="<c:url value="/signin/facebook"/>" method="POST" class="col-sm-6 col-md-6">
+            <input type="hidden" name="scope" value="email,public_profile" />
+            <button type="submit"  class="btn btn-facebook login-button" >
+              <span class="fa fa-facebook"></span> | Facebook
+            </button>
+            <div> &nbsp;</div>
+        </form>
+        <form action="<c:url value="/signin/google"/>" method="POST" class="col-sm-6 col-md-6">
+           <input type="hidden" name="scope" value="email" />
+           <button type="submit"  class="btn btn-google-plus login-button" >
+              <i class="fa fa-google-plus"></i> | Google
+          </button>
+          <div> &nbsp;</div>
+        </form>
     </div>
-
-  </form>
-
+    </div>
 
 </body>
 </html>

@@ -4,6 +4,22 @@ CREATE DATABASE `mockupdd`;
 
 USE `mockupdd`;
 
+CREATE TABLE `UserConnection` (
+  `userId` varchar(255) NOT NULL,
+  `providerId` varchar(255) NOT NULL,
+  `providerUserId` varchar(255) NOT NULL DEFAULT '',
+  `rank` int(11) NOT NULL,
+  `displayName` varchar(255) DEFAULT NULL,
+  `profileUrl` varchar(512) DEFAULT NULL,
+  `imageUrl` varchar(512) DEFAULT NULL,
+  `accessToken` varchar(255) NOT NULL,
+  `secret` varchar(255) DEFAULT NULL,
+  `refreshToken` varchar(255) DEFAULT NULL,
+  `expireTime` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`userId`,`providerId`,`providerUserId`),
+  UNIQUE KEY `UserConnectionRank` (`userId`,`providerId`,`rank`)
+);
+
 CREATE TABLE `user` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(`id`)

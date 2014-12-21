@@ -11,6 +11,8 @@
 
   <properties>
     <spring.version>4.1.2.RELEASE</spring.version>
+    <spring.security.version>3.2.4.RELEASE</spring.security.version>
+    <spring.social.version>1.1.0.RELEASE</spring.social.version>
 	  <junit.version>4.11</junit.version>
     <hibernate.version>4.2.5.Final</hibernate.version>
   </properties>
@@ -18,13 +20,7 @@
 
   <description>MockupDD - Parent project</description>
 
-  <repositories>
-    <repository>
-      <id>maven2-repository.java.net</id>
-      <name>Java.net Repository for Maven</name>
-      <url>http://download.java.net/maven/2/</url>
-    </repository>
-  </repositories>
+
 
   <dependencyManagement>
     <dependencies>
