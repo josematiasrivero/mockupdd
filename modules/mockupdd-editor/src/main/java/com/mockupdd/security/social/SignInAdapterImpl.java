@@ -22,7 +22,7 @@ public class SignInAdapterImpl implements SignInAdapter {
 	@Override
 	public String signIn(String userId, Connection<?> connection, NativeWebRequest request) {
 		User user = this.userService.getUserById(Long.parseLong(userId));
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getId(), "", user.getAuthorities()));
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user,connection, user.getAuthorities()));
 		return "/projects/";
 	}
 	

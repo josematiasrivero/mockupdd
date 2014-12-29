@@ -18,7 +18,7 @@ import com.mockupdd.services.ProjectService;
 
 @Controller
 @RequestMapping("/projects")
-public class ProjectsController {
+public class ProjectsController extends BaseController{
 	
 	private static int PAGE_SIZE = 5;
 	
@@ -30,7 +30,7 @@ public class ProjectsController {
 		if(page == null){
 			page = 1;
 		}
-		ModelAndView mv = new ModelAndView("projects-list");
+		ModelAndView mv = this.getView("projects-list");
 		mv.addObject("projects",this.projectService.getProjects((page-1)*PAGE_SIZE, page*PAGE_SIZE));
 		return mv;
 	}
@@ -49,7 +49,7 @@ public class ProjectsController {
 	
 	@RequestMapping("/{projectId}")
 	public ModelAndView viewProject(){
-		ModelAndView mv = new ModelAndView("project-view");
+		ModelAndView mv = this.getView("project-view");
 		Project project = new Project();
 		project.setId(1L);
 		project.setName("Test");

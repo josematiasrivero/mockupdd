@@ -8,14 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class LoginController {
+public class LoginController extends BaseController{
 
 	@RequestMapping("/login")
 	public ModelAndView index(){
 		Authentication aut = SecurityContextHolder.getContext().getAuthentication();
-		return new ModelAndView("login");
+		return this.getView("login");
 	}
-	
-	
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import com.mockupdd.security.UserRole;
 
 public class User extends Entity<Long>{
+	
 	private List<Project> projects;
 
 	public User(){

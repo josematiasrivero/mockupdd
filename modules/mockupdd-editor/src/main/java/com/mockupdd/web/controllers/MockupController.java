@@ -8,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mockupdd.model.Mockup;
 
 @Controller
-public class MockupController {
+public class MockupController extends BaseController{
 	
 	@RequestMapping("/projects/{projectId}/mockup/{mockupId}")
 	public ModelAndView viewMockup(@PathVariable("projectId") Long projectId, @PathVariable("mockupId") Long mockupId){
-		ModelAndView mv = new ModelAndView("mockup-view");
+		ModelAndView mv = this.getView("mockup-view");
 		Mockup mock = new Mockup();
 		mock.setName("test");
 		mv.addObject("mockup",mock);
