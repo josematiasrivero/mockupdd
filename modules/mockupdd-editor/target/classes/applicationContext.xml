@@ -28,6 +28,7 @@
 	
 	<bean id="projectService" class="com.mockupdd.services.ProjectService">
 		<constructor-arg ref="projectRepository" />
+		<constructor-arg ref="userRepository" />
 	</bean>
 	
 	<bean id="userService" class="com.mockupdd.services.UserService">

@@ -24,6 +24,10 @@ public class User extends Entity<Long>{
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
+	
+	public void addProject(Project project){
+		this.projects.add(project);
+	}
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

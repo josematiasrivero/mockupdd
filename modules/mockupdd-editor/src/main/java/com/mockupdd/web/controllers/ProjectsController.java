@@ -14,7 +14,9 @@ import javax.ws.rs.QueryParam;
 
 import com.mockupdd.model.Mockup;
 import com.mockupdd.model.Project;
+import com.mockupdd.model.User;
 import com.mockupdd.services.ProjectService;
+import com.mockupdd.services.UserService;
 
 @Controller
 @RequestMapping("/projects")
@@ -24,6 +26,7 @@ public class ProjectsController extends BaseController{
 	
 	@Autowired
 	private ProjectService projectService;
+	private UserService userService;
 	
 	@RequestMapping("/")
 	public ModelAndView listProjects( @QueryParam("page") Integer page){
@@ -31,13 +34,13 @@ public class ProjectsController extends BaseController{
 			page = 1;
 		}
 		ModelAndView mv = this.getView("projects-list");
-		mv.addObject("projects",this.projectService.getProjects((page-1)*PAGE_SIZE, page*PAGE_SIZE));
+		mv.addObject("projects",this.projectService.getProjects(getLoggedUserId(),(page-1)*PAGE_SIZE, page*PAGE_SIZE));
 		return mv;
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ModelAndView createProject( @FormParam("name") String name){
-		Project project = this.projectService.createProject(name);
+		Project project = this.projectService.createProject(name,getLoggedUserId());
 		return new ModelAndView("redirect:/projects/"+project.getId());
 	}
 	
