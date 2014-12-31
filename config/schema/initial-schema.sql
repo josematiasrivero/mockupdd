@@ -27,17 +27,23 @@ CREATE TABLE `user` (
 
 CREATE TABLE `project` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`user_id` bigint(20) ,
+	`user_id` bigint(20),
 	`name` varchar(128) NOT NULL,
 	PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `mockup` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`project_id` bigint(20) NOT NULL,
+	`project_id` bigint(20) ,
 	`name` varchar(128) NOT NULL,
-	`json` MEDIUMTEXT NOT NULL,
+	`json` MEDIUMTEXT,
 	PRIMARY KEY(`id`),
 	CONSTRAINT FK_mockup_project FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
 );
 
+CREATE TABLE `resource` (
+	`id` varchar(255) NOT NULL,
+	`data` BLOB,
+	`media_type` varchar(128),
+	PRIMARY KEY(`id`)	
+);

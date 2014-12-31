@@ -13,6 +13,7 @@
 					trigger: "manual"
 					
 				});
+				createPagination($(".pagination"),Math.floor(${(projects.totalCount/5)+1}),${page})
 			})
 		</script>
 	</jsp:attribute>
@@ -66,7 +67,7 @@
 					</form></li>
 				<c:forEach var="project" items="${projects.items}">
 					<li class="list-group-item"><span class="pink"> <a
-							href="/projects/<c:out value="${project.id}" />"> <c:out
+							href="/projects/<c:out value="${project.id}" />/"> <c:out
 									value="${project.name}" />
 						</a>
 					</span>
@@ -79,7 +80,12 @@
 	
 				</c:forEach>
 			</ul>
-	
+			
+			<nav class="text-center">
+			  <ul class="pagination">
+			   
+			  </ul>
+			</nav>
 		</div>
 	</jsp:body>
 </t:baseLayout>

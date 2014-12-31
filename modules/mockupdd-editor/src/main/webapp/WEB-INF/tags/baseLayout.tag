@@ -11,6 +11,7 @@
 	<link href="/css/bootstrap-social.css" type="text/css" rel="stylesheet" />
 	<script src="/libs/jquery.js"></script>
 	<script src="/libs/bootstrap3.min.js"></script>
+	<script src="/scripts/pagination.js"></script>
 	<jsp:invoke fragment="head" />
   </head>
   <body>

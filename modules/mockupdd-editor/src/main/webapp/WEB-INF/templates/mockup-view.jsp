@@ -7,6 +7,7 @@
 <jsp:attribute name="title">${mockup.name}</jsp:attribute>
 <jsp:attribute name="head">
 
+
 	<script src="/libs/jcrop.min.js"></script>
 	<script src="/libs/class.js" type="text/javascript"></script>
 	<script src="/scripts/mockupdd-image-tagging/ui/Widget.js" type="text/javascript"></script>
@@ -17,6 +18,7 @@
 	<link rel="stylesheet" href="/css/image-mockup-tagging.css">
 	
 	<script type="text/javascript">
+		var mockupData = ${mockup.jsonData}
 		var jcrop;
 		var lastHighlight;
 		var lastCoords;
@@ -112,6 +114,8 @@
 					createTagWidget(tags[i]);
 				}
 			})
+			
+			$("#mockupImage").attr("src","/resource?id="+mockupData.image)
 
 		});
 	</script>
@@ -121,7 +125,7 @@
 
 	    <h4>${mockup.name}</h4>
 	
-	    <img src="/images/m1.png" style="psoition: absolute"/>
+	    <img id="mockupImage" style="position: absolute"/>
 	
 	    <ul id="menu" class="list-group widget-menu" style="display: none; position: absolute; z-index: 99999999">
 	      <li class="menu-item list-group-item" data-menu-entry="close">[close]</li>

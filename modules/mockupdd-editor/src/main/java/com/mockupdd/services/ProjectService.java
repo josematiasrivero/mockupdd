@@ -43,5 +43,9 @@ public class ProjectService {
 		project.setId(id);
 		this.projectRepository.delete(project);
 	}
+	
+	public Project getProject(Long id){
+		return this.projectRepository.get(id);
+	}
 
 }

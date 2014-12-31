@@ -4,6 +4,7 @@ import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,17 +16,19 @@ import javax.ws.rs.QueryParam;
 import com.mockupdd.model.Mockup;
 import com.mockupdd.model.Project;
 import com.mockupdd.model.User;
+import com.mockupdd.services.MockupService;
 import com.mockupdd.services.ProjectService;
 import com.mockupdd.services.UserService;
 
 @Controller
 @RequestMapping("/projects")
-public class ProjectsController extends BaseController{
-	
-	private static int PAGE_SIZE = 5;
+public class ProjectController extends BaseController{
 	
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private MockupService mockupService;
+	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("/")
@@ -34,6 +37,7 @@ public class ProjectsController extends BaseController{
 			page = 1;
 		}
 		ModelAndView mv = this.getView("projects-list");
+		mv.addObject("page",page);
 		mv.addObject("projects",this.projectService.getProjects(getLoggedUserId(),(page-1)*PAGE_SIZE, page*PAGE_SIZE));
 		return mv;
 	}
@@ -41,7 +45,7 @@ public class ProjectsController extends BaseController{
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ModelAndView createProject( @FormParam("name") String name){
 		Project project = this.projectService.createProject(name,getLoggedUserId());
-		return new ModelAndView("redirect:/projects/"+project.getId());
+		return new ModelAndView("redirect:/projects/"+project.getId()+"/");
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
@@ -50,21 +54,15 @@ public class ProjectsController extends BaseController{
 		return new ModelAndView("redirect:/projects/");
 	}
 	
-	@RequestMapping("/{projectId}")
-	public ModelAndView viewProject(){
+	@RequestMapping("/{projectId}/")
+	public ModelAndView viewProject(@PathVariable("projectId")Long projectId,@QueryParam("page") Integer page){
+		if(page == null){
+			page = 1;
+		}
 		ModelAndView mv = this.getView("project-view");
-		Project project = new Project();
-		project.setId(1L);
-		project.setName("Test");
-		Mockup m1 = new Mockup();
-		m1.setId(1L);
-		m1.setName("Mokcup 1");
-		Mockup m2 = new Mockup();
-		m2.setId(2L);
-		m2.setName("Mokcup 2");
-		project.getMockups().add(m1);
-		project.getMockups().add(m2);
-		mv.addObject("project",project);
+		mv.addObject("page",page);
+		mv.addObject("project", this.projectService.getProject(projectId));
+		mv.addObject("mockups", this.mockupService.getMockupsOfProject(projectId, (page-1)*PAGE_SIZE, page*PAGE_SIZE));
 		return mv;
 	}
 

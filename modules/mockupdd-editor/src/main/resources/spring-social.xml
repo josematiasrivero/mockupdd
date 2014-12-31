@@ -15,11 +15,10 @@
                         http://www.springframework.org/schema/social/twitter http://www.springframework.org/schema/social/spring-social-twitter.xsd
                         http://www.springframework.org/schema/social http://www.springframework.org/schema/social/spring-social.xsd
                         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
-                        http://www.springframework.org/schema/mvc
-        				http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+                        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
         				
     <mvc:annotation-driven />
-
+	
 	<bean class="org.springframework.social.connect.web.ProviderSignInController">
 		<constructor-arg ref="connectionFactoryLocator"></constructor-arg>
 		<constructor-arg ref="usersConnectionRepository"></constructor-arg>
