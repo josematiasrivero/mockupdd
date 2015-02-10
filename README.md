@@ -11,7 +11,7 @@ MockupDD Engine is web application which uses user interface mockups in the form
 3. Install [Apache Maven](http://maven.apache.org/). After the installation, the command `mvn` should work
 4. In order to run the DB creation scripts without changes, user `root` without any password should be provided. As a result, the command `mysql -uroot` must log you into the database directly.
 5. At the root of the project, run `config/scripts/recreateSchema.sh` in order to instantiate the DB
-6. At the root of the project, `run mvn clean install` which will build the project and run the tests. Then, to get the web application running with [Jetty](http://eclipse.org/jetty/) at the default port (8080), execute `mvn jetty:run`
+6. At the root of the project, `run mvn clean install` which will build the project and run the tests. Then, to get the web application running with [Jetty](http://eclipse.org/jetty/) at the default port (8080), execute `mvn jetty:run` at the `modules/mockupdd-editor` folder
 
 ## Recommented setup for development ##
 
