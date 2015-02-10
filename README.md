@@ -6,50 +6,20 @@ MockupDD Engine is web application which uses user interface mockups in the form
 
 ## Basic project Setup to get the web app running ##
 
-### Step 1. Install [Apache Maven](http://maven.apache.org/) ###
-After the installation, the command
+1. Install Git
+2. After installing Git, run the command `git clone http://bitbucket.org/jmrivero/mockupdd-engine.git`
+3. Install [Apache Maven](http://maven.apache.org/). After the installation, the command `mvn` should work
+4. In order to run the DB creation scripts without changes, user `root` without any password should be provided. As a result, the command `mysql -uroot` must log you into the database directly.
+5. At the root of the project, run `config/scripts/recreateSchema.sh` in order to instantiate the DB
+6. At the root of the project, `run mvn clean install` which will build the project and run the tests. Then, to get the web application running with [Jetty](http://eclipse.org/jetty/) at the default port (8080), execute `mvn jetty:run`
 
-```
-#!bash
-mvn
+## Recommented setup for development ##
 
-```
-should work
+1. Download [Eclipse IDE for Java EE Developers](https://www.eclipse.org/downloads/)
+2. At the root of the project, run `mvn eclipse:eclipse`. This will create the Eclipse Project metainfo.
+3. [Import](http://help.eclipse.org/juno/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-importproject.htm) the project in Eclipse
+4. Follow [this guide](http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+inside+Eclipse) in order to start the web application from Eclipse with debugging enabled
 
-### Step 2. Install MySQL ###
-In order to run the DB creation scripts without changes, user "root" without any password should be provided, i.e., the command
-
-```
-#!bash
-mysql -uroot
-
-```
-must log you into the database
-
-### Step 3. Recreate Database ###
-At the root of the project, run the following script
-
-```
-#!bash
-config/scripts/recreateSchema.sh
-
-```
-
-### Step 4. Run the app ###
-At the root of the project, run the following command
-
-```
-#!bash
-mvn clean install
-```
-which will build the project and run the tests.
-
-To get the web application running with [Jetty](http://eclipse.org/jetty/) at the default port (8080), execute the following command
-```
-#!bash
-mvn jetty:run
-```
-
-### If you have any problems... ###
+## If you have any problems... ##
 
 Write an e-mail to jose.matias.rivero@gmail.com or mrivero@lifia.info.unlp.edu.ar
