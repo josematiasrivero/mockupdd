@@ -19,26 +19,25 @@ import com.mockupdd.model.Mockup;
 import com.mockupdd.services.MockupService;
 
 @Controller
-public class MockupController extends BaseController{
-	
-	@Autowired
-	private MockupService mockupService;
-	
-	@RequestMapping("/projects/{projectId}/mockups/{mockupId}/")
-	public ModelAndView viewMockup(@PathVariable("projectId") Long projectId, @PathVariable("mockupId") Long mockupId){
-		ModelAndView mv = this.getView("mockup-view");
-		mv.addObject("mockup",this.mockupService.getMockup(mockupId));
-		return mv;
-	}
-	@RequestMapping(value="/projects/{projectId}/mockups/", method=RequestMethod.POST)
-	public ModelAndView createMockup(@PathVariable("projectId") Long projectId,
-			@FormParam("name") String name,
-			@RequestParam("image") MultipartFile image){
-		try {
-			Mockup mockup = this.mockupService.createMockup(projectId,name,image);
-			return new ModelAndView("redirect:/projects/"+projectId+"/mockups/"+mockup.getId()+"/");
-		} catch (IOException e) {
-			return null;
-		}
-	}
+public class MockupController extends BaseController {
+
+  @Autowired
+  private MockupService mockupService;
+
+  @RequestMapping("/projects/{projectId}/mockups/{mockupId}/")
+  public ModelAndView viewMockup(@PathVariable("projectId") Long projectId, @PathVariable("mockupId") Long mockupId) {
+    ModelAndView mv = this.getView("mockup-view");
+    mv.addObject("mockup", this.mockupService.getMockup(mockupId));
+    return mv;
+  }
+
+  @RequestMapping(value = "/projects/{projectId}/mockups/", method = RequestMethod.POST)
+  public ModelAndView createMockup(@PathVariable("projectId") Long projectId, @FormParam("name") String name, @RequestParam("image") MultipartFile image) {
+    try {
+      Mockup mockup = this.mockupService.createMockup(projectId, name, image);
+      return new ModelAndView("redirect:/projects/" + projectId + "/mockups/" + mockup.getId() + "/");
+    } catch (IOException e) {
+      return null;
+    }
+  }
 }

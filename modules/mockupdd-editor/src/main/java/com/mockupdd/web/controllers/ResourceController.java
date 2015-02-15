@@ -17,15 +17,15 @@ import com.mockupdd.services.ResourceService;
 @Controller
 public class ResourceController {
 
-	@Autowired
-	private ResourceService resourceService;
-	
-	@ResponseBody
-	@RequestMapping(value="/resource")
-	public ResponseEntity<byte[]> getResource(@QueryParam("id") String id){
-		Resource resource = this.resourceService.getResource(id);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.parseMediaType(resource.getType()));
-		return new ResponseEntity<byte[]>(resource.getData(),headers,HttpStatus.OK);
-	}
+  @Autowired
+  private ResourceService resourceService;
+
+  @ResponseBody
+  @RequestMapping(value = "/resource")
+  public ResponseEntity<byte[]> getResource(@QueryParam("id") String id) {
+    Resource resource = this.resourceService.getResource(id);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.parseMediaType(resource.getType()));
+    return new ResponseEntity<byte[]>(resource.getData(), headers, HttpStatus.OK);
+  }
 }

@@ -1,21 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html;charset=UTF-8"%> 
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+
 <t:baseLayout>
-<jsp:attribute name="title">${project.name}</jsp:attribute>
-<jsp:attribute name="head">
+  <jsp:attribute name="title">${project.name}</jsp:attribute>
+  <jsp:attribute name="head">
 	<script type="text/javascript">
-			$(function(){
-				$("#newMockupModal").modal({
-					show: false,
-					trigger: "manual"
-					
-				});
-			})
-		</script>
+		$(function() {
+			$("#newMockupModal").modal({
+				show : false,
+				trigger : "manual"
+
+			});
+		})
+	</script>
 </jsp:attribute>
-<jsp:body>
+  <jsp:body>
 
 	<div class="modal fade" id="newMockupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -24,10 +25,10 @@
 
 			<div class="form-group error">
 				<label for="newMockupName" class="control-label">Name </label>
-				<input id="newMockupName" name="name" placeholder="Enter new mockup name" class="form-control"/>
+				<input id="newMockupName" name="name" placeholder="Enter new mockup name" class="form-control" />
 			</div>
 			<div class="form-group">
-				<input  type="file" name="image"></input>
+				<input type="file" name="image"></input>
 			</div>
 
 			</div>
@@ -49,7 +50,7 @@
 	    <hr />
 	
 	    <ul id="list" class="list-group">
-	  	  <c:forEach var="mockup" items="${mockups.items}" >
+	  	  <c:forEach var="mockup" items="${mockups.items}">
 		  <li class="list-group-item">
 	        <span class="pink">
 	          <a href="/projects/${project.id}/mockups/${mockup.id}/" class="btn btn-link">

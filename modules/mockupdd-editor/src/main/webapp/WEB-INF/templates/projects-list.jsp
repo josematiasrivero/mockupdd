@@ -55,16 +55,6 @@
 			<hr />
 	
 			<ul id="list" class="list-group">
-				<li class="list-group-item clearfix"><span class="pink">
-						<a class="" href="/projects/MyInvoices/MyInvoices.html">My
-							Invoices</a>
-				</span>
-					<form method="POST" action="delete" class="pull-right">
-						<button type="submit" disabled="disabled"
-							class="btn btn-danger btn-xs ">
-							<span class="glyphicon glyphicon-remove"></span>
-						</button>
-					</form></li>
 				<c:forEach var="project" items="${projects.items}">
 					<li class="list-group-item"><span class="pink"> <a
 							href="/projects/<c:out value="${project.id}" />/"> <c:out
@@ -77,7 +67,6 @@
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</form></li>
-	
 				</c:forEach>
 			</ul>
 			

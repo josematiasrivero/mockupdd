@@ -43,7 +43,7 @@ CREATE TABLE `mockup` (
 
 CREATE TABLE `resource` (
 	`id` varchar(255) NOT NULL,
-	`data` BLOB,
+	`data` MEDIUMBLOB,
 	`media_type` varchar(128),
 	PRIMARY KEY(`id`)	
 );
