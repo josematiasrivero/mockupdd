@@ -25,7 +25,7 @@ MockupDD Engine is web application which uses user interface mockups in the form
 ### Code Style ###
 Pressing `Ctrl + Shift + F` in any code window will automatically format the current file according to configured code formatting options. Import the following XML files to use the formatting options for this project:
 
-- `Preferences-Java-CodeStyle-CodeTemplates.xml` in Preferences -> Java -> Code Style
+- `Preferences-Java-CodeStyle-CodeTemplates.xml` in Preferences -> Java -> Code Style -> Code Templates
 - `Preferences-Java-CodeStyle-Formatter.xml` in Preferences -> Java -> Code Style -> Formatter
 - `Preferences-Java-Editor-Templates.xml` in Preferences -> Java -> Editor -> Templates
 
