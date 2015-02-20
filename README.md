@@ -20,6 +20,22 @@ MockupDD Engine is web application which uses user interface mockups in the form
 3. [Import](http://help.eclipse.org/juno/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-importproject.htm) the project in Eclipse
 4. Follow [this guide](http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+inside+Eclipse) in order to start the web application from Eclipse with debugging enabled
 
+## Tips for development with Eclipse ##
+
+### Code Style ###
+Pressing `Ctrl + Shift + F` in any code window will automatically format the current file according to configured code formatting options. Import the following XML files to use the formatting options for this project:
+
+- `Preferences-Java-CodeStyle-CodeTemplates.xml` in Preferences -> Java -> Code Style
+- `Preferences-Java-CodeStyle-Formatter.xml` in Preferences -> Java -> Code Style -> Formatter
+- `Preferences-Java-Editor-Templates.xml` in Preferences -> Java -> Editor -> Templates
+
+### Keyboard shortcuts ###
+
+- `Ctrl + Shift + R`: search for resources
+- `Ctrl + Shift + T`: search for classes
+
+There are a bunch of useful keyboard shortcuts to agilize development with Eclipse, just google for them :)
+
 ## If you have any problems... ##
 
 Write an e-mail to jose.matias.rivero@gmail.com or mrivero@lifia.info.unlp.edu.ar
