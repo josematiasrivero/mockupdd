@@ -22,40 +22,56 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- Spring 3 dependencies -->
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
+      <artifactId>spring-core</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
-      <version>${spring.security.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
       <type>jar</type>
-      <version>${spring.security.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
       <type>jar</type>
-      <version>${spring.security.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-taglibs</artifactId>
-      <version>${spring.security.version}</version>
     </dependency>
 
     <dependency>
@@ -63,47 +79,30 @@
       <artifactId>spring-social-core</artifactId>
       <version>${spring.social.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.social</groupId>
       <artifactId>spring-social-web</artifactId>
       <version>${spring.social.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.social</groupId>
       <artifactId>spring-social-config</artifactId>
       <version>${spring.social.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.social</groupId>
       <artifactId>spring-social-security</artifactId>
       <version>${spring.social.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.social</groupId>
       <artifactId>spring-social-facebook</artifactId>
       <version>${spring.social.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.social</groupId>
       <artifactId>spring-social-google</artifactId>
       <version>1.0.0.RELEASE</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-orm</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>${spring.version}</version>
     </dependency>
 
     <dependency>
@@ -162,6 +161,28 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
+    </dependency>
+
+    <!-- Jersey -->
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-json</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey.contribs</groupId>
+      <artifactId>jersey-spring</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey.contribs</groupId>
+      <artifactId>jersey-multipart</artifactId>
     </dependency>
 
   </dependencies>
