@@ -9,13 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.QueryParam;
 
-import com.mockupdd.model.Mockup;
 import com.mockupdd.model.Project;
-import com.mockupdd.model.User;
 import com.mockupdd.services.MockupService;
 import com.mockupdd.services.ProjectService;
 import com.mockupdd.services.UserService;

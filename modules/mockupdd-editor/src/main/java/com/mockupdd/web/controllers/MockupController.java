@@ -1,10 +1,8 @@
 package com.mockupdd.web.controllers;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.ws.rs.FormParam;
-import javax.ws.rs.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
