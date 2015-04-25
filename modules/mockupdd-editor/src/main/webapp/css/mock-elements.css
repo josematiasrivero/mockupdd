@@ -1,0 +1,41 @@
+/* -- MK --
+ *
+ * MK is a CSS framework for mock elements.
+ *
+ * @author: Martin Aparicio Pons (martin.aparicio.pons@gmail.com),
+ * 			Facundo Galán (facundogalan91@gmail.com)
+ */
+.mk {
+	background-color: white;
+	cursor: pointer;
+}
+
+.sidebar-nav .mk {
+	border: 1px dashed #444;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.mk.picked {
+	cursor: move;
+}
+
+.mk-title {
+	color: grey;
+	font-size: 18px;
+}
+
+.mk-label {
+	font-weight: bold;
+	line-height: 1;
+	white-space: nowrap;
+	vertical-align: baseline;
+}
+
+.mk-button {
+	
+}
+
+.mk-input {
+	
+}

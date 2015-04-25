@@ -1,142 +1,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <t:baseLayout>
-<jsp:attribute name="title">${mockup.name}</jsp:attribute>
-<jsp:attribute name="head">
-
-
-	<script src="/libs/jcrop.min.js"></script>
-	<script src="/libs/class.js" type="text/javascript"></script>
-	<script src="/scripts/mockupdd-image-tagging/ui/Widget.js" type="text/javascript"></script>
-	<script src="/scripts/mockupdd-image-tagging/ui/TagWidget.js" type="text/javascript"></script>
-	<script src="/scripts/mockupdd-image-tagging/model/Mockup.js" type="text/javascript"></script>
-	<script src="/scripts/mockupdd-image-tagging/store/MockupModelLocalStorageStore.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="/css/jcrop.min.css">
-	<link rel="stylesheet" href="/css/image-mockup-tagging.css">
-	
-	<script type="text/javascript">
-		var mockupData = ${mockup.jsonData}
-		var jcrop;
-		var lastHighlight;
-		var lastCoords;
-		var menuOffset = {x: 11, y: 110};
-		
-		var store = new MockupModelLocalStorageStore();
-		var mockupId = 1;
-		var model = new Mockup();
-
-		function buildHighlightAt(coords, label) {
-			var highlight = label ? $('<div class="item-highlight-with-label">') : $('<div class="item-highlight">');
-			highlight.offset({
-				left : coords.x,
-				top : coords.y
-			});
-			highlight.height(coords.h);
-			highlight.width(coords.w);
-			if (label) {
-				highlight.append("<div>" + label + "</div>")
-			}
-			highlight.appendTo("body");
-			return highlight;
-		}
-
-		function showMenuAt(coords) {
-			$("#menu").show();
-			console.log({
-				left : coords.x,
-				top : coords.y + coords.h
-			});
-			$("#menu").offset({
-				left : coords.x + menuOffset.x,
-				top : coords.y + coords.h + menuOffset.y
-			})
-		}
-		
-		function deleteTag(tag) {
-			console.log(tag);	
-		}
-		
-		function createTagWidget(tag) {
-			return new TagWidget($("body"), tag).on("delete", function(tag) {
-				console.log(tag);
-				saveModel();
-			});
-		}
-		
-		function saveModel() {
-			store.saveModel(mockupId, model, function() {
-				console.log("Model saved");
-			})
-		}
-
-		$(document).ready(function() {
-
-			jcrop = $("img").Jcrop({
-				allowResize : false,
-				onSelect : function(coords) {
-					console.log(coords);
-					this.release();
-					lastHighlight = buildHighlightAt(coords);
-					lastCoords = coords;
-					showMenuAt(coords);
-				}
-			});
-
-			$(".menu-item").click(function() {
-				var menuEntry = $(this).data("menu-entry");
-				if (menuEntry != "close") {
-					var tag = {
-						type: menuEntry, 
-						x: lastCoords.x, 
-						y: lastCoords.y, 
-						width: lastCoords.w, 
-						height: lastCoords.h
-					};
-					var tagWidget = createTagWidget(tag);
-					model.addTag(tag);
-					saveModel();
-				}
-				
-				lastHighlight.remove();
-				$("#menu").hide();
-			});
-			
-			store.getModel(mockupId, function(mockupModel) {
-				if (!mockupModel) {
-					return;
-				}
-				var tags = mockupModel.getTags();
-				model = mockupModel;
-				for (i in tags) {
-					createTagWidget(tags[i]);
-				}
-			})
-			
-			$("#mockupImage").attr("src","/resource?id="+mockupData.image)
-
-		});
-	</script>
-</jsp:attribute>
-<jsp:body>
-	<div class="container">
-
-	    <h4>${mockup.name}</h4>
-	
-	    <img id="mockupImage" style="position: absolute"/>
-	
-	    <ul id="menu" class="list-group widget-menu" style="display: none; position: absolute; z-index: 99999999">
-	      <li class="menu-item list-group-item" data-menu-entry="close">[close]</li>
-	      <li class="menu-item list-group-item" data-menu-entry="inputbox">Input box</li>
-	      <li class="menu-item list-group-item" data-menu-entry="dropdown">Dropdown list</li>
-	      <li class="menu-item list-group-item" data-menu-entry="radiobutton">Choose one of...</li>
-	      <li class="menu-item list-group-item" data-menu-entry="checkbox">Check option</li>
-	      <li class="menu-item list-group-item" data-menu-entry="label">Label, text or information</li>
-	      <li class="menu-item list-group-item" data-menu-entry="panel">Group of elements</li>
-	    </ul>
-
+  <jsp:attribute name="title">${mockup.name}</jsp:attribute>
+  <jsp:attribute name="head">
+    <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
+    <link href="/css/mock-elements.css" type="text/css" rel="stylesheet">
+  </jsp:attribute>
+  <jsp:body>
+	<div id="wrapper">
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            Elements
+          </li>          
+          <li>
+            <label class="control-label">Title</label>
+            <div class="mk mk-title">This is a title</div>
+          </li>
+          <li>
+            <label class="control-label">Label</label>
+            <div class="mk mk-label">Label:</div>
+          </li>
+          <li>
+            <label class="control-label">Input</label>
+            <div class="mk mk-input">
+              <span class="form-control"></span>
+            </div>
+          </li>
+          <li>
+            <label class="control-label">Button</label>
+            <div class="mk mk-button">
+              <button class="btn btn-primary">Press me!</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="container">
+        <h4>${mockup.name}</h4>
+      </div>
 	</div>
-</jsp:body>
+  </jsp:body>
 </t:baseLayout>
