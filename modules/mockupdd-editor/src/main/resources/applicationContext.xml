@@ -50,7 +50,6 @@
 	<bean id="mockupService" class="com.mockupdd.services.MockupService">
 		<constructor-arg ref="mockupRepository" />
 		<constructor-arg ref="projectRepository" />
-		<constructor-arg ref="resourceService" />
 	</bean>
 
 </beans>
