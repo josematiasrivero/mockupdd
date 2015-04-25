@@ -4,17 +4,17 @@
 <style>
 
 .circular {
-	border-radius: 150px;
-	-webkit-border-radius: 150px;
-	-moz-border-radius: 150px;
+	border-radius: 100%;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
 	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-	}
+}
 </style>
 <nav class="navbar navbar-default">
 	<sec:authorize access="isAuthenticated()">
-		<a class="navbar-brand">MockupDD</a>
+		<a class="navbar-brand" href="/projects/">MockupDD</a>
 
         <ul class="nav navbar-nav navbar-right" style="margin-right: 60px;">
             <li class="dropdown">

@@ -27,10 +27,6 @@
 				<label for="newMockupName" class="control-label">Name </label>
 				<input id="newMockupName" name="name" placeholder="Enter new mockup name" class="form-control" />
 			</div>
-			<div class="form-group">
-				<input type="file" name="image"></input>
-			</div>
-
 			</div>
 			<div class="modal-footer">
 				<button data-dismiss="modal" class="btn btn-default">Cancel</button>
