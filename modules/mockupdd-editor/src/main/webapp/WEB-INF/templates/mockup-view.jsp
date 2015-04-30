@@ -7,7 +7,7 @@
   <jsp:attribute name="title">${mockup.name}</jsp:attribute>
   <jsp:attribute name="head">
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
-    <link href="/css/mock-elements.css" type="text/css" rel="stylesheet">
+    <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
   </jsp:attribute>
   <jsp:body>
 	<div id="wrapper">
