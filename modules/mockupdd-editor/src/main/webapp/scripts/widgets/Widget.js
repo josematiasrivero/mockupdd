@@ -1,25 +1,21 @@
 /**
- * WidgetId: an id generator for all widgets.
+ * IdGenerator: an id generator for all classes.
+ * 
+ * @author (martin.aparicio.pons@gmail.com)
  */
-
-var WidgetId = 1; // hacer un generador de ids.
-
-var IdGenerator = Class.extend({
+var IdGenerator = new (Class.extend({
   init : function() {
     this.next = 0;
-  },
-  getInstance : function() {
-    return this;
   },
   getNext : function() {
     this.next++;
     return this.next;
   }
-});
+}))();
 
 var Widget = Class.extend({
   init : function() {
-    this.id = "Widget-id-" + IdGenerator.getInstance().getNext();
+    this.id = "Widget-id-" + IdGenerator.getNext();
     this.x = 0.0; // right position
     this.y = 0.0; // top position
     this.height = 0.0;
