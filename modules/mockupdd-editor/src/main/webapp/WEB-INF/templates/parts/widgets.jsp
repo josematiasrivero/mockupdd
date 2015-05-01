@@ -6,8 +6,10 @@
 <script type="text/javascript" src="/libs/class.js"></script>
 
 <!-- Import all widgets -->
+<script type="text/javascript" src="/scripts/widgets/IdGenerator.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Widget.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Label.js"></script>
+<script type="text/javascript" src="/scripts/widgets/Title.js"></script>
 
 <!-- Import MK for mock widgets -->
 <link href="/css/mock-elements.css" type="text/css" rel="stylesheet">
