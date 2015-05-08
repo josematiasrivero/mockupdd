@@ -1,5 +1,6 @@
 package com.mockupdd.services;
 
+import org.springframework.social.connect.Connection;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mockupdd.model.User;
@@ -14,8 +15,10 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
-	public User createNewUser(){
+	public User createNewUser(Connection<?> connection){
+		
 		User user = new User();
+		user.setDisplayName(connection.fetchUserProfile().getFirstName() + " " + connection.fetchUserProfile().getLastName());
 		this.userRepository.add(user);
 		return user;
 	}

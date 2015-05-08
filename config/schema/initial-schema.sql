@@ -21,8 +21,9 @@ CREATE TABLE `UserConnection` (
 );
 
 CREATE TABLE `user` (
-	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY(`id`)
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `display_name` varchar(255) DEFAULT NULL,
+   PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `project` (
