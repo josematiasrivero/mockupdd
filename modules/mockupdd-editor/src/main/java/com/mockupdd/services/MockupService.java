@@ -40,4 +40,8 @@ public class MockupService {
     return this.mockupRepository.get(mockupId);
   }
 
+  public void update(Long mockupId, Mockup mockup) {
+    this.mockupRepository.update(mockup);
+  }
+
 }

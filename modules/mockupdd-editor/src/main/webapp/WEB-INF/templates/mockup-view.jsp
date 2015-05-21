@@ -8,6 +8,8 @@
   <jsp:attribute name="head">
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
+    <script src="/scripts/ajax/GenericRESTClient.js" type="text/javascript"></script>
+    <script src="/scripts/ajax/MockupRESTClient.js" type="text/javascript"></script>
   </jsp:attribute>
   <jsp:body>
 	<div id="wrapper">
