@@ -11,7 +11,7 @@ var Label = Widget.extend({
     this.text = text;
     return this.text;
   },
-  doubleClick() : function(){
+  doubleClick : function(){
 	alert("Double click triggered!");  
   },
   addEvents : function(element){
@@ -23,5 +23,8 @@ var Label = Widget.extend({
 	element.dblclick(this.doubleClick);
 	this.addEvents(element);
     $("#page").append(element);
+  },
+  getHtml : function() {
+    return this.html.text(this.getText()).attr("id", this.getId());
   }
 })

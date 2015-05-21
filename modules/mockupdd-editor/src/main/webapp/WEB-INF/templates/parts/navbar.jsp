@@ -18,7 +18,7 @@
 
         <ul class="nav navbar-nav navbar-right" style="margin-right: 60px;">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><sec:authentication property="credentials.displayName" /> <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">${loggedUser.displayName}<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="<c:url value='/j_spring_security_logout' />">Log out</a></li>
                 </ul>

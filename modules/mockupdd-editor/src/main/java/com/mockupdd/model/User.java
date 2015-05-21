@@ -12,6 +12,7 @@ import com.mockupdd.security.UserRole;
 public class User extends Entity<Long>{
 	
 	private List<Project> projects;
+	private String displayName;
 
 	public User(){
 		this.projects = new ArrayList<Project>();
@@ -27,6 +28,14 @@ public class User extends Entity<Long>{
 	
 	public void addProject(Project project){
 		this.projects.add(project);
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -8,6 +8,7 @@
 .mk {
 	background-color: white;
 	cursor: pointer;
+	display: block; 
 }
 
 .sidebar-nav .mk {
@@ -21,11 +22,13 @@
 }
 
 .mk-title {
+	display: inline-block;
 	color: grey;
 	font-size: 18px;
 }
 
 .mk-label {
+	display: inline-block;
 	font-weight: bold;
 	line-height: 1;
 	white-space: nowrap;
@@ -33,7 +36,7 @@
 }
 
 .mk-button {
-	
+	display: inline-block;
 }
 
 .mk-input {
