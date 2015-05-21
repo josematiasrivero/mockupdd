@@ -22,7 +22,14 @@
           </li>
           <li>
             <label class="control-label">Label</label>
-            <div class="mk mk-label">Label:</div>
+            <div id="create-label" class="ui-widget-content mk mk-label" style="position: relative;">Label:</div>
+            <script>
+            	$('#create-label').click(function(){
+            		var label = new Label();
+            		label.setText("New label");
+            		label.draw();
+            	})
+            </script>
           </li>
           <li>
             <label class="control-label">Input</label>
@@ -37,6 +44,8 @@
             </div>
           </li>
         </ul>
+      </div>
+      <div id="page" style="height:100%; margin-left:250px; position:fixed;">
       </div>
       <div class="container">
         <h4>${mockup.name}</h4>
