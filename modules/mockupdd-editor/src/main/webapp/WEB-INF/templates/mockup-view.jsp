@@ -49,6 +49,22 @@
       </div>
       <div class="container">
         <h4>${mockup.name}</h4>
+        <div id="myModal" class="modal fade" style="overflow-y: auto;">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title"></h4>
+		      </div>
+		      <div class="modal-body">
+		      </div>
+	          <div class="modal-footer">
+	            <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Close</button>
+	            <button type="button" id="save-changes" class="btn btn-primary">Save changes</button>
+	          </div>
+		    </div>
+		   </div>
+		</div>
       </div>
 	</div>
   </jsp:body>

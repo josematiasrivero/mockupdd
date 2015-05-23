@@ -6,11 +6,11 @@
   <head>
   	<title>MockupDD - <jsp:invoke fragment="title" /></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/css/navbar.css" type="text/css" rel="stylesheet" />
+	<script src="/libs/jquery.js"></script>
 	<link href="/css/bootstrap3.min.css" type="text/css" rel="stylesheet" />
 	<link href="/css/font-awesome.css" rel="stylesheet">
 	<link href="/css/bootstrap-social.css" type="text/css" rel="stylesheet" />
-    <link href="/css/navbar.css" type="text/css" rel="stylesheet" />
-	<script src="/libs/jquery.js"></script>
 	<script src="/libs/bootstrap3.min.js"></script>
 	<script src="/scripts/pagination.js"></script>
 	<jsp:invoke fragment="head" />
