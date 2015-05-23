@@ -27,3 +27,6 @@
 		<img class="circular  navbar-right" src="<sec:authentication property="credentials.imageUrl" />" />
 	</sec:authorize>
 </nav>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/css/style.css">
