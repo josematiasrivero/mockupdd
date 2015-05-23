@@ -35,4 +35,27 @@ public class APIResponse {
     }
     return Response.ok(json).build();
   }
+
+  public static Response userError(){
+    return APIResponse.userError(null);
+  }
+  
+  public static Response userError(String message) {
+    JSONObject json = new JSONObject();
+    try{
+      json.put("result", "error");
+    } catch (JSONException e){
+      //Should never happen, this is only thrown when the key is null.
+      log.error("Error creating API response");
+    }
+    if(message != null){
+      try{
+        json.put("message", message);
+      } catch (JSONException e){
+        //Should never happen, this is only thrown when the key is null.
+        log.error("Error creating API response");
+      }
+    }
+    return Response.status(400).entity(message).build();
+  }
 }

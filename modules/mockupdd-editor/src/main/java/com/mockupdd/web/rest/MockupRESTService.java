@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
@@ -41,6 +43,12 @@ public class MockupRESTService {
   @Path("/{mockupId}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateMockup(@PathParam("mockupId") Long mockupId, Mockup mockup){
+    //Validate json
+    try {
+      JSONObject json = new JSONObject(mockup.getJsonData());
+    } catch (JSONException e) {
+      return APIResponse.userError();
+    }
 	  this.mockupService.update(mockupId, mockup);
 	  return APIResponse.ok();
   }
