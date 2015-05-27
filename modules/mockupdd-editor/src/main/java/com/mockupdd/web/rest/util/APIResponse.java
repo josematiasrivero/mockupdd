@@ -7,8 +7,6 @@ import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-
 public class APIResponse {
 
   private static Logger log = LoggerFactory.getLogger(APIResponse.class);
