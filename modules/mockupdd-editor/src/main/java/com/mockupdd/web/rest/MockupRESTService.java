@@ -34,9 +34,9 @@ public class MockupRESTService {
   @GET
   @Path("/{mockupId}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getMockupId(@Context SecurityContext context, @PathParam("mockupId") String mockupId) {
-    User principal = (User) ((UsernamePasswordAuthenticationToken) context.getUserPrincipal()).getPrincipal();
-    return Response.ok(mockupId).build();
+  public Response getMockup(@Context SecurityContext context, @PathParam("mockupId") Long mockupId) {
+    Mockup mockup = this.mockupService.getMockup(mockupId);
+    return Response.ok(mockup).build();
   }
   
   @PUT

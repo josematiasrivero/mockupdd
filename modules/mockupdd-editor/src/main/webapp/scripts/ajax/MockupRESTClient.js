@@ -2,6 +2,13 @@ var MockupRESTClient = GenericRESTClient.extend({
   init : function() {
   },
   
+  getMockup : function(id, okCallback, errorCallback){
+	  return this._jsonGet("/service/mockups/"+id,function(data){
+		  data.jsonData = JSON.parse(data.jsonData);
+		  return okCallback(data);
+	  }, errorCallback);
+  },
+  
   updateMockup : function(id, name, jsonData, okCallback, errorCallback){
 	  var jsonString = JSON.stringify(jsonData);
 	  var mockup = {
@@ -9,6 +16,6 @@ var MockupRESTClient = GenericRESTClient.extend({
 			  name:name,
 			  jsonData: jsonString
 	  };
-	  this._jsonPut("/service/mockups/"+id, mockup, okCallback, errorCallback);
+	  return this._jsonPut("/service/mockups/"+id, mockup, okCallback, errorCallback);
   }
 });
