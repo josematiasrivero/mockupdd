@@ -1,9 +1,12 @@
-var Title = Widget.extend({
+var Button = Widget.extend({
+  /**
+   * Creates a button with style 'primary' and text 'Button' by default.
+   */
   init : function() {
     this._super();
-    this.text = "Title";
-    this.color = "gray";
-    this.html = $("<h3>");
+    this.text = "Button";
+    this.style = Styles.PRIMARY;
+    this.html = $("<div class='btn'>");
   },
   getText : function() {
     return this.text;
@@ -12,16 +15,24 @@ var Title = Widget.extend({
     this.text = text;
     return this.text;
   },
-  getColor : function() {
-    return this.color;
+  getStyle : function() {
+    return this.style;
   },
-  setColor : function(color) {
-    this.color = color;
-    return this.color;
+  setStyle : function(style) {
+    this.style = style;
+    return this.style;
+  },
+  putClassInHtml : function() {
+    for ( var style in Styles) {
+      if (Styles.hasOwnProperty(style)) {
+        this.html.removeClass("btn-" + Styles[style]);
+      }
+    }
+    return this.html.addClass("btn-" + this.style);
   },
   getHtml : function() {
-    return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
-        .css("position", "absolute");
+    return this.putClassInHtml().text(this.getText()).attr("id", this.getId()).css("position",
+        "absolute");
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
@@ -34,17 +45,17 @@ var Title = Widget.extend({
   },
   doubleClick : function() {
     $("#myModal .modal-title").empty();
-    $("#myModal .modal-title").html('Input');
+    $("#myModal .modal-title").html('Button');
     $("#myModal .modal-body").empty();
     $("#myModal .modal-body").html(
         '<div class="col-xs-9" style="margin: auto; float:left;">'
             + '<label class="col-xs-3 control-label">Text</label>' + '<div class="col-xs-9">'
-            + '<input type="text" id="title-text" class="form-control" name="titletext" value="'
+            + '<input type="text" id="button-text" class="form-control" name="button-text" value="'
             + this.getText() + '" />' + '</div>' + '</div>'
             + '<div class="col-xs-9" style="margin: 10px auto auto auto; float:left;">'
-            + '<label class="col-xs-3 control-label">Color</label>' + '<div class="col-xs-9">'
-            + '<input type="text" id="title-color" class="form-control" name="titlecolor" value="'
-            + this.getColor() + '" />' + '</div>' + '</div>');
+            + '<label class="col-xs-3 control-label">Style</label>' + '<div class="col-xs-9">'
+            + '<input type="text" id="button-style" class="form-control" name="button-color" value="'
+            + this.getStyle() + '" />' + '</div>' + '</div>');
     $("#myModal .modal-body").css("height", "100px");
     $("#save-changes").click($.proxy(this.persist, this));
     $("#close").click($.proxy(function() {
@@ -55,12 +66,12 @@ var Title = Widget.extend({
   },
   persist : function() {
     // No chequea datos.
-    var text = $("#title-text").val();
     var element = $("#" + this.getId());
+    var text = $("#button-text").val();
     this.setText(text);
     element.text(this.getText());
-    color = $("#title-color").val();
-    this.setColor(color);
-    element.css("color", this.getColor());
+    style = $("#button-style").val();
+    this.setStyle(style);
+    this.putClassInHtml();
   }
 })
