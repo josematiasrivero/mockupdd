@@ -51,5 +51,11 @@
 		<constructor-arg ref="mockupRepository" />
 		<constructor-arg ref="projectRepository" />
 	</bean>
+	
+	<!-- REST Services -->
+	
+	<bean id="mockupRESTService" class="com.mockupdd.web.rest.MockupRESTService">
+		<constructor-arg ref="mockupService" />
+	</bean>
 
 </beans>

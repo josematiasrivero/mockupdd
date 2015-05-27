@@ -15,7 +15,7 @@ public class ConnectionSignUpImpl implements ConnectionSignUp{
 
 	@Override
 	public String execute(Connection<?> connection) {
-		return this.userService.createNewUser().getId().toString();
+		return this.userService.createNewUser(connection).getId().toString();
 	}
 
 	
