@@ -12,17 +12,20 @@ var Input = Widget.extend({
     return this.placeholder;
   },
   getHtml : function() {
-    return this.html.text(this.getPlaceholder()).attr("id", this.getId()).css(
-        "position", "absolute").css("width", "150px");
+    return this.html.text(this.getPlaceholder()).attr("id", this.getId()).css("width", "150px");
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
-    element.draggable();
   },
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    $("#page").append(element);
+    var div = $("<div class='ui-widget-content' style='width:170px; height:50px;'></div>");
+    div.resizable();
+    div.draggable();
+    div.append(element);
+    $("#page").append(div);
+    div.css("position", "absolute");
   },
   doubleClick : function() {
     $("#myModal .modal-title").empty();

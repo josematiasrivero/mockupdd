@@ -28,17 +28,17 @@ var Label = Widget.extend({
     return this.fontSize;
   },
   doubleClick : function(){
-	$("#myModal .modal-title").empty();
-	$("#myModal .modal-title").html('Label');
-	$("#myModal .modal-body").empty();
-	$("#myModal .modal-body").html(
-        '<div class="col-xs-9" style="margin: auto; float:left;">' +
-        	'<label class="col-xs-3 control-label">Text</label>' +
-        	'<div class="col-xs-9">' +
-        		'<input type="text" id="label-text" class="form-control" name="labeltext" value="' +
-        			this.getText() +
-        		'" />' +
-        	'</div>' +
+  	$("#myModal .modal-title").empty();
+  	$("#myModal .modal-title").html('Label');
+  	$("#myModal .modal-body").empty();
+  	$("#myModal .modal-body").html(
+      '<div class="col-xs-9" style="margin: auto; float:left;">' +
+      	'<label class="col-xs-3 control-label">Text</label>' +
+      	'<div class="col-xs-9">' +
+      		'<input type="text" id="label-text" class="form-control" name="labeltext" value="' +
+      			this.getText() +
+      		'" />' +
+    	'</div>' +
     	'</div>' +
         '<div class="col-xs-9" style="margin: 10px auto auto auto; float:left;">' +
 	    	'<label class="col-xs-3 control-label">Color</label>' +
@@ -51,29 +51,29 @@ var Label = Widget.extend({
 	    '<div class="col-xs-9" style="margin: 10px auto auto auto; float:left;">' +
 	    	'<label class="col-xs-3 control-label">Font size</label>' +
 	    	'<div class="col-xs-9">' +
-				'<input type="text" id="label-font-size" class="form-control" name="labelfontsize" value="' +
-					this.getFontSize() +
-				'" />' +
-			'</div>' +
+  				'<input type="text" id="label-font-size" class="form-control" name="labelfontsize" value="' +
+  					this.getFontSize() +
+  				'" />' +
+				'</div>' +
 	    '</div>');
-	$("#myModal .modal-body").css("height", "140px");
-	$("#save-changes").click($.proxy(this.persist, this));
-	$("#close").click($.proxy(function(){$("#save-changes").off("click");}, this));
-	$("#myModal").draggable();
-	$("#myModal").modal('show');
+  	$("#myModal .modal-body").css("height", "140px");
+  	$("#save-changes").click($.proxy(this.persist, this));
+  	$("#close").click($.proxy(function(){$("#save-changes").off("click");}, this));
+  	$("#myModal").draggable();
+  	$("#myModal").modal('show');
   },
   addEvents : function(element){
-	element.dblclick($.proxy(this.doubleClick, this));
+    element.dblclick($.proxy(this.doubleClick, this));
   },
   draw : function() {
-	var element = this.getHtml();
-	this.addEvents(element);
-	var div = $("<div class=\"ui-widget-content\" style=\"width:100px; height:50px;\"></div>");
-	div.resizable();
-	div.draggable();
-	div.append(element);
+  	var element = this.getHtml();
+  	this.addEvents(element);
+  	var div = $("<div class=\"ui-widget-content\" style=\"width:100px; height:50px;\"></div>");
+  	div.resizable();
+  	div.draggable();
+  	div.append(element);
     $("#page").append(div);
-	div.css("position", "absolute");
+    div.css("position", "absolute");
   },
   getHtml : function() {
     return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor()).css("font-size", this.getFontSize());

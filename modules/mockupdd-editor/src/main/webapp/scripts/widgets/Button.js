@@ -31,17 +31,20 @@ var Button = Widget.extend({
     return this.html.addClass("btn-" + this.style);
   },
   getHtml : function() {
-    return this.putClassInHtml().text(this.getText()).attr("id", this.getId()).css("position",
-        "absolute");
+    return this.putClassInHtml().text(this.getText()).attr("id", this.getId());
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
-    element.draggable();
   },
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    $("#page").append(element);
+    var div = $("<div class='ui-widget-content' style='width:100px; height:50px;'></div>");
+    div.resizable();
+    div.draggable();
+    div.append(element);
+    $("#page").append(div);
+    div.css("position", "absolute");
   },
   doubleClick : function() {
     $("#myModal .modal-title").empty();
