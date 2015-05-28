@@ -50,15 +50,10 @@ var Button = Widget.extend({
     $("#myModal .modal-title").empty();
     $("#myModal .modal-title").html('Button');
     $("#myModal .modal-body").empty();
-    $("#myModal .modal-body").html(
-        '<div class="col-xs-9" style="margin: auto; float:left;">'
-            + '<label class="col-xs-3 control-label">Text</label>' + '<div class="col-xs-9">'
-            + '<input type="text" id="button-text" class="form-control" name="button-text" value="'
-            + this.getText() + '" />' + '</div>' + '</div>'
-            + '<div class="col-xs-9" style="margin: 10px auto auto auto; float:left;">'
-            + '<label class="col-xs-3 control-label">Style</label>' + '<div class="col-xs-9">'
-            + '<input type="text" id="button-style" class="form-control" name="button-color" value="'
-            + this.getStyle() + '" />' + '</div>' + '</div>');
+    var form = new FormConstructor();
+    form.addTextInput("Text", this.getText(), "button-text");
+    form.addTextInput("Style", this.getStyle(), "button-style");
+    $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "100px");
     $("#save-changes").click($.proxy(this.persist, this));
     $("#close").click($.proxy(function() {

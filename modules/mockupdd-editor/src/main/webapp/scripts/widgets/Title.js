@@ -40,15 +40,10 @@ var Title = Widget.extend({
     $("#myModal .modal-title").empty();
     $("#myModal .modal-title").html('Input');
     $("#myModal .modal-body").empty();
-    $("#myModal .modal-body").html(
-        '<div class="col-xs-9" style="margin: auto; float:left;">'
-            + '<label class="col-xs-3 control-label">Text</label>' + '<div class="col-xs-9">'
-            + '<input type="text" id="title-text" class="form-control" name="titletext" value="'
-            + this.getText() + '" />' + '</div>' + '</div>'
-            + '<div class="col-xs-9" style="margin: 10px auto auto auto; float:left;">'
-            + '<label class="col-xs-3 control-label">Color</label>' + '<div class="col-xs-9">'
-            + '<input type="text" id="title-color" class="form-control" name="titlecolor" value="'
-            + this.getColor() + '" />' + '</div>' + '</div>');
+    var form = new FormConstructor();
+    form.addTextInput("Text", this.getText(), "title-text");
+    form.addTextInput("Color", this.getColor(), "title-color");
+    $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "100px");
     $("#save-changes").click($.proxy(this.persist, this));
     $("#close").click($.proxy(function() {

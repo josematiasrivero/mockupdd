@@ -31,11 +31,9 @@ var Input = Widget.extend({
     $("#myModal .modal-title").empty();
     $("#myModal .modal-title").html('Input');
     $("#myModal .modal-body").empty();
-    $("#myModal .modal-body").html(
-        '<div class="col-xs-9" style="margin: auto; float:left;">'
-            + '<label class="col-xs-3 control-label">Placeholder</label>' + '<div class="col-xs-9">'
-            + '<input type="text" id="input-placeholder" class="form-control" name="inputplaceholder" value="'
-            + this.getPlaceholder() + '" />' + '</div>' + '</div>');
+    var form = new FormConstructor();
+    form.addTextInput("Placeholder", this.getPlaceholder(), "input-placeholder");
+    $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "80px");
     $("#save-changes").click($.proxy(this.persist, this));
     $("#close").click($.proxy(function() {

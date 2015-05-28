@@ -8,6 +8,7 @@
 <!-- Import all widgets -->
 <script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
 <script type="text/javascript" src="/scripts/utils/Styles.js"></script>
+<script type="text/javascript" src="/scripts/utils/FormConstructor.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Widget.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Label.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Title.js"></script>
