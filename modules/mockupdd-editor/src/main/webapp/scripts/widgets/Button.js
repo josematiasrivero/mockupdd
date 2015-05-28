@@ -39,8 +39,11 @@ var Button = Widget.extend({
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    var div = $("<div class='ui-widget-content' style='width:100px; height:50px;'></div>");
-    div.resizable();
+    var div = $("<div style='width:100px; height:50px;'></div>");
+    div.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
+    div.removeClass('ui-resizable'); //Remove the dotted line
+    div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
+    div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     div.draggable();
     div.append(element);
     $("#page").append(div);

@@ -5,10 +5,8 @@
  */
 var IdGenerator = new (Class.extend({
   init : function() {
-    this.next = 0;
   },
   getNext : function() {
-    this.next++;
-    return this.next;
+    return CryptoJS.MD5((new Date()).toString()).toString();
   }
 }))();
