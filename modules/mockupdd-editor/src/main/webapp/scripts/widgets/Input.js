@@ -20,15 +20,13 @@ var Input = Widget.extend({
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    var div = $("<div style='width:100px; height:50px;'></div>");
-    div.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
-    div.removeClass('ui-resizable'); //Remove the dotted line
-    div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
-    div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
-    div.draggable();
-    div.append(element);
-    $("#page").append(div);
-    div.css("position", "absolute");
+    element.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
+    element.removeClass('ui-resizable'); //Remove the dotted line
+    element.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
+    element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
+    element.draggable();
+    $("#page").append(element);
+    element.css("position", "absolute");
   },
   doubleClick : function() {
     $("#myModal .modal-title").empty();
@@ -51,5 +49,12 @@ var Input = Widget.extend({
     var element = $("#" + this.getId());
     this.setPlaceholder(placeholder);
     element.text(this.getPlaceholder());
+    /*
+     * The function .text remove the divs added by the .resizable()
+     * So we have to add it again.
+     */
+    element.resizable('destroy');
+    element.resizable({autoHide: true});
+    element.removeClass('ui-resizable');
   }
 })
