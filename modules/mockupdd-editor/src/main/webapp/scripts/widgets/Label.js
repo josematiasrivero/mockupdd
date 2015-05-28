@@ -47,30 +47,11 @@ var Label = Widget.extend({
     $("#myModal .modal-title").empty();
     $("#myModal .modal-title").html('Label');
     $("#myModal .modal-body").empty();
-    $("#myModal .modal-body").html(
-        '<div class="col-xs-9" style="margin: auto; float:left;">'
-          + '<label class="col-xs-3 control-label">Text</label>'
-          + '<div class="col-xs-9">'
-            + '<input type="text" id="label-text" class="form-control" name="labeltext" value="'
-              + this.getText()
-            + '" />'
-          + '</div>'
-        + '</div>'
-        + '<div class="col-xs-9" style="margin: 10px auto auto auto; float:left;">'
-          + '<label class="col-xs-3 control-label">Color</label>'
-          + '<div class="col-xs-9">'
-            + '<input type="text" id="label-color" class="form-control" name="labelcolor" value="'
-              + this.getColor()
-            + '" />'
-          + '</div>'
-        + '</div>'
-        + '<div class="col-xs-9" style="margin: 10px auto auto auto; float:left;">'
-          + '<label class="col-xs-3 control-label">Font size</label>'
-          + '<div class="col-xs-9">'
-            + '<input type="text" id="label-font-size" class="form-control" name="labelfontsize" value="'
-            + this.getFontSize() + '" />' 
-          + '</div>' 
-        + '</div>');
+    var form = new FormConstructor();
+    form.addTextInput("Text", this.getText(), "label-text")
+    form.addTextInput("Color", this.getColor(), "label-color")
+    form.addTextInput("Font size", this.getFontSize(), "label-font-size")
+    $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "140px");
     $("#save-changes").click($.proxy(this.persist, this));
     $("#close").click($.proxy(function() {
@@ -93,11 +74,11 @@ var Label = Widget.extend({
     div.css("position", "absolute");
   },
   getHtml : function() {
-    return this.html.text(this.getText()).attr("id", this.getId())
-        .css("color", this.getColor()).css("font-size", this.getFontSize());
+    return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
+        .css("font-size", this.getFontSize());
   },
   persist : function() {
-    //No chequea datos.
+    // No chequea datos.
     text = $("#label-text").val();
     this.setText(text);
     $("#" + this.getId()).text(this.getText());

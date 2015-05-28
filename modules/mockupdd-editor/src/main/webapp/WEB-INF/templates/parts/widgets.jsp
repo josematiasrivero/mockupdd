@@ -6,8 +6,14 @@
 <script type="text/javascript" src="/libs/class.js"></script>
 
 <!-- Import all widgets -->
+<script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
+<script type="text/javascript" src="/scripts/utils/Styles.js"></script>
+<script type="text/javascript" src="/scripts/utils/FormConstructor.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Widget.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Label.js"></script>
+<script type="text/javascript" src="/scripts/widgets/Title.js"></script>
+<script type="text/javascript" src="/scripts/widgets/Button.js"></script>
+<script type="text/javascript" src="/scripts/widgets/Input.js"></script>
 <script type="text/javascript" src="/scripts/ajax/GenericRESTClient.js"></script>
 <script type="text/javascript" src="/scripts/ajax/MockupRESTClient.js"></script>
 <script type="text/javascript" src="/scripts/ajax/PersistenceManager.js"></script>

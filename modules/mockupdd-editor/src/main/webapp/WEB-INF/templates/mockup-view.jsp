@@ -25,7 +25,12 @@
           </li>          
           <li>
             <label class="control-label">Title</label>
-            <div class="mk mk-title">This is a title</div>
+            <div id="create-title" class="mk mk-title">This is a title</div>
+            <script>
+              $('#create-title').click(function(){
+                (new Title()).draw();
+              })
+            </script>
           </li>
           <li>
             <label class="control-label">Label</label>
@@ -40,15 +45,25 @@
           </li>
           <li>
             <label class="control-label">Input</label>
-            <div class="mk mk-input">
+            <div id="create-input" class="mk mk-input">
               <span class="form-control"></span>
             </div>
+            <script>
+              $('#create-input').click(function(){
+                (new Input()).draw();
+              })
+            </script>
           </li>
           <li>
             <label class="control-label">Button</label>
-            <div class="mk mk-button">
-              <button class="btn btn-primary">Press me!</button>
+            <div id="create-button" class="mk mk-button">
+              <button class="btn btn-primary">Button</button>
             </div>
+            <script>
+              $('#create-button').click(function(){
+                (new Button()).draw();
+              })
+            </script>
           </li>
         </ul>
       </div>

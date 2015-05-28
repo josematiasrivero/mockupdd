@@ -124,3 +124,7 @@ input.code {
 	background-color: white;
 	border: 2px solid #ddd;
 }
+
+.ui-resizable {
+	border: 1px dashed #000;
+}
