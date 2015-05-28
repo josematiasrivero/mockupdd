@@ -43,6 +43,7 @@ public class MockupRESTService {
   @Path("/{mockupId}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateMockup(@PathParam("mockupId") Long mockupId, Mockup mockup){
+    System.out.println("acá todo ok");
     //Validate json
     try {
       JSONObject json = new JSONObject(mockup.getJsonData());

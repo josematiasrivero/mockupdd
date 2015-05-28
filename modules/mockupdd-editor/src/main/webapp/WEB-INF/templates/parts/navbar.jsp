@@ -29,5 +29,6 @@
 </nav>
 
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="/css/style.css">

@@ -10,6 +10,11 @@
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
     <script src="/scripts/ajax/GenericRESTClient.js" type="text/javascript"></script>
     <script src="/scripts/ajax/MockupRESTClient.js" type="text/javascript"></script>
+    <script>
+    	$(function(){
+    	  PersistenceManager.startupMockup(${mockup.id}, ${mockup.name});
+    	});
+    </script>
   </jsp:attribute>
   <jsp:body>
 	<div id="wrapper">
