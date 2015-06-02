@@ -57,9 +57,7 @@ var Button = Widget.extend({
     $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "100px");
     $("#save-changes").click($.proxy(this.persist, this));
-    $("#close").click($.proxy(function() {
-      $("#save-changes").off("click");
-    }, this));
+    $("#delete-widget").click($.proxy(this.erase, this));
     $("#myModal").draggable();
     $("#myModal").modal('show');
   },
@@ -68,7 +66,7 @@ var Button = Widget.extend({
     var element = $("#" + this.getId());
     var text = $("#button-text").val();
     this.setText(text);
-    element.text(this.getText());
+    element.html(this.getText());
     /*
      * The function .text remove the divs added by the .resizable()
      * So we have to add it again.
@@ -76,8 +74,7 @@ var Button = Widget.extend({
     element.resizable('destroy');
     element.resizable({autoHide: true});
     element.removeClass('ui-resizable');
-    style = $("#button-style").val();
-    this.setStyle(style);
+    this.setStyle($("#button-style").val());
     this.putClassInHtml();
   }
 })

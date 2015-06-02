@@ -16,8 +16,10 @@ var PersistenceManager = new (Class.extend({
   },
   saveMockup : function() {
     if (this.dirty) {
-      arr = new Array();
-      for (w in this.widgets) arr.push(this.widgets[w].serialize());
+      var arr = new Array();
+      for (var w in this.widgets) {
+        arr.push(this.widgets[w].serialize());
+      }
       MockupRESTClient.updateMockup(
           this.mockupId, 
           this.mockupName, 

@@ -10,13 +10,25 @@
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
     <script src="/scripts/ajax/GenericRESTClient.js" type="text/javascript"></script>
     <script src="/scripts/ajax/MockupRESTClient.js" type="text/javascript"></script>
-    <!-- 
     <script>
+    	/** By: Viral Patel. 
+    	 *	Adds on("show"|"hide") events to jQuery.
+    	 */
+    	(function ($) {
+          $.each(['show', 'hide'], function (i, ev) {
+            var el = $.fn[ev];
+            $.fn[ev] = function () {
+              this.trigger(ev);
+              return el.apply(this, arguments);
+            };
+          });
+        })(jQuery);
+    	/*
     	$(function(){
     	  PersistenceManager.startupMockup(${mockup.id}, ${mockup.name});
     	});
+    	*/
     </script>
-     -->
   </jsp:attribute>
   <jsp:body>
 	<div id="wrapper">
@@ -36,13 +48,11 @@
           </li>
           <li>
             <label class="control-label">Label</label>
-            <div id="create-label" class="ui-widget-content mk mk-label" style="position: relative;">Label:</div>
+            <div id="create-label" class="mk mk-label" style="position: relative;">Label:</div>
             <script>
-            	$('#create-label').click(function(){
-            		var label = new Label();
-            		label.setText("New label");
-            		label.draw();
-            	})
+              $('#create-label').click(function(){
+                (new Label()).draw();
+              })
             </script>
           </li>
           <li>
@@ -84,12 +94,19 @@
 		      </div>
 	          <div class="modal-footer">
 	            <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="delete-widget" class="btn btn-danger" data-dismiss="modal">Delete</button>
 	            <button type="button" id="save-changes" class="btn btn-primary">Save changes</button>
 	          </div>
 		    </div>
-		   </div>
+		  </div>
 		</div>
       </div>
+      <script type="text/javascript">
+      	$("#myModal").on("hide", function(){
+      	  $("#delete-widget").off();
+      	  $("#save-changes").off();
+      	});
+      </script>
 	</div>
   </jsp:body>
 </t:baseLayout>

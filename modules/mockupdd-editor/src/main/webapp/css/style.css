@@ -125,6 +125,7 @@ input.code {
 	border: 2px solid #ddd;
 }
 
-.ui-resizable {
-	border: 1px dashed #000;
+.ui-widget-content {
+	border: 1px dashed #000 !important;
+	cursor: pointer !important;
 }

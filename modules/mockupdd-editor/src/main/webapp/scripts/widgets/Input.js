@@ -37,9 +37,7 @@ var Input = Widget.extend({
     $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "80px");
     $("#save-changes").click($.proxy(this.persist, this));
-    $("#close").click($.proxy(function() {
-      $("#save-changes").off("click");
-    }, this));
+    $("#delete-widget").click($.proxy(this.erase, this));
     $("#myModal").draggable();
     $("#myModal").modal('show');
   },

@@ -30,8 +30,9 @@ var Title = Widget.extend({
     var element = this.getHtml();
     this.addEvents(element);
     var div = $("<div style='width:100px; height:50px;'></div>");
+    div.attr("id", "container-" + this.getId());
     div.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
-    div.removeClass('ui-resizable'); //Remove the dotted line
+    div.removeClass('ui-resizable');
     div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
     div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     div.draggable();
@@ -49,9 +50,7 @@ var Title = Widget.extend({
     $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "100px");
     $("#save-changes").click($.proxy(this.persist, this));
-    $("#close").click($.proxy(function() {
-      $("#save-changes").off("click");
-    }, this));
+    $("#delete-widget").click($.proxy(this.erase, this));
     $("#myModal").draggable();
     $("#myModal").modal('show');
   },
