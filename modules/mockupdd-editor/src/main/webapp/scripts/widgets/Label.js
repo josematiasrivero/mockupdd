@@ -1,7 +1,7 @@
 var Label = Widget.extend({
   init : function() {
     this._super();
-    this.text = "";
+    this.text = "New label";
     this.color = "black";
     this.fontSize = "14px";
     this.html = $("<label>");
@@ -55,9 +55,7 @@ var Label = Widget.extend({
     $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "140px");
     $("#save-changes").click($.proxy(this.persist, this));
-    $("#close").click($.proxy(function() {
-      $("#save-changes").off("click");
-    }, this));
+    $("#delete-widget").click($.proxy(this.erase, this));
     $("#myModal").draggable();
     $("#myModal").modal('show');
   },
