@@ -1,22 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <t:baseLayout>
   <jsp:attribute name="title">${mockup.name}</jsp:attribute>
   <jsp:attribute name="head">
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
-    <script src="/scripts/ajax/GenericRESTClient.js" type="text/javascript"></script>
-    <script src="/scripts/ajax/MockupRESTClient.js" type="text/javascript"></script>
-    <!-- 
     <script>
     	$(function(){
-    	  PersistenceManager.startupMockup(${mockup.id}, ${mockup.name});
+    	  PersistenceManager.startupMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
     	});
     </script>
-     -->
   </jsp:attribute>
   <jsp:body>
 	<div id="wrapper">

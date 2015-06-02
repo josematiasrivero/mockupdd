@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +44,15 @@ public class MockupRESTService {
   @Path("/{mockupId}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response updateMockup(@PathParam("mockupId") Long mockupId, Mockup mockup){
-    System.out.println("acá todo ok");
     //Validate json
     try {
       JSONObject json = new JSONObject(mockup.getJsonData());
     } catch (JSONException e) {
-      return APIResponse.userError();
+      try {
+        JSONArray json = new JSONArray(mockup.getJsonData());
+      } catch (JSONException e2) {
+        return APIResponse.userError();
+      }
     }
 	  this.mockupService.update(mockupId, mockup);
 	  return APIResponse.ok();

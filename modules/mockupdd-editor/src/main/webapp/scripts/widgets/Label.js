@@ -5,10 +5,12 @@ var Label = Widget.extend({
     this.color = "black";
     this.fontSize = "14px";
     this.html = $("<label>");
+    this.width = "100px";
+    this.height = "50px";
     PersistenceManager.addWidget(this);
   },
   serialize : function() {
-    arr = ["Label", [this.id, this.x.toString(), this.y.toString(), this.height.toString(), this.width.toString(), this.text, this.color, this.fontSize]];
+    var arr = ["Label", [this.id, this.x.toString(), this.y.toString(), this.height.toString(), this.width.toString(), this.text, this.color, this.fontSize]];
     return arr;
   },
   unserialize : function(arr) {
@@ -20,7 +22,6 @@ var Label = Widget.extend({
     this.text = arr[5];
     this.color = arr[6];
     this.fontSize = arr[7];
-    this.html = arr[8];
   },
   getText : function() {
     return this.text;
@@ -66,7 +67,7 @@ var Label = Widget.extend({
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    var div = $("<div style='width:100px; height:50px;'></div>");
+    var div = $("<div style='width:"+this.width+"; height:"+this.height+";'></div>");
     div.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
     div.removeClass('ui-resizable'); //Remove the dotted line
     div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
@@ -82,12 +83,12 @@ var Label = Widget.extend({
   },
   persist : function() {
     // No chequea datos.
-    text = $("#label-text").val();
+    var text = $("#label-text").val();
     this.setText(text);
     $("#" + this.getId()).text(this.getText());
-    color = $("#label-color").val();
+    var color = $("#label-color").val();
     this.setColor(color);
-    fontSize = $("#label-font-size").val();
+    var fontSize = $("#label-font-size").val();
     this.setFontSize(fontSize);
     $("#" + this.getId()).css("color", this.getColor()).css("font-size", this.getFontSize());
     PersistenceManager.updateWidget(this);
