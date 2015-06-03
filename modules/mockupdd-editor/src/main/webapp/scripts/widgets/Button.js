@@ -1,3 +1,4 @@
+widgetsName["Button"] = 'Button';
 var Button = Widget.extend({
   /**
    * Creates a button with style 'primary' and text 'Button' by default.

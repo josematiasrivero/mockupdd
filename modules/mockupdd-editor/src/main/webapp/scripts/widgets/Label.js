@@ -1,3 +1,4 @@
+widgetsName["Label"] = 'Label';
 var Label = Widget.extend({
   init : function() {
     this._super();
@@ -66,14 +67,23 @@ var Label = Widget.extend({
     var element = this.getHtml();
     this.addEvents(element);
     var div = $("<div style='width:"+this.width+"; height:"+this.height+";'></div>");
+    div.attr("id", "container-" + this.getId());
     div.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
     div.removeClass('ui-resizable'); //Remove the dotted line
     div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
     div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
-    div.draggable();
+    div.draggable({
+      stop: $.proxy(function(){
+        console.log(this.x + " " + this.y);
+        debugger;
+        this.x = $("#container-" + this.getId()).css('left');
+        this.y = $("#container-" + this.getId()).css('top');
+        console.log(this.x + " " + this.y);
+      }, this)
+    });
     div.append(element);
     $("#page").append(div);
-    div.css("position", "absolute");
+    div.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   getHtml : function() {
     return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor())

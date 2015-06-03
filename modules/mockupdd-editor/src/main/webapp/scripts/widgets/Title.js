@@ -1,3 +1,4 @@
+widgetsName["Title"] = 'Title';
 var Title = Widget.extend({
   init : function() {
     this._super();

@@ -11,10 +11,9 @@ var PersistenceManager = new (Class.extend({
     this.mockupName = name;
     var jsonData = JSON.parse(json);
     for (var i in jsonData) {
-      //WARNING it'd be recommended to avoid the possible XSS here
-      //Possible solution: ask for every widget name
       var id = jsonData[i][1][0];
-      this.widgets[id] = eval("new " + jsonData[i][0] + "()");
+      var fn = window[widgetsName[jsonData[i][0]]];
+      this.widgets[id] = new fn();
       this.widgets[id].unserialize(jsonData[i][1]);
       this.widgets[id].draw();
     }
@@ -23,8 +22,12 @@ var PersistenceManager = new (Class.extend({
     if (this.dirty) {
       var arr = new Array();
       for (var w in this.widgets) {
-        arr.push(this.widgets[w].serialize());
+        if (this.widgets.hasOwnProperty(w)) {
+          arr.push(this.widgets[w].serialize());
+        }
       }
+      debugger;
+      console.log(arr);
       MockupRESTClient.updateMockup(
           this.mockupId, 
           this.mockupName, 

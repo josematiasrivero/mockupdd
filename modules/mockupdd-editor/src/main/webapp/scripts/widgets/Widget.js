@@ -1,10 +1,12 @@
+widgetsName = {}; //This dictionary is going to have the functions to create the new labels
+                  //For example, widgetsName["Label"] = Label;
 var Widget = Class.extend({
   init : function() {
     this.id = "Widget-id-" + IdGenerator.getNext();
-    this.x = 0.0; // right position
-    this.y = 0.0; // top position
-    this.height = 0.0;
-    this.width = 0.0;
+    this.x = "0px"; // right position
+    this.y = "0px"; // top position
+    this.height = "50px";
+    this.width = "100px";
   },
   serialize : function() {
     // abstract method to be implemented in the subclasses
