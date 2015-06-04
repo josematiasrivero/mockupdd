@@ -54,7 +54,7 @@ var Button = Widget.extend({
     $("#myModal .modal-body").empty();
     var form = new FormConstructor();
     form.addTextInput("Text", this.getText(), "button-text");
-    form.addTextInput("Style", this.getStyle(), "button-style");
+    form.addSelectInput("Style", this.getStyle(), Styles.values, "button-style");
     $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "100px");
     $("#save-changes").click($.proxy(this.persist, this));

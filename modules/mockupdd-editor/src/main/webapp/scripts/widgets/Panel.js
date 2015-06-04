@@ -65,7 +65,7 @@ var Panel = Widget.extend({
     form.addTextInput("Header text", this.getHeader(), "panel-header");
     form.addTextarea("Paragraph text", this.getText(), "panel-text");
     form.addTextInput("Font size", this.getFontSize(), "panel-font-size");
-    form.addSelectInput("Style", this.getStyle(), "panel-style");
+    form.addSelectInput("Style", this.getStyle(), Styles.panelValues, "panel-style");
     $("#myModal .modal-body").html(form.getContent());
     $("#myModal .modal-body").css("height", "170px");
     $("#save-changes").click($.proxy(this.persist, this));

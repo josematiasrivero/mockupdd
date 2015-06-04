@@ -79,9 +79,9 @@ var FormConstructor = Class.extend({
    * Adds a Select input field in the form.
    * 
    */
-  addSelectInput : function(label, value, id) {
+  addSelectInput : function(label, value, options, id) {
     // TODO: Check for XSS in parameters.
-    this._add(this._createLabel(label) + this._createSelectInput(value, id));
+    this._add(this._createLabel(label) + this._createSelectInput(value, options, id));
   },
 
   /**
@@ -101,15 +101,15 @@ var FormConstructor = Class.extend({
     input = div + input + "</input></div>";
     return input;
   },
-  _createSelectInput : function(value, id) {
+  _createSelectInput : function(value, options, id) {
     var div = "<div class='col-xs-" + this.getInputSpace() + "'>";
     var input = "<select id='" + id + "'>";
-    for ( var v in Styles.panelValues) {
-      input += "<option value='" + Styles.panelValues[v] + "' ";
-      if (value === Styles.panelValues[v]) {
+    for ( var v in options) {
+      input += "<option value='" + options[v] + "' ";
+      if (value === options[v]) {
         input += "selected='selected'";
       }
-      input += ">" + Styles.panelValues[v] + "</option>";
+      input += ">" + options[v] + "</option>";
     }
     return div + input + "</select></div>";
   },
