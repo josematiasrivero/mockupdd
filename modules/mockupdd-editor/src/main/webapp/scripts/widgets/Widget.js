@@ -1,8 +1,12 @@
 widgetsName = {}; //This dictionary is going to have the functions to create the new labels
                   //For example, widgetsName["Label"] = Label;
 var Widget = Class.extend({
-  init : function() {
-    this.id = "Widget-id-" + IdGenerator.getNext();
+  init : function(id) {
+    if (typeof id === 'undefined') {
+      this.id = "Widget-id-" + IdGenerator.getNext();
+    } else {
+      this.id = id;
+    }
     this.x = "0px"; // right position
     this.y = "0px"; // top position
     this.height = "50px";

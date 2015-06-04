@@ -30,7 +30,8 @@
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <li class="sidebar-brand">
-            Elements
+            <label class="control-label">Elements</label>
+            <div id="persistence-state" style="position: relative;"></div>
           </li>          
           <li>
             <label class="control-label">Title</label>

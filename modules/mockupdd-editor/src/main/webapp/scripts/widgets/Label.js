@@ -1,7 +1,7 @@
 widgetsName["Label"] = 'Label';
 var Label = Widget.extend({
-  init : function() {
-    this._super();
+  init : function(id) {
+    this._super(id);
     this.text = "New label";
     this.color = "black";
     this.fontSize = "14px";
@@ -74,11 +74,9 @@ var Label = Widget.extend({
     div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     div.draggable({
       stop: $.proxy(function(){
-        console.log(this.x + " " + this.y);
-        debugger;
         this.x = $("#container-" + this.getId()).css('left');
         this.y = $("#container-" + this.getId()).css('top');
-        console.log(this.x + " " + this.y);
+        PersistenceManager.updateWidget(this);
       }, this)
     });
     div.append(element);

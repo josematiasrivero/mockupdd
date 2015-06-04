@@ -9,14 +9,19 @@ var PersistenceManager = new (Class.extend({
   startupMockup : function(id, name, json) {
     this.mockupId = id;
     this.mockupName = name;
-    var jsonData = JSON.parse(json);
-    for (var i in jsonData) {
-      var id = jsonData[i][1][0];
-      var fn = window[widgetsName[jsonData[i][0]]];
-      this.widgets[id] = new fn();
-      this.widgets[id].unserialize(jsonData[i][1]);
-      this.widgets[id].draw();
+    debugger;
+    if (json) {
+      var jsonData = JSON.parse(json);
+      for (var i in jsonData) {
+        var id = jsonData[i][1][0];
+        var fn = window[widgetsName[jsonData[i][0]]];
+        new fn(id);
+        this.widgets[id].unserialize(jsonData[i][1]);
+        this.widgets[id].draw();
+      }
     }
+    this.dirty = false;
+    $("#persistence-state").html("Saved");
   },
   saveMockup : function() {
     if (this.dirty) {
@@ -26,14 +31,19 @@ var PersistenceManager = new (Class.extend({
           arr.push(this.widgets[w].serialize());
         }
       }
-      debugger;
-      console.log(arr);
+      $("#persistence-state").html("Saving");
       MockupRESTClient.updateMockup(
           this.mockupId, 
           this.mockupName, 
           arr, 
-          $.proxy(function() {this.dirty = false;}, this), 
-          function() {alert("Error when trying to connect with server.")}
+          $.proxy(function() {
+            this.dirty = false;
+            $("#persistence-state").html("Saved");
+          }, this),
+          $.proxy(function() {
+            $("#persistence-state").html("Dirty");
+            alert("Error when trying to connect with server.");
+          }, this)
       );
     }
   },
@@ -41,13 +51,16 @@ var PersistenceManager = new (Class.extend({
     this.widgets[widget.getId()] = widget;
     this.numberOfWidgets++;
     this.dirty = true;
+    $("#persistence-state").html("Dirty");
   },
   updateWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
     this.dirty = true;
+    $("#persistence-state").html("Dirty");
   },
   deleteWidget : function(widget) {
     delete this.widgets[widget.getId()];
     this.dirty = true;
+    $("#persistence-state").html("Dirty");
   }
 }))();
