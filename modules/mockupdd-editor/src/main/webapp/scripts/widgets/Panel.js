@@ -1,7 +1,7 @@
 widgetsName["Panel"] = 'Panel';
 var Panel = Widget.extend({
-  init : function() {
-    this._super();
+  init : function(id) {
+    this._super(id);
     this.header = "Header text";
     this.text = "Paragraph text";
     this.style = "info";
@@ -57,6 +57,49 @@ var Panel = Widget.extend({
     this.fontSize = fontSize;
     return this.fontSize;
   },
+  getHtml : function() {
+    return this.html.attr("id", this.getId());
+  },
+  addEvents : function(element) {
+    element.dblclick($.proxy(this.doubleClick, this));
+  },
+  draw : function() {
+    var element = this.getHtml();
+    this.addEvents(element);
+    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
+    div.attr("id", "container-" + this.getId());
+    div.resizable({
+      autoHide : true,
+      stop : $.proxy(function () {
+        this.width = $("#container-" + this.getId()).css('width');
+        this.height = $("#container-" + this.getId()).css('height');
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); // Make the div resizable, but it'll hide when not mouseover.
+        // Also when it stops modify the width and height values.
+    div.removeClass('ui-resizable'); // Remove the dotted line
+    div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
+    div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
+    div.draggable({
+      stop: $.proxy(function(){
+        this.x = $("#container-" + this.getId()).css('left');
+        this.y = $("#container-" + this.getId()).css('top');
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); //Make the div draggable, and when it stops modify the (x, y) value.
+    element.addClass("panel panel-" + this.getStyle());
+    element.css("height", "100%");
+    var header = $("<div class='panel-heading'></div>");
+    header.html(this.getHeader());
+    element.append(header);
+    var body = $("<div class='panel-body'></div>");
+    body.html(this.getText());
+    body.css("font-size", this.getFontSize());
+    element.append(body);
+    div.append(element);
+    $("#page").append(div);
+    div.css("position", "absolute").css('left', this.x).css('top', this.y);
+  },
   doubleClick : function() {
     $("#myModal .modal-title").empty();
     $("#myModal .modal-title").html('Panel');
@@ -72,41 +115,6 @@ var Panel = Widget.extend({
     $("#delete-widget").click($.proxy(this.erase, this));
     $("#myModal").draggable();
     $("#myModal").modal('show');
-  },
-  addEvents : function(element) {
-    element.dblclick($.proxy(this.doubleClick, this));
-  },
-  draw : function() {
-    var element = this.getHtml();
-    this.addEvents(element);
-    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
-    div.attr("id", "container-" + this.getId());
-    div.resizable({
-      autoHide : true
-    }); // Made the div resizable, but it'll hide when not mouseover
-    div.removeClass('ui-resizable'); // Remove the dotted line
-    div.mouseover(function() {
-      $(this).addClass('ui-widget-content')
-    }); // Add the style when mouse over
-    div.mouseout(function() {
-      $(this).removeClass('ui-widget-content')
-    }); // Remove the style when mouse over
-    div.draggable();
-    element.addClass("panel panel-" + this.getStyle());
-    element.css("height", "100%");
-    var header = $("<div class='panel-heading'></div>");
-    header.html(this.getHeader());
-    element.append(header);
-    var body = $("<div class='panel-body'></div>");
-    body.html(this.getText());
-    body.css("font-size", this.getFontSize());
-    element.append(body);
-    div.append(element);
-    $("#page").append(div);
-    div.css("position", "absolute");
-  },
-  getHtml : function() {
-    return this.html.attr("id", this.getId());
   },
   persist : function() {
     // No chequea datos.
