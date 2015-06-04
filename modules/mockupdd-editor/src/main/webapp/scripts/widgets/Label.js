@@ -63,7 +63,6 @@ var Label = Widget.extend({
     div.resizable({
       autoHide : true,
       stop : $.proxy(function () {
-        debugger;
         this.width = $("#container-" + this.getId()).css('width');
         this.height = $("#container-" + this.getId()).css('height');
         PersistenceManager.updateWidget(this);

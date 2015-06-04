@@ -7,7 +7,6 @@ var Title = Widget.extend({
     this.html = $("<h3>");
     this.width = "100px";
     this.height = "50px";
-    debugger;
     PersistenceManager.addWidget(this);
   },
   serialize : function() {
@@ -55,7 +54,6 @@ var Title = Widget.extend({
     div.resizable({
       autoHide : true,
       stop : $.proxy(function () {
-        debugger;
         this.width = $("#container-" + this.getId()).css('width');
         this.height = $("#container-" + this.getId()).css('height');
         PersistenceManager.updateWidget(this);
