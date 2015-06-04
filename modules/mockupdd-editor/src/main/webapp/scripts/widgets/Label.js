@@ -11,7 +11,10 @@ var Label = Widget.extend({
     PersistenceManager.addWidget(this);
   },
   serialize : function() {
-    var arr = ["Label", [this.id, this.x.toString(), this.y.toString(), this.height.toString(), this.width.toString(), this.text, this.color, this.fontSize]];
+    var arr = [
+        "Label",
+        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
+            this.width.toString(), this.text, this.color, this.fontSize ] ];
     return arr;
   },
   unserialize : function(arr) {
@@ -66,12 +69,18 @@ var Label = Widget.extend({
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    var div = $("<div style='width:"+this.width+"; height:"+this.height+";'></div>");
+    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
     div.attr("id", "container-" + this.getId());
-    div.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
-    div.removeClass('ui-resizable'); //Remove the dotted line
-    div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
-    div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
+    div.resizable({
+      autoHide : true
+    }); // Made the div resizable, but it'll hide when not mouseover
+    div.removeClass('ui-resizable'); // Remove the dotted line
+    div.mouseover(function() {
+      $(this).addClass('ui-widget-content')
+    }); // Add the style when mouse over
+    div.mouseout(function() {
+      $(this).removeClass('ui-widget-content')
+    }); // Remove the style when mouse over
     div.draggable({
       stop: $.proxy(function(){
         this.x = $("#container-" + this.getId()).css('left');

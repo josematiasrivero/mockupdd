@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/scripts/widgets/Title.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Button.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Input.js"></script>
+<script type="text/javascript" src="/scripts/widgets/Panel.js"></script>
 <script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
 <script type="text/javascript" src="/scripts/utils/Styles.js"></script>
 <script type="text/javascript" src="/scripts/utils/FormConstructor.js"></script>

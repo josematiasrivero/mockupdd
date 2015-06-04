@@ -47,6 +47,7 @@ var FormConstructor = Class.extend({
     this.inputStyle = style;
     return this.inputStyle;
   },
+
   /**
    * Adds a Text input field in the form.
    * 
@@ -55,13 +56,32 @@ var FormConstructor = Class.extend({
     // TODO: Check for XSS in parameters.
     this._add(this._createLabel(label) + this._createInput("text", value, id));
   },
+
   /**
-   * Adds a Text input field in the form.
+   * Adds a Number input field in the form.
    * 
    */
   addNumberInput : function(label, value, id) {
     // TODO: Check for XSS in parameters.
     this._add(this._createLabel(label) + this._createInput("number", value, id));
+  },
+
+  /**
+   * Adds a Textarea field in the form.
+   * 
+   */
+  addTextarea : function(label, value, id) {
+    // TODO: Check for XSS in parameters.
+    this._add(this._createLabel(label) + this._createTextarea(value, id));
+  },
+
+  /**
+   * Adds a Select input field in the form.
+   * 
+   */
+  addSelectInput : function(label, value, options, id) {
+    // TODO: Check for XSS in parameters.
+    this._add(this._createLabel(label) + this._createSelectInput(value, options, id));
   },
 
   /**
@@ -80,6 +100,24 @@ var FormConstructor = Class.extend({
         + "'id='" + id + "' value='" + name + "'>";
     input = div + input + "</input></div>";
     return input;
+  },
+  _createSelectInput : function(value, options, id) {
+    var div = "<div class='col-xs-" + this.getInputSpace() + "'>";
+    var input = "<select id='" + id + "'>";
+    for ( var v in options) {
+      input += "<option value='" + options[v] + "' ";
+      if (value === options[v]) {
+        input += "selected='selected'";
+      }
+      input += ">" + options[v] + "</option>";
+    }
+    return div + input + "</select></div>";
+  },
+  _createTextarea : function(value, id) {
+    var div = "<div class='col-xs-" + this.getInputSpace() + "'>";
+    var textarea = "<textarea class='form-control' id='" + id + "'>" + value + "</textarea>";
+    textarea = div + textarea + "</div>";
+    return textarea;
   },
   _add : function(field) {
     this.setContent(this.getContent() + this._createField(field));
