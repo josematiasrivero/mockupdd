@@ -72,8 +72,15 @@ var Label = Widget.extend({
     var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
     div.attr("id", "container-" + this.getId());
     div.resizable({
-      autoHide : true
-    }); // Made the div resizable, but it'll hide when not mouseover
+      autoHide : true,
+      stop : $.proxy(function () {
+        debugger;
+        this.width = $("#container-" + this.getId()).css('width');
+        this.height = $("#container-" + this.getId()).css('height');
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); // Make the div resizable, but it'll hide when not mouseover.
+        // Also when it stops modify the width and height values.
     div.removeClass('ui-resizable'); // Remove the dotted line
     div.mouseover(function() {
       $(this).addClass('ui-widget-content')
@@ -87,7 +94,7 @@ var Label = Widget.extend({
         this.y = $("#container-" + this.getId()).css('top');
         PersistenceManager.updateWidget(this);
       }, this)
-    });
+    }); //Make the div draggable, and when it stops modify the (x, y) value.
     div.append(element);
     $("#page").append(div);
     div.css("position", "absolute").css('left', this.x).css('top', this.y);
