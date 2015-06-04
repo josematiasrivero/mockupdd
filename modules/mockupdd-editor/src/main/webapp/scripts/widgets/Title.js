@@ -1,10 +1,30 @@
 widgetsName["Title"] = 'Title';
 var Title = Widget.extend({
-  init : function() {
-    this._super();
+  init : function(id) {
+    this._super(id);
     this.text = "Title";
     this.color = "gray";
     this.html = $("<h3>");
+    this.width = "100px";
+    this.height = "50px";
+    debugger;
+    PersistenceManager.addWidget(this);
+  },
+  serialize : function() {
+    var arr = [
+        "Title",
+        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
+            this.width.toString(), this.text, this.color ] ];
+    return arr;
+  },
+  unserialize : function(arr) {
+    this.id = arr[0];
+    this.x = arr[1];
+    this.y = arr[2];
+    this.height = arr[3];
+    this.width = arr[4];
+    this.text = arr[5];
+    this.color = arr[6];
   },
   getText : function() {
     return this.text;
@@ -30,16 +50,31 @@ var Title = Widget.extend({
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    var div = $("<div style='width:100px; height:50px;'></div>");
+    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
     div.attr("id", "container-" + this.getId());
-    div.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
-    div.removeClass('ui-resizable');
+    div.resizable({
+      autoHide : true,
+      stop : $.proxy(function () {
+        debugger;
+        this.width = $("#container-" + this.getId()).css('width');
+        this.height = $("#container-" + this.getId()).css('height');
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); // Make the div resizable, but it'll hide when not mouseover.
+        // Also when it stops modify the width and height values.
+    div.removeClass('ui-resizable'); // Remove the dotted line
     div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
     div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
-    div.draggable();
+    div.draggable({
+      stop: $.proxy(function(){
+        this.x = $("#container-" + this.getId()).css('left');
+        this.y = $("#container-" + this.getId()).css('top');
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); //Make the div draggable, and when it stops modify the (x, y) value.
     div.append(element);
     $("#page").append(div);
-    div.css("position", "absolute");
+    div.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
     $("#myModal .modal-title").empty();
@@ -64,5 +99,6 @@ var Title = Widget.extend({
     color = $("#title-color").val();
     this.setColor(color);
     element.css("color", this.getColor());
+    PersistenceManager.updateWidget(this);
   }
 })

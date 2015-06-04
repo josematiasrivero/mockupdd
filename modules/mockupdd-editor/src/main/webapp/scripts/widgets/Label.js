@@ -48,20 +48,9 @@ var Label = Widget.extend({
     this.fontSize = fontSize;
     return this.fontSize;
   },
-  doubleClick : function() {
-    $("#myModal .modal-title").empty();
-    $("#myModal .modal-title").html('Label');
-    $("#myModal .modal-body").empty();
-    var form = new FormConstructor();
-    form.addTextInput("Text", this.getText(), "label-text")
-    form.addTextInput("Color", this.getColor(), "label-color")
-    form.addTextInput("Font size", this.getFontSize(), "label-font-size")
-    $("#myModal .modal-body").html(form.getContent());
-    $("#myModal .modal-body").css("height", "140px");
-    $("#save-changes").click($.proxy(this.persist, this));
-    $("#delete-widget").click($.proxy(this.erase, this));
-    $("#myModal").draggable();
-    $("#myModal").modal('show');
+  getHtml : function() {
+    return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
+        .css("font-size", this.getFontSize());
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
@@ -82,12 +71,8 @@ var Label = Widget.extend({
     }); // Make the div resizable, but it'll hide when not mouseover.
         // Also when it stops modify the width and height values.
     div.removeClass('ui-resizable'); // Remove the dotted line
-    div.mouseover(function() {
-      $(this).addClass('ui-widget-content')
-    }); // Add the style when mouse over
-    div.mouseout(function() {
-      $(this).removeClass('ui-widget-content')
-    }); // Remove the style when mouse over
+    div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
+    div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     div.draggable({
       stop: $.proxy(function(){
         this.x = $("#container-" + this.getId()).css('left');
@@ -99,9 +84,20 @@ var Label = Widget.extend({
     $("#page").append(div);
     div.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
-  getHtml : function() {
-    return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
-        .css("font-size", this.getFontSize());
+  doubleClick : function() {
+    $("#myModal .modal-title").empty();
+    $("#myModal .modal-title").html('Label');
+    $("#myModal .modal-body").empty();
+    var form = new FormConstructor();
+    form.addTextInput("Text", this.getText(), "label-text")
+    form.addTextInput("Color", this.getColor(), "label-color")
+    form.addTextInput("Font size", this.getFontSize(), "label-font-size")
+    $("#myModal .modal-body").html(form.getContent());
+    $("#myModal .modal-body").css("height", "140px");
+    $("#save-changes").click($.proxy(this.persist, this));
+    $("#delete-widget").click($.proxy(this.erase, this));
+    $("#myModal").draggable();
+    $("#myModal").modal('show');
   },
   persist : function() {
     // No chequea datos.
