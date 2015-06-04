@@ -3,11 +3,30 @@ var Button = Widget.extend({
   /**
    * Creates a button with style 'primary' and text 'Button' by default.
    */
-  init : function() {
-    this._super();
+  init : function(id) {
+    this._super(id);
     this.text = "Button";
     this.style = Styles.PRIMARY;
     this.html = $("<div class='btn'>");
+    this.width = "100px";
+    this.height = "50px";
+    PersistenceManager.addWidget(this);
+  },
+  serialize : function() {
+    var arr = [
+        "Button",
+        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
+            this.width.toString(), this.text, this.style ] ];
+    return arr;
+  },
+  unserialize : function(arr) {
+    this.id = arr[0];
+    this.x = arr[1];
+    this.y = arr[2];
+    this.height = arr[3];
+    this.width = arr[4];
+    this.text = arr[5];
+    this.style = arr[6];
   },
   getText : function() {
     return this.text;
@@ -32,7 +51,7 @@ var Button = Widget.extend({
     return this.html.addClass("btn-" + this.style);
   },
   getHtml : function() {
-    return this.putClassInHtml().text(this.getText()).attr("id", this.getId());
+    return this.putClassInHtml().text(this.getText()).attr("id", this.getId()).css("width", this.width).css("height", this.height);
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
@@ -40,13 +59,26 @@ var Button = Widget.extend({
   draw : function() {
     var element = this.getHtml();
     this.addEvents(element);
-    element.resizable({autoHide: true}); //Made the div resizable, but it'll hide when not mouseover
+    element.resizable({
+      autoHide : true,
+      stop : $.proxy(function () {
+        this.width = $("#" + this.getId()).css('width');
+        this.height = $("#" + this.getId()).css('height');
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); // Make the element resizable, but it'll hide when not mouseover.
+        // Also when it stops modify the width and height values.
     element.removeClass('ui-resizable'); //Remove the dotted line
-    //the line below break the resizable, for some reason
-    element.css('white-space', 'pre-wrap');
-    element.draggable();
+    //element.css('white-space', 'pre-wrap');
+    element.draggable({
+      stop: $.proxy(function(){
+        this.x = $("#" + this.getId()).css('left');
+        this.y = $("#" + this.getId()).css('top');
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); //Make the element draggable, and when it stops modify the (x, y) value.
     $("#page").append(element);
-    element.css("position", "absolute");
+    element.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
     $("#myModal .modal-title").empty();
@@ -77,5 +109,6 @@ var Button = Widget.extend({
     element.removeClass('ui-resizable');
     this.setStyle($("#button-style").val());
     this.putClassInHtml();
+    PersistenceManager.updateWidget(this);
   }
 })

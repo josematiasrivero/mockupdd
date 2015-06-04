@@ -59,7 +59,7 @@ var Input = Widget.extend({
       }, this)
     }); //Make the element draggable, and when it stops modify the (x, y) value.
     $("#page").append(element);
-    element.css("position", "absolute").css('left', this.x).css('top', this.y);;
+    element.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
     $("#myModal .modal-title").empty();
