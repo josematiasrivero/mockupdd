@@ -72,9 +72,24 @@
               })
             </script>
           </li>
+          <li>
+            <label class="control-label">Panel</label>
+            <div id="create-panel" class="mk">
+              <div class="panel panel-info">
+                <div class="panel panel-heading">  
+                  Panel
+                </div>
+              </div>
+            </div>
+            <script>
+              $('#create-panel').click(function(){
+                (new Panel()).draw();
+              })
+            </script>
+          </li>
         </ul>
       </div>
-      <div id="page" style="height:100%; margin-left:250px; position:fixed;">
+      <div id="page" style="height: 100%; margin-left: 250px; position: fixed;">
       </div>
       <div class="container">
         <h4>${mockup.name}</h4>

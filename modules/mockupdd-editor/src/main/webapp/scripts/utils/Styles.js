@@ -1,5 +1,5 @@
 /**
- * This enum has all the Twitter Bootstrap styles for the app. 
+ * This enum has all the Twitter Bootstrap styles for the app.
  */
 
 var Styles = {
@@ -10,8 +10,12 @@ var Styles = {
   DEFAULT : "default",
   LINK : "link",
   SUCCESS : "success"
-};
+}
+Styles.values = [ Styles.DANGER, Styles.DEFAULT, Styles.INFO, Styles.LINK, Styles.PRIMARY,
+    Styles.SUCCESS, Styles.WARNING ];
+Styles.panelValues = [ Styles.DANGER, Styles.DEFAULT, Styles.INFO, Styles.PRIMARY, Styles.SUCCESS,
+    Styles.WARNING ];
 
-if(Object.freeze){
+if (Object.freeze) {
   Object.freeze(Styles);
 }
