@@ -75,18 +75,10 @@ var Title = Widget.extend({
     div.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
-    $("#myModal .modal-title").empty();
-    $("#myModal .modal-title").html('Input');
-    $("#myModal .modal-body").empty();
     var form = new FormConstructor();
     form.addTextInput("Text", this.getText(), "title-text");
     form.addTextInput("Color", this.getColor(), "title-color");
-    $("#myModal .modal-body").html(form.getContent());
-    $("#myModal .modal-body").css("height", "100px");
-    $("#save-changes").click($.proxy(this.persist, this));
-    $("#delete-widget").click($.proxy(this.erase, this));
-    $("#myModal").draggable();
-    $("#myModal").modal('show');
+    ModalConstructor.draw("Label", form.getContent(), this);
   },
   persist : function() {
     // No chequea datos.

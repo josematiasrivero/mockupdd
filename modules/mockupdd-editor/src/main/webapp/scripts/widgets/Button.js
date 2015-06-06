@@ -8,8 +8,8 @@ var Button = Widget.extend({
     this.text = "Button";
     this.style = Styles.PRIMARY;
     this.html = $("<div class='btn'>");
-    this.width = "100px";
-    this.height = "50px";
+    this.width = "70px";
+    this.height = "35px";
     PersistenceManager.addWidget(this);
   },
   serialize : function() {
@@ -81,18 +81,10 @@ var Button = Widget.extend({
     element.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
-    $("#myModal .modal-title").empty();
-    $("#myModal .modal-title").html('Button');
-    $("#myModal .modal-body").empty();
     var form = new FormConstructor();
     form.addTextInput("Text", this.getText(), "button-text");
     form.addSelectInput("Style", this.getStyle(), Styles.values, "button-style");
-    $("#myModal .modal-body").html(form.getContent());
-    $("#myModal .modal-body").css("height", "100px");
-    $("#save-changes").click($.proxy(this.persist, this));
-    $("#delete-widget").click($.proxy(this.erase, this));
-    $("#myModal").draggable();
-    $("#myModal").modal('show');
+    ModalConstructor.draw("Button", form.getContent(), this);
   },
   persist : function() {
     // No chequea datos.

@@ -62,17 +62,9 @@ var Input = Widget.extend({
     element.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
-    $("#myModal .modal-title").empty();
-    $("#myModal .modal-title").html('Input');
-    $("#myModal .modal-body").empty();
     var form = new FormConstructor();
     form.addTextInput("Placeholder", this.getPlaceholder(), "input-placeholder");
-    $("#myModal .modal-body").html(form.getContent());
-    $("#myModal .modal-body").css("height", "80px");
-    $("#save-changes").click($.proxy(this.persist, this));
-    $("#delete-widget").click($.proxy(this.erase, this));
-    $("#myModal").draggable();
-    $("#myModal").modal('show');
+    ModalConstructor.draw("Input", form.getContent(), this);
   },
   persist : function() {
     // No chequea datos.

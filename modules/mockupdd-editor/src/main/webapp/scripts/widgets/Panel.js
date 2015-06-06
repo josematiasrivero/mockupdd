@@ -101,20 +101,12 @@ var Panel = Widget.extend({
     div.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
-    $("#myModal .modal-title").empty();
-    $("#myModal .modal-title").html('Panel');
-    $("#myModal .modal-body").empty();
     var form = new FormConstructor();
     form.addTextInput("Header text", this.getHeader(), "panel-header");
     form.addTextarea("Paragraph text", this.getText(), "panel-text");
     form.addTextInput("Font size", this.getFontSize(), "panel-font-size");
     form.addSelectInput("Style", this.getStyle(), Styles.panelValues, "panel-style");
-    $("#myModal .modal-body").html(form.getContent());
-    $("#myModal .modal-body").css("height", "170px");
-    $("#save-changes").click($.proxy(this.persist, this));
-    $("#delete-widget").click($.proxy(this.erase, this));
-    $("#myModal").draggable();
-    $("#myModal").modal('show');
+    ModalConstructor.draw("Panel", form.getContent(), this);
   },
   persist : function() {
     // No chequea datos.
