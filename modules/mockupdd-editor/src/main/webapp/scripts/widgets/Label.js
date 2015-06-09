@@ -84,19 +84,11 @@ var Label = Widget.extend({
     div.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
   doubleClick : function() {
-    $("#myModal .modal-title").empty();
-    $("#myModal .modal-title").html('Label');
-    $("#myModal .modal-body").empty();
     var form = new FormConstructor();
     form.addTextInput("Text", this.getText(), "label-text")
     form.addTextInput("Color", this.getColor(), "label-color")
     form.addTextInput("Font size", this.getFontSize(), "label-font-size")
-    $("#myModal .modal-body").html(form.getContent());
-    $("#myModal .modal-body").css("height", "140px");
-    $("#save-changes").click($.proxy(this.persist, this));
-    $("#delete-widget").click($.proxy(this.erase, this));
-    $("#myModal").draggable();
-    $("#myModal").modal('show');
+    ModalConstructor.draw("Label", form.getContent(), this);
   },
   persist : function() {
     // No chequea datos.

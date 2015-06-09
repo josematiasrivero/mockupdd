@@ -16,6 +16,7 @@
 <script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
 <script type="text/javascript" src="/scripts/utils/Styles.js"></script>
 <script type="text/javascript" src="/scripts/utils/FormConstructor.js"></script>
+<script type="text/javascript" src="/scripts/utils/ModalConstructor.js"></script>
 <script type="text/javascript" src="/scripts/utils/PersistenceManager.js"></script>
 <script type="text/javascript" src="/scripts/ajax/GenericRESTClient.js"></script>
 <script type="text/javascript" src="/scripts/ajax/MockupRESTClient.js"></script>

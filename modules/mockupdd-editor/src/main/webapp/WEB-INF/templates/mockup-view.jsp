@@ -8,7 +8,7 @@
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
     <script>
-    	/** By: Viral Patel. 
+    	/** @author: Viral Patel. 
     	 *	Adds on("show"|"hide") events to jQuery.
     	 */
     	(function ($) {
@@ -20,12 +20,15 @@
             };
           });
         })(jQuery);
+    	// On ready function
     	$(function(){
+		  // Draws the mockup in page.
     	  PersistenceManager.startupMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
     	});
     </script>
   </jsp:attribute>
   <jsp:body>
+    <!-- Sidebar for widgets creation -->
 	<div id="wrapper">
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
@@ -92,6 +95,7 @@
       </div>
       <div id="page" style="height: 100%; margin-left: 250px; position: fixed;">
       </div>
+      <!-- Modal for edition and deletion of widgets -->
       <div class="container">
         <h4>${mockup.name}</h4>
         <div id="myModal" class="modal fade" style="overflow-y: auto;">
