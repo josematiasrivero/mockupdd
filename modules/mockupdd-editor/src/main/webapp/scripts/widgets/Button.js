@@ -42,16 +42,9 @@ var Button = Widget.extend({
     this.style = style;
     return this.style;
   },
-  putClassInHtml : function() {
-    for ( var style in Styles) {
-      if (Styles.hasOwnProperty(style)) {
-        this.html.removeClass("btn-" + Styles[style]);
-      }
-    }
-    return this.html.addClass("btn-" + this.style);
-  },
   getHtml : function() {
-    return this.putClassInHtml().text(this.getText()).attr("id", this.getId()).css("width", this.width).css("height", this.height);
+    return this.html.text(this.getText()).attr("id", this.getId()).addClass("btn-" + this.getStyle()).css("width",
+        this.width).css("height", this.height);
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
@@ -61,22 +54,23 @@ var Button = Widget.extend({
     this.addEvents(element);
     element.resizable({
       autoHide : true,
-      stop : $.proxy(function () {
+      stop : $.proxy(function() {
         this.width = $("#" + this.getId()).css('width');
         this.height = $("#" + this.getId()).css('height');
         PersistenceManager.updateWidget(this);
       }, this)
     }); // Make the element resizable, but it'll hide when not mouseover.
-        // Also when it stops modify the width and height values.
-    element.removeClass('ui-resizable'); //Remove the dotted line
-    //element.css('white-space', 'pre-wrap');
+    // Also when it stops modify the width and height values.
+    element.removeClass('ui-resizable'); // Remove the dotted line
+    // element.css('white-space', 'pre-wrap');
     element.draggable({
-      stop: $.proxy(function(){
+      stop : $.proxy(function() {
         this.x = $("#" + this.getId()).css('left');
         this.y = $("#" + this.getId()).css('top');
         PersistenceManager.updateWidget(this);
       }, this)
-    }); //Make the element draggable, and when it stops modify the (x, y) value.
+    }); // Make the element draggable, and when it stops modify the (x, y)
+        // value.
     $("#page").append(element);
     element.css("position", "absolute").css('left', this.x).css('top', this.y);
   },
@@ -93,14 +87,17 @@ var Button = Widget.extend({
     this.setText(text);
     element.html(this.getText());
     /*
-     * The function .text remove the divs added by the .resizable()
-     * So we have to add it again.
+     * The function .text remove the divs added by the .resizable() So we have
+     * to add it again.
      */
     element.resizable('destroy');
-    element.resizable({autoHide: true});
+    element.resizable({
+      autoHide : true
+    });
     element.removeClass('ui-resizable');
+    element.removeClass("btn-" + this.getStyle());
     this.setStyle($("#button-style").val());
-    this.putClassInHtml();
+    element.addClass("btn-" + this.getStyle());
     PersistenceManager.updateWidget(this);
   }
 })
