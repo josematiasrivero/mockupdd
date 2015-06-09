@@ -48,10 +48,6 @@ var Button = Widget.extend({
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
-  },
-  draw : function() {
-    var element = this.getHtml();
-    this.addEvents(element);
     element.resizable({
       autoHide : true,
       stop : $.proxy(function() {
@@ -60,17 +56,19 @@ var Button = Widget.extend({
         PersistenceManager.updateWidget(this);
       }, this)
     }); // Make the element resizable, but it'll hide when not mouseover.
-    // Also when it stops modify the width and height values.
-    element.removeClass('ui-resizable'); // Remove the dotted line
-    // element.css('white-space', 'pre-wrap');
+        // Also when it stops modify the width and height values.
+    element.removeClass('ui-resizable'); //Remove the dotted line
     element.draggable({
       stop : $.proxy(function() {
         this.x = $("#" + this.getId()).css('left');
         this.y = $("#" + this.getId()).css('top');
         PersistenceManager.updateWidget(this);
       }, this)
-    }); // Make the element draggable, and when it stops modify the (x, y)
-        // value.
+    }); //Make the element draggable, and when it stops modify the (x, y) value.
+  },
+  draw : function() {
+    var element = this.getHtml();
+    this.addEvents(element);
     $("#page").append(element);
     element.css("position", "absolute").css('left', this.x).css('top', this.y);
   },

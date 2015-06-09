@@ -53,5 +53,8 @@ var Widget = Class.extend({
       $("#" + this.getId()).remove();
     }
     PersistenceManager.deleteWidget(this);
+  },
+  persist : function() {
+    // abstract method to be implemented in the subclasses
   }
 })

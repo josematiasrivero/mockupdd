@@ -45,13 +45,7 @@ var Title = Widget.extend({
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
-  },
-  draw : function() {
-    var element = this.getHtml();
-    this.addEvents(element);
-    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
-    div.attr("id", "container-" + this.getId());
-    div.resizable({
+    element.resizable({
       autoHide : true,
       stop : $.proxy(function () {
         this.width = $("#container-" + this.getId()).css('width');
@@ -60,16 +54,22 @@ var Title = Widget.extend({
       }, this)
     }); // Make the div resizable, but it'll hide when not mouseover.
         // Also when it stops modify the width and height values.
-    div.removeClass('ui-resizable'); // Remove the dotted line
-    div.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
-    div.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
-    div.draggable({
+    element.removeClass('ui-resizable'); // Remove the dotted line
+    element.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
+    element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
+    element.draggable({
       stop: $.proxy(function(){
         this.x = $("#container-" + this.getId()).css('left');
         this.y = $("#container-" + this.getId()).css('top');
         PersistenceManager.updateWidget(this);
       }, this)
     }); //Make the div draggable, and when it stops modify the (x, y) value.
+  },
+  draw : function() {
+    var element = this.getHtml();
+    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
+    div.attr("id", "container-" + this.getId());
+    this.addEvents(div);
     div.append(element);
     $("#page").append(div);
     div.css("position", "absolute").css('left', this.x).css('top', this.y);
