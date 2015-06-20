@@ -1,6 +1,7 @@
 widgetsName = {}; //This dictionary is going to have the functions to create the new labels
                   //For example, widgetsName["Label"] = Label;
 var Widget = Class.extend({
+	
   init : function(id) {
     if (typeof id === 'undefined') {
       this.id = "Widget-id-" + IdGenerator.getNext();

@@ -3,10 +3,64 @@
  * MIT Licensed.
  */
 // Inspired by base2 and Prototype
+
+
+/*
+ * 
+ * Modified to be able to attach metadata to properties.
+ * 
+ * How to use: 
+ * 	When extending a subclass, declare a dict with a name startin with "__", 
+ *  for example:
+ *  
+ *  	__myProperty : {type:"string"}
+ *  
+ *  This will create a getter and setter (getMyProperty, setMyProperty), as well as a field
+ *  (_myProperty). The metadata you defined can be accessed using the method getMetadata().
+ *  Full example:
+ *  
+ *  Test = Class.extend({
+ *  
+ *  	__name= {type:"string", maxLength:64}
+ *  
+ *  })
+ *  
+ *  t = new Test()
+ *  
+ *  t.setName("Jonh")
+ *  
+ *  t.getName()
+ *  > "Jonh"
+ *  t.getMetadata().name.type
+ *  >"string"
+ */
 (function(){
   var initializing = false, fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;
   // The base Class implementation (does nothing)
-  this.Class = function(){};
+  this.Class = function(){
+	  
+	  this.getMetadata = function (){
+		  return this._metadata
+	  }
+	  
+	  this._propertyGetter = function (prop){
+		  return function(){
+			  return this["_"+prop];
+		  }
+	  }
+	  
+	  this._propertySetter = function (prop){
+		  return function(val){
+			  this["_"+prop] = val;
+		  }
+	  }
+	  
+	  this._metadata = {};
+  };
+  
+
+  
+
   
   // Create a new Class that inherits from this class
   Class.extend = function(prop) {
@@ -17,6 +71,21 @@
     initializing = true;
     var prototype = new this();
     initializing = false;
+    var expandedProps = {}
+    
+    for(var name in prop){
+    	if( typeof prop[name] == "object" && name.startsWith("__")){
+    		var propName = name.slice(2);
+    		prototype._metadata[propName] = prop[name];
+    		var camelPropName = propName[0].toUpperCase() + propName.slice(1);
+    		expandedProps["get"+camelPropName] = prototype.propertyGetter(propName);
+    		expandedProps["set"+camelPropName] = prototype.propertySetter(propName);
+    	} else {
+    		expandedProps[name] = prop[name];
+    	}
+    }
+    
+    prop = expandedProps;
     
     // Copy the properties over onto the new prototype
     for (var name in prop) {
