@@ -1,72 +1,28 @@
-widgetsName["Panel"] = 'Panel';
-var Panel = Widget.extend({
+var Panel = Widget.extend("Panel",{
   init : function(id) {
     this._super(id);
-    this.header = "Header text";
-    this.text = "Paragraph text";
-    this.style = "info";
-    this.fontSize = "14px";
-    this.html = $("<div>");
-    this.width = "300px";
-    this.height = "200px";
+
+    this.setWidth("300px");
+    this.setHeight("200px");
     PersistenceManager.addWidget(this);
   },
-  serialize : function() {
-    var arr = [
-        "Panel",
-        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
-            this.width.toString(), this.header, this.text, this.style, this.fontSize ] ];
-    return arr;
-  },
-  unserialize : function(arr) {
-    this.id = arr[0];
-    this.x = arr[1];
-    this.y = arr[2];
-    this.height = arr[3];
-    this.width = arr[4];
-    this.header = arr[5];
-    this.text = arr[6];
-    this.style = arr[7];
-    this.fontSize = arr[8];
-  },
-  getHeader : function() {
-    return this.header;
-  },
-  setHeader : function(header) {
-    this.header = header;
-    return this.header;
-  },
-  getText : function() {
-    return this.text;
-  },
-  setText : function(text) {
-    this.text = text;
-    return this.text;
-  },
-  getStyle : function() {
-    return this.style;
-  },
-  setStyle : function(style) {
-    this.style = style;
-    return this.style;
-  },
-  getFontSize : function() {
-    return this.fontSize;
-  },
-  setFontSize : function(fontSize) {
-    this.fontSize = fontSize;
-    return this.fontSize;
-  },
-  getHtml : function() {
-    return this.html.attr("id", this.getId());
+
+  __header: {init: "Header text", label: "Header"},
+  __text: {init: "Paragraph text", label: "Content"},
+  __style: {init: "info", label: "Style", type: TYPES.BootstraoStyle},
+  __fontSize: {init: "14px", label: "Font Size", type: TYPES.FontSize},
+  __html: {visible: false, editable: false, serializable: false, init: "<div>",
+	get: function() {
+	    return $(this._html).attr("id", this.getId());
+	  },
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
     element.resizable({
       autoHide : true,
       stop : $.proxy(function () {
-        this.width = $("#container-" + this.getId()).css('width');
-        this.height = $("#container-" + this.getId()).css('height');
+        this.setWidth($("#container-" + this.getId()).css('width'));
+        this.setHeight($("#container-" + this.getId()).css('height'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); // Make the div resizable, but it'll hide when not mouseover.
@@ -76,15 +32,15 @@ var Panel = Widget.extend({
     element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     element.draggable({
       stop: $.proxy(function(){
-        this.x = $("#container-" + this.getId()).css('left');
-        this.y = $("#container-" + this.getId()).css('top');
+        this.setX($("#container-" + this.getId()).css('left'));
+        this.setY($("#container-" + this.getId()).css('top'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); //Make the div draggable, and when it stops modify the (x, y) value.
   },
   draw : function() {
     var element = this.getHtml();
-    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
+    var div = $("<div style='width:" + this.getWidth()+ "; height:" + this.getHeight() + ";'></div>");
     div.attr("id", "container-" + this.getId());
     this.addEvents(div);
     element.addClass("panel panel-" + this.getStyle());
@@ -98,7 +54,7 @@ var Panel = Widget.extend({
     element.append(body);
     div.append(element);
     $("#page").append(div);
-    div.css("position", "absolute").css('left', this.x).css('top', this.y);
+    div.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
   },
   doubleClick : function() {
     var form = new FormConstructor();

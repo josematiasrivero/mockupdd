@@ -12,11 +12,9 @@ var PersistenceManager = new (Class.extend({
     if (json) {
       var jsonData = JSON.parse(json);
       for (var i in jsonData) {
-        var id = jsonData[i][1][0];
-        var fn = window[widgetsName[jsonData[i][0]]];
-        new fn(id);
-        this.widgets[id].unserialize(jsonData[i][1]);
-        this.widgets[id].draw();
+        var widget = Widget.unserialize(jsonData[i]);
+        this.widgets[widget.getId()] = widget;
+        widget.draw();
       }
     }
     this.dirty = false;

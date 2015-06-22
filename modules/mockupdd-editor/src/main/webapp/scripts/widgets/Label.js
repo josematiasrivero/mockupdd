@@ -1,64 +1,27 @@
-widgetsName["Label"] = 'Label';
-var Label = Widget.extend({
+var Label = Widget.extend("Label",{
   init : function(id) {
     this._super(id);
-    this.text = "New label";
-    this.color = "black";
-    this.fontSize = "14px";
-    this.html = $("<label>");
-    this.width = "100px";
-    this.height = "50px";
+    this.setWidth("100px");
+    this.setHeight("50px");
     PersistenceManager.addWidget(this);
   },
-  serialize : function() {
-    var arr = [
-        "Label",
-        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
-            this.width.toString(), this.text, this.color, this.fontSize ] ];
-    return arr;
+  __text : {init: "New label", label: "Text"},
+  __color : {type: TYPES.Color, init: "black", color: "Color"},
+  __fontSize : {type: TYPES.FontSize, init: "14px", label: "Font Size"},
+  __html : {init: ("<label>"), visible: false, editable:false, serializable: false,
+	 get: function() {
+		    return $(this._html).text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
+	        .css("font-size", this.getFontSize());
+	  },
   },
-  unserialize : function(arr) {
-    this.id = arr[0];
-    this.x = arr[1];
-    this.y = arr[2];
-    this.height = arr[3];
-    this.width = arr[4];
-    this.text = arr[5];
-    this.color = arr[6];
-    this.fontSize = arr[7];
-  },
-  getText : function() {
-    return this.text;
-  },
-  setText : function(text) {
-    this.text = text;
-    return this.text;
-  },
-  getColor : function() {
-    return this.color;
-  },
-  setColor : function(color) {
-    this.color = color;
-    return this.color;
-  },
-  getFontSize : function() {
-    return this.fontSize;
-  },
-  setFontSize : function(fontSize) {
-    this.fontSize = fontSize;
-    return this.fontSize;
-  },
-  getHtml : function() {
-    return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
-        .css("font-size", this.getFontSize());
-  },
+
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
     element.resizable({
       autoHide : true,
       stop : $.proxy(function () {
-        this.width = $("#container-" + this.getId()).css('width');
-        this.height = $("#container-" + this.getId()).css('height');
+        this.setWidth($("#container-" + this.getId()).css('width'));
+        this.setHeight($("#container-" + this.getId()).css('height'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); // Make the div resizable, but it'll hide when not mouseover.
@@ -68,20 +31,20 @@ var Label = Widget.extend({
     element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     element.draggable({
       stop: $.proxy(function(){
-        this.x = $("#container-" + this.getId()).css('left');
-        this.y = $("#container-" + this.getId()).css('top');
+        this.setX($("#container-" + this.getId()).css('left'));
+        this.setY($("#container-" + this.getId()).css('top'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); //Make the div draggable, and when it stops modify the (x, y) value.
   },
   draw : function() {
     var element = this.getHtml();
-    var div = $("<div style='width:" + this.width + "; height:" + this.height + ";'></div>");
+    var div = $("<div style='width:" + this.getWidth() + "; height:" + this.getHeight() + ";'></div>");
     div.attr("id", "container-" + this.getId());
     this.addEvents(div);
     div.append(element);
     $("#page").append(div);
-    div.css("position", "absolute").css('left', this.x).css('top', this.y);
+    div.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
   },
   doubleClick : function() {
     var form = new FormConstructor();

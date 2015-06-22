@@ -41,26 +41,50 @@
 	  
 	  this.getMetadata = function (){
 		  return this._metadata
-	  }
+	  },
 	  
-	  this._propertyGetter = function (prop){
-		  return function(){
-			  return this["_"+prop];
-		  }
-	  }
+	  this.getSetter = function(prop){
+		  return this[Class.setterName(prop)];
+	  },
 	  
-	  this._propertySetter = function (prop){
-		  return function(val){
-			  this["_"+prop] = val;
-		  }
-	  }
+	  this.getGetter = function(prop){
+		  return this[Class.getterName(prop)];
+	  },
+	  
+	  this.getProperty = function(prop){
+		  return this.getGetter(prop).apply(this,[prop]);
+	  },
+	  
+	  //TODO grayfox: Support setters with many parameters.
+	  this.setProperty = function(prop, val){
+		  return this.getSetter(prop).apply(this,[val]);
+	  },
 	  
 	  this._metadata = {};
   };
   
-
+  Class.setterName = function(prop){
+	  return "set"+prop[0].toUpperCase() + prop.slice(1)
+  }
   
-
+  Class.getterName = function(prop){
+	  return "get"+prop[0].toUpperCase() + prop.slice(1)
+  }
+  
+  Class.defaultPropertyGetter = function (prop){
+	  return function(){
+		  return this["_"+prop];
+	  }
+  }
+  
+  Class.defaultPropertySetter = function (prop){
+	  return function(val){
+		  this["_"+prop] = val;
+		  return val;
+	  }
+  }
+  
+  var Clazz = Class;
   
   // Create a new Class that inherits from this class
   Class.extend = function(prop) {
@@ -70,6 +94,7 @@
     // don't run the init constructor)
     initializing = true;
     var prototype = new this();
+    prototype._metadata = $.extend(true,{},prototype._metadata);
     initializing = false;
     var expandedProps = {}
     
@@ -78,8 +103,8 @@
     		var propName = name.slice(2);
     		prototype._metadata[propName] = prop[name];
     		var camelPropName = propName[0].toUpperCase() + propName.slice(1);
-    		expandedProps["get"+camelPropName] = prototype.propertyGetter(propName);
-    		expandedProps["set"+camelPropName] = prototype.propertySetter(propName);
+    		expandedProps["get"+camelPropName] = prop[name].get || Clazz.defaultPropertyGetter(propName);
+    		expandedProps["set"+camelPropName] = prop[name].set || Clazz.defaultPropertySetter(propName);
     	} else {
     		expandedProps[name] = prop[name];
     	}
@@ -111,15 +136,23 @@
         prop[name];
     }
     
-    // The dummy class constructor
-    function Class() {
-      // All construction is actually done in the init method
-      if ( !initializing && this.init )
-        this.init.apply(this, arguments);
-    }
+	// The dummy class constructor
+	function Class() {
+		if(!initializing){
+			for (name in this.getMetadata()) {
+				if (this.getMetadata()[name].init !== undefined) {
+					this.getSetter(name).apply(this,[(this.getMetadata()[name].init)]);
+				}
+			}
+		}
+		// All construction is actually done in the init method
+		if (!initializing && this.init){
+			this.init.apply(this, arguments);
+		}
+	}
     
     // Populate our constructed prototype object
-    Class.prototype = prototype;
+    Class.prototype = prototype
     
     // Enforce the constructor to be what we expect
     Class.prototype.constructor = Class;

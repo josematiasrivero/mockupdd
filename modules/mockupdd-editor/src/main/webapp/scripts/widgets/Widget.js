@@ -1,49 +1,51 @@
-widgetsName = {}; //This dictionary is going to have the functions to create the new labels
-                  //For example, widgetsName["Label"] = Label;
 var Widget = Class.extend({
 	
+  //properties
+  __id : {visible : false, editable : false, serializable : true},
+  __x : {type:TYPES.Pixels, visible : true, editable : true, serializable : true, init:"0px", label: "X"},
+  __y : {type:TYPES.Pixels, visible : true, editable : true, serializable : true, init:"0px", label: "Y"},
+  
+  __origin : {
+	  visible : false, editable : false, serializable : false,
+	  get : function(){
+		  return [this.getX(), this.getY];
+	  },
+  	  set : function(x,y){
+  		  this.setX(x);
+  		  this.setY(y);
+  		  return this.getOrigin();
+  	  }
+  },
+  
+  __height : {visible : true, editable : true,
+	  serializable : true, type:TYPES.Pixels, init: "100px", label: "Height"},
+  __width : {visible : true, editable : true,
+	  serializable : true, type:TYPES.Pixels, init: "50px", label: "Width"},
+  
   init : function(id) {
     if (typeof id === 'undefined') {
-      this.id = "Widget-id-" + IdGenerator.getNext();
+      this.setId("Widget-id-" + IdGenerator.getNext());
     } else {
-      this.id = id;
+      this.setId(id);
     }
-    this.x = "0px"; // right position
-    this.y = "0px"; // top position
-    this.height = "50px";
-    this.width = "100px";
   },
   serialize : function() {
-    // abstract method to be implemented in the subclasses
+	var repr = {}
+	var metadata = this.getMetadata();
+    for(var prop in metadata){
+    	if(metadata[prop].serializable == true){
+    		repr[prop] = this.getProperty(prop);
+    	}
+    }
+    return repr;
   },
-  unserialize : function() {
-    // abstract method to be implemented in the subclasses
+  unserialize : function(repr) {
+	  for(prop in repr){
+		  this.setProperty(prop,repr[prop]); //Todo, support complex properties.
+	  }
   },
-  getId : function() {
-    return this.id;
-  },
-  getOrigin : function() {
-    return [ this.x, this.y ];
-  },
-  setOrigin : function(x, y) {
-    this.x = x;
-    this.y = y;
-    return [ x, y ];
-  },
-  getHeight : function() {
-    return this.height;
-  },
-  setHeight : function(height) {
-    this.height = height;
-    return height;
-  },
-  getWidth : function() {
-    return this.width;
-  },
-  setWidth : function(width) {
-    this.width = width;
-    return width;
-  },
+
+  
   /** Deletes the widget from the DOM. */
   erase : function() {
     // If it has a container parent, delete it (with the widget).
@@ -57,5 +59,39 @@ var Widget = Class.extend({
   },
   persist : function() {
     // abstract method to be implemented in the subclasses
-  }
+  },
 })
+
+
+Widget.unserialize = function(repr){
+    var widget = new Widget.widgetTypes[repr.widgetType](repr.id);
+    widget.unserialize(repr);
+    return widget;
+}
+
+Widget._defaultMetadata = {
+  visible : true,		//Whether this should be visible in the UI.
+  editable : true,		//Whether this should be editable in the UI.
+  serializable : true,	//Whether this should be serialized.
+  type: TYPES.String
+},
+
+Widget.widgetTypes = {}; //This dictionary is going to have the functions to create the new labels
+						 //For example, widgetsName["Label"] = Label;
+
+Widget.extend = function(widgetName, prop) {
+	prop.__widgetType =  {visible: false, editable:false, init:widgetName};
+	for (var name in prop) {
+		if (typeof prop[name] == "object" && name.startsWith("__")) {
+			for (field in Widget._defaultMetadata) {
+				if(prop[name][field] === undefined)
+					prop[name][field] = Widget._defaultMetadata[field]; 
+			}
+		}
+	}
+	var ret = Class.extend.apply(this,[prop]);
+	ret.extend = arguments.callee;
+	ret.widgetType = widgetName;
+	Widget.widgetTypes[widgetName] = ret;
+	return ret;
+}

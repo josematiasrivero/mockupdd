@@ -1,58 +1,30 @@
-widgetsName["Button"] = 'Button';
-var Button = Widget.extend({
+var Button = Widget.extend("Button",{
   /**
    * Creates a button with style 'primary' and text 'Button' by default.
    */
   init : function(id) {
     this._super(id);
-    this.text = "Button";
-    this.style = Styles.PRIMARY;
-    this.html = $("<div class='btn'>");
-    this.width = "70px";
-    this.height = "35px";
+    this.setWidth("70px");
+    this.setHeight("35px");
     PersistenceManager.addWidget(this);
   },
-  serialize : function() {
-    var arr = [
-        "Button",
-        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
-            this.width.toString(), this.text, this.style ] ];
-    return arr;
+
+  __text: {init: "Button", label: "Text"},
+  __style: {type: TYPES.BootstrapStyles, init: Styles.PRIMARY, label:"Style"},
+  __html: {visible: false, editable:false, serializable: false, init: "<div class='btn'>", 
+	  get: function() {
+		    return $(this._html).text(this.getText()).attr("id", this.getId()).addClass("btn-" + this.getStyle()).css("width",
+		            this.getWidth()).css("height", this.getHeight());
+	  }
   },
-  unserialize : function(arr) {
-    this.id = arr[0];
-    this.x = arr[1];
-    this.y = arr[2];
-    this.height = arr[3];
-    this.width = arr[4];
-    this.text = arr[5];
-    this.style = arr[6];
-  },
-  getText : function() {
-    return this.text;
-  },
-  setText : function(text) {
-    this.text = text;
-    return this.text;
-  },
-  getStyle : function() {
-    return this.style;
-  },
-  setStyle : function(style) {
-    this.style = style;
-    return this.style;
-  },
-  getHtml : function() {
-    return this.html.text(this.getText()).attr("id", this.getId()).addClass("btn-" + this.getStyle()).css("width",
-        this.width).css("height", this.height);
-  },
+
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
     element.resizable({
       autoHide : true,
       stop : $.proxy(function() {
-        this.width = $("#" + this.getId()).css('width');
-        this.height = $("#" + this.getId()).css('height');
+        this.setWidth( $("#" + this.getId()).css('width'));
+        this.setHeight($("#" + this.getId()).css('height'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); // Make the element resizable, but it'll hide when not mouseover.
@@ -60,8 +32,8 @@ var Button = Widget.extend({
     element.removeClass('ui-resizable'); //Remove the dotted line
     element.draggable({
       stop : $.proxy(function() {
-        this.x = $("#" + this.getId()).css('left');
-        this.y = $("#" + this.getId()).css('top');
+        this.setX($("#" + this.getId()).css('left'));
+        this.setY($("#" + this.getId()).css('top'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); //Make the element draggable, and when it stops modify the (x, y) value.
@@ -70,7 +42,7 @@ var Button = Widget.extend({
     var element = this.getHtml();
     this.addEvents(element);
     $("#page").append(element);
-    element.css("position", "absolute").css('left', this.x).css('top', this.y);
+    element.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
   },
   doubleClick : function() {
     var form = new FormConstructor();

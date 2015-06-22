@@ -1,45 +1,24 @@
-widgetsName["Input"] = 'Input';
-var Input = Widget.extend({
+var Input = Widget.extend("Input",{
   init : function(id) {
     this._super(id);
-    this.placeholder = "Placeholder";
-    this.html = $("<div class='form-control'>");
-    this.width = "150px";
-    this.height = "50px";
+    this.setWidth("150px");
+    this.setHeight("50px");
     PersistenceManager.addWidget(this);
   },
-  serialize : function() {
-    var arr = [
-        "Input",
-        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
-            this.width.toString(), this.placeholder ] ];
-    return arr;
-  },
-  unserialize : function(arr) {
-    this.id = arr[0];
-    this.x = arr[1];
-    this.y = arr[2];
-    this.height = arr[3];
-    this.width = arr[4];
-    this.placeholder = arr[5];
-  },
-  getPlaceholder : function() {
-    return this.placeholder;
-  },
-  setPlaceholder : function(placeholder) {
-    this.placeholder = placeholder;
-    return this.placeholder;
-  },
-  getHtml : function() {
-    return this.html.text(this.getPlaceholder()).attr("id", this.getId()).css("width", this.width).css("height", this.height);
+  
+  __placeholder: {init: "Placeholder", label: "Placeholder"},
+  __html: {visible: false, editable:false, serializable: false, init:"<div class='form-control'>",
+	get: function() {
+	    return $(this._html).text(this.getPlaceholder()).attr("id", this.getId()).css("width", this.width).css("height", this.height);
+	  }
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
     element.resizable({
       autoHide : true,
       stop : $.proxy(function () {
-        this.width = $("#" + this.getId()).css('width');
-        this.height = $("#" + this.getId()).css('height');
+        this.setWidth($("#" + this.getId()).css('width'));
+        this.setHeight($("#" + this.getId()).css('height'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); // Make the element resizable, but it'll hide when not mouseover.
@@ -49,8 +28,8 @@ var Input = Widget.extend({
     element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     element.draggable({
       stop: $.proxy(function(){
-        this.x = $("#" + this.getId()).css('left');
-        this.y = $("#" + this.getId()).css('top');
+        this.setX($("#" + this.getId()).css('left'));
+        this.setY($("#" + this.getId()).css('top'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); //Make the element draggable, and when it stops modify the (x, y) value.
@@ -59,7 +38,8 @@ var Input = Widget.extend({
     var element = this.getHtml();
     this.addEvents(element);
     $("#page").append(element);
-    element.css("position", "absolute").css('left', this.x).css('top', this.y);
+    element.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
+    element.css("width", this.getWidth()).css("height",this.getHeight())
   },
   doubleClick : function() {
     var form = new FormConstructor();

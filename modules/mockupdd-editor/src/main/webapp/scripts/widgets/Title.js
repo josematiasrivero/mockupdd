@@ -1,55 +1,24 @@
-widgetsName["Title"] = 'Title';
-var Title = Widget.extend({
+var Title = Widget.extend("Title", {
   init : function(id) {
     this._super(id);
-    this.text = "Title";
-    this.color = "gray";
-    this.html = $("<h3>");
-    this.width = "100px";
-    this.height = "50px";
     PersistenceManager.addWidget(this);
   },
-  serialize : function() {
-    var arr = [
-        "Title",
-        [ this.id, this.x.toString(), this.y.toString(), this.height.toString(),
-            this.width.toString(), this.text, this.color ] ];
-    return arr;
-  },
-  unserialize : function(arr) {
-    this.id = arr[0];
-    this.x = arr[1];
-    this.y = arr[2];
-    this.height = arr[3];
-    this.width = arr[4];
-    this.text = arr[5];
-    this.color = arr[6];
-  },
-  getText : function() {
-    return this.text;
-  },
-  setText : function(text) {
-    this.text = text;
-    return this.text;
-  },
-  getColor : function() {
-    return this.color;
-  },
-  setColor : function(color) {
-    this.color = color;
-    return this.color;
-  },
-  getHtml : function() {
-    return this.html.text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
-        .css("margin-top", "3px");
+
+  __text: {init: "Title", label: "Title"},
+  __color: {type: TYPES.Color, init: "gray", label:"Color"},
+  __html:{visible: false, editable: false, serializable: false, init: "<h3>",
+	  get: function() {
+	    return $(this._html).text(this.getText()).attr("id", this.getId()).css("color", this.getColor())
+	        .css("margin-top", "3px");
+	  }
   },
   addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
     element.resizable({
       autoHide : true,
       stop : $.proxy(function () {
-        this.width = $("#container-" + this.getId()).css('width');
-        this.height = $("#container-" + this.getId()).css('height');
+        this.setWidth($("#container-" + this.getId()).css('width'));
+        this.setHeight($("#container-" + this.getId()).css('height'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); // Make the div resizable, but it'll hide when not mouseover.
@@ -59,8 +28,8 @@ var Title = Widget.extend({
     element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     element.draggable({
       stop: $.proxy(function(){
-        this.x = $("#container-" + this.getId()).css('left');
-        this.y = $("#container-" + this.getId()).css('top');
+        this.setX($("#container-" + this.getId()).css('left'));
+        this.setY($("#container-" + this.getId()).css('top'));
         PersistenceManager.updateWidget(this);
       }, this)
     }); //Make the div draggable, and when it stops modify the (x, y) value.
@@ -72,7 +41,7 @@ var Title = Widget.extend({
     this.addEvents(div);
     div.append(element);
     $("#page").append(div);
-    div.css("position", "absolute").css('left', this.x).css('top', this.y);
+    div.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
   },
   doubleClick : function() {
     var form = new FormConstructor();

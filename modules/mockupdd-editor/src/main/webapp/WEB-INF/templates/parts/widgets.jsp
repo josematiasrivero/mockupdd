@@ -7,14 +7,15 @@
 
 <!-- Import all widgets -->
 <!-- Widget.js must be first, because widgetsName dependencies -->
+<script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
+<script type="text/javascript" src="/scripts/utils/Types.js"></script>
+<script type="text/javascript" src="/scripts/utils/Styles.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Widget.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Label.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Title.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Button.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Input.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Panel.js"></script>
-<script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
-<script type="text/javascript" src="/scripts/utils/Styles.js"></script>
 <script type="text/javascript" src="/scripts/utils/FormConstructor.js"></script>
 <script type="text/javascript" src="/scripts/utils/ModalConstructor.js"></script>
 <script type="text/javascript" src="/scripts/utils/PersistenceManager.js"></script>
