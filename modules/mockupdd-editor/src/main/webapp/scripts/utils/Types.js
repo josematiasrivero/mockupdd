@@ -16,7 +16,7 @@ Type.extend = function(typeName, prop, parametrized) {
 	parametrized = parametrized || false;
 	var ret = Class.extend.apply(this,[prop]);
 	ret.extend = arguments.callee;
-	Type.typeClasses = ret;
+	Type.typeClasses[typeName] = ret;
 	if(!parametrized)
 		Type.types[typeName] = new ret();
 	return ret;

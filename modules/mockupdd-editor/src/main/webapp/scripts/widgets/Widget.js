@@ -1,14 +1,16 @@
 var Widget = Class.extend({
 	
   //properties
-  __id : {visible : false, editable : false, serializable : true},
-  __x : {type:TYPES.Pixels, visible : true, editable : true, serializable : true, init:"0px", label: "X"},
-  __y : {type:TYPES.Pixels, visible : true, editable : true, serializable : true, init:"0px", label: "Y"},
+  __id : {visible : false, editable : false, serializable : true, category: null},
+  __x : {type:TYPES.Pixels, visible : false, editable : false, serializable : true, init:"0px",
+	  label: "X",  category: "position"},
+  __y : {type:TYPES.Pixels, visible : false, editable : false, serializable : true, init:"0px",
+	  label: "Y",  category: "position"},
   
   __origin : {
-	  visible : false, editable : false, serializable : false,
+	  visible : false, editable : false, serializable : false,  category: "position",
 	  get : function(){
-		  return [this.getX(), this.getY];
+		  return [this.getX(), this.getY()];
 	  },
   	  set : function(x,y){
   		  this.setX(x);
@@ -17,10 +19,10 @@ var Widget = Class.extend({
   	  }
   },
   
-  __height : {visible : true, editable : true,
-	  serializable : true, type:TYPES.Pixels, init: "100px", label: "Height"},
-  __width : {visible : true, editable : true,
-	  serializable : true, type:TYPES.Pixels, init: "50px", label: "Width"},
+  __height : {visible : false, editable : false,
+	  serializable : true, type:TYPES.Pixels, init: "100px", label: "Height",  category: "position"},
+  __width : {visible : false, editable : false,
+	  serializable : true, type:TYPES.Pixels, init: "50px", label: "Width",  category: "position"},
   
   init : function(id) {
     if (typeof id === 'undefined') {
@@ -73,6 +75,7 @@ Widget._defaultMetadata = {
   visible : true,		//Whether this should be visible in the UI.
   editable : true,		//Whether this should be editable in the UI.
   serializable : true,	//Whether this should be serialized.
+  category: "visual",
   type: TYPES.String
 },
 
