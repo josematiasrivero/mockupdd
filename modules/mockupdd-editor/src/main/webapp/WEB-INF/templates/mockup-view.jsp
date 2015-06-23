@@ -7,6 +7,11 @@
   <jsp:attribute name="head">
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
+    <style>
+    	.widget-wrapper > * {
+    		margin: 0px !important;
+    	}
+    </style>
     <script>
     	/** @author: Viral Patel. 
     	 *	Adds on("show"|"hide") events to jQuery.

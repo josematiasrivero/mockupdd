@@ -31,6 +31,39 @@ var Widget = Class.extend({
       this.setId(id);
     }
   },
+  
+  draw : function() {
+	    var element = this.getHtml();
+	    var div = $("<div class='widget-wrapper' style='width:" + this.getWidth() + "; height:" + this.getHeight() + ";'></div>");
+	    this.addEvents(div);
+	    div.append(element);
+	    $("#page").append(div);
+	    div.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
+  },
+  
+  addEvents : function(element) {
+    element.dblclick($.proxy(this.doubleClick, this));
+    element.resizable({
+      autoHide : true,
+      stop : $.proxy(function (event, ui) {
+        this.setWidth(ui.size.width);
+        this.setHeight(ui.size.height);
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); // Make the div resizable, but it'll hide when not mouseover.
+        // Also when it stops modify the width and height values.
+    element.removeClass('ui-resizable'); // Remove the dotted line
+    element.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
+    element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
+    element.draggable({
+      stop: $.proxy(function(event, ui){
+        this.setX(ui.position.left);
+        this.setY(ui.position.top);
+        PersistenceManager.updateWidget(this);
+      }, this)
+    }); //Make the div draggable, and when it stops modify the (x, y) value.
+  },
+  
   serialize : function() {
 	var repr = {}
 	var metadata = this.getMetadata();

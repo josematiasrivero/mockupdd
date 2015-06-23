@@ -14,36 +14,10 @@ var Button = Widget.extend("Button",{
   __html: {visible: false, editable:false, serializable: false, init: "<div class='btn'>", 
 	  get: function() {
 		    return $(this._html).text(this.getText()).attr("id", this.getId()).addClass("btn-" + this.getStyle()).css("width",
-		            this.getWidth()).css("height", this.getHeight());
+		            "100%").css("height", "100%");
 	  }
   },
 
-  addEvents : function(element) {
-    element.dblclick($.proxy(this.doubleClick, this));
-    element.resizable({
-      autoHide : true,
-      stop : $.proxy(function() {
-        this.setWidth( $("#" + this.getId()).css('width'));
-        this.setHeight($("#" + this.getId()).css('height'));
-        PersistenceManager.updateWidget(this);
-      }, this)
-    }); // Make the element resizable, but it'll hide when not mouseover.
-        // Also when it stops modify the width and height values.
-    element.removeClass('ui-resizable'); //Remove the dotted line
-    element.draggable({
-      stop : $.proxy(function() {
-        this.setX($("#" + this.getId()).css('left'));
-        this.setY($("#" + this.getId()).css('top'));
-        PersistenceManager.updateWidget(this);
-      }, this)
-    }); //Make the element draggable, and when it stops modify the (x, y) value.
-  },
-  draw : function() {
-    var element = this.getHtml();
-    this.addEvents(element);
-    $("#page").append(element);
-    element.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
-  },
   doubleClick : function() {
     var form = new FormConstructor();
     form.addTextInput("Text", this.getText(), "button-text");
