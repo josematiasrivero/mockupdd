@@ -11,6 +11,10 @@
     	.widget-wrapper > * {
     		margin: 0px !important;
     	}
+    	.widget {
+    		pointer-events: none;
+    		nav-index: -1
+    	}
     </style>
     <script>
     	/** @author: Viral Patel. 

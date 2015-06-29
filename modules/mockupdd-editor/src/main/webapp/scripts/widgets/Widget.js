@@ -34,7 +34,11 @@ var Widget = Class.extend({
   
   draw : function() {
 	    var element = this.getHtml();
-	    var div = $("<div class='widget-wrapper' style='width:" + this.getWidth() + "; height:" + this.getHeight() + ";'></div>");
+	    element.addClass("widget");
+	    element.attr("tabindex",-1);
+	    var div = $("<div class='widget-wrapper'></div>");
+	    div.css("width",this.getWidth());
+	    div.css("height", this.getHeight())
 	    this.addEvents(div);
 	    div.append(element);
 	    $("#page").append(div);

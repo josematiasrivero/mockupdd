@@ -1,15 +1,15 @@
 var Input = Widget.extend("Input",{
   init : function(id) {
     this._super(id);
-    this.setWidth("150px");
+    this.setWidth("1500px");
     this.setHeight("30px");
     PersistenceManager.addWidget(this);
   },
   
   __placeholder: {init: "Placeholder", label: "Placeholder"},
-  __html: {visible: false, editable:false, serializable: false, init:"<div class='form-control'>",
+  __html: {visible: false, editable:false, serializable: false, init:"<input class='form-control'>",
 	get: function() {
-	    return $(this._html).text(this.getPlaceholder()).attr("id", this.getId()).css("width", "100%").css("height", "100%");
+	    return $(this._html).attr('placeholder',this.getPlaceholder()).attr("id", this.getId()).css("width", "100%").css("height", "100%");
 	  }
   },
 

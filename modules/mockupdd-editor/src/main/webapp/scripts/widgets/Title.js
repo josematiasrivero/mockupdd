@@ -13,6 +13,7 @@ var Title = Widget.extend("Title", {
 	  }
   },
 
+
   doubleClick : function() {
     var form = new FormConstructor();
     form.addTextInput("Text", this.getText(), "title-text");
