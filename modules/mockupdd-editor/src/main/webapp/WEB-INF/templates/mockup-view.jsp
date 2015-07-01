@@ -32,7 +32,7 @@
     	// On ready function
     	$(function(){
 		  // Draws the mockup in page.
-    	  PersistenceManager.startupMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
+    	  MockupEditor.startupMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
     	});
     </script>
   </jsp:attribute>

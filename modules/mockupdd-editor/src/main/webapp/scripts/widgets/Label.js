@@ -3,7 +3,6 @@ var Label = Widget.extend("Label",{
     this._super(id);
     this.setWidth("100px");
     this.setHeight("50px");
-    PersistenceManager.addWidget(this);
   },
   __text : {init: "New label", label: "Text"},
   __color : {type: TYPES.Color, init: "black", color: "Color"},

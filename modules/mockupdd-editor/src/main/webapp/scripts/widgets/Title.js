@@ -1,7 +1,6 @@
 var Title = Widget.extend("Title", {
   init : function(id) {
     this._super(id);
-    PersistenceManager.addWidget(this);
   },
 
   __text: {init: "Title", label: "Title"},

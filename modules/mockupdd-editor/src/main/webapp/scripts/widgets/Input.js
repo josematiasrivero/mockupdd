@@ -1,9 +1,8 @@
 var Input = Widget.extend("Input",{
   init : function(id) {
     this._super(id);
-    this.setWidth("1500px");
+    this.setWidth("150px");
     this.setHeight("30px");
-    PersistenceManager.addWidget(this);
   },
   
   __placeholder: {init: "Placeholder", label: "Placeholder"},

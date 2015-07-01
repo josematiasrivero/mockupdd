@@ -4,12 +4,12 @@ var Panel = Widget.extend("Panel",{
 
     this.setWidth("300px");
     this.setHeight("200px");
-    PersistenceManager.addWidget(this);
+
   },
 
   __header: {init: "Header text", label: "Header"},
   __text: {init: "Paragraph text", label: "Content"},
-  __style: {init: "info", label: "Style", type: TYPES.BootstraoStyle},
+  __style: {init: "info", label: "Style", type: TYPES.BootstrapStyle},
   __fontSize: {init: "14px", label: "Font Size", type: TYPES.FontSize},
   __html: {visible: false, editable: false, serializable: false, init: "<div>",
 	get: function() {

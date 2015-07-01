@@ -6,7 +6,6 @@ var Button = Widget.extend("Button",{
     this._super(id);
     this.setWidth("70px");
     this.setHeight("35px");
-    PersistenceManager.addWidget(this);
   },
 
   __text: {init: "Button", label: "Text"},
