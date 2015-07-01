@@ -64,9 +64,22 @@ var Widget = Class.extend({
     }); //Make the div draggable, and when it stops modify the (x, y) value.
   },
   
+  // TODO facug91: make the doubleClick work from here(Widget.js)
+  doubleClick : function() {
+    var form = new FormConstructor();
+    var metadata = this.getMetadata();
+    for (var prop in metadata) {
+    	if (metadata[prop].visible == true) {
+    		form.add(this.getGetter, metadata[prop]);
+    	}
+    }
+    ModalConstructor.draw("Label", form.getContent(), this);
+  },
+  
   serialize : function() {
 	var repr = {}
 	var metadata = this.getMetadata();
+	debugger;
     for(var prop in metadata){
     	if(metadata[prop].serializable == true){
     		repr[prop] = this.getProperty(prop);

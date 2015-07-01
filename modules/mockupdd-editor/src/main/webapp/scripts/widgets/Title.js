@@ -4,7 +4,7 @@ var Title = Widget.extend("Title", {
     PersistenceManager.addWidget(this);
   },
 
-  __text: {init: "Title", label: "Title"},
+  __text: {type: TYPES.String, init: "Title", label: "Title"},
   __color: {type: TYPES.Color, init: "gray", label:"Color"},
   __html:{visible: false, editable: false, serializable: false, init: "<h3>",
 	  get: function() {

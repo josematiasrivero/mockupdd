@@ -9,7 +9,7 @@ var Button = Widget.extend("Button",{
     PersistenceManager.addWidget(this);
   },
 
-  __text: {init: "Button", label: "Text"},
+  __text: {type: TYPES.String, init: "Button", label: "Text"},
   __style: {type: TYPES.BootstrapStyles, init: Styles.PRIMARY, label:"Style"},
   __html: {visible: false, editable:false, serializable: false, init: "<div class='btn'>", 
 	  get: function() {

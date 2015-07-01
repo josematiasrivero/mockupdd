@@ -10,7 +10,6 @@ var FormConstructor = Class.extend({
     this.labelSpace = "3";
     this.labelStyle = "";
     this.inputSpace = "9";
-    this.inputStyle = "margin-bottom:10px;";
   },
   getContent : function() {
     return this.content;
@@ -40,14 +39,15 @@ var FormConstructor = Class.extend({
     this.inputSpace = space;
     return this.inputSpace;
   },
-  getInputStyle : function() {
-    return this.inputStyle;
+  
+  /**
+   * Receive the metadata, and depending of the type call the corresponding method
+   */
+  add : function (metadata, currentValue) {
+	 var typeView = metadata.type.getTypeView();
+	 this._add(this.createLabel(metadata.type.getTypeName) + typeView.getView(currentValue));
   },
-  setInputStyle : function(style) {
-    this.inputStyle = style;
-    return this.inputStyle;
-  },
-
+  
   /**
    * Adds a Text input field in the form.
    * 

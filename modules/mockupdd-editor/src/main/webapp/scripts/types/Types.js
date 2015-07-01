@@ -1,7 +1,10 @@
 Type = Class.extend({
 	
-	posibleValues : function(){
+	posibleValues : function() {
 		
+	},
+	getTypeView : function(value) {
+		return new window[this.typeName](value);
 	}
 })
 
@@ -23,6 +26,7 @@ Type.extend = function(typeName, prop, parametrized) {
 }
 
 Type.extend("String");
+Type.extend("Text");
 Type.extend("Color");
 Type.extend("FontSize");
 Type.extend("BootstrapStyle");

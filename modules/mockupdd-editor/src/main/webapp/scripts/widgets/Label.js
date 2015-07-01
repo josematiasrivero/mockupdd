@@ -5,7 +5,7 @@ var Label = Widget.extend("Label",{
     this.setHeight("50px");
     PersistenceManager.addWidget(this);
   },
-  __text : {init: "New label", label: "Text"},
+  __text : {type: TYPES.String, init: "New label", label: "Text"},
   __color : {type: TYPES.Color, init: "black", color: "Color"},
   __fontSize : {type: TYPES.FontSize, init: "14px", label: "Font Size"},
   __html : {init: ("<label>"), visible: false, editable:false, serializable: false,

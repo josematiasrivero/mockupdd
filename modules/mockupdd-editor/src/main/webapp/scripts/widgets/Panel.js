@@ -7,10 +7,10 @@ var Panel = Widget.extend("Panel",{
     PersistenceManager.addWidget(this);
   },
 
-  __header: {init: "Header text", label: "Header"},
-  __text: {init: "Paragraph text", label: "Content"},
-  __style: {init: "info", label: "Style", type: TYPES.BootstraoStyle},
-  __fontSize: {init: "14px", label: "Font Size", type: TYPES.FontSize},
+  __header: {type: TYPES.String, init: "Header text", label: "Header"},
+  __text: {type: TYPES.Text, init: "Paragraph text", label: "Content"},
+  __style: {type: TYPES.BootstrapStyle, init: "info", label: "Style"},
+  __fontSize: {type: TYPES.FontSize, init: "14px", label: "Font Size"},
   __html: {visible: false, editable: false, serializable: false, init: "<div>",
 	get: function() {
 
