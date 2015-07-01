@@ -30,25 +30,52 @@ var Widget = Class.extend({
     } else {
       this.setId(id);
     }
+    this.__dom = null;
+    MockupEditor.addWidget(this);
+  },
+  
+  _resetDom: function(){
+	    this._dom = $(this.getHtml())
+	    this._dom.addClass("widget");
+	    this._dom.css("margin",0)
+	    this._innerWrapper.html(this._dom);
   },
   
   draw : function() {
-	    var element = this.getHtml();
-	    var div = $("<div class='widget-wrapper' style='width:" + this.getWidth() + "; height:" + this.getHeight() + ";'></div>");
-	    this.addEvents(div);
-	    div.append(element);
+
+	    var div = $("<div class='widget-wrapper'></div>");
+	    div.css("width",this.getWidth());
+	    div.css("height", this.getHeight())
+	    this._addEvents(div);
 	    $("#page").append(div);
 	    div.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
+	    this._wrapper = div;
+	    this._innerWrapper = $("<div />").css("height","100%").css("width","100%");
+	    this._wrapper.append(this._innerWrapper);
+	    this._resetDom();
   },
   
-  addEvents : function(element) {
+  switchToEditMode: function(){
+	  this._resetDom();
+	  this._wrapper.draggable("enable");
+	  this._wrapper.resizable("enable");
+  },
+  
+  
+  switchToRunMode: function(){
+	  this._resetDom();
+	  this._wrapper.draggable("disable");
+	  this._wrapper.resizable("disable");
+  },
+  
+  _addEvents : function(element) {
     element.dblclick($.proxy(this.doubleClick, this));
     element.resizable({
       autoHide : true,
       stop : $.proxy(function (event, ui) {
         this.setWidth(ui.size.width);
         this.setHeight(ui.size.height);
-        PersistenceManager.updateWidget(this);
+        MockupEditor.updateWidget(this);
       }, this)
     }); // Make the div resizable, but it'll hide when not mouseover.
         // Also when it stops modify the width and height values.
@@ -59,7 +86,7 @@ var Widget = Class.extend({
       stop: $.proxy(function(event, ui){
         this.setX(ui.position.left);
         this.setY(ui.position.top);
-        PersistenceManager.updateWidget(this);
+        MockupEditor.updateWidget(this);
       }, this)
     }); //Make the div draggable, and when it stops modify the (x, y) value.
   },

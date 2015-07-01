@@ -125,7 +125,7 @@ input.code {
 	border: 2px solid #ddd;
 }
 
-.ui-widget-content {
+:not(.runtime-mode) .widget-wrapper:hover {
 	border: 1px dashed #000 !important;
-	cursor: pointer !important;
+	cursor: pointer !important
 }

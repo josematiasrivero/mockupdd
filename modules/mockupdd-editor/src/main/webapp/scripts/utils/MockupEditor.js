@@ -1,8 +1,9 @@
-var PersistenceManager = new (Class.extend({
+var MockupEditor = new (Class.extend({
   init : function() {
     this.widgets = {};
     this.numberOfWidgets = 0;
     this.dirty = false;
+	this._isInEditMode = true;
     // Calls saveMockup() every 5 seconds
     setInterval($.proxy(this.saveMockup, this), 5000);
   },
@@ -59,5 +60,39 @@ var PersistenceManager = new (Class.extend({
     delete this.widgets[widget.getId()];
     this.dirty = true;
     $("#persistence-state").html("Dirty");
+  },
+  
+  isInEditMode: function(){
+	return this._inInEditMode;
+  },
+	
+  isInRunMode: function(){
+	return !this._isInEditMode;
+  },
+	
+  switchToEditMode: function(){
+	this._isInEditMode = true;
+	for(var id in this.widgets){
+		this.widgets[id].switchToEditMode();
+	}
+	$("#wrapper").removeClass("runtime-mode")
+  },
+	
+  switchToRunMode: function(){
+	this._isInEditMode = false;
+	for(var id in this.widgets){
+		this.widgets[id].switchToRunMode();
+	}
+	$("#wrapper").addClass("runtime-mode")
+  },
+  
+  createStateDependentFunction(editModeFunction, runModeFunction){
+	  return function(){
+		  if(MockupEditor.isInEditMode()){
+			  editModeFunction.call()
+		  }
+	  }
+
   }
+  
 }))();

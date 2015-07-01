@@ -18,7 +18,7 @@
 <script type="text/javascript" src="/scripts/widgets/Panel.js"></script>
 <script type="text/javascript" src="/scripts/utils/FormConstructor.js"></script>
 <script type="text/javascript" src="/scripts/utils/ModalConstructor.js"></script>
-<script type="text/javascript" src="/scripts/utils/PersistenceManager.js"></script>
+<script type="text/javascript" src="/scripts/utils/MockupEditor.js"></script>
 <script type="text/javascript" src="/scripts/ajax/GenericRESTClient.js"></script>
 <script type="text/javascript" src="/scripts/ajax/MockupRESTClient.js"></script>
 

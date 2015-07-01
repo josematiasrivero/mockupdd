@@ -1,7 +1,6 @@
 var Title = Widget.extend("Title", {
   init : function(id) {
     this._super(id);
-    PersistenceManager.addWidget(this);
   },
 
   __text: {type: TYPES.String, init: "Title", label: "Title"},
@@ -12,6 +11,7 @@ var Title = Widget.extend("Title", {
 	        .css("margin-top", "3px");
 	  }
   },
+
 
   doubleClick : function() {
     var form = new FormConstructor();

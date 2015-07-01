@@ -6,12 +6,11 @@ var Button = Widget.extend("Button",{
     this._super(id);
     this.setWidth("70px");
     this.setHeight("35px");
-    PersistenceManager.addWidget(this);
   },
 
   __text: {type: TYPES.String, init: "Button", label: "Text"},
   __style: {type: TYPES.BootstrapStyles, init: Styles.PRIMARY, label:"Style"},
-  __html: {visible: false, editable:false, serializable: false, init: "<div class='btn'>", 
+  __html: {visible: false, editable:false, serializable: false, init: "<button class='btn'>", 
 	  get: function() {
 		    return $(this._html).text(this.getText()).attr("id", this.getId()).addClass("btn-" + this.getStyle()).css("width",
 		            "100%").css("height", "100%");

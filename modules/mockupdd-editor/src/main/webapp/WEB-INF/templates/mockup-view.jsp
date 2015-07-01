@@ -11,6 +11,10 @@
     	.widget-wrapper > * {
     		margin: 0px !important;
     	}
+    	.widget {
+    		pointer-events: none;
+    		nav-index: -1
+    	}
     </style>
     <script>
     	/** @author: Viral Patel. 
@@ -28,7 +32,7 @@
     	// On ready function
     	$(function(){
 		  // Draws the mockup in page.
-    	  PersistenceManager.startupMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
+    	  MockupEditor.startupMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
     	});
     </script>
   </jsp:attribute>

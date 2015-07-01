@@ -4,7 +4,7 @@ var Panel = Widget.extend("Panel",{
 
     this.setWidth("300px");
     this.setHeight("200px");
-    PersistenceManager.addWidget(this);
+
   },
 
   __header: {type: TYPES.String, init: "Header text", label: "Header"},
