@@ -13,11 +13,6 @@ var Input = Widget.extend("Input",{
 	  }
   },
 
-  doubleClick : function() {
-    var form = new FormConstructor();
-    form.addTextInput("Placeholder", this.getPlaceholder(), "input-placeholder");
-    ModalConstructor.draw("Input", form.getContent(), this);
-  },
   persist : function() {
     // No chequea datos.
     var placeholder = $("#input-placeholder").val();

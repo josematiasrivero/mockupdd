@@ -24,8 +24,9 @@ var ModalConstructor = new (Class.extend({
     $(this.getId() + " .modal-body").empty();
     $(this.getId() + " .modal-body").html(htmlForm);
     // TODO: remove the hardcoded height
-    $(this.getId() + " .modal-body").css("height", "200px");
+    $(this.getId() + " .modal-body").css("height", "220px");
     // Adds click events for the save changes and widget deletion.
+    debugger;
     $(this.getId()).find("#save-changes").click($.proxy(widgetContext.persist, widgetContext));
     $(this.getId()).find("#delete-widget").click($.proxy(widgetContext.erase, widgetContext));
     

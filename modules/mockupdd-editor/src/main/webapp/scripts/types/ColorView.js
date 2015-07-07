@@ -1,7 +1,6 @@
 var ColorView = TypeView.extend({
-	init : function(value, id, options){
+	init : function(value, id){
 		this._super(value, id);
-		this.options = options;
 	},
 	getOptions : function() {
 		return this.options;
@@ -11,15 +10,7 @@ var ColorView = TypeView.extend({
 		return this.options;
 	},
 	getView : function() {
-		var input = "<select id='" + this.getId() + "'>";
-		for (var o in options) {
-			input += "<option value'" + this.options[o] + "' ";
-			if (this.getValue() === this.options[o]) {
-				input += "selected='selected'";
-			}
-			input += ">" + this.options[o] + "</options>";
-		}
-		input += "</select>";
-		return input;
+		return "<input class='form-control' type='Text' style='" + this.getInputStyle()
+        + "'id='" + this.getId() + "' value='" + this.getValue() + "'></input>";
 	},
 })

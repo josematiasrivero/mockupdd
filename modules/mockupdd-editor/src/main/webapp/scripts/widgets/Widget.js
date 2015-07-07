@@ -42,7 +42,6 @@ var Widget = Class.extend({
   },
   
   draw : function() {
-
 	    var div = $("<div class='widget-wrapper'></div>");
 	    div.css("width",this.getWidth());
 	    div.css("height", this.getHeight())
@@ -60,7 +59,6 @@ var Widget = Class.extend({
 	  this._wrapper.draggable("enable");
 	  this._wrapper.resizable("enable");
   },
-  
   
   switchToRunMode: function(){
 	  this._resetDom();
@@ -91,16 +89,16 @@ var Widget = Class.extend({
     }); //Make the div draggable, and when it stops modify the (x, y) value.
   },
   
-  // TODO facug91: make the doubleClick work from here(Widget.js)
   doubleClick : function() {
     var form = new FormConstructor();
     var metadata = this.getMetadata();
     for (var prop in metadata) {
     	if (metadata[prop].visible == true) {
-    		form.add(this.getGetter, metadata[prop]);
+    		var gg = this.getProperty(prop);
+    		form.add(this.getWidgetType().toLowerCase(), prop.toLowerCase(), metadata[prop], this.getProperty(prop));
     	}
     }
-    ModalConstructor.draw("Label", form.getContent(), this);
+    ModalConstructor.draw(this.getWidgetType(), form.getContent(), this);
   },
   
   serialize : function() {
@@ -134,7 +132,7 @@ var Widget = Class.extend({
   },
   persist : function() {
     // abstract method to be implemented in the subclasses
-  },
+  }
 })
 
 

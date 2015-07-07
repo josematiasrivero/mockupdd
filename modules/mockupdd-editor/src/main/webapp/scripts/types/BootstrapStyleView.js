@@ -1,7 +1,6 @@
 var BootstrapStyleView = TypeView.extend({
-	init : function(value, id, options){
+	init : function(value, id){
 		this._super(value, id);
-		this.options = options;
 	},
 	getOptions : function() {
 		return this.options;
@@ -11,13 +10,13 @@ var BootstrapStyleView = TypeView.extend({
 		return this.options;
 	},
 	getView : function() {
-		var input = "<select id='" + this.getId() + "'>";
-		for (var o in options) {
-			input += "<option value'" + this.options[o] + "' ";
-			if (this.getValue() === this.options[o]) {
+		var input = "<select class='form-control'" + "id='" + this.getId() + "'>";
+		for (var o in Styles.values) {
+			input += "<option value'" + Styles.values[o] + "' ";
+			if (this.getValue() === Styles.values[o]) {
 				input += "selected='selected'";
 			}
-			input += ">" + this.options[o] + "</options>";
+			input += ">" + Styles.values[o] + "</options>";
 		}
 		input += "</select>";
 		return input;

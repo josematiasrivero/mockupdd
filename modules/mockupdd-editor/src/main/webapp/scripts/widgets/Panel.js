@@ -31,14 +31,6 @@ var Panel = Widget.extend("Panel",{
 	  },
   },
 
-  doubleClick : function() {
-    var form = new FormConstructor();
-    form.addTextInput("Header text", this.getHeader(), "panel-header");
-    form.addTextarea("Paragraph text", this.getText(), "panel-text");
-    form.addTextInput("Font size", this.getFontSize(), "panel-font-size");
-    form.addSelectInput("Style", this.getStyle(), Styles.panelValues, "panel-style");
-    ModalConstructor.draw("Panel", form.getContent(), this);
-  },
   persist : function() {
     // No chequea datos.
     var text = $("#panel-text").val();
@@ -48,7 +40,7 @@ var Panel = Widget.extend("Panel",{
     var header = $("#panel-header").val();
     this.setHeader(header);
     element.find(".panel-heading").html(this.getHeader());
-    var fontSize = $("#panel-font-size").val();
+    var fontSize = $("#panel-fontsize").val();
     this.setFontSize(fontSize);
     element.css("font-size", this.getFontSize());
     element.removeClass("panel-" + this.getStyle());

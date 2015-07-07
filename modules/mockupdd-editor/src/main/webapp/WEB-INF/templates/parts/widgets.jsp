@@ -8,7 +8,14 @@
 <!-- Import all widgets -->
 <!-- Widget.js must be first, because widgetsName dependencies -->
 <script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
-<script type="text/javascript" src="/scripts/utils/Types.js"></script>
+<script type="text/javascript" src="/scripts/types/Types.js"></script>
+<script type="text/javascript" src="/scripts/types/TypeView.js"></script>
+<script type="text/javascript" src="/scripts/types/BootstrapStyleView.js"></script>
+<script type="text/javascript" src="/scripts/types/ColorView.js"></script>
+<script type="text/javascript" src="/scripts/types/FontSizeView.js"></script>
+<script type="text/javascript" src="/scripts/types/PixelsView.js"></script>
+<script type="text/javascript" src="/scripts/types/StringView.js"></script>
+<script type="text/javascript" src="/scripts/types/TextView.js"></script>
 <script type="text/javascript" src="/scripts/utils/Styles.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Widget.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Label.js"></script>

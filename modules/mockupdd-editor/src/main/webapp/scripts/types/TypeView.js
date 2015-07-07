@@ -2,7 +2,7 @@ var TypeView = Class.extend({
 	init : function(value, id){
 		this.value = value;
 		this.id = id;
-	    this.inputStyle = "margin-bottom:10px;";
+	    this.inputStyle = "";
 	},
 	getValue : function() {
 		return this.value;
@@ -10,7 +10,7 @@ var TypeView = Class.extend({
 	setValue : function(value) {
 		this.value = value;
 		return this.value;
-	}
+	},
 	getId : function() {
 		return this.id;
 	},

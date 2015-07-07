@@ -5,7 +5,7 @@ var Label = Widget.extend("Label",{
     this.setHeight("50px");
   },
   __text : {type: TYPES.String, init: "New label", label: "Text"},
-  __color : {type: TYPES.Color, init: "black", color: "Color"},
+  __color : {type: TYPES.Color, init: "black", label: "Color"},
   __fontSize : {type: TYPES.FontSize, init: "14px", label: "Font Size"},
   __html : {init: ("<label>"), visible: false, editable:false, serializable: false,
 	 get: function() {
@@ -14,14 +14,6 @@ var Label = Widget.extend("Label",{
 	  },
   },
 
-
-  doubleClick : function() {
-    var form = new FormConstructor();
-    form.addTextInput("Text", this.getText(), "label-text")
-    form.addTextInput("Color", this.getColor(), "label-color")
-    form.addTextInput("Font size", this.getFontSize(), "label-font-size")
-    ModalConstructor.draw("Label", form.getContent(), this);
-  },
   persist : function() {
     // No chequea datos.
     var text = $("#label-text").val();
@@ -29,7 +21,7 @@ var Label = Widget.extend("Label",{
     $("#" + this.getId()).text(this.getText());
     var color = $("#label-color").val();
     this.setColor(color);
-    var fontSize = $("#label-font-size").val();
+    var fontSize = $("#label-fontsize").val();
     this.setFontSize(fontSize);
     $("#" + this.getId()).css("color", this.getColor()).css("font-size", this.getFontSize());
     PersistenceManager.updateWidget(this);

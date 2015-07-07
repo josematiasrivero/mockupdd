@@ -43,9 +43,9 @@ var FormConstructor = Class.extend({
   /**
    * Receive the metadata, and depending of the type call the corresponding method
    */
-  add : function (metadata, currentValue) {
-	 var typeView = metadata.type.getTypeView();
-	 this._add(this.createLabel(metadata.type.getTypeName) + typeView.getView(currentValue));
+  add : function (widgetName, propertyName, metadata, currentValue) {
+	 var typeView = metadata.type.getTypeView(currentValue, widgetName + "-" + propertyName);
+	 this._add(this._createLabel(metadata.label) + this._createInput(typeView.getView()));
   },
   
   /**
@@ -94,12 +94,8 @@ var FormConstructor = Class.extend({
     label = label + name + "</label>";
     return label;
   },
-  _createInput : function(type, name, id) {
-    var div = "<div class='col-xs-" + this.getInputSpace() + "'>";
-    var input = "<input class='form-control' type='" + type + "' style='" + this.getInputStyle()
-        + "'id='" + id + "' value='" + name + "'>";
-    input = div + input + "</input></div>";
-    return input;
+  _createInput : function(input) {
+    return "<div class='col-xs-" + this.getInputSpace() + "'>" + input + "</div>";
   },
   _createSelectInput : function(value, options, id) {
     var div = "<div class='col-xs-" + this.getInputSpace() + "'>";

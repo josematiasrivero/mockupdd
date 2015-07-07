@@ -1,10 +1,9 @@
 Type = Class.extend({
 	
 	posibleValues : function() {
-		
 	},
-	getTypeView : function(value) {
-		return new window[this.typeName](value);
+	getTypeView : function(value, id) {
+		return (new window[this._typeViewName](value, id));
 	}
 })
 
@@ -16,6 +15,7 @@ TYPES = Type.types;
 Type.extend = function(typeName, prop, parametrized) {
 	prop = prop || {};
 	prop.__typeName =  {init: typeName};
+	prop.__typeViewName = {init: typeName+"View"};
 	parametrized = parametrized || false;
 	var ret = Class.extend.apply(this,[prop]);
 	ret.extend = arguments.callee;
