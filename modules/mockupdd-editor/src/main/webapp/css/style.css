@@ -125,7 +125,15 @@ input.code {
 	border: 2px solid #ddd;
 }
 
-:not(.runtime-mode) .widget-wrapper:hover {
+.widget-wrapper > * {
+	margin: 0px !important;
+}
+.edit-mode .widget {
+	pointer-events: none;
+	nav-index: -1
+}
+
+.edit-mode .widget-wrapper:hover {
 	border: 1px dashed #000 !important;
 	cursor: pointer !important
 }

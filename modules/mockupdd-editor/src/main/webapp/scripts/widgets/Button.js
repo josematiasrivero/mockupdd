@@ -16,6 +16,16 @@ var Button = Widget.extend("Button",{
 		            "100%").css("height", "100%");
 	  }
   },
+  
+  switchToEditMode: function(){
+	  this._super();
+	  this._dom.attr("tabindex","-1")
+  },
+  
+  switchToRunMode: function(){
+	  this._super();
+	  this._dom.removeAttr("tabindex");
+  },
 
   doubleClick : function() {
     var form = new FormConstructor();
@@ -23,24 +33,16 @@ var Button = Widget.extend("Button",{
     form.addSelectInput("Style", this.getStyle(), Styles.values, "button-style");
     ModalConstructor.draw("Button", form.getContent(), this);
   },
+  
   persist : function() {
     // No chequea datos.
-    var element = $("#" + this.getId());
+    var element = this._dom
     var text = $("#button-text").val();
     this.setText(text);
-    element.html(this.getText());
-    /*
-     * The function .text remove the divs added by the .resizable() So we have
-     * to add it again.
-     */
-    element.resizable('destroy');
-    element.resizable({
-      autoHide : true
-    });
-    element.removeClass('ui-resizable');
+    this._dom.text(this.getText());
     element.removeClass("btn-" + this.getStyle());
     this.setStyle($("#button-style").val());
     element.addClass("btn-" + this.getStyle());
-    PersistenceManager.updateWidget(this);
+    MockupEditor.updateWidget(this);
   }
 })

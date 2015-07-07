@@ -13,21 +13,22 @@ var Title = Widget.extend("Title", {
   },
 
 
-  doubleClick : function() {
+  doubleClick :function() {
     var form = new FormConstructor();
     form.addTextInput("Text", this.getText(), "title-text");
     form.addTextInput("Color", this.getColor(), "title-color");
     ModalConstructor.draw("Label", form.getContent(), this);
   },
+  
   persist : function() {
     // No chequea datos.
     var text = $("#title-text").val();
-    var element = $("#" + this.getId());
+    var element = this._dom
     this.setText(text);
     element.text(this.getText());
     color = $("#title-color").val();
     this.setColor(color);
     element.css("color", this.getColor());
-    PersistenceManager.updateWidget(this);
+    MockupEditor.updateWidget(this);
   }
 })

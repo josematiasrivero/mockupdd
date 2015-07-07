@@ -5,9 +5,11 @@ var MockupEditor = new (Class.extend({
     this.dirty = false;
 	this._isInEditMode = true;
     // Calls saveMockup() every 5 seconds
-    setInterval($.proxy(this.saveMockup, this), 5000);
+    setInterval(this.editModeOnlyFunction(this.saveMockup, this), 5000);
   },
-  startupMockup : function(id, name, json) {
+  LoadMockup : function(id, name, json) {
+	$("#page").empty();
+	this.widgets = {};
     this.mockupId = id;
     this.mockupName = name;
     if (json) {
@@ -18,8 +20,7 @@ var MockupEditor = new (Class.extend({
         widget.draw();
       }
     }
-    this.dirty = false;
-    $("#persistence-state").html("Saved");
+    this.markClean();
   },
   saveMockup : function() {
     if (this.dirty) {
@@ -35,8 +36,7 @@ var MockupEditor = new (Class.extend({
           this.mockupName, 
           arr, 
           $.proxy(function() {
-            this.dirty = false;
-            $("#persistence-state").html("Saved");
+        	  this.markClean();
           }, this),
           $.proxy(function() {
             $("#persistence-state").html("Dirty");
@@ -48,22 +48,20 @@ var MockupEditor = new (Class.extend({
   addWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
     this.numberOfWidgets++;
-    this.dirty = true;
-    $("#persistence-state").html("Dirty");
+    this.markDirty()
+
   },
   updateWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
-    this.dirty = true;
-    $("#persistence-state").html("Dirty");
+    this.markDirty()
   },
   deleteWidget : function(widget) {
     delete this.widgets[widget.getId()];
-    this.dirty = true;
-    $("#persistence-state").html("Dirty");
+    this.markDirty()
   },
   
   isInEditMode: function(){
-	return this._inInEditMode;
+	return this._isInEditMode;
   },
 	
   isInRunMode: function(){
@@ -75,7 +73,7 @@ var MockupEditor = new (Class.extend({
 	for(var id in this.widgets){
 		this.widgets[id].switchToEditMode();
 	}
-	$("#wrapper").removeClass("runtime-mode")
+	$("#page").addClass("edit-mode")
   },
 	
   switchToRunMode: function(){
@@ -83,16 +81,39 @@ var MockupEditor = new (Class.extend({
 	for(var id in this.widgets){
 		this.widgets[id].switchToRunMode();
 	}
-	$("#wrapper").addClass("runtime-mode")
+	$("#page").removeClass("edit-mode")
   },
   
-  createStateDependentFunction(editModeFunction, runModeFunction){
+  editModeOnlyFunction: function(fn,context){
 	  return function(){
 		  if(MockupEditor.isInEditMode()){
-			  editModeFunction.call()
+			  return fn.apply(context);
 		  }
+		  return;
 	  }
-
+  },
+  
+  runModeOnlyFunction: function(fn){
+	  return function(){
+		  if(MockupEditor.isInRunMode()){
+			  return fn.apply(context);
+		  }
+		  return;
+	  }
+  },
+  
+  markDirty: function(){
+	  $("#modeToggle").bootstrapToggle("disable");
+	  this.dirty = true;
+	  $("#persistence-state").html("Dirty");
+  },
+  
+  markClean: function(){
+      this.dirty = false;
+      $("#persistence-state").html("Saved");
+	  $("#modeToggle").bootstrapToggle("enable");
   }
+  
+  
   
 }))();
