@@ -6,6 +6,9 @@ var Widget = Class.extend({
 	  label: "X",  category: "position"},
   __y : {type:TYPES.Pixels, visible : false, editable : false, serializable : true, init:"0px",
 	  label: "Y",  category: "position"},
+	  
+  __y : {type:TYPES.String, visible : true, editable : true, serializable : true,
+		  label: "name",  category: "behaviour"},
   
   __origin : {
 	  visible : false, editable : false, serializable : false,  category: "position",
@@ -67,7 +70,7 @@ var Widget = Class.extend({
   },
   
   _addEvents : function(element) {
-    element.dblclick($.proxy(this.doubleClick, this));
+    element.dblclick(MockupEditor.editModeOnlyFunction(this.doubleClick,this));
     element.resizable({
       autoHide : true,
       stop : $.proxy(function (event, ui) {
@@ -78,8 +81,6 @@ var Widget = Class.extend({
     }); // Make the div resizable, but it'll hide when not mouseover.
         // Also when it stops modify the width and height values.
     element.removeClass('ui-resizable'); // Remove the dotted line
-    element.mouseover(function(){$(this).addClass('ui-widget-content')}); //Add the style when mouse over
-    element.mouseout(function(){$(this).removeClass('ui-widget-content')}); //Remove the style when mouse over
     element.draggable({
       stop: $.proxy(function(event, ui){
         this.setX(ui.position.left);
@@ -117,7 +118,6 @@ var Widget = Class.extend({
 		  this.setProperty(prop,repr[prop]); //Todo, support complex properties.
 	  }
   },
-
   
   /** Deletes the widget from the DOM. */
   erase : function() {

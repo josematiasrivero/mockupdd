@@ -35,7 +35,7 @@ var Panel = Widget.extend("Panel",{
     // No chequea datos.
     var text = $("#panel-text").val();
     this.setText(text);
-    var element = $("#" + this.getId());
+    var element = this._dom;
     element.find(".panel-body").html(this.getText());
     var header = $("#panel-header").val();
     this.setHeader(header);
@@ -46,6 +46,6 @@ var Panel = Widget.extend("Panel",{
     element.removeClass("panel-" + this.getStyle());
     this.setStyle($("#panel-style").val());
     element.addClass("panel-" + this.getStyle());
-    PersistenceManager.updateWidget(this);
+    MockupEditor.updateWidget(this);
   }
 })

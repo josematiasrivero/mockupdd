@@ -5,16 +5,12 @@
 <t:baseLayout>
   <jsp:attribute name="title">${mockup.name}</jsp:attribute>
   <jsp:attribute name="head">
+ 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
     <style>
-    	.widget-wrapper > * {
-    		margin: 0px !important;
-    	}
-    	.widget {
-    		pointer-events: none;
-    		nav-index: -1
-    	}
+
     </style>
     <script>
     	/** @author: Viral Patel. 
@@ -32,7 +28,24 @@
     	// On ready function
     	$(function(){
 		  // Draws the mockup in page.
-    	  MockupEditor.startupMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
+
+
+		  
+		  $("#modeToggle").bootstrapToggle({
+			  on: "Run",
+			  onstyle: "success",
+			  off: "Edit",
+			  offstyle: "primary"
+		  })
+		  $("#modeToggle").change(function(){
+			  if($(this).prop("checked")){
+				  MockupEditor.switchToRunMode();
+			  } else {
+				  MockupEditor.switchToEditMode();
+			  }
+		  })
+		  MockupEditor.LoadMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
+		  MockupEditor.switchToEditMode();
     	});
     </script>
   </jsp:attribute>
@@ -42,8 +55,14 @@
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <li class="sidebar-brand">
-            <label class="control-label">Elements</label>
+          	<label>Mode:
+            	<input id="modeToggle" type="checkbox">
+            </label>
+          </li> 
+          <li class="sidebar-brand">
+            <label class="control-label">Elements
             <div id="persistence-state" style="position: relative;"></div>
+            </label>
           </li>          
           <li>
             <label class="control-label">Title</label>

@@ -15,12 +15,12 @@ var Title = Widget.extend("Title", {
   persist : function() {
     // No chequea datos.
     var text = $("#title-text").val();
-    var element = $("#" + this.getId());
+    var element = this._dom
     this.setText(text);
     element.text(this.getText());
     color = $("#title-color").val();
     this.setColor(color);
     element.css("color", this.getColor());
-    PersistenceManager.updateWidget(this);
+    MockupEditor.updateWidget(this);
   }
 })

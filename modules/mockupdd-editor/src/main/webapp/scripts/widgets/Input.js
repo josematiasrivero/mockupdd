@@ -12,20 +12,23 @@ var Input = Widget.extend("Input",{
 	    return $(this._html).attr('placeholder',this.getPlaceholder()).attr("id", this.getId()).css("width", "100%").css("height", "100%");
 	  }
   },
+  
+  switchToEditMode: function(){
+	  this._super();
+	  this._dom.attr("tabindex","-1")
+  },
+  
+  switchToRunMode: function(){
+	  this._super();
+	  this._dom.removeAttr("tabindex");
+  },
 
   persist : function() {
     // No chequea datos.
     var placeholder = $("#input-placeholder").val();
-    var element = $("#" + this.getId());
+    var element = this._dom;
     this.setPlaceholder(placeholder);
-    element.text(this.getPlaceholder());
-    /*
-     * The function .text remove the divs added by the .resizable()
-     * So we have to add it again.
-     */
-    element.resizable('destroy');
-    element.resizable({autoHide: true});
-    element.removeClass('ui-resizable');
-    PersistenceManager.updateWidget(this);
+    this._dom.attr("placeholder",this.getPlaceholder())
+    MockupEditor.updateWidget(this);
   }
 })

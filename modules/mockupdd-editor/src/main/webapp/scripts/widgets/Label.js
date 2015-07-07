@@ -18,12 +18,12 @@ var Label = Widget.extend("Label",{
     // No chequea datos.
     var text = $("#label-text").val();
     this.setText(text);
-    $("#" + this.getId()).text(this.getText());
+    this._dom.text(this.getText());
     var color = $("#label-color").val();
     this.setColor(color);
     var fontSize = $("#label-fontsize").val();
     this.setFontSize(fontSize);
-    $("#" + this.getId()).css("color", this.getColor()).css("font-size", this.getFontSize());
-    PersistenceManager.updateWidget(this);
+    this._dom.css("color", this.getColor()).css("font-size", this.getFontSize());
+    MockupEditor.updateWidget(this);
   }
 })
