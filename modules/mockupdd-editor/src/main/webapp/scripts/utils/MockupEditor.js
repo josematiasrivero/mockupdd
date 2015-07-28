@@ -7,7 +7,7 @@ var MockupEditor = new (Class.extend({
     // Calls saveMockup() every 5 seconds
     setInterval(this.editModeOnlyFunction(this.saveMockup, this), 5000);
   },
-  LoadMockup : function(id, name, json) {
+  loadMockup : function(id, name, json) {
 	$("#page").empty();
 	this.widgets = {};
     this.mockupId = id;
@@ -20,8 +20,22 @@ var MockupEditor = new (Class.extend({
         widget.draw();
       }
     }
+	for(var id in this.widgets){
+		this.widgets[id].switchToEditMode();
+	}
     this.markClean();
   },
+  
+  reloadMockup : function(){
+	  MockupRESTClient.getMockup(this.mockupId,
+		  function(json){
+			  MockupEditor.loadMockup(json.id,json.name,json.jsonData);
+		  }, function(){
+			  alert("Could not reload mockup.");
+		  }
+	  )
+  },
+  
   saveMockup : function() {
     if (this.dirty) {
       var arr = new Array();
@@ -70,10 +84,9 @@ var MockupEditor = new (Class.extend({
 	
   switchToEditMode: function(){
 	this._isInEditMode = true;
-	for(var id in this.widgets){
-		this.widgets[id].switchToEditMode();
-	}
 	$("#page").addClass("edit-mode")
+	$("#page").empty()
+	this.reloadMockup();
   },
 	
   switchToRunMode: function(){

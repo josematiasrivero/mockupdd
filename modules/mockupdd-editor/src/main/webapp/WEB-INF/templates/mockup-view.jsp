@@ -44,7 +44,7 @@
 				  MockupEditor.switchToEditMode();
 			  }
 		  })
-		  MockupEditor.LoadMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
+		  MockupEditor.loadMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
 		  MockupEditor.switchToEditMode();
     	});
     </script>

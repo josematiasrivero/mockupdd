@@ -4,9 +4,6 @@ var MockupRESTClient = new (GenericRESTClient.extend({
 
   getMockup : function(id, okCallback, errorCallback) {
     return this._jsonGet("/service/mockups/" + id, function(data) {
-      alert(data.jsonData);
-      data = JSON.parse(data.jsonData);
-      alert(data);
       return okCallback(data);
     }, errorCallback);
   },

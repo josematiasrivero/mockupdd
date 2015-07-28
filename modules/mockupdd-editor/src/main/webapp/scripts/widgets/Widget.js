@@ -105,7 +105,6 @@ var Widget = Class.extend({
   serialize : function() {
 	var repr = {}
 	var metadata = this.getMetadata();
-	debugger;
     for(var prop in metadata){
     	if(metadata[prop].serializable == true){
     		repr[prop] = this.getProperty(prop);
@@ -115,7 +114,7 @@ var Widget = Class.extend({
   },
   unserialize : function(repr) {
 	  for(prop in repr){
-		  this.setProperty(prop,repr[prop]); //Todo, support complex properties.
+		  this.setProperty(prop,repr[prop]); //TODO, support complex properties.
 	  }
   },
   

@@ -35,7 +35,7 @@ public class MockupRESTService {
   @GET
   @Path("/{mockupId}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getMockup(@Context SecurityContext context, @PathParam("mockupId") Long mockupId) {
+  public Response getMockup(@PathParam("mockupId") Long mockupId) {
     Mockup mockup = this.mockupService.getMockup(mockupId);
     return Response.ok(mockup).build();
   }
