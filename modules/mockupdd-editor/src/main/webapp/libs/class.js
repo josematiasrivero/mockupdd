@@ -44,11 +44,11 @@
 	  },
 	  
 	  this.getSetter = function(prop){
-		  return this[Class.setterName(prop)];
+		  return $.proxy(this[Class.setterName(prop)],this);
 	  },
 	  
 	  this.getGetter = function(prop){
-		  return this[Class.getterName(prop)];
+		  return $.proxy(this[Class.getterName(prop)],this);
 	  },
 	  
 	  this.getProperty = function(prop){

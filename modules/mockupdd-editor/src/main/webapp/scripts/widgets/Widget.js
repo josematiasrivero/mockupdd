@@ -3,11 +3,21 @@ var Widget = Class.extend({
   //properties
   __id : {visible : false, editable : false, serializable : true, category: null},
   __x : {type:TYPES.Pixels, visible : false, editable : false, serializable : true, init:"0px",
-	  label: "X",  category: "position"},
+	  label: "X",  category: "position",
+	  set: function(val){
+		  this._x=val;
+		  if(this._wrapper != null)
+			  this._wrapper.css('left', this.getX());
+	  }},
   __y : {type:TYPES.Pixels, visible : false, editable : false, serializable : true, init:"0px",
-	  label: "Y",  category: "position"},
+	  label: "Y",  category: "position",
+	  set: function(val){
+		  this._y=val;
+		  if(this._wrapper != null)
+			  this._wrapper.css('top', this.getY());
+	  }},
 	  
-  __y : {type:TYPES.String, visible : true, editable : true, serializable : true,
+  __name : {type:TYPES.String, visible : true, editable : true, serializable : true,
 		  label: "name",  category: "behaviour"},
   
   __origin : {
@@ -23,9 +33,19 @@ var Widget = Class.extend({
   },
   
   __height : {visible : false, editable : false,
-	  serializable : true, type:TYPES.Pixels, init: "100px", label: "Height",  category: "position"},
+	  serializable : true, type:TYPES.Pixels, init: "100px", label: "Height",  category: "position",
+	  set: function(val){
+		  this._height=val;
+		  if(this._wrapper != null)
+			  this._wrapper.css('height', this.getHeight());
+	  }},
   __width : {visible : false, editable : false,
-	  serializable : true, type:TYPES.Pixels, init: "50px", label: "Width",  category: "position"},
+	  serializable : true, type:TYPES.Pixels, init: "50px", label: "Width",  category: "position",
+	  set: function(val){
+		  this._width=val;
+		  if(this._wrapper != null)
+			  this._wrapper.css('width', this.getWidth());
+	  }},
   
   init : function(id) {
     if (typeof id === 'undefined') {
@@ -33,7 +53,8 @@ var Widget = Class.extend({
     } else {
       this.setId(id);
     }
-    this.__dom = null;
+    this._wapper=null;
+    this._dom = null;
     MockupEditor.addWidget(this);
   },
   
