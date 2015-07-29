@@ -5,6 +5,9 @@ var Serializable = Class.extend({
 	var metadata = this.getMetadata();
     for(var prop in metadata){
     	if(metadata[prop].serializable == true){
+    		if(metadata[prop].type.isComplex()){
+    			repr[prop] = this.getProperty(prop).serialize();
+    		}
     		repr[prop] = this.getProperty(prop);
     	}
     }
@@ -12,6 +15,10 @@ var Serializable = Class.extend({
   },
   unserialize : function(repr) {
 	  for(prop in repr){
+		  if(this.getMetadata()[prop].type.isComplex()){
+			  //This property needs to be deserialized recursively.
+			  prop = Serializable.unserialize(prop);
+		  }
 		  this.setProperty(prop,repr[prop]); // TODO, support complex
 												// properties.
 	  }
@@ -20,7 +27,7 @@ var Serializable = Class.extend({
 
 
 Serializable.unserialize = function(repr){
-    var serializable = new Serializable.types[repr.type]
+    var serializable = new Serializable.types[repr.serializationType]
     serializable.unserialize(repr);
     return serializable;
 }
@@ -30,13 +37,13 @@ Serializable._defaultMetadata = {
   editable : true,		// Whether this should be editable in the UI.
   serializable : true,	// Whether this should be serialized.
   category: "visual",
-  type: TYPES.String
+  type: TYPES.String,
 },
 
 Serializable.types = {};
 
 Serializable.extend = function(typeName, prop) {
-	prop.__type =  {visible: false, editable:false, init:typeName};
+	prop.__serializationType =  {visible: false, editable:false, init:typeName};
 	for (var name in prop) {
 		if (typeof prop[name] == "object" && name.startsWith("__")) {
 			for (field in Serializable._defaultMetadata) {
