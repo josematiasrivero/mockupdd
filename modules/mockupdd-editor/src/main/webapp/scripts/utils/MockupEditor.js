@@ -17,6 +17,7 @@ var MockupEditor = new (Class.extend({
       for (var i in jsonData) {
         var widget = Widget.unserialize(jsonData[i]);
         this.widgets[widget.getId()] = widget;
+        widget.setMockupEditor(this);
         widget.draw();
       }
     }
@@ -24,6 +25,10 @@ var MockupEditor = new (Class.extend({
 		this.widgets[id].switchToEditMode();
 	}
     this.markClean();
+  },
+  
+  getContainer: function(){
+	  return $("#page");
   },
   
   reloadMockup : function(){
@@ -61,6 +66,7 @@ var MockupEditor = new (Class.extend({
   },
   addWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
+    widget.setMockupEditor(this);
     this.numberOfWidgets++;
     this.markDirty()
 

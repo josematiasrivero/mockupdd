@@ -18,6 +18,7 @@
 <script type="text/javascript" src="/scripts/types/TextView.js"></script>
 <script type="text/javascript" src="/scripts/utils/Styles.js"></script>
 <script type="text/javascript" src="/scripts/utils/MockupEditor.js"></script>
+<script type="text/javascript" src="/scripts/utils/Serializable.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Widget.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Label.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Title.js"></script>
