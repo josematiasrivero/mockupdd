@@ -7,6 +7,7 @@ var MockupEditor = new (Class.extend({
     // Calls saveMockup() every 5 seconds
     setInterval(this.editModeOnlyFunction(this.saveMockup, this), 5000);
   },
+  
   loadMockup : function(id, name, json) {
 	$("#page").empty();
 	this.widgets = {};
@@ -17,14 +18,35 @@ var MockupEditor = new (Class.extend({
       for (var i in jsonData) {
         var widget = Widget.unserialize(jsonData[i]);
         this.widgets[widget.getId()] = widget;
-        widget.setMockupEditor(this);
-        widget.draw();
+        this._addEditionEvents(widget);
+        widget.drawOn(this.getContainer());
       }
     }
-	for(var id in this.widgets){
-		this.widgets[id].switchToEditMode();
-	}
     this.markClean();
+  },
+  
+  _addEditionEvents : function(widget){
+	  var wrapper = widget.getWrapper();
+	  // Make the wrapper resizable, but it'll hide when not mouseover.
+      // Also when it stops modify the width and height values.
+	  wrapper.resizable({
+		  autoHide : true,
+		  stop : $.proxy(function (event, ui) {
+		    widget.setWidth(ui.size.width);
+		    widget.setHeight(ui.size.height);
+		        this.updateWidget(widget);
+		  }, this)
+	  });
+	  wrapper.removeClass('ui-resizable'); // Remove the dotted line
+	  wrapper.draggable({
+	      stop: $.proxy(function(event, ui){
+	        widget.setX(ui.position.left);
+	        widget.setY(ui.position.top);
+	        this.updateWidget(widget);
+	      }, this)
+	  }); // Make the div draggable, and when it stops modify the (x, y) value.
+	  var editEventsIcon = $("<div class='edit-events-icon'><span class'fa fa-bolt fa-lg'/></div>");
+	  wrapper.append(editEventsIcon);
   },
   
   getContainer: function(){
@@ -98,7 +120,9 @@ var MockupEditor = new (Class.extend({
   switchToRunMode: function(){
 	this._isInEditMode = false;
 	for(var id in this.widgets){
-		this.widgets[id].switchToRunMode();
+		var wrapper = this.widgets[id].getWrapper();
+		wrapper.draggable("destroy");
+		wrapper.resizable("destroy");
 	}
 	$("#page").removeClass("edit-mode")
   },

@@ -56,94 +56,39 @@ var Widget = Serializable.extend("Widget",{
     if( this.getName() == null){
     	this.setName(this.getId());
     }
-    this._isInEditMode=true;
     this._wapper=null;
-    this._dom = null;
-    MockupEditor.addWidget(this);
+    this._dom = this._resetDom();
   },
   
   _resetDom: function(){
+	    var div = $("<div class='widget-wrapper'></div>");
+	    div.css("width",this.getWidth());
+	    div.css("height", this.getHeight())
+	    div.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
+	    this._wrapper = div;
+	    this._innerWrapper = $("<div />").css("height","100%").css("width","100%");
+	    this._wrapper.append(this._innerWrapper);
 	    this._dom = $(this.getHtml())
 	    this._dom.addClass("widget");
 	    this._dom.css("margin",0)
 	    this._innerWrapper.html(this._dom);
   },
   
-  draw : function() {
-	if(this._mockupEditor == null){
-		throw "Error. Trying to draw the widget before setting the editor."
-	}
-    var div = $("<div class='widget-wrapper'></div>");
-    div.css("width",this.getWidth());
-    div.css("height", this.getHeight())
-    this._addEditionEvents(div);
-    this._mockupEditor.getContainer().append(div);
-    div.css("position", "absolute").css('left', this.getX()).css('top', this.getY());
-    this._wrapper = div;
-    this._innerWrapper = $("<div />").css("height","100%").css("width","100%");
-    this._wrapper.append(this._innerWrapper);
-    this._resetDom();
+  getWrapper: function(){
+	  return this._wrapper;
   },
   
-  setMockupEditor: function(mockupEditor){
-	  this._mockupEditor = mockupEditor;
+  drawOn : function(container){
+	  container.append(this._wrapper);
   },
-  
-  switchToEditMode: function(){
-	  this._isInEditMode=true;
-	  this._resetDom();
-	  this._wrapper.draggable("enable");
-	  this._wrapper.resizable("enable");
-  },
-  
-  switchToRunMode: function(){
-	  this._isInEditMode=false;
-	  this._resetDom();
-	  this._wrapper.draggable("disable");
-	  this._wrapper.resizable("disable");
-  },
-  
-  _addEditionEvents : function(element) {
-    element.dblclick(MockupEditor.editModeOnlyFunction(this.doubleClick,this));
-    element.resizable({
-      autoHide : true,
-      stop : $.proxy(function (event, ui) {
-        this.setWidth(ui.size.width);
-        this.setHeight(ui.size.height);
-        this._mockupEditor.updateWidget(this);
-      }, this)
-    }); // Make the div resizable, but it'll hide when not mouseover.
-        // Also when it stops modify the width and height values.
-    element.removeClass('ui-resizable'); // Remove the dotted line
-    element.draggable({
-      stop: $.proxy(function(event, ui){
-        this.setX(ui.position.left);
-        this.setY(ui.position.top);
-        this._mockupEditor.updateWidget(this);
-      }, this)
-    }); // Make the div draggable, and when it stops modify the (x, y) value.
-  },
-  
-  doubleClick : function() {
-    var form = new FormConstructor();
-    var metadata = this.getMetadata();
-    for (var prop in metadata) {
-    	if (metadata[prop].visible == true) {
-    		var gg = this.getProperty(prop);
-    		form.add(this.getWidgetType().toLowerCase(), prop.toLowerCase(), metadata[prop], this.getProperty(prop));
-    	}
-    }
-    ModalConstructor.draw(this.getWidgetType(), form.getContent(), this);
-  },
-  
   
   /** Deletes the widget from the DOM. */
   erase : function() {
     if(this._wrapper){
     	this._wrapper.remove();
     }
-    this._mockupEditor.deleteWidget(this);
   },
+  
   persist : function() {
     // abstract method to be implemented in the subclasses
   }

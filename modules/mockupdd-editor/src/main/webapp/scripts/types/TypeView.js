@@ -1,9 +1,8 @@
 var TypeView = Class.extend({
 	init : function(value, id){
 		this.value = this.copyEditingValue(value);
-		this.id = id;
-	    this.inputStyle = "";
 	},
+	
 	getValue : function() {
 		return this.value;
 	},
@@ -11,21 +10,12 @@ var TypeView = Class.extend({
 		this.value = value;
 		return this.value;
 	},
-	getId : function() {
-		return this.id;
+	
+	isDirty : function(){
+		return true; //Override in subclasses for efficiency
 	},
-	setId : function(id) {
-		this.id = id;
-		return this.id;
-	},
-	getInputStyle : function() {
-	  return this.inputStyle;
-	},
-	setInputStyle : function(style) {
-	  this.inputStyle = style;
-	  return this.inputStyle;
-	},
-	getView : function() {
+	
+	getDom : function() {
 		//abstract method to be implemented in subclasses
 	},
 	

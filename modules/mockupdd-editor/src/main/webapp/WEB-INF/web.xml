@@ -26,24 +26,23 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
-<!--   <servlet> -->
-<!--     <servlet-name>jersey-servlet-service</servlet-name> -->
-<!--     <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class> -->
-<!--     <async-supported>true</async-supported> -->
-<!--     <init-param> -->
-<!--       <param-name>com.sun.jersey.config.property.packages</param-name> -->
-<!--       <param-value>com.mockupdd.web.rest</param-value> -->
-<!--     </init-param> -->
-<!--     <init-param> -->
-<!--       <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name> -->
-<!--       <param-value>true</param-value> -->
-<!--     </init-param> -->
-<!--     <load-on-startup>1</load-on-startup> -->
-<!--   </servlet> -->
-<!--   <servlet-mapping> -->
-<!--     <servlet-name>jersey-servlet-service</servlet-name> -->
-<!--     <url-pattern>/service/*</url-pattern> -->
-<!--   </servlet-mapping> -->
+  <servlet>
+    <servlet-name>jersey-servlet-service</servlet-name>
+    <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.mockupdd.web.rest</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jersey-servlet-service</servlet-name>
+    <url-pattern>/service/*</url-pattern>
+  </servlet-mapping>
 
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>

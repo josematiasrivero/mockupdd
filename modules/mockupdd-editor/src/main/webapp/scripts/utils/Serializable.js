@@ -26,6 +26,10 @@ var Serializable = Class.extend({
 												// properties.
 	  }
   },
+  
+  clone: function(){
+	  return Serializable.unserialize(this.serialize);
+  }
 })
 
 
