@@ -53,6 +53,10 @@ var Widget = Serializable.extend("Widget",{
     } else {
       this.setId(id);
     }
+    if( this.getName() == null){
+    	this.setName(this.getId());
+    }
+    this._isInEditMode=true;
     this._wapper=null;
     this._dom = null;
     MockupEditor.addWidget(this);
@@ -86,12 +90,14 @@ var Widget = Serializable.extend("Widget",{
   },
   
   switchToEditMode: function(){
+	  this._isInEditMode=true;
 	  this._resetDom();
 	  this._wrapper.draggable("enable");
 	  this._wrapper.resizable("enable");
   },
   
   switchToRunMode: function(){
+	  this._isInEditMode=false;
 	  this._resetDom();
 	  this._wrapper.draggable("disable");
 	  this._wrapper.resizable("disable");

@@ -1,6 +1,6 @@
 var TypeView = Class.extend({
 	init : function(value, id){
-		this.value = value;
+		this.value = this.copyEditingValue(value);
 		this.id = id;
 	    this.inputStyle = "";
 	},
@@ -27,5 +27,9 @@ var TypeView = Class.extend({
 	},
 	getView : function() {
 		//abstract method to be implemented in subclasses
+	},
+	
+	copyEditingValue: function(value){
+		return value;
 	}
 })

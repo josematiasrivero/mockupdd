@@ -33,6 +33,8 @@ Type.extend("Color");
 Type.extend("FontSize");
 Type.extend("BootstrapStyle");
 Type.extend("Pixels");
+Type.extend("Action",null, false, true);
+Type.extend("Event", null, false, true);
 Type.extend("List",{
 	
 	init: function(itemType){

@@ -6,7 +6,7 @@
 
 var FormConstructor = Class.extend({
   init : function() {
-    this.content = "";
+    this.content = [];
     this.labelSpace = "3";
     this.labelStyle = "";
     this.inputSpace = "9";
@@ -45,80 +45,34 @@ var FormConstructor = Class.extend({
    */
   add : function (widgetName, propertyName, metadata, currentValue) {
 	 var typeView = metadata.type.getTypeView(currentValue, widgetName + "-" + propertyName);
-	 this._add(this._createLabel(metadata.label) + this._createInput(typeView.getView()));
-  },
-  
-  /**
-   * Adds a Text input field in the form.
-   * 
-   */
-  addTextInput : function(label, value, id) {
-    // TODO: Check for XSS in parameters.
-    this._add(this._createLabel(label) + this._createInput("text", value, id));
-  },
-
-  /**
-   * Adds a Number input field in the form.
-   * 
-   */
-  addNumberInput : function(label, value, id) {
-    // TODO: Check for XSS in parameters.
-    this._add(this._createLabel(label) + this._createInput("number", value, id));
-  },
-
-  /**
-   * Adds a Textarea field in the form.
-   * 
-   */
-  addTextarea : function(label, value, id) {
-    // TODO: Check for XSS in parameters.
-    this._add(this._createLabel(label) + this._createTextarea(value, id));
-  },
-
-  /**
-   * Adds a Select input field in the form.
-   * 
-   */
-  addSelectInput : function(label, value, options, id) {
-    // TODO: Check for XSS in parameters.
-    this._add(this._createLabel(label) + this._createSelectInput(value, options, id));
+	 this._add(metadata.label, typeView.getView());
   },
 
   /**
    * Private methods
    */
 
+  _createInput : function(field){
+	var wrapper = $("<div />");
+	wrapper.addClass("col-xs-"+this.getInputSpace());
+	wrapper.append(field);
+	return wrapper;
+  },
+  
   _createLabel : function(name) {
     var label = "<label class='control-label col-xs-" + this.getLabelSpace() + "' style='"
         + this.getLabelStyle() + "'>";
     label = label + name + "</label>";
-    return label;
+    return $(label);
   },
-  _createInput : function(input) {
-    return "<div class='col-xs-" + this.getInputSpace() + "'>" + input + "</div>";
+
+  _add : function(label,field) {
+    this.content.push(this._createField(label,field));
   },
-  _createSelectInput : function(value, options, id) {
-    var div = "<div class='col-xs-" + this.getInputSpace() + "'>";
-    var input = "<select id='" + id + "'>";
-    for ( var v in options) {
-      input += "<option value='" + options[v] + "' ";
-      if (value === options[v]) {
-        input += "selected='selected'";
-      }
-      input += ">" + options[v] + "</option>";
-    }
-    return div + input + "</select></div>";
-  },
-  _createTextarea : function(value, id) {
-    var div = "<div class='col-xs-" + this.getInputSpace() + "'>";
-    var textarea = "<textarea class='form-control' id='" + id + "'>" + value + "</textarea>";
-    textarea = div + textarea + "</div>";
-    return textarea;
-  },
-  _add : function(field) {
-    this.setContent(this.getContent() + this._createField(field));
-  },
-  _createField : function(field) {
-    return "<div class='form-group'>" + field + "</div>";
+  _createField : function(label, field) {
+    var wrapper = $("<div class='form-group'/>");
+    wrapper.append(this._createLabel(label))
+    wrapper.append(this._createInput(field));
+    return wrapper;
   }
 });

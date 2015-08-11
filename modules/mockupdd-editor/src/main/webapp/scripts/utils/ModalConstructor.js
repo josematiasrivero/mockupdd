@@ -16,17 +16,15 @@ var ModalConstructor = new (Class.extend({
    * 
    * @params the widget name, html form and context.
    */
-  draw : function(widgetName, htmlForm, widgetContext) {
+  draw : function(widgetName, content, widgetContext) {
     // Adds the title text
     $(this.getId() + " .modal-title").empty();
     $(this.getId() + " .modal-title").html(widgetName);
     // Adds the html form
     $(this.getId() + " .modal-body").empty();
-    $(this.getId() + " .modal-body").html(htmlForm);
+    $(this.getId() + " .modal-body").append(content)
     // TODO: remove the hardcoded height
-    $(this.getId() + " .modal-body").css("height", "220px");
     // Adds click events for the save changes and widget deletion.
-    debugger;
     $(this.getId()).find("#save-changes").click($.proxy(widgetContext.persist, widgetContext));
     $(this.getId()).find("#delete-widget").click($.proxy(widgetContext.erase, widgetContext));
     

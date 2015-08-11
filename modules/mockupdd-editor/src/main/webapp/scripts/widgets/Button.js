@@ -6,6 +6,7 @@ var Button = Widget.extend("Button",{
     this._super(id);
     this.setWidth("70px");
     this.setHeight("35px");
+    this.setClickEvent(new Event());
   },
 
   __text: {type: TYPES.String, init: "Button", label: "Text"},
@@ -17,6 +18,8 @@ var Button = Widget.extend("Button",{
 	  }
   },
   
+  __clickEvent : {type:TYPES.Event, label: "Click"},
+  
   switchToEditMode: function(){
 	  this._super();
 	  this._dom.attr("tabindex","-1")
@@ -25,6 +28,15 @@ var Button = Widget.extend("Button",{
   switchToRunMode: function(){
 	  this._super();
 	  this._dom.removeAttr("tabindex");
+  },
+  
+  draw: function(){
+	  this._super();
+	  this._wrapper.click($.proxy(function(){
+		  if(!this._isInEditMode){
+			  this.getClickEvent().trigger();
+		  }
+	  },this))
   },
   
   persist : function() {
