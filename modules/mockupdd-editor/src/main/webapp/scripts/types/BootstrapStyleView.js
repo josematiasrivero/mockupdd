@@ -1,24 +1,22 @@
 var BootstrapStyleView = TypeView.extend({
-	init : function(value, id){
-		this._super(value, id);
-	},
-	getOptions : function() {
-		return this.options;
-	},
-	setOptions : function(options) {
-		this.options = options;
-		return this.options;
-	},
-	getView : function() {
-		var input = "<select class='form-control'" + "id='" + this.getId() + "'>";
+	init : function(value){
+		this._super(value);
+		
+		this._dom = $("<select class='form-control'/>");
 		for (var o in Styles.values) {
-			input += "<option value'" + Styles.values[o] + "' ";
-			if (this.getValue() === Styles.values[o]) {
-				input += "selected='selected'";
+			var option= $("<option />")
+			option.html(Styles.values[o]);
+			option.attr("value", Styles.values[o]);
+			if (this._value === Styles.values[o]) {
+				option.attr("selected",'selected');
 			}
-			input += ">" + Styles.values[o] + "</options>";
+			this._dom.append(option);
 		}
-		input += "</select>";
-		return input;
+		
 	},
+	
+	getValue : function(){
+		return this._dom.val();
+	}
+
 })

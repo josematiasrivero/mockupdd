@@ -1,8 +1,12 @@
 var TextView = TypeView.extend({
-	init : function(value, id){
-		this._super(value, id);
+	init : function(value){
+		this._super(value);
+		this._dom= $("<textarea class='form-control' >" + this._value + "</textarea>");
 	},
-	getView : function() {
-		return "<textarea class='form-control' id='" + this.getId() + "'>" + this.getValue() + "</textarea>";
-	},
+
+	
+	getValue : function(){
+		return this._dom.val();
+	}
+	
 })

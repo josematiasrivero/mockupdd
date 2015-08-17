@@ -18,7 +18,7 @@ var Widget = Serializable.extend("Widget",{
 	  }},
 	  
   __name : {type:TYPES.String, visible : true, editable : true, serializable : true,
-		  label: "name",  category: "behaviour"},
+		  label: "Name",  category: "behaviour"},
   
   __origin : {
 	  visible : false, editable : false, serializable : false,  category: "position",
@@ -72,6 +72,7 @@ var Widget = Serializable.extend("Widget",{
 	    this._dom.addClass("widget");
 	    this._dom.css("margin",0)
 	    this._innerWrapper.html(this._dom);
+	    return this._dom;
   },
   
   getWrapper: function(){

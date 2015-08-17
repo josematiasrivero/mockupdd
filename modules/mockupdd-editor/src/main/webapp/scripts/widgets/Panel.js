@@ -7,10 +7,34 @@ var Panel = Widget.extend("Panel",{
 
   },
 
-  __header: {type: TYPES.String, init: "Header text", label: "Header"},
-  __text: {type: TYPES.Text, init: "Paragraph text", label: "Content"},
-  __style: {type: TYPES.BootstrapStyle, init: "info", label: "Style"},
-  __fontSize: {type: TYPES.FontSize, init: "14px", label: "Font Size"},
+  __header: {type: TYPES.String, init: "Header text", label: "Header",
+	  set: function(value){
+		  this._header = value;
+		  if(this._dom != null){
+			  this._headerDom.html(value)
+		  }
+	  }},
+  __text: {type: TYPES.Text, init: "Paragraph text", label: "Content",
+	  set: function(value){
+		  this._text = value;
+		  if(this._dom != null){
+			  this._bodyDom.html(value);
+		  }
+	  }},
+  __style: {type: TYPES.BootstrapStyle, init: "info", label: "Style",
+	  set: function(value){
+		  this._style = value;
+		  if(this._dom != null){
+			  this._dom.attr("class", "panel panel-"+value);
+		  }
+	  }},
+  __fontSize: {type: TYPES.FontSize, init: "14px", label: "Font Size",
+	  set: function(value){
+		  this._fontSize = value;
+		  if(this._dom != null){
+			  this._bodyDom.css("font-size", value);
+		  }
+	  }},
   __html: {visible: false, editable: false, serializable: false, init: "<div>",
 	get: function() {
 
@@ -26,26 +50,10 @@ var Panel = Widget.extend("Panel",{
 	    body.html(this.getText());
 	    body.css("font-size", this.getFontSize());
 	    element.append(body);
-	    
+	    this._headerDom = header;
+	    this._bodyDom = body;
 	    return element;
 	  },
   },
 
-  persist : function() {
-    // No chequea datos.
-    var text = $("#panel-text").val();
-    this.setText(text);
-    var element = this._dom;
-    element.find(".panel-body").html(this.getText());
-    var header = $("#panel-header").val();
-    this.setHeader(header);
-    element.find(".panel-heading").html(this.getHeader());
-    var fontSize = $("#panel-fontsize").val();
-    this.setFontSize(fontSize);
-    element.css("font-size", this.getFontSize());
-    element.removeClass("panel-" + this.getStyle());
-    this.setStyle($("#panel-style").val());
-    element.addClass("panel-" + this.getStyle());
-    MockupEditor.updateWidget(this);
-  }
 })

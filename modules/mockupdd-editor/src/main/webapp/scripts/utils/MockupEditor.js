@@ -1,6 +1,7 @@
 var MockupEditor = new (Class.extend({
   init : function() {
     this.widgets = {};
+    this._widgetsFormRenderers = {};
     this.numberOfWidgets = 0;
     this.dirty = false;
 	this._isInEditMode = true;
@@ -16,7 +17,7 @@ var MockupEditor = new (Class.extend({
     if (json) {
       var jsonData = JSON.parse(json);
       for (var i in jsonData) {
-        var widget = Widget.unserialize(jsonData[i]);
+        var widget = Serializable.unserialize(jsonData[i]);
         this.widgets[widget.getId()] = widget;
         this._addEditionEvents(widget);
         widget.drawOn(this.getContainer());
@@ -45,8 +46,15 @@ var MockupEditor = new (Class.extend({
 	        this.updateWidget(widget);
 	      }, this)
 	  }); // Make the div draggable, and when it stops modify the (x, y) value.
-	  var editEventsIcon = $("<div class='edit-events-icon'><span class'fa fa-bolt fa-lg'/></div>");
-	  wrapper.append(editEventsIcon);
+	  //Add a modal form renderer with this widget as model.
+	  this._widgetsFormRenderers[widget.getId()] = new ModalFormRenderer(wrapper,widget,"widget-edit-modal");
+	  var self = this;
+	  this._widgetsFormRenderers[widget.getId()].onClose(function(formRenderer){
+		  self.updateWidget(formRenderer.getModel())
+	  })
+	  this._widgetsFormRenderers[widget.getId()].onDelete(function(formRenderer){
+		  self.deleteWidget(formRenderer.getModel())
+	  })
   },
   
   getContainer: function(){
@@ -88,7 +96,8 @@ var MockupEditor = new (Class.extend({
   },
   addWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
-    widget.setMockupEditor(this);
+    widget.drawOn(this.getContainer());
+    this._addEditionEvents(widget);
     this.numberOfWidgets++;
     this.markDirty()
 
@@ -99,6 +108,8 @@ var MockupEditor = new (Class.extend({
   },
   deleteWidget : function(widget) {
     delete this.widgets[widget.getId()];
+    widget.getWrapper().remove();
+    this.numberOfWidgets--;
     this.markDirty()
   },
   

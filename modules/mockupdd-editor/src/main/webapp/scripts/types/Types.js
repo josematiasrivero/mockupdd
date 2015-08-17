@@ -2,8 +2,8 @@ Type = Class.extend({
 	
 	posibleValues : function() {
 	},
-	getTypeView : function(value, id) {
-		return (new window[this._typeViewName](value, id));
+	getTypeView : function(value) {
+		return (new window[this._typeViewName](value));
 	}
 })
 

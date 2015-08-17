@@ -1,16 +1,9 @@
 var ColorView = TypeView.extend({
 	init : function(value, id){
 		this._super(value, id);
+		this._dom=$("<input class='form-control' type='Text' value='" + this._value + "'/>");
 	},
-	getOptions : function() {
-		return this.options;
-	},
-	setOptions : function(options) {
-		this.options = options;
-		return this.options;
-	},
-	getView : function() {
-		return "<input class='form-control' type='Text' style='" + this.getInputStyle()
-        + "'id='" + this.getId() + "' value='" + this.getValue() + "'></input>";
+	getValue : function() {
+		return this._dom.val();
 	},
 })

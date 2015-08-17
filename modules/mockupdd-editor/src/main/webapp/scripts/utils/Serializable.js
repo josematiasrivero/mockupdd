@@ -17,14 +17,15 @@ var Serializable = Class.extend({
     return repr;
   },
   unserialize : function(repr) {
-	  for(prop in repr){
+	  for(var prop in repr){
 		  if(this.getMetadata()[prop].type.isComplex()){
 			  //This property needs to be deserialized recursively.
 			   this.setProperty(prop,Serializable.unserialize(repr[prop]));
+		  } else {
+			  this.setProperty(prop,repr[prop]); 
 		  }
-		  this.setProperty(prop,repr[prop]); // TODO, support complex
-												// properties.
 	  }
+		  
   },
   
   clone: function(){

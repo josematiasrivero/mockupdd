@@ -30,8 +30,10 @@
 <script type="text/javascript" src="/scripts/types/StringView.js"></script>
 <script type="text/javascript" src="/scripts/types/TextView.js"></script>
 <script type="text/javascript" src="/scripts/types/EventView.js"></script>
-<script type="text/javascript" src="/scripts/utils/FormConstructor.js"></script>
-<script type="text/javascript" src="/scripts/utils/ModalConstructor.js"></script>
+
+<script type="text/javascript" src="/scripts/forms/Form.js"></script>
+<script type="text/javascript" src="/scripts/forms/FormRenderer.js"></script>
+<script type="text/javascript" src="/scripts/forms/ModalFormRenderer.js"></script>
 
 <script type="text/javascript" src="/scripts/ajax/GenericRESTClient.js"></script>
 <script type="text/javascript" src="/scripts/ajax/MockupRESTClient.js"></script>
