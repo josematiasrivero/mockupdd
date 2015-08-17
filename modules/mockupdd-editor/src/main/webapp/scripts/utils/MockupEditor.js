@@ -55,6 +55,7 @@ var MockupEditor = new (Class.extend({
 	  this._widgetsFormRenderers[widget.getId()].onDelete(function(formRenderer){
 		  self.deleteWidget(formRenderer.getModel())
 	  })
+	  widget.switchToEditMode();
   },
   
   getContainer: function(){
@@ -108,7 +109,7 @@ var MockupEditor = new (Class.extend({
   },
   deleteWidget : function(widget) {
     delete this.widgets[widget.getId()];
-    widget.getWrapper().remove();
+    widget.erase();
     this.numberOfWidgets--;
     this.markDirty()
   },
@@ -131,9 +132,13 @@ var MockupEditor = new (Class.extend({
   switchToRunMode: function(){
 	this._isInEditMode = false;
 	for(var id in this.widgets){
+		this.widgets[id].switchToRunMode();
 		var wrapper = this.widgets[id].getWrapper();
 		wrapper.draggable("destroy");
 		wrapper.resizable("destroy");
+	}
+	for(var id in this._widgetsFormRenderers){
+		this._widgetsFormRenderers[id].disable();
 	}
 	$("#page").removeClass("edit-mode")
   },

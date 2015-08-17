@@ -57,6 +57,7 @@ var Widget = Serializable.extend("Widget",{
     	this.setName(this.getId());
     }
     this._wapper=null;
+    this._runMode=false;
     this._dom = this._resetDom();
   },
   
@@ -90,9 +91,14 @@ var Widget = Serializable.extend("Widget",{
     }
   },
   
-  persist : function() {
-    // abstract method to be implemented in the subclasses
-  }
+  switchToEditMode : function(){
+	  this._runMode = false;
+  },
+  
+  switchToRunMode : function(){
+	  this._runMode = true;
+  },
+  
 })
 
 

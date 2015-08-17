@@ -9,6 +9,12 @@ var Button = Widget.extend("Button",{
     this.setText("Button");
     this.setStyle(Styles.PRIMARY);
     this.setClickEvent(new Event());
+    var self = this;
+    this._dom.click(function(){
+    	if(self._runMode){
+    		self._clickEvent.trigger();
+    	}
+    })
   },
 
   __text: {type: TYPES.String, label: "Text", 
