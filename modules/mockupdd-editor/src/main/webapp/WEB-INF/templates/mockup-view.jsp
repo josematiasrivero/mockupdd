@@ -74,7 +74,7 @@
             </div>
             <script>
               $('#create-title').click(function(){
-                (new Title()).draw();
+            	  MockupEditor.addWidget(new Title());
               })
             </script>
           </div>
@@ -87,7 +87,7 @@
             </div>
             <script>
               $('#create-label').click(function(){
-                (new Label()).draw();
+            	  MockupEditor.addWidget(new Label());
               })
             </script>
           </div>
@@ -100,7 +100,7 @@
             </div>
             <script>
               $('#create-input').click(function(){
-                (new Input()).draw();
+            	  MockupEditor.addWidget(new Input());
               })
             </script>
           </div>
@@ -113,7 +113,7 @@
             </div>
             <script>
               $('#create-button').click(function(){
-                (new Button()).draw();
+                MockupEditor.addWidget(new Button());
               })
             </script>
           </div>
@@ -130,7 +130,7 @@
             </div>
             <script>
               $('#create-panel').click(function(){
-                (new Panel()).draw();
+            	  MockupEditor.addWidget(new Panel());
               })
             </script>
           </div>
@@ -141,19 +141,14 @@
       <!-- Modal for edition and deletion of widgets -->
       <div class="container">
         <h4>${mockup.name}</h4>
-        <div id="myModal" class="modal fade" style="overflow-y: auto;">
+        <div id="widget-edit-modal" class="modal fade" style="overflow-y: auto;">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title"></h4>
-		      </div>
+
 		      <div class="modal-body form-horizontal">
 		      </div>
 	          <div class="modal-footer">
-	            <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="delete-widget" class="btn btn-danger" data-dismiss="modal">Delete</button>
-	            <button type="button" id="save-changes" class="btn btn-primary">Save changes</button>
+	            
 	          </div>
 		    </div>
 		  </div>

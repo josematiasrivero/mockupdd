@@ -1,12 +1,14 @@
 var MockupEditor = new (Class.extend({
   init : function() {
     this.widgets = {};
+    this._widgetsFormRenderers = {};
     this.numberOfWidgets = 0;
     this.dirty = false;
 	this._isInEditMode = true;
     // Calls saveMockup() every 5 seconds
     setInterval(this.editModeOnlyFunction(this.saveMockup, this), 5000);
   },
+  
   loadMockup : function(id, name, json) {
 	$("#page").empty();
 	this.widgets = {};
@@ -15,15 +17,49 @@ var MockupEditor = new (Class.extend({
     if (json) {
       var jsonData = JSON.parse(json);
       for (var i in jsonData) {
-        var widget = Widget.unserialize(jsonData[i]);
+        var widget = Serializable.unserialize(jsonData[i]);
         this.widgets[widget.getId()] = widget;
-        widget.draw();
+        this._addEditionEvents(widget);
+        widget.drawOn(this.getContainer());
       }
     }
-	for(var id in this.widgets){
-		this.widgets[id].switchToEditMode();
-	}
     this.markClean();
+  },
+  
+  _addEditionEvents : function(widget){
+	  var wrapper = widget.getWrapper();
+	  // Make the wrapper resizable, but it'll hide when not mouseover.
+      // Also when it stops modify the width and height values.
+	  wrapper.resizable({
+		  autoHide : true,
+		  stop : $.proxy(function (event, ui) {
+		    widget.setWidth(ui.size.width);
+		    widget.setHeight(ui.size.height);
+		        this.updateWidget(widget);
+		  }, this)
+	  });
+	  wrapper.removeClass('ui-resizable'); // Remove the dotted line
+	  wrapper.draggable({
+	      stop: $.proxy(function(event, ui){
+	        widget.setX(ui.position.left);
+	        widget.setY(ui.position.top);
+	        this.updateWidget(widget);
+	      }, this)
+	  }); // Make the div draggable, and when it stops modify the (x, y) value.
+	  //Add a modal form renderer with this widget as model.
+	  this._widgetsFormRenderers[widget.getId()] = new ModalFormRenderer(wrapper,widget,"widget-edit-modal");
+	  var self = this;
+	  this._widgetsFormRenderers[widget.getId()].onClose(function(formRenderer){
+		  self.updateWidget(formRenderer.getModel())
+	  })
+	  this._widgetsFormRenderers[widget.getId()].onDelete(function(formRenderer){
+		  self.deleteWidget(formRenderer.getModel())
+	  })
+	  widget.switchToEditMode();
+  },
+  
+  getContainer: function(){
+	  return $("#page");
   },
   
   reloadMockup : function(){
@@ -61,6 +97,8 @@ var MockupEditor = new (Class.extend({
   },
   addWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
+    widget.drawOn(this.getContainer());
+    this._addEditionEvents(widget);
     this.numberOfWidgets++;
     this.markDirty()
 
@@ -71,6 +109,8 @@ var MockupEditor = new (Class.extend({
   },
   deleteWidget : function(widget) {
     delete this.widgets[widget.getId()];
+    widget.erase();
+    this.numberOfWidgets--;
     this.markDirty()
   },
   
@@ -93,6 +133,12 @@ var MockupEditor = new (Class.extend({
 	this._isInEditMode = false;
 	for(var id in this.widgets){
 		this.widgets[id].switchToRunMode();
+		var wrapper = this.widgets[id].getWrapper();
+		wrapper.draggable("destroy");
+		wrapper.resizable("destroy");
+	}
+	for(var id in this._widgetsFormRenderers){
+		this._widgetsFormRenderers[id].disable();
 	}
 	$("#page").removeClass("edit-mode")
   },

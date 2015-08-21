@@ -1,9 +1,9 @@
 var FontSizeView = TypeView.extend({
-	init : function(value, id){
-		this._super(value, id);
+	init : function(value){
+		this._super(value);
+		this._dom =$("<input class='form-control' type='Text' value='" + this._value + "'></input>")
 	},
-	getView : function() {
-		return "<input class='form-control' type='Text' style='" + this.getInputStyle()
-        + "'id='" + this.getId() + "' value='" + this.getValue() + "'></input>";
-	},
+	getValue(){
+		return this._dom.val();
+	}
 })

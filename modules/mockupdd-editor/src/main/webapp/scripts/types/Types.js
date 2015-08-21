@@ -2,8 +2,8 @@ Type = Class.extend({
 	
 	posibleValues : function() {
 	},
-	getTypeView : function(value, id) {
-		return (new window[this._typeViewName](value, id));
+	getTypeView : function(value) {
+		return (new window[this._typeViewName](value));
 	}
 })
 
@@ -12,10 +12,12 @@ Type.types = {}
 
 TYPES = Type.types;
 
-Type.extend = function(typeName, prop, parametrized) {
+Type.extend = function(typeName, prop, parametrized, complex) {
 	prop = prop || {};
 	prop.__typeName =  {init: typeName};
+	prop.__complex = {init: complex}
 	prop.__typeViewName = {init: typeName+"View"};
+	prop.isComplex = function(){return this.getComplex()} //More natural.
 	parametrized = parametrized || false;
 	var ret = Class.extend.apply(this,[prop]);
 	ret.extend = arguments.callee;
@@ -31,6 +33,8 @@ Type.extend("Color");
 Type.extend("FontSize");
 Type.extend("BootstrapStyle");
 Type.extend("Pixels");
+Type.extend("Action",null, false, true);
+Type.extend("Event", null, false, true);
 Type.extend("List",{
 	
 	init: function(itemType){

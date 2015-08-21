@@ -29,7 +29,6 @@
   <servlet>
     <servlet-name>jersey-servlet-service</servlet-name>
     <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
-    <async-supported>true</async-supported>
     <init-param>
       <param-name>com.sun.jersey.config.property.packages</param-name>
       <param-value>com.mockupdd.web.rest</param-value>

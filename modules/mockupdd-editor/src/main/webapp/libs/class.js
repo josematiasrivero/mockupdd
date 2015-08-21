@@ -139,7 +139,7 @@
 	// The dummy class constructor
 	function Class() {
 		if(!initializing){
-			for (name in this.getMetadata()) {
+			for (var name in this.getMetadata()) {
 				if (this.getMetadata()[name].init !== undefined) {
 					this.getSetter(name).apply(this,[(this.getMetadata()[name].init)]);
 				}

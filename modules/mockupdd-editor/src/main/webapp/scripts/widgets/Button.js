@@ -6,16 +6,39 @@ var Button = Widget.extend("Button",{
     this._super(id);
     this.setWidth("70px");
     this.setHeight("35px");
+    this.setText("Button");
+    this.setStyle(Styles.PRIMARY);
+    this.setClickEvent(new Event());
+    var self = this;
+    this._dom.click(function(){
+    	if(self._runMode){
+    		self._clickEvent.trigger();
+    	}
+    })
   },
 
-  __text: {type: TYPES.String, init: "Button", label: "Text"},
-  __style: {type: TYPES.BootstrapStyle, init: Styles.PRIMARY, label:"Style"},
-  __html: {visible: false, editable:false, serializable: false, init: "<button class='btn'>", 
+  __text: {type: TYPES.String, label: "Text", 
+	  set: function(value){
+		  this._text = value;
+		  if(this._dom != null)
+			  this._dom.html(value);
+	  }},
+  __style: {type: TYPES.BootstrapStyle, label:"Style",
+	  set: function(value){
+		  this._style=value;
+		  if(this._dom != null)
+			  this._dom.attr("class","widget btn btn-"+value)
+	  }
+	 
+  },
+  __html: {visible: false, editable:false, serializable: false, init: "<button class='widget btn'>", 
 	  get: function() {
 		    return $(this._html).text(this.getText()).attr("id", this.getId()).addClass("btn-" + this.getStyle()).css("width",
 		            "100%").css("height", "100%");
 	  }
   },
+  
+  __clickEvent : {type:TYPES.Event, label: "Click"},
   
   switchToEditMode: function(){
 	  this._super();
@@ -27,15 +50,8 @@ var Button = Widget.extend("Button",{
 	  this._dom.removeAttr("tabindex");
   },
   
-  persist : function() {
-    // No chequea datos.
-    var element = this._dom
-    var text = $("#button-text").val();
-    this.setText(text);
-    this._dom.text(this.getText());
-    element.removeClass("btn-" + this.getStyle());
-    this.setStyle($("#button-style").val());
-    element.addClass("btn-" + this.getStyle());
-    MockupEditor.updateWidget(this);
-  }
+  draw: function(){
+	  this._super();
+  },
+  
 })

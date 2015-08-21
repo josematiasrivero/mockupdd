@@ -1,31 +1,31 @@
 var TypeView = Class.extend({
-	init : function(value, id){
-		this.value = value;
-		this.id = id;
-	    this.inputStyle = "";
+	init : function(value){
+		this._value = this.copyEditingValue(value);
+		this._dom = null;
+		this._renderer=null;
 	},
+	
+	setRenderer	 : function(renderer){
+		this._renderer = renderer;
+	},
+	
 	getValue : function() {
-		return this.value;
+		return this._value;
 	},
 	setValue : function(value) {
-		this.value = value;
-		return this.value;
+		this._value = value;
+		return this._value;
 	},
-	getId : function() {
-		return this.id;
+	
+	isDirty : function(){
+		return true; //Override in subclasses for efficiency
 	},
-	setId : function(id) {
-		this.id = id;
-		return this.id;
+	
+	getDom : function() {
+		return this._dom;
 	},
-	getInputStyle : function() {
-	  return this.inputStyle;
-	},
-	setInputStyle : function(style) {
-	  this.inputStyle = style;
-	  return this.inputStyle;
-	},
-	getView : function() {
-		//abstract method to be implemented in subclasses
+	
+	copyEditingValue: function(value){
+		return value;
 	}
 })

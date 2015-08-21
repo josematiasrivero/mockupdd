@@ -137,3 +137,7 @@ input.code {
 	border: 1px dashed #000 !important;
 	cursor: pointer !important
 }
+
+.modal-content .btn {
+	margin-left: 0;
+}
