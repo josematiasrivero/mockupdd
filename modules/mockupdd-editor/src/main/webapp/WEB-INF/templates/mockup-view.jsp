@@ -9,9 +9,6 @@
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
     <jsp:include page="/WEB-INF/templates/parts/widgets.jsp" />
-    <style>
-
-    </style>
     <script>
     	/** @author: Viral Patel. 
     	 *	Adds on("show"|"hide") events to jQuery.
@@ -50,41 +47,55 @@
     </script>
   </jsp:attribute>
   <jsp:body>
-    <!-- Sidebar for widgets creation -->
 	<div id="wrapper">
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="sidebar-brand">
+	
+	  <!-- Sidebar for widgets creation -->
+      <c:set var="widgetWidth" value="${130}"/> <%-- Widget width within the toolbox --%>
+      <c:set var="widgetHeight" value="${100}"/> <%-- Widget height within the toolbox --%>
+      
+      <div class="sidebar-wrapper statebar" style="width:<c:out value="${widgetWidth*2+17}"/>px; ">
+        <div class="sidebar-nav" style="width: 100%;">
+          <div class="sidebar-brand" style="position: absolute; top: 0px; left: 0px;">
           	<label>Mode:
             	<input id="modeToggle" type="checkbox">
+            	<div id="persistence-state" style="position: relative;"></div>
             </label>
-          </li> 
-          <li class="sidebar-brand">
-            <label class="control-label">Elements
-            <div id="persistence-state" style="position: relative;"></div>
-            </label>
-          </li>          
-          <li>
-            <label class="control-label">Title</label>
-            <div id="create-title" class="mk mk-title">This is a title</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-wrapper widgetbar" style="width:<c:out value="${widgetWidth*2+17}"/>px;">
+        <div class="sidebar-nav" style="width: 100%;">
+          <div style="position: absolute; top: <c:out value="${widgetHeight*0}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px;">
+          	<div style="text-align: center;">
+          		<label class="control-label">Title:</label>
+          	</div>
+            <div id="create-title" class="mk mk-title widget-selector" style="top:<c:out value="${widgetHeight*1+widgetHeight*0.30}"/>px">
+            	This is a title
+            </div>
             <script>
               $('#create-title').click(function(){
                 (new Title()).draw();
               })
             </script>
-          </li>
-          <li>
-            <label class="control-label">Label</label>
-            <div id="create-label" class="mk mk-label" style="position: relative;">Label:</div>
+          </div>
+          <div style="position: absolute; top: <c:out value="${widgetHeight*0}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+            	<label class="control-label">Label:</label>
+            </div>
+            <div id="create-label" class="mk mk-label widget-selector" style="top:<c:out value="${widgetHeight*1+widgetHeight*0.30}"/>px">
+            	This is a label
+            </div>
             <script>
               $('#create-label').click(function(){
                 (new Label()).draw();
               })
             </script>
-          </li>
-          <li>
-            <label class="control-label">Input</label>
-            <div id="create-input" class="mk mk-input">
+          </div>
+          <div style="position: absolute; top: <c:out value="${widgetHeight*1}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+            	<label class="control-label">Input</label>
+            </div>
+            <div id="create-input" class="mk mk-input widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px">
               <span class="form-control"></span>
             </div>
             <script>
@@ -92,10 +103,12 @@
                 (new Input()).draw();
               })
             </script>
-          </li>
-          <li>
-            <label class="control-label">Button</label>
-            <div id="create-button" class="mk mk-button">
+          </div>
+          <div style="position: absolute; top: <c:out value="${widgetHeight*1}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+            	<label class="control-label">Button</label>
+            </div>
+            <div id="create-button" class="mk mk-button widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px; width:100%;">
               <button class="btn btn-primary">Button</button>
             </div>
             <script>
@@ -103,10 +116,12 @@
                 (new Button()).draw();
               })
             </script>
-          </li>
-          <li>
-            <label class="control-label">Panel</label>
-            <div id="create-panel" class="mk">
+          </div>
+          <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+            	<label class="control-label">Panel</label>
+            </div>
+            <div id="create-panel" class="mk widget-selector" style="top:<c:out value="${widgetHeight*3+widgetHeight*0.30}"/>px">
               <div class="panel panel-info">
                 <div class="panel panel-heading">  
                   Panel
@@ -118,10 +133,10 @@
                 (new Panel()).draw();
               })
             </script>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
-      <div id="page" style="height: 100%; margin-left: 250px; position: fixed;">
+      <div id="page" style="height: 100%; margin-left: <c:out value="${widgetWidth*2+17}"/>px; position: fixed;">
       </div>
       <!-- Modal for edition and deletion of widgets -->
       <div class="container">

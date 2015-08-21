@@ -5,21 +5,31 @@
  */
 
 /* Toggle Styles */
-#sidebar-wrapper {
+.sidebar-wrapper {
 	z-index: 1000;
 	position: fixed;
-	left: 250px;
-	width: 0;
-	height: 100%;
-	margin-left: -250px;
-	margin-top: -21px;
 	overflow-y: auto;  
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;
 }
 
-#sidebar-wrapper {
-	width: 250px;
+.sidebar-wrapper.statebar {
+	height: 75px;
+	top:51px;
+}
+
+.sidebar-wrapper.widgetbar {
+	top: 115px;
+	height: auto;
+	overflow: auto;
+	bottom: 0;
+}
+
+.widget-selector {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #page-content-wrapper {
@@ -32,20 +42,9 @@
 .sidebar-nav {
 	position: absolute;
 	top: 0;
-	width: 250px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
-}
-
-.sidebar-nav li {
-	padding: 7px;
-	border-bottom: 1px solid #ccc;
-}
-
-.sidebar-nav li a:hover, .sidebar-nav li a:active, .sidebar-nav li a:focus
-	{
-	text-decoration: none;
 }
 
 .sidebar-nav>.sidebar-brand {
