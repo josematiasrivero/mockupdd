@@ -22,10 +22,12 @@
             };
           });
         })(jQuery);
+    
+    	var mockupEditor = new MockupEditor();
     	// On ready function
     	$(function(){
 		  // Draws the mockup in page.
-
+		  $("#page").append(mockupEditor.getContainer());
 
 		  
 		  $("#modeToggle").bootstrapToggle({
@@ -36,13 +38,13 @@
 		  })
 		  $("#modeToggle").change(function(){
 			  if($(this).prop("checked")){
-				  MockupEditor.switchToRunMode();
+				  mockupEditor.switchToRunMode();
 			  } else {
-				  MockupEditor.switchToEditMode();
+				  mockupEditor.switchToEditMode();
 			  }
 		  })
-		  MockupEditor.loadMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
-		  MockupEditor.switchToEditMode();
+		  mockupEditor.loadMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
+		  mockupEditor.switchToEditMode();
     	});
     </script>
   </jsp:attribute>
@@ -74,7 +76,7 @@
             </div>
             <script>
               $('#create-title').click(function(){
-            	  MockupEditor.addWidget(new Title());
+            	  mockupEditor.addWidget(new Title());
               })
             </script>
           </div>
@@ -87,7 +89,7 @@
             </div>
             <script>
               $('#create-label').click(function(){
-            	  MockupEditor.addWidget(new Label());
+            	  mockupEditor.addWidget(new Label());
               })
             </script>
           </div>
@@ -100,7 +102,7 @@
             </div>
             <script>
               $('#create-input').click(function(){
-            	  MockupEditor.addWidget(new Input());
+            	  mockupEditor.addWidget(new Input());
               })
             </script>
           </div>
@@ -113,7 +115,7 @@
             </div>
             <script>
               $('#create-button').click(function(){
-                MockupEditor.addWidget(new Button());
+                mockupEditor.addWidget(new Button());
               })
             </script>
           </div>
@@ -130,7 +132,7 @@
             </div>
             <script>
               $('#create-panel').click(function(){
-            	  MockupEditor.addWidget(new Panel());
+            	  mockupEditor.addWidget(new Panel());
               })
             </script>
           </div>

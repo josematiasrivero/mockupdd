@@ -1,16 +1,17 @@
-var MockupEditor = new (Class.extend({
+var MockupEditor = Class.extend({
   init : function() {
     this.widgets = {};
     this._widgetsFormRenderers = {};
     this.numberOfWidgets = 0;
     this.dirty = false;
 	this._isInEditMode = true;
+	this._container = $("<div />");
     // Calls saveMockup() every 5 seconds
     setInterval(this.editModeOnlyFunction(this.saveMockup, this), 5000);
   },
   
   loadMockup : function(id, name, json) {
-	$("#page").empty();
+	this._container.empty();
 	this.widgets = {};
     this.mockupId = id;
     this.mockupName = name;
@@ -59,13 +60,14 @@ var MockupEditor = new (Class.extend({
   },
   
   getContainer: function(){
-	  return $("#page");
+	  return this._container;
   },
   
   reloadMockup : function(){
+	  var self = this;
 	  MockupRESTClient.getMockup(this.mockupId,
 		  function(json){
-			  MockupEditor.loadMockup(json.id,json.name,json.jsonData);
+			  self.loadMockup(json.id,json.name,json.jsonData);
 		  }, function(){
 			  alert("Could not reload mockup.");
 		  }
@@ -124,8 +126,8 @@ var MockupEditor = new (Class.extend({
 	
   switchToEditMode: function(){
 	this._isInEditMode = true;
-	$("#page").addClass("edit-mode")
-	$("#page").empty()
+	this.getContainer().addClass("edit-mode")
+	this.getContainer().empty()
 	this.reloadMockup();
   },
 	
@@ -140,12 +142,13 @@ var MockupEditor = new (Class.extend({
 	for(var id in this._widgetsFormRenderers){
 		this._widgetsFormRenderers[id].disable();
 	}
-	$("#page").removeClass("edit-mode")
+	this.getContainer().removeClass("edit-mode")
   },
   
   editModeOnlyFunction: function(fn,context){
+	  var self = this;
 	  return function(){
-		  if(MockupEditor.isInEditMode()){
+		  if(self.isInEditMode()){
 			  return fn.apply(context);
 		  }
 		  return;
@@ -153,8 +156,9 @@ var MockupEditor = new (Class.extend({
   },
   
   runModeOnlyFunction: function(fn){
+	  var self = this;
 	  return function(){
-		  if(MockupEditor.isInRunMode()){
+		  if(self.isInRunMode()){
 			  return fn.apply(context);
 		  }
 		  return;
@@ -175,4 +179,4 @@ var MockupEditor = new (Class.extend({
   
   
   
-}))();
+});
