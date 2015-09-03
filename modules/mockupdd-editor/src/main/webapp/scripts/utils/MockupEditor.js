@@ -5,7 +5,27 @@ var MockupEditor = Class.extend({
     this.numberOfWidgets = 0;
     this.dirty = false;
 	this._isInEditMode = true;
-	this._container = $("<div />");
+	this._editorModeIndicator = $("<label>Mode:</input>");
+	this._modeSwitch = $("<input id='modeToggle' type='checkbox'>");
+	this._persistenceStateDiv = $("<div class='persistence-state' style='margin-left:15px; display:inline;'></div>");
+	this._editorModeIndicator.append(this._modeSwitch);
+	var self = this;
+	this._modeSwitch.bootstrapToggle({
+		  on: "Run",
+		  onstyle: "success",
+		  off: "Edit",
+		  offstyle: "primary"
+	  })
+	this._modeSwitch.change(function(){
+	  if($(this).prop("checked")){
+			  self.switchToRunMode();
+		  } else {
+			  self.switchToEditMode();
+		  }
+	  })
+	
+	this._editorModeIndicator.append(this._persistenceStateDiv);
+	this._container = $("<div class='widget-container'/>");
     // Calls saveMockup() every 5 seconds
     setInterval(this.editModeOnlyFunction(this.saveMockup, this), 5000);
   },
@@ -33,6 +53,7 @@ var MockupEditor = Class.extend({
       // Also when it stops modify the width and height values.
 	  wrapper.resizable({
 		  autoHide : true,
+		  containment: "parent",
 		  stop : $.proxy(function (event, ui) {
 		    widget.setWidth(ui.size.width);
 		    widget.setHeight(ui.size.height);
@@ -63,6 +84,10 @@ var MockupEditor = Class.extend({
 	  return this._container;
   },
   
+  getEditorModeIndicator : function(){
+	  return this._editorModeIndicator;
+  },
+  
   reloadMockup : function(){
 	  var self = this;
 	  MockupRESTClient.getMockup(this.mockupId,
@@ -82,7 +107,7 @@ var MockupEditor = Class.extend({
           arr.push(this.widgets[w].serialize());
         }
       }
-      $("#persistence-state").html("Saving");
+      this._persistenceStateDiv.html("Saving");
       MockupRESTClient.updateMockup(
           this.mockupId, 
           this.mockupName, 
@@ -166,17 +191,22 @@ var MockupEditor = Class.extend({
   },
   
   markDirty: function(){
-	  $("#modeToggle").bootstrapToggle("disable");
+	  this._modeSwitch.bootstrapToggle("disable");
 	  this.dirty = true;
-	  $("#persistence-state").html("Dirty");
+	  this._persistenceStateDiv.html("Dirty");
   },
   
   markClean: function(){
       this.dirty = false;
-      $("#persistence-state").html("Saved");
-	  $("#modeToggle").bootstrapToggle("enable");
+      this._persistenceStateDiv.html("Saved");
+      this._modeSwitch.bootstrapToggle("enable");
   }
   
   
   
 });
+
+MockupEditor._currentEditor = new MockupEditor();
+MockupEditor.getCurrentEditor = function(){
+	return MockupEditor._currentEditor;
+}

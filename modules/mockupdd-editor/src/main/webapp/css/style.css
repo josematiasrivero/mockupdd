@@ -141,3 +141,8 @@ input.code {
 .modal-content .btn {
 	margin-left: 0;
 }
+
+#page, .widget-container {
+	width: 100%;
+	height: 100%;
+}

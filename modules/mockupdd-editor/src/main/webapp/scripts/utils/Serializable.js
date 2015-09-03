@@ -29,7 +29,7 @@ var Serializable = Class.extend({
   },
   
   clone: function(){
-	  return Serializable.unserialize(this.serialize);
+	  return Serializable.unserialize(this.serialize());
   }
 })
 

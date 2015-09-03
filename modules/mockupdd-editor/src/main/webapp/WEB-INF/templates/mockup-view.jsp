@@ -23,26 +23,14 @@
           });
         })(jQuery);
     
-    	var mockupEditor = new MockupEditor();
+    	var mockupEditor = MockupEditor.getCurrentEditor();
+
     	// On ready function
     	$(function(){
 		  // Draws the mockup in page.
+		  $("#editorStatus").append(mockupEditor.getEditorModeIndicator());
 		  $("#page").append(mockupEditor.getContainer());
 
-		  
-		  $("#modeToggle").bootstrapToggle({
-			  on: "Run",
-			  onstyle: "success",
-			  off: "Edit",
-			  offstyle: "primary"
-		  })
-		  $("#modeToggle").change(function(){
-			  if($(this).prop("checked")){
-				  mockupEditor.switchToRunMode();
-			  } else {
-				  mockupEditor.switchToEditMode();
-			  }
-		  })
 		  mockupEditor.loadMockup(${mockup.id}, "${mockup.name}", '${mockup.jsonData}');
 		  mockupEditor.switchToEditMode();
     	});
@@ -57,11 +45,8 @@
       
       <div class="sidebar-wrapper statebar" style="width:<c:out value="${widgetWidth*2+17}"/>px; ">
         <div class="sidebar-nav" style="width: 100%;">
-          <div class="sidebar-brand" style="position: absolute; top: 0px; left: 0px;">
-          	<label>Mode:
-            	<input id="modeToggle" type="checkbox">
-            	<div id="persistence-state" style="position: relative;"></div>
-            </label>
+          <div id="editorStatus" class="sidebar-brand" style="position: absolute; top: 0px; left: 0px;">
+
           </div>
         </div>
       </div>
@@ -141,21 +126,18 @@
       <div id="page" style="height: 100%; margin-left: <c:out value="${widgetWidth*2+17}"/>px; position: fixed;">
       </div>
       <!-- Modal for edition and deletion of widgets -->
-      <div class="container">
-        <h4>${mockup.name}</h4>
-        <div id="widget-edit-modal" class="modal fade" style="overflow-y: auto;">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
+      <div id="widget-edit-modal" class="modal fade" style="overflow-y: auto;">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
 
-		      <div class="modal-body form-horizontal">
-		      </div>
-	          <div class="modal-footer">
-	            
-	          </div>
-		    </div>
-		  </div>
-		</div>
-      </div>
+	      <div class="modal-body form-horizontal">
+	      </div>
+          <div class="modal-footer">
+            
+          </div>
+	    </div>
+	  </div>
+	  </div>
       <script type="text/javascript">
       	$("#myModal").on("hide", function(){
       	  $("#delete-widget").off();
