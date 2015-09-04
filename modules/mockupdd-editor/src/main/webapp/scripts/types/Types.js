@@ -33,7 +33,9 @@ Type.extend("Color");
 Type.extend("FontSize");
 Type.extend("BootstrapStyle");
 Type.extend("Pixels");
+Type.extend("Number");
 Type.extend("Action",null, false, true);
+Type.extend("Validation",null, false, true);
 Type.extend("Event", null, false, true);
 Type.extend("List",{
 	

@@ -1,8 +1,10 @@
 var Input = Widget.extend("Input",{
   init : function(id) {
     this._super(id);
+    this._valid
     this.setWidth("150px");
     this.setHeight("30px");
+    this.setValidation(null)
   },
   
   __placeholder: {type: TYPES.String, init: "Placeholder", label: "Placeholder", init: "Placeholder",
@@ -16,6 +18,16 @@ var Input = Widget.extend("Input",{
 	get: function() {
 	    return $(this._html).attr('placeholder',this.getPlaceholder()).attr("id", this.getId()).css("width", "100%").css("height", "100%");
 	  }
+  },
+  
+  __validation: {label : "Validation", type: TYPES.Validation},
+  
+  triggerValidation(){
+	  this.getValidation().validate(this.getValue())
+  },
+  
+  getValue : function(){
+	  return this._dom.val();
   },
   
   switchToEditMode: function(){

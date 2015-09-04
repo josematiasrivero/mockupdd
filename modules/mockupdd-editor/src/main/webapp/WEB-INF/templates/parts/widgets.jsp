@@ -13,8 +13,15 @@
 <script type="text/javascript" src="/scripts/utils/MockupEditor.js"></script>
 <script type="text/javascript" src="/scripts/utils/Serializable.js"></script>
 <script type="text/javascript" src="/scripts/utils/Event.js"></script>
+
 <script type="text/javascript" src="/scripts/actions/Action.js"></script>
 <script type="text/javascript" src="/scripts/actions/AlertAction.js"></script>
+<script type="text/javascript" src="/scripts/actions/PopoverAction.js"></script>
+<script type="text/javascript" src="/scripts/actions/TriggerValidationAction.js"></script>
+
+<script type="text/javascript" src="/scripts/validations/Validation.js"></script>
+<script type="text/javascript" src="/scripts/validations/RegexpValidation.js"></script>
+
 <script type="text/javascript" src="/scripts/widgets/Widget.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Label.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Title.js"></script>
@@ -29,7 +36,10 @@
 <script type="text/javascript" src="/scripts/types/PixelsView.js"></script>
 <script type="text/javascript" src="/scripts/types/StringView.js"></script>
 <script type="text/javascript" src="/scripts/types/TextView.js"></script>
+<script type="text/javascript" src="/scripts/types/NumberView.js"></script>
 <script type="text/javascript" src="/scripts/types/EventView.js"></script>
+<script type="text/javascript" src="/scripts/types/ValidationView.js"></script>
+
 
 <script type="text/javascript" src="/scripts/forms/Form.js"></script>
 <script type="text/javascript" src="/scripts/forms/FormRenderer.js"></script>

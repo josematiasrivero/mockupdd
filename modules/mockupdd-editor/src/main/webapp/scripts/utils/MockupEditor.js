@@ -1,6 +1,7 @@
 var MockupEditor = Class.extend({
   init : function() {
     this.widgets = {};
+    this._widgetsByName = {};
     this._widgetsFormRenderers = {};
     this.numberOfWidgets = 0;
     this.dirty = false;
@@ -140,7 +141,9 @@ var MockupEditor = Class.extend({
     this.numberOfWidgets--;
     this.markDirty()
   },
-  
+  getWidgetByName : function(name){
+	  return this._widgetsByName[name];
+  },
   isInEditMode: function(){
 	return this._isInEditMode;
   },
@@ -158,7 +161,9 @@ var MockupEditor = Class.extend({
 	
   switchToRunMode: function(){
 	this._isInEditMode = false;
+	this._widgetsByName = {}
 	for(var id in this.widgets){
+		this._widgetsByName[this.widgets[id].getName()] = this.widgets[id];
 		this.widgets[id].switchToRunMode();
 		var wrapper = this.widgets[id].getWrapper();
 		wrapper.draggable("destroy");
