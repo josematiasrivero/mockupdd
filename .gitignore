@@ -3,6 +3,8 @@ target/
 **/.settings
 **.classpath
 **.project
+**/bin
+.wtpmodules
 *~
 /.DS_Store
 secret.properties
