@@ -43,6 +43,8 @@ var MockupEditor = Class.extend({
         this.widgets[widget.getId()] = widget;
         this._addEditionEvents(widget);
         widget.drawOn(this.getContainer());
+        widget.getWrapper().append("<div class='widget-tags text-right' />")
+        this.recomputeTags(widget);
       }
     }
     this.markClean();
@@ -123,17 +125,41 @@ var MockupEditor = Class.extend({
       );
     }
   },
+  
+  recomputeTags : function(widget){
+	  $(".widget-tags", widget.getWrapper()).empty();
+	  for(var name in widget.getMetadata()){
+		  var prop = widget.getMetadata()[name];
+		  if(prop.type == TYPES.Event && widget.getProperty(name).getAction() != null){
+			  var tag = $("<span class='fa fa-bolt'></span>");
+			  $(".widget-tags", widget.getWrapper()).append(tag);
+			  var msg = JSON.stringify(widget.getProperty(name).serialize());
+			  msg = msg.replace(/,/g,",<wbr>");
+			  tag.popover({
+				  trigger: "hover",
+				  html: true,
+				  title: name,
+				  content: msg,
+				  position: "bottom"
+			  })
+		  }
+	  }
+  },
+  
   addWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
     widget.drawOn(this.getContainer());
     this._addEditionEvents(widget);
     this.numberOfWidgets++;
+    widget.getWrapper().append("<div class='widget-tags text-right' />")
+    this.recomputeTags(widget);
     this.markDirty()
 
   },
   updateWidget : function(widget) {
     this.widgets[widget.getId()] = widget;
     this.markDirty()
+    this.recomputeTags(widget);
   },
   deleteWidget : function(widget) {
     delete this.widgets[widget.getId()];

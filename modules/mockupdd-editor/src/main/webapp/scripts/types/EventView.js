@@ -38,6 +38,7 @@ var EventView = TypeView.extend({
 		var selectedAction = $("option:selected",this._select).val();
 		if(selectedAction=="none"){
 			this._button.prop("disabled",true);
+			this._value.setAction(null);
 		} else{
 			this._button.prop("disabled",false);
 			if(this._value.getAction() == null || this._value.getAction().getActionType() != selectedAction){
