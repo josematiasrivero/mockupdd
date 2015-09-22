@@ -19,6 +19,13 @@ var Widget = Serializable.extend("Widget",{
 	  
   __name : {type:TYPES.String, visible : true, editable : true, serializable : true,
 		  label: "Name",  category: "behaviour"},
+		  
+  __zindex : {type:TYPES.Number, visible : true, editable : true, serializable : true, init : 0,
+	  label: "Z-Index",  category: "position", set: function(val){
+		  this._zindex=val;
+		  if(this._wrapper != null)
+			  this._wrapper.css("z-index", val);
+	  }},
   
   __origin : {
 	  visible : false, editable : false, serializable : false,  category: "position",
