@@ -3,41 +3,48 @@ var ModalFormRenderer = FormRenderer.extend({
 	init: function(domElement,model,modalId){
 		this._super(model);
 		this._enabled = true;
-		var self = this;
 		this._domElement = domElement;
 		this._modal = $("#"+modalId);
 		this.setContainer($(".modal-body",this._modal));
 		this.setButtonsContainer($(".modal-footer",this._modal));
-		this._domElement.on("dblclick",function(){
-			if(!self._enabled)
+		this._modal.on('shown.bs.modal', $.proxy(function () {
+			if(this._toFocus != null){
+			  this._toFocus.focus()
+			}
+		}, this))
+		this._domElement.on("dblclick",$.proxy(function(){
+			if(!this._enabled)
 				return;
-			var form = new Form(self._model);
+			var form = new Form(this._model);
 			form.setButtons({
 				"Cancel": {
 					style: "default",
-					action: function(form){
-						self.triggerClose();
-					}
+					action: $.proxy(function(form){
+						this.triggerClose();
+					}, this)
 				},
 				"Delete": {
 					style: "danger",
-					action: function(form){
-						self.triggerDelete();
-					}
+					action: $.proxy(function(form){
+						this.triggerDelete();
+						
+					}, this)
 				},
 				"Save": {
+					focused : true,
 					style: "primary",
-					action: function(form){
+					action: $.proxy(function(form){
 						form.save();
-						self.triggerClose();
-					}
+						this.triggerClose();
+					}, this)
 				},
 				
 			})
-			self._forms = [];
-			self.pushForm(form);
-			self._modal.modal("show");
-		})
+			this._forms = [];
+			this.pushForm(form);
+			this._modal.modal("show");
+
+		},this))
 	},
 	
 	disable: function(){

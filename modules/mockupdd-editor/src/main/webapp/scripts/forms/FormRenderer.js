@@ -6,6 +6,7 @@ var FormRenderer = Class.extend({
 		this._forms = [];	
 		this._onClose = null;
 		this._onDelete = null;
+		this._toFocus = null;
 	},
 
 	setContainer: function(container){
@@ -26,7 +27,11 @@ var FormRenderer = Class.extend({
 		}
 		this._buttonsContainer.empty();
 		for(var label in currentForm.getButtons()){
-			this._buttonsContainer.append(currentForm.getButtonDom(label));
+			var button = currentForm.getButtonDom(label);
+			this._buttonsContainer.append(button)
+			if(currentForm.getButtons()[label].focused){
+				this._toFocus = button;
+			}
 		}
 	},
 	
