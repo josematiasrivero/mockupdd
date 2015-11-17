@@ -116,6 +116,25 @@
               </div>
             </div>
             <script>
+              $('#create-input').click(function(){
+            	  mockupEditor.addWidget(new Input());
+              })
+            </script>
+          </div>
+           <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+            	<label class="control-label">TextArea</label>
+            </div>
+            <div id="create-input" class="mk mk-input widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px">
+              <span class="form-control"></span>
+            </div>
+            <script>
+              $('#create-input').click(function(){
+            	  mockupEditor.addWidget(new TextArea());
+              })
+            </script>
+          </div>
+            <script>
               $('#create-panel').click(function(){
             	  mockupEditor.addWidget(new Panel());
               })
