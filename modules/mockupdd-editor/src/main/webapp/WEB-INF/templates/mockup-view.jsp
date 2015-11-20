@@ -116,8 +116,8 @@
               </div>
             </div>
             <script>
-              $('#create-input').click(function(){
-            	  mockupEditor.addWidget(new Input());
+              $('#create-panel').click(function(){
+            	  mockupEditor.addWidget(new Panel());
               })
             </script>
           </div>
@@ -125,20 +125,15 @@
             <div style="text-align: center;">
             	<label class="control-label">TextArea</label>
             </div>
-            <div id="create-input" class="mk mk-input widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px">
+            <div id="create-textarea" class="mk mk-input widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px">
               <span class="form-control"></span>
             </div>
             <script>
-              $('#create-input').click(function(){
+              $('#create-textarea').click(function(){
             	  mockupEditor.addWidget(new TextArea());
               })
             </script>
           </div>
-            <script>
-              $('#create-panel').click(function(){
-            	  mockupEditor.addWidget(new Panel());
-              })
-            </script>
           </div>
         </div>
       </div>

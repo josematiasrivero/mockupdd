@@ -1,20 +1,20 @@
-var Input = Widget.extend("Input",{
+var TextArea = Widget.extend("TextArea",{
   init : function(id) {
     this._super(id);
     this._valid
-    this.setWidth("150px");
-    this.setHeight("30px");
-    this.setValidation(null)
+    this.setWidth("300px");
+    this.setHeight("70px");
+    this.setValidation(null);
   },
   
-  __placeholder: {type: TYPES.String, init: "Placeholder", label: "Placeholder", init: "Placeholder",
+  __placeholder: {type: TYPES.String, init: "Placeholder", label: "Placeholder", init: "This is a Text Area",
 	  set: function(value){
 		  this._placeholder = value
 		  if(this._dom != null){
 			  this._dom.attr("placeholder", value);
 		  }
 	  }},
-  __html: {visible: false, editable:false, serializable: false, init:"<input class='form-control'>",
+  __html: { visible: false, editable:false, serializable: false, init:"<textarea class='form-control'>",
 	get: function() {
 	    return $(this._html).attr('placeholder',this.getPlaceholder()).attr("id", this.getId()).css("width", "100%").css("height", "100%");
 	  }
@@ -23,7 +23,7 @@ var Input = Widget.extend("Input",{
   __validation: {label : "Validation", type: TYPES.Validation},
   
   triggerValidation(){
-	  this.getValidation().validate(this.getValue())
+	  this.getValidation().validate(this.getValue());
   },
   
   getValue : function(){
