@@ -104,6 +104,51 @@
               })
             </script>
           </div>
+<!--Boton2-->
+          <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+              <label class="control-label">Button2</label>
+            </div>
+            <div id="create-button2" class="mk mk-button2 widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px; width:100%;">
+              <button class="btn btn-primary">Button2</button>
+            </div>
+            <script>
+              $('#create-button2').click(function(){
+                mockupEditor.addWidget(new Button2())
+              })
+            </script>
+          </div>
+<!--Checkbox-->
+          <div style="position: absolute; top: <c:out value="${widgetHeight*3}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+              <label class="control-label">Checkbox</label>
+            </div>
+            <div id="create-checkbox" class="mk mk-checkbox widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px; width:100%;">
+              <button class="<input type='checkbox'>">Checkbox</button>
+            </div>
+            <script>
+              $('#create-checkbox').click(function(){
+                mockupEditor.addWidget(new Checkbox())
+              })
+            </script>
+          </div>
+          
+ <!--Picture-->
+          <div style="position: absolute; top: <c:out value="${widgetHeight*4}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+              <label class="control-label">Picture</label>
+            </div>
+            <div id="create-picture" class="mk mk-picture widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px; width:100%;">
+              <div class="<input type='picture'>">Picture</div>
+            </div>
+            <script>
+              $('#create-picture').click(function(){
+                mockupEditor.addWidget(new Picture())
+              })
+            </script>
+          </div>
+          
+
           <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
             <div style="text-align: center;">
             	<label class="control-label">Panel</label>
