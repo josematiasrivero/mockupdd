@@ -133,6 +133,21 @@
             </script>
           </div>
           
+ <!--Picture-->
+          <div style="position: absolute; top: <c:out value="${widgetHeight*4}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+              <label class="control-label">Picture</label>
+            </div>
+            <div id="create-picture" class="mk mk-picture widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px; width:100%;">
+              <div class="<input type='picture'>">Picture</div>
+            </div>
+            <script>
+              $('#create-picture').click(function(){
+                mockupEditor.addWidget(new Picture())
+              })
+            </script>
+          </div>
+          
 
           <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
             <div style="text-align: center;">

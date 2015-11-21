@@ -29,6 +29,7 @@
 <script type="text/javascript" src="/scripts/widgets/Input.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Panel.js"></script>
 <script type="text/javascript" src="/scripts/widgets/Checkbox.js"></script>
+<script type="text/javascript" src="/scripts/widgets/Picture.js"></script>
 
 <script type="text/javascript" src="/scripts/types/TypeView.js"></script>
 <script type="text/javascript" src="/scripts/types/BootstrapStyleView.js"></script>
