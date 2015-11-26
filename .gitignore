@@ -1,4 +1,4 @@
-target/
+target
 **.metadata
 **/.settings
 **.classpath
@@ -8,3 +8,5 @@ target/
 *~
 /.DS_Store
 secret.properties
+.idea
+*.iml
