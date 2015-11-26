@@ -43,8 +43,15 @@ CREATE TABLE `mockup` (
 );
 
 CREATE TABLE `resource` (
-	`id` varchar(255) NOT NULL,
-	`data` MEDIUMBLOB,
-	`media_type` varchar(128),
-	PRIMARY KEY(`id`)	
+  `id` varchar(255) NOT NULL,
+  `data` MEDIUMBLOB,
+  `media_type` varchar(128),
+  PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `annotation_template` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(100),
+  `content` MEDIUMTEXT,
+  PRIMARY KEY(`id`)
 );
