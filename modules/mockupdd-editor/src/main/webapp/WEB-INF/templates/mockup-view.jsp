@@ -121,6 +121,20 @@
               })
             </script>
           </div>
+           <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
+            <div style="text-align: center;">
+            	<label class="control-label">TextArea</label>
+            </div>
+            <div id="create-textarea" class="mk mk-input widget-selector" style="top:<c:out value="${widgetHeight*2+widgetHeight*0.30}"/>px">
+              <span class="form-control"></span>
+            </div>
+            <script>
+              $('#create-textarea').click(function(){
+            	  mockupEditor.addWidget(new TextArea());
+              })
+            </script>
+          </div>
+          </div>
         </div>
       </div>
       <div id="page" style="height: 100%; margin-left: <c:out value="${widgetWidth*2+17}"/>px; position: fixed;">

@@ -22,7 +22,10 @@ var Form = Class.extend({
 		for(var prop in this._model.getMetadata()){
 			var metadata = this._model.getMetadata()[prop];
 			if(this._fieldFilterFunction(metadata) && metadata.editable){
-				this._views[prop] = metadata.type.getTypeView(this._model.getProperty(prop));
+				this._views[prop] = {
+						view: metadata.type.getTypeView(this._model.getProperty(prop)),
+						category: metadata.category
+				};
 			}
 		}
 	},
@@ -60,7 +63,7 @@ var Form = Class.extend({
 	},
 
 	/*
-	 * Returns a map from label to view, with the views to be rendered by the form renderer.
+	 * Returns a map from label an object holding the view and the category.
 	 */
 	getViews: function(){
 		var viewsMap = {}
@@ -82,8 +85,8 @@ var Form = Class.extend({
 	
 	save: function(){
 		for(var prop in this._views){
-			if(this._views[prop].isDirty()){
-				this._model.setProperty(prop, this._views[prop].getValue());
+			if(this._views[prop].view.isDirty()){
+				this._model.setProperty(prop, this._views[prop].view.getValue());
 			}
 		}
 	}
