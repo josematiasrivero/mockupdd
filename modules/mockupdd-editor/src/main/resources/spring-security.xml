@@ -11,6 +11,7 @@
   <http pattern="/js/**" security="none"/>
   <http pattern="/fonts/**" security="none"/>
   <http pattern="/libs/**" security="none"/>
+  <http pattern="/favicon.ico" security="none"/>
   <http pattern="/scripts/**" security="none"/>
 
   
