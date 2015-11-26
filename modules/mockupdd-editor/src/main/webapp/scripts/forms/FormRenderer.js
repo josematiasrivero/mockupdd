@@ -20,10 +20,18 @@ var FormRenderer = Class.extend({
 	render: function(){
 		var currentForm = this._forms[this._forms.length-1];
 		var views = currentForm.getViews();
+
 		this._container.empty();
+		
+		this._tabSelectorList = $('<ul class="nav nav-tabs" role="tablist">');
+		this._tabList = $('<div class="tab-content form-tab">');
+		this._container.append(this._tabSelectorList);
+		this._container.append(this._tabList);
+		this._tabs = {};
 		for(var label in views){
-			views[label].setRenderer(this);
-			this._container.append(this._createField(label, views[label]));
+			views[label].view.setRenderer(this);
+			var tab = this._getTab( views[label].category);
+			tab.append(this._createField(label, views[label].view));
 		}
 		this._buttonsContainer.empty();
 		for(var label in currentForm.getButtons()){
@@ -33,6 +41,23 @@ var FormRenderer = Class.extend({
 				this._toFocus = button;
 			}
 		}
+	},
+
+	_getTab : function(category){
+		if(category in this._tabs){
+			return this._tabs[category];
+		}
+
+		var tabSelector = $('<li role="presentation"><a href="#formtab-'+category+'" role="tab" data-toggle="tab">'+category.charAt(0).toUpperCase() + category.slice(1)+'</a></li>')
+		var tab = $('<div role="tabpanel" class="tab-pane" id="formtab-'+category+'"></div>')
+		this._tabSelectorList.append(tabSelector);
+		this._tabList.append(tab);
+		if(Object.keys(this._tabs).length == 0 ){
+			tabSelector.addClass("active");
+			tab.addClass("active");
+		}
+		this._tabs[category] = tab;
+		return tab;
 	},
 	
 	_createField: function(label, view){

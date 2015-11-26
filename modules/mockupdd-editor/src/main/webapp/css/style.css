@@ -154,3 +154,7 @@ input.code {
 .edit-mode .widget-tags {
 	display: block;
 }
+
+.form-tab{
+	padding-top: 10px;
+}
