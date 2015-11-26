@@ -31,6 +31,7 @@
 	<bean id="userRepository" class="com.mockupdd.repositories.UserRepository" parent="genericRepository" />
 	<bean id="mockupRepository" class="com.mockupdd.repositories.MockupRepository" parent="genericRepository" />
 	<bean id="resourceRepository" class="com.mockupdd.repositories.ResourceRepository" parent="genericRepository" />
+	<bean id="annotationTemplateRepository" class="com.mockupdd.repositories.AnnotationTemplateRepository" parent="genericRepository" />
 	
 	<!-- Services -->
 	
@@ -42,20 +43,28 @@
 	<bean id="userService" class="com.mockupdd.services.UserService">
 		<constructor-arg ref="userRepository" />
 	</bean>
-	
+
 	<bean id="resourceService" class="com.mockupdd.services.ResourceService">
 		<constructor-arg ref="resourceRepository" />
 	</bean>
-	
+
 	<bean id="mockupService" class="com.mockupdd.services.MockupService">
 		<constructor-arg ref="mockupRepository" />
 		<constructor-arg ref="projectRepository" />
 	</bean>
-	
+
+	<bean id="annotationTemplateService" class="com.mockupdd.services.AnnotationTemplateService">
+		<constructor-arg ref="annotationTemplateRepository" />
+	</bean>
+
 	<!-- REST Services -->
-	
+
 	<bean id="mockupRESTService" class="com.mockupdd.web.rest.MockupRESTService">
 		<constructor-arg ref="mockupService" />
+	</bean>
+
+	<bean id="annotationTemplateRESTService" class="com.mockupdd.web.rest.AnnotationTemplateRESTService">
+		<constructor-arg ref="annotationTemplateService" />
 	</bean>
 
 </beans>
