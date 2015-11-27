@@ -5,10 +5,7 @@ import com.mockupdd.services.AnnotationTemplateService;
 import com.mockupdd.web.controllers.BaseController;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -36,5 +33,11 @@ public class AnnotationTemplateRESTService extends BaseController {
   public Response getAll() {
     return Response.ok(service.getAll()).build();
   }
-
+  
+  @POST
+  @Path("/{name}/{content}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response save(@PathParam("name") String name, @PathParam("content") String content) {
+    return Response.ok(service.create(name, content)).build();
+  }
 }
