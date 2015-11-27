@@ -50,7 +50,7 @@ CREATE TABLE `resource` (
 );
 
 CREATE TABLE `annotation_template` (
-  `id` varchar(255) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100),
   `content` MEDIUMTEXT,
   PRIMARY KEY(`id`)
