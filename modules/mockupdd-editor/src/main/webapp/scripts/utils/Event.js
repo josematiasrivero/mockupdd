@@ -1,5 +1,5 @@
 var Event = Serializable.extend("Event",{
-	__action : {type: TYPES.Action},
+	__action : {type: TYPES.Action, category: "behaviour"},
 
 	
 	trigger: function(){

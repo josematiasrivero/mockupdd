@@ -53,6 +53,10 @@ var Widget = Serializable.extend("Widget",{
 		  if(this._wrapper != null)
 			  this._wrapper.css('width', this.getWidth());
 	  }},
+	  
+  __annotations : {visible : true, editable : true,
+	  serializable : true, type: new Type.typeClasses.List(TYPES.Annotation), init: [], label: "Annotations",  category: "annotations",	  
+  },
   
   init : function(id) {
     if (typeof id === 'undefined') {

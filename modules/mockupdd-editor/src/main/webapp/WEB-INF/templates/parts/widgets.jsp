@@ -13,6 +13,7 @@
 <script type="text/javascript" src="/scripts/utils/MockupEditor.js"></script>
 <script type="text/javascript" src="/scripts/utils/Serializable.js"></script>
 <script type="text/javascript" src="/scripts/utils/Event.js"></script>
+<script type="text/javascript" src="/scripts/utils/Annotation.js"></script>
 
 <script type="text/javascript" src="/scripts/actions/Action.js"></script>
 <script type="text/javascript" src="/scripts/actions/AlertAction.js"></script>
@@ -40,6 +41,8 @@
 <script type="text/javascript" src="/scripts/types/NumberView.js"></script>
 <script type="text/javascript" src="/scripts/types/EventView.js"></script>
 <script type="text/javascript" src="/scripts/types/ValidationView.js"></script>
+<script type="text/javascript" src="/scripts/types/AnnotationListView.js"></script>
+<script type="text/javascript" src="/scripts/types/ListView.js"></script>
 
 
 <script type="text/javascript" src="/scripts/forms/Form.js"></script>

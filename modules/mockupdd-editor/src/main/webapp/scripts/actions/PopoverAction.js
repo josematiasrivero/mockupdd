@@ -1,11 +1,11 @@
 var PopoverAction = Action.extend("PopoverAction",{
 	
 	
-	__message : {label: "Message", init: ""},
+	__message : {label: "Message", init: "", category: "behaviour"},
 	
-	__target : {label: "Target widget", init: ""},
+	__target : {label: "Target widget", init: "", category: "behaviour"},
 	
-	__time : {label: "Time", type: TYPES.Number, init:3000},
+	__time : {label: "Time", type: TYPES.Number, init:3000, category: "behaviour"},
 	
 	
 	run: function(){

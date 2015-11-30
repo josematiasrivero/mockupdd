@@ -4,7 +4,10 @@ Type = Class.extend({
 	},
 	getTypeView : function(value) {
 		return (new window[this._typeViewName](value));
-	}
+	},
+	getLisItemView : function(value) {
+		return (new window[this._listItemViewName](value, this.getItemType()));
+	},
 })
 
 Type.typeClasses = {}
@@ -17,6 +20,7 @@ Type.extend = function(typeName, prop, parametrized, complex) {
 	prop.__typeName =  {init: typeName};
 	prop.__complex = {init: complex}
 	prop.__typeViewName = {init: typeName+"View"};
+	prop.__listItemViewName = {init: typeName+"ListItemView"};
 	prop.isComplex = function(){return this.getComplex()} //More natural.
 	parametrized = parametrized || false;
 	var ret = Class.extend.apply(this,[prop]);
@@ -37,10 +41,15 @@ Type.extend("Number");
 Type.extend("Action",null, false, true);
 Type.extend("Validation",null, false, true);
 Type.extend("Event", null, false, true);
+Type.extend("Annotation", {}, false, true);
 Type.extend("List",{
 	
 	init: function(itemType){
 		this.setItemType(itemType);
+	},
+	
+	getTypeView : function(value) {
+		return (new window[this._typeViewName](value, this.getItemType()));
 	},
 
 	__itemType : {}
