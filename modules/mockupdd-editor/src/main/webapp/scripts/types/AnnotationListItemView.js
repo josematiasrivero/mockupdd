@@ -8,7 +8,7 @@ var AnnotationListItemView = TypeView.extend({
 	},
 	
 	getDom : function() {
-		this._wrapper = $("<li class='list-group-item'>");
+		this._wrapper = $("<li class='list-group-item'>Test</li>");
 		return this._wrapper;
 	},
 	

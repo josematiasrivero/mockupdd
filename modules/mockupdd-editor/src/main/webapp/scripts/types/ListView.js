@@ -4,7 +4,7 @@ var ListView = TypeView.extend({
 		this._itemType = itemType;
 		this._items = [];
 		for(item in this._value){
-			this.items.push(new itemType.getListItemView()(item));
+			this._items.push(new itemType.getListItemView()(item));
 		}
 	},
 	
@@ -15,14 +15,25 @@ var ListView = TypeView.extend({
 	getDom : function() {
 		this._wrapper = $("<div class='input-group'>");
 		this._list = $("<ul class='list-group'>");
+		
+
+		for(item in this._items){
+			this._list.append(this._itemType.getListItemView(item));
+		}
+		
 		var addBtn = $("<button class='btn btn-primary'>New</button>");
 		var delBtn = $("<button class='btn btn-danger'>Delete</button>");
+		
+		this._wrapper.append(this._list);
 		this._wrapper.append(addBtn);
 		this._wrapper.append(delBtn);
+		
 		addBtn.click($.proxy(function(){
 			var itemType = window[this._itemType.getTypeName()];
 			var item = new itemType();
-			this._items.push(this._itemType.getListItemView(item));
+			var listItemView = this._itemType.getListItemView(item);
+			this._items.push(listItemView);
+			this._list.append(listItemView.getDom);
 		}, this));
 		return this._wrapper;
 		

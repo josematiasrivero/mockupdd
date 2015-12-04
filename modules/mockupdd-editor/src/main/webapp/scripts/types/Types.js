@@ -5,8 +5,8 @@ Type = Class.extend({
 	getTypeView : function(value) {
 		return (new window[this._typeViewName](value));
 	},
-	getLisItemView : function(value) {
-		return (new window[this._listItemViewName](value, this.getItemType()));
+	getListItemView : function(value) {
+		return (new window[this._listItemViewName](value));
 	},
 })
 

@@ -17,71 +17,17 @@ var FormRenderer = Class.extend({
 		this._buttonsContainer = container;
 	},
 	
-	render: function(){
-		var currentForm = this._forms[this._forms.length-1];
-		var views = currentForm.getViews();
 
+	_render : function(){
+		var form = this._forms[this._forms.length-1];
 		this._container.empty();
-		
-		this._tabSelectorList = $('<ul class="nav nav-tabs" role="tablist">');
-		this._tabList = $('<div class="tab-content form-tab">');
-		this._container.append(this._tabSelectorList);
-		this._container.append(this._tabList);
-		this._tabs = {};
-		for(var label in views){
-			views[label].view.setRenderer(this);
-			var tab = this._getTab( views[label].category);
-			tab.append(this._createField(label, views[label].view));
-		}
-		this._buttonsContainer.empty();
-		for(var label in currentForm.getButtons()){
-			var button = currentForm.getButtonDom(label);
-			this._buttonsContainer.append(button)
-			if(currentForm.getButtons()[label].focused){
-				this._toFocus = button;
-			}
-		}
-	},
-
-	_getTab : function(category){
-		if(category in this._tabs){
-			return this._tabs[category];
-		}
-
-		var tabSelector = $('<li role="presentation"><a href="#formtab-'+category+'" role="tab" data-toggle="tab">'+category.charAt(0).toUpperCase() + category.slice(1)+'</a></li>')
-		var tab = $('<div role="tabpanel" class="tab-pane" id="formtab-'+category+'"></div>')
-		this._tabSelectorList.append(tabSelector);
-		this._tabList.append(tab);
-		if(Object.keys(this._tabs).length == 0 ){
-			tabSelector.addClass("active");
-			tab.addClass("active");
-		}
-		this._tabs[category] = tab;
-		return tab;
-	},
-	
-	_createField: function(label, view){
-		var formGroup = $("<div class='form-group'/>");
-		var label=$("<label class='control-label col-xs-3'>"+label+"</label>");
-		var control= $("<div class='col-xs-9'/>").append(view.getDom());
-		formGroup.append(label);
-		formGroup.append(control);
-		return formGroup;
+		this._container.append(form.getDom());
 	},
 	
 	pushForm: function(form){
 		var self = this;
 		this._forms.push(form);
-		var oldActions = {}
-		for(var button in form.getButtons()){ 
-			oldActions[button] = form.getButtons()[button].action;
-			//TODO Refactor: this code below is a hack to fix the value button variable inside the new action.
-			form.getButtons()[button].action = function(button){ return function(theForm){
-					oldActions[button](theForm);
-					self.popForm();
-			}}(button);
-		}
-		this.render();
+		this._render();
 	},
 	
 	popForm: function(){

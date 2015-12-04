@@ -15,31 +15,7 @@ var ModalFormRenderer = FormRenderer.extend({
 		this._domElement.on("dblclick",$.proxy(function(){
 			if(!this._enabled)
 				return;
-			var form = new Form(this._model);
-			form.setButtons({
-				"Cancel": {
-					style: "default",
-					action: $.proxy(function(form){
-						this.triggerClose();
-					}, this)
-				},
-				"Delete": {
-					style: "danger",
-					action: $.proxy(function(form){
-						this.triggerDelete();
-						
-					}, this)
-				},
-				"Save": {
-					focused : true,
-					style: "primary",
-					action: $.proxy(function(form){
-						form.save();
-						this.triggerClose();
-					}, this)
-				},
-				
-			})
+			var form = new ReflectionForm(this._model);
 			this._forms = [];
 			this.pushForm(form);
 			this._modal.modal("show");
