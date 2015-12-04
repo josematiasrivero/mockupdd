@@ -10,6 +10,8 @@ var MockupEditor = Class.extend({
 	this._modeSwitch = $("<input id='modeToggle' type='checkbox'>");
 	this._persistenceStateDiv = $("<div class='persistence-state' style='margin-left:15px; display:inline;'></div>");
 	this._editorModeIndicator.append(this._modeSwitch);
+	this._formRenderer = new ModalFormRenderer('widget-edit-modal');
+	
 	var self = this;
 	this._modeSwitch.bootstrapToggle({
 		  on: "Run",
@@ -72,14 +74,19 @@ var MockupEditor = Class.extend({
 	      }, this)
 	  }); // Make the div draggable, and when it stops modify the (x, y) value.
 	  //Add a modal form renderer with this widget as model.
-	  this._widgetsFormRenderers[widget.getId()] = new ModalFormRenderer(wrapper,widget,"widget-edit-modal");
-	  var self = this;
-	  this._widgetsFormRenderers[widget.getId()].onClose(function(formRenderer){
-		  self.updateWidget(formRenderer.getModel())
-	  })
-	  this._widgetsFormRenderers[widget.getId()].onDelete(function(formRenderer){
-		  self.deleteWidget(formRenderer.getModel())
-	  })
+
+	  wrapper.on("dblclick",$.proxy(function(){
+		  var form = new ReflectionForm(widget, "");
+		  var self = this;
+		  form.onSave(function(form){
+			  self.updateWidget(form.getModel())
+		  })
+		  form.onDelete(function(form){
+			  self.deleteWidget(form.getModel())
+		  })
+	    this._formRenderer.displayForm(form);
+	  },this));
+
 	  widget.switchToEditMode();
   },
   

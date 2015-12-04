@@ -1,26 +1,10 @@
 var ModalFormRenderer = FormRenderer.extend({
 	
-	init: function(domElement,model,modalId){
-		this._super(model);
+	init: function(modalId){
+		this._super();
+		this._modalId = modalId;
 		this._enabled = true;
-		this._domElement = domElement;
-		this._modal = $("#"+modalId);
-		this.setContainer($(".modal-body",this._modal));
-		this.setButtonsContainer($(".modal-footer",this._modal));
-		this._modal.on('shown.bs.modal', $.proxy(function () {
-			if(this._toFocus != null){
-			  this._toFocus.focus()
-			}
-		}, this))
-		this._domElement.on("dblclick",$.proxy(function(){
-			if(!this._enabled)
-				return;
-			var form = new ReflectionForm(this._model);
-			this._forms = [];
-			this.pushForm(form);
-			this._modal.modal("show");
 
-		},this))
 	},
 	
 	disable: function(){
@@ -33,9 +17,21 @@ var ModalFormRenderer = FormRenderer.extend({
 	
 	popForm: function(){
 		this._super();
+		var modal = $("#"+this._modalId);
 		if(this._forms.length == 0){
-			this._modal.modal("hide");
+			modal.modal("hide");
 		}
+	},
+	
+	displayForm : function(form){
+		var modal = $("#"+this._modalId);
+		this.setContainer($(".modal-body",modal));
+		this.setButtonsContainer($(".modal-footer",modal));
+		if(!this._enabled){
+			return;
+		}
+		this.pushForm(form);
+		modal.modal("show");
 	}
 	
 })

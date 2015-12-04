@@ -10,7 +10,6 @@
 <script type="text/javascript" src="/scripts/utils/IdGenerator.js"></script>
 <script type="text/javascript" src="/scripts/types/Types.js"></script>
 <script type="text/javascript" src="/scripts/utils/Styles.js"></script>
-<script type="text/javascript" src="/scripts/utils/MockupEditor.js"></script>
 <script type="text/javascript" src="/scripts/utils/Serializable.js"></script>
 <script type="text/javascript" src="/scripts/utils/Event.js"></script>
 <script type="text/javascript" src="/scripts/utils/Annotation.js"></script>
@@ -52,6 +51,8 @@
 
 <script type="text/javascript" src="/scripts/ajax/GenericRESTClient.js"></script>
 <script type="text/javascript" src="/scripts/ajax/MockupRESTClient.js"></script>
+
+<script type="text/javascript" src="/scripts/utils/MockupEditor.js"></script>
 
 <!-- Import MK for mock widgets -->
 <link href="/css/mock-elements.css" type="text/css" rel="stylesheet">

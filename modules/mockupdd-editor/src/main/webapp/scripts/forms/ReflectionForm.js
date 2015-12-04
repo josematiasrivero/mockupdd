@@ -19,6 +19,7 @@ var ReflectionForm = Form.extend({
 			var metadata = this._model.getMetadata()[prop];
 			if(this._fieldFilterFunction(metadata) && metadata.editable){
 				this._views[prop] = metadata.type.getTypeView(this._model.getProperty(prop));
+				this._views[prop].setForm(this);
 			}
 		}
 	},
@@ -41,22 +42,10 @@ var ReflectionForm = Form.extend({
 		return wrapper;
 	},
 
-
-	
-	getButtonDom: function(label){
-		var style = this._buttons[label].style;
-		var button = $("<button class='btn btn-"+style+"'>"+label+"</button>")
-		var self = this;
-		button.click(function(){
-			self._buttons[label].action(self);
-		})
-		return button;
-	},
-	
 	save: function(){
 		for(var prop in this._views){
-			if(this._views[prop].view.isDirty()){
-				this._model.setProperty(prop, this._views[prop].view.getValue());
+			if(this._views[prop].isDirty()){
+				this._model.setProperty(prop, this._views[prop].getValue());
 			}
 		}
 	},

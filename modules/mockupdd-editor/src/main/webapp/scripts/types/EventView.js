@@ -27,7 +27,7 @@ var EventView = TypeView.extend({
 		this._wrapper.append(this._select);
 		var self = this;
 		this._button.click(function(){
-			self._renderer.pushForm(new Form(self._value.getAction(), "Click action"));
+			self._form.openStackedForm(new ReflectionForm(self._value.getAction(), "Click action"));
 		})
 		this._wrapper.append(btnWrapper);
 		return this._wrapper;

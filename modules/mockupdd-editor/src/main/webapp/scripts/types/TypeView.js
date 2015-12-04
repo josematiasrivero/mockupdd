@@ -17,6 +17,14 @@ var TypeView = Class.extend({
 		return this._value;
 	},
 	
+	setForm(form){
+		this._form = form;
+	},
+	
+	_openForm(form){
+		this._form.openStackedForm(form);
+	},
+	
 	isDirty : function(){
 		return true; //Override in subclasses for efficiency
 	},
