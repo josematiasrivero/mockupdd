@@ -158,3 +158,13 @@ input.code {
 .form-tab{
 	padding-top: 10px;
 }
+
+.form-list{
+	max-height:300px;
+	overflow-y: auto;
+}
+
+.list-button-wrapper button{
+	width:100%;
+	margin: 3px;
+}
