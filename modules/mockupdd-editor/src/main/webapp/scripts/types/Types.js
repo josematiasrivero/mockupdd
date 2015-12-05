@@ -2,11 +2,11 @@ Type = Class.extend({
 	
 	posibleValues : function() {
 	},
-	getTypeView : function(value) {
-		return (new window[this._typeViewName](value));
+	getTypeView : function(value, form) {
+		return (new window[this._typeViewName](value, form));
 	},
-	getListItemView : function(value) {
-		return (new window[this._listItemViewName](value));
+	getListItemView : function(value, form) {
+		return (new window[this._listItemViewName](value, form));
 	},
 })
 
@@ -48,8 +48,8 @@ Type.extend("List",{
 		this.setItemType(itemType);
 	},
 	
-	getTypeView : function(value) {
-		return (new window[this._typeViewName](value, this.getItemType()));
+	getTypeView : function(value, form) {
+		return (new window[this._typeViewName](value, form, this.getItemType()));
 	},
 
 	__itemType : {}

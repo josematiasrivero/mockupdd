@@ -1,12 +1,8 @@
 var TypeView = Class.extend({
-	init : function(value){
+	init : function(value, form){
 		this._value = this.copyEditingValue(value);
 		this._dom = null;
-		this._renderer=null;
-	},
-	
-	setRenderer	 : function(renderer){
-		this._renderer = renderer;
+		this._form = form;
 	},
 	
 	getValue : function() {
@@ -15,10 +11,6 @@ var TypeView = Class.extend({
 	setValue : function(value) {
 		this._value = value;
 		return this._value;
-	},
-	
-	setForm(form){
-		this._form = form;
 	},
 	
 	_openForm(form){

@@ -1,10 +1,11 @@
 var ListView = TypeView.extend({
-	init : function(value, itemType){
-		this._super(value);
+	init : function(value, form, itemType){
+		this._super(value, form);
 		this._itemType = itemType;
 		this._items = [];
 		for(item in this._value){
-			this._items.push(itemType.getListItemView(this._value[item]));
+			var itemView = itemType.getListItemView(this._value[item], this._form);
+			this._items.push();
 		}
 	},
 	
@@ -43,7 +44,7 @@ var ListView = TypeView.extend({
 		addBtn.click($.proxy(function(){
 			var itemType = window[this._itemType.getTypeName()];
 			var item = new itemType();
-			var listItemView = this._itemType.getListItemView(item);
+			var listItemView = this._itemType.getListItemView(item, this._form);
 			this._items.push(listItemView);
 			this._list.append(listItemView.getDom());
 		}, this));

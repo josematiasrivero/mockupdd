@@ -18,8 +18,7 @@ var ReflectionForm = Form.extend({
 		for(var prop in this._model.getMetadata()){
 			var metadata = this._model.getMetadata()[prop];
 			if(this._fieldFilterFunction(metadata) && metadata.editable){
-				this._views[prop] = metadata.type.getTypeView(this._model.getProperty(prop));
-				this._views[prop].setForm(this);
+				this._views[prop] = metadata.type.getTypeView(this._model.getProperty(prop),this);
 			}
 		}
 	},
