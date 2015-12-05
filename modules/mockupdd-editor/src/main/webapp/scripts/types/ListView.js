@@ -5,7 +5,7 @@ var ListView = TypeView.extend({
 		this._items = [];
 		for(item in this._value){
 			var itemView = itemType.getListItemView(this._value[item], this._form);
-			this._items.push();
+			this._items.push(itemView);
 		}
 	},
 	

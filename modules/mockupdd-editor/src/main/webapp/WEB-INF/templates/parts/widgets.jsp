@@ -46,6 +46,7 @@
 
 <script type="text/javascript" src="/scripts/forms/Form.js"></script>
 <script type="text/javascript" src="/scripts/forms/ReflectionForm.js"></script>
+<script type="text/javascript" src="/scripts/forms/AnnotationForm2.js"></script>
 <script type="text/javascript" src="/scripts/forms/FormRenderer.js"></script>
 <script type="text/javascript" src="/scripts/forms/ModalFormRenderer.js"></script>
 
