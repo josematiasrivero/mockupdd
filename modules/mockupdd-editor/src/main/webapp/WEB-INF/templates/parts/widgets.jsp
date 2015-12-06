@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- Import libs -->
 <script type="text/javascript" src="/libs/class.js"></script>
@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/scripts/utils/Styles.js"></script>
 <script type="text/javascript" src="/scripts/utils/Serializable.js"></script>
 <script type="text/javascript" src="/scripts/utils/Event.js"></script>
+<script type="text/javascript" src="/scripts/utils/AnnotationTemplate.js"></script>
 <script type="text/javascript" src="/scripts/utils/Annotation.js"></script>
 
 <script type="text/javascript" src="/scripts/actions/Action.js"></script>
@@ -46,7 +47,7 @@
 
 <script type="text/javascript" src="/scripts/forms/Form.js"></script>
 <script type="text/javascript" src="/scripts/forms/ReflectionForm.js"></script>
-<script type="text/javascript" src="/scripts/forms/AnnotationForm2.js"></script>
+<script type="text/javascript" src="/scripts/forms/AnnotationForm.js"></script>
 <script type="text/javascript" src="/scripts/forms/FormRenderer.js"></script>
 <script type="text/javascript" src="/scripts/forms/ModalFormRenderer.js"></script>
 

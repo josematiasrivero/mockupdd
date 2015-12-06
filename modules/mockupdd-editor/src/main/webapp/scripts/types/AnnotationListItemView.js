@@ -10,7 +10,7 @@ var AnnotationListItemView = TypeView.extend({
 	getDom : function() {
 		this._wrapper = $("<li class='list-group-item'>"+this._value.getName()+"</li>");
 		this._wrapper.dblclick($.proxy(function(){
-			var form = new AnnotationForm2(this._value,"");
+			var form = new AnnotationForm(this._value,"");
 			this._form.openStackedForm(form);
 		}, this))
 		return this._wrapper;
