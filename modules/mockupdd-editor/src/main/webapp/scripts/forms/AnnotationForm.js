@@ -4,9 +4,20 @@
 var AnnotationForm = Form.extend({
 
     init: function (model, title) {
-        var placeholders = this._getPlaceholders(model.getTemplate().getValue());
-        this._editionHtml = this._getEditionHtml(model.getTemplate().getValue(), placeholders);
         this._super(model, title);
+        this._annotationTemplates = this._getAnnotationTemplates();
+        this._setEditionHtml();
+    },
+
+    changeTemplate: function (template) {
+        this._model.setTemplate(template);
+        this._setEditionHtml();
+        $("#annotation-template-edition").html(this._editionHtml);
+    },
+
+    _setEditionHtml: function () {
+        var placeholders = this._getPlaceholders(this._model.getTemplate().getContent());
+        this._editionHtml = this._getEditionHtml(this._model.getTemplate().getContent(), placeholders);
     },
 
     /**
@@ -47,12 +58,33 @@ var AnnotationForm = Form.extend({
         return str;
     },
 
+    _getAnnotationTemplates: function () {
+        return AnnotationTemplateRESTClient.getAll();
+    },
+
+    _createSelectionOfTemplates: function () {
+        if (this._getAnnotationTemplates() == [])
+            return "<h5 style='color: red'>ERROR: There are not any annotation templates. Please upload some.</h5>";
+        var select = "<select id='annotation-template' class='form-control'>";
+        select += "<option selected value='null'> -- Annotation Template -- </option>";
+        this._getAnnotationTemplates().forEach(function (at, i) {
+            select += "<option value='" + i + "'>" + at.getName() + "</option>";
+        });
+        var response = $(select + "</select>");
+        var self = this;
+        response.change(function () {
+            var resp = $("#annotation-template option:selected").first().val();
+            if (resp !== "null") self.changeTemplate(self._getAnnotationTemplates()[resp]);
+        });
+        return response;
+    },
+
     getDom: function () {
-        return "<div>" +
-            "<h3>" + this.getModel().getName() + "</h3>" +
-            "<hr>" +
-            this._editionHtml +
-            "</div>";
+        return $("<div>").append("<h3>" + this.getModel().getName() + "</h3>")
+            .append("<hr>")
+            .append(this._createSelectionOfTemplates())
+            .append("<hr>")
+            .append("<div id='annotation-template-edition'>");
     },
 
     save: function () {

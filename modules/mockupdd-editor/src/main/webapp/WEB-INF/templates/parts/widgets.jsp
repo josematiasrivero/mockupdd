@@ -53,6 +53,8 @@
 
 <script type="text/javascript" src="/scripts/ajax/GenericRESTClient.js"></script>
 <script type="text/javascript" src="/scripts/ajax/MockupRESTClient.js"></script>
+<script type="text/javascript" src="/scripts/ajax/AnnotationTemplatesRESTClient.js"></script>
+
 
 <script type="text/javascript" src="/scripts/utils/MockupEditor.js"></script>
 
