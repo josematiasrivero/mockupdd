@@ -4,6 +4,6 @@ var Annotation = Serializable.extend("Annotation", {
         type: TYPES.AnnotationTemplate, label: "Template", init: function () {
             return new AnnotationTemplate();
         }()
-    }
-    // Valores de los placeholders.
+    },
+    __text: {type: TYPES.String, label: "Text", init: ""}
 });

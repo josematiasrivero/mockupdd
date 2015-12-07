@@ -88,7 +88,15 @@ var AnnotationForm = Form.extend({
     },
 
     save: function () {
-        console.log($("#nombre1").val());
-        this._model.set();
+        var placeholders = this._getPlaceholders(this._model.getTemplate().getContent());
+        var text = "",
+            prev = 0;
+        for (var i = 0; i < placeholders.length; i++) {
+            text += this._model.getTemplate().getContent().substring(prev, placeholders[i].start);
+            text += $("#PH-" + i).val();
+            prev = placeholders[i].end;
+        }
+        text += this._model.getTemplate().getContent().substring(prev);
+        this._model.setText(text);
     }
 });
