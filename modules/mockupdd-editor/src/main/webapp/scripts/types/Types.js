@@ -34,6 +34,7 @@ Type.extend = function (typeName, prop, parametrized, complex) {
 };
 
 Type.extend("String");
+Type.extend("Object");
 Type.extend("Text");
 Type.extend("Color");
 Type.extend("FontSize");
@@ -57,4 +58,4 @@ Type.extend("List", {
 
     __itemType: {}
 
-}, true);
+}, true, true);

@@ -21,23 +21,36 @@ var ListView = TypeView.extend({
 		return ret;
 	},
 	
-	getDom : function() {
-		this._wrapper = $("<div class='row'>");
-		var colLeft = $("<div class='col-md-8'>");
-		var colRight = $("<div class='col-md-4 list-button-wrapper'>");
-		this._wrapper.append(colLeft);
-		this._wrapper.append(colRight);
-		this._list = $("<ul class='list-group form-list'>");
+	_buildList : function(){
+		this._colLeft.empty();
+		this._list = $("<div class='list-group form-list'>");
 		
 
 		for(item in this._items){
-			this._list.append(this._items[item].getDom());
+			var dom = this._items[item].getDom();
+			this._list.append(dom);
+			var self = this;
+			dom.click(function(){
+				$("a", self._list).removeClass("active");
+				$(this).addClass("active");
+			});
 		}
+		this._colLeft.append(this._list);
+	},
+	
+	getDom : function() {
+		this._wrapper = $("<div class='row'>");
+		this._colLeft = $("<div class='col-md-8'>");
+		var colRight = $("<div class='col-md-4 list-button-wrapper'>");
+		this._wrapper.append(this._colLeft);
+		this._wrapper.append(colRight);
+		
+		this._buildList();
 		
 		var addBtn = $("<button class='btn btn-primary'>New</button>");
 		var delBtn = $("<button class='btn btn-danger'>Delete</button>");
 		
-		colLeft.append(this._list);
+
 		colRight.append(addBtn);
 		colRight.append(delBtn);
 		
@@ -46,8 +59,20 @@ var ListView = TypeView.extend({
 			var item = new itemType();
 			var listItemView = this._itemType.getListItemView(item, this._form);
 			this._items.push(listItemView);
-			this._list.append(listItemView.getDom());
+			var dom = listItemView.getDom()
+			dom.click(function(){
+				$("a", self._list).removeClass("active");
+				$(this).addClass("active");
+			});
+			this._list.append(dom);
 		}, this));
+		
+		delBtn.click($.proxy(function(){
+			var selected = $(this._list, "a.active");
+			var selectedIndex = $(this._list, "a").index(selected);
+			this._items.splice(selectedIndex,1);
+			this._buildList();
+		},this))
 		return this._wrapper;
 		
 	},

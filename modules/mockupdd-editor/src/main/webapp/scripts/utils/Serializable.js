@@ -7,7 +7,20 @@ var Serializable = Class.extend({
     	if(metadata[prop].serializable == true){
     		if(metadata[prop].type.isComplex()){
     			if(this.getProperty(prop) != null){
-    				repr[prop] = this.getProperty(prop).serialize();
+    				var value = this.getProperty(prop);
+    				if(value instanceof Array){
+    					repr[prop] = [];
+    					for(i in value){
+    						if(metadata[prop].type.getItemType().isComplex()){
+        						repr[prop].push(value[i].serialize());
+    						} else {
+    							repr[prop] = value[i];
+    						}
+
+    					}
+    				} else {
+    					repr[prop] = this.getProperty(prop).serialize();
+    				}
     			}
     		} else {
     			repr[prop] = this.getProperty(prop);
@@ -37,9 +50,19 @@ var Serializable = Class.extend({
 Serializable.unserialize = function(repr){
 	if(repr == null)
 		return null;
-    var serializable = new Serializable.types[repr.serializationType]
-    serializable.unserialize(repr);
-    return serializable;
+	if(repr instanceof Array){
+		var list = [];
+		for (var i in repr){
+			var item = repr[i];
+		    var serializable = new Serializable.types[item.serializationType];
+			list.push(serializable);
+		}
+		return list;
+	} else {
+	    var serializable = new Serializable.types[repr.serializationType]
+	    serializable.unserialize(repr);
+	    return serializable;
+	}
 }
 
 Serializable._defaultMetadata = {
