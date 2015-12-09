@@ -160,7 +160,7 @@ var MockupEditor = Class.extend({
 		  var msg = annotation.getText();
 		  msg = msg.replace(/,/g,",<wbr>");
 		  tag.popover({
-			  trigger: "click",
+			  trigger: "hover",
 			  html: true,
 			  title: annotation.getName(),
 			  content: msg,
