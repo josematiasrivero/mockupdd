@@ -9,6 +9,14 @@ var AnnotationForm = Form.extend({
         this._freeEditor = $("<textarea class='annotation-editor' />");
         this._freeEditor.val(model.getText());
         this._wrapper = $("<div>")
+        var nameInputGroup = $("<div class='input-group'>");
+        nameInputGroup.append($("<label>Name:</label>"));
+        this._nameInput = $("<input class='form-control'>");
+        this._nameInput.val(this._model.getName());
+        nameInputGroup.append(this._nameInput);
+        this._wrapper.append(nameInputGroup);
+        this._wrapper.append("<hr>");
+        this._wrapper.append($("<label>Template:</label>"));
         this._wrapper.append(this._createSelectionOfTemplates())
         this._wrapper.append("<hr>");
         this._editionHtmlWrapper = $("<div>");
@@ -97,6 +105,7 @@ var AnnotationForm = Form.extend({
     },
 
     save: function () {
+    	this._model.setName(this._nameInput.val());
     	if(this._currentTemplate != null){
 	        var placeholders = this._getPlaceholders(this._currentTemplate.getContent());
 	        var text = "",
