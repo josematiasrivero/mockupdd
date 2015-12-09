@@ -6,18 +6,29 @@ var AnnotationForm = Form.extend({
     init: function (model, title) {
         this._super(model, title);
         this._annotationTemplates = this._getAnnotationTemplates();
-        this._setEditionHtml();
+        this._freeEditor = $("<textarea class='annotation-editor' />");
+        this._freeEditor.val(model.getText());
+        this._wrapper = $("<div>")
+        this._wrapper.append(this._createSelectionOfTemplates())
+        this._wrapper.append("<hr>");
+        this._editionHtmlWrapper = $("<div>");
+        this.changeTemplate(null)
+        this._wrapper.append(this._editionHtmlWrapper);
     },
 
     changeTemplate: function (template) {
-        this._model.setTemplate(template);
+        this._currentTemplate = template;
         this._setEditionHtml();
-        $("#annotation-template-edition").html(this._editionHtml);
+        this._editionHtmlWrapper.html(this._editionHtml);
     },
 
     _setEditionHtml: function () {
-        var placeholders = this._getPlaceholders(this._model.getTemplate().getContent());
-        this._editionHtml = this._getEditionHtml(this._model.getTemplate().getContent(), placeholders);
+    	if(this._currentTemplate != null){
+	        var placeholders = this._getPlaceholders(this._currentTemplate.getContent());
+	        this._editionHtml = this._getEditionHtml(this._currentTemplate.getContent(), placeholders);
+    	} else {
+    		this._editionHtml = this._freeEditor;
+    	}    
     },
 
     /**
@@ -63,40 +74,42 @@ var AnnotationForm = Form.extend({
     },
 
     _createSelectionOfTemplates: function () {
-        if (this._getAnnotationTemplates() == [])
-            return "<h5 style='color: red'>ERROR: There are not any annotation templates. Please upload some.</h5>";
-        var select = "<select id='annotation-template' class='form-control'>";
-        select += "<option selected value='null'> -- Annotation Template -- </option>";
-        this._getAnnotationTemplates().forEach(function (at, i) {
-            select += "<option value='" + i + "'>" + at.getName() + "</option>";
-        });
-        var response = $(select + "</select>");
         var self = this;
-        response.change(function () {
-            var resp = $("#annotation-template option:selected").first().val();
-            if (resp !== "null") self.changeTemplate(self._getAnnotationTemplates()[resp]);
+        this._templateSelect = $("<select class='form-control'>");
+        this._templateSelect.append($("<option selected value='null'> -- No template -- </option>"));
+        this._getAnnotationTemplates().forEach(function (at, i) {
+            self._templateSelect.append($("<option value='" + i + "'>" + at.getName() + "</option>"));
         });
-        return response;
+
+        this._templateSelect.change(function () {
+            var resp = $("option:selected", self._templateSelect).first().val();
+            if (resp !== "null"){
+            	self.changeTemplate(self._getAnnotationTemplates()[resp]);
+            } else {
+            	self.changeTemplate(null);
+            };
+        });
+        return this._templateSelect;
     },
 
     getDom: function () {
-        return $("<div>").append("<h3>" + this.getModel().getName() + "</h3>")
-            .append("<hr>")
-            .append(this._createSelectionOfTemplates())
-            .append("<hr>")
-            .append("<div id='annotation-template-edition'>");
+        return this._wrapper;
     },
 
     save: function () {
-        var placeholders = this._getPlaceholders(this._model.getTemplate().getContent());
-        var text = "",
-            prev = 0;
-        for (var i = 0; i < placeholders.length; i++) {
-            text += this._model.getTemplate().getContent().substring(prev, placeholders[i].start);
-            text += $("#PH-" + i).val();
-            prev = placeholders[i].end;
+    	if(this._currentTemplate != null){
+	        var placeholders = this._getPlaceholders(this._currentTemplate.getContent());
+	        var text = "",
+	            prev = 0;
+	        for (var i = 0; i < placeholders.length; i++) {
+	            text += this._currentTemplate.getContent().substring(prev, placeholders[i].start);
+	            text += $("#PH-" + i).val();
+	            prev = placeholders[i].end;
+	        }
+	        text += this._currentTemplate.getContent().substring(prev);
+	        this._model.setText(text);
+        } else {
+        	this._model.setText(this._freeEditor.val());
         }
-        text += this._model.getTemplate().getContent().substring(prev);
-        this._model.setText(text);
     }
 });

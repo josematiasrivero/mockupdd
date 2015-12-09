@@ -1,6 +1,6 @@
 var EventView = TypeView.extend({
-	init : function(value){
-		this._super(value);
+	init : function(value, form){
+		this._super(value, form);
 	},
 	
 	copyEditingValue: function(value){

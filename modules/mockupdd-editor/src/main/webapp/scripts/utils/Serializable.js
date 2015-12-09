@@ -14,7 +14,7 @@ var Serializable = Class.extend({
     						if(metadata[prop].type.getItemType().isComplex()){
         						repr[prop].push(value[i].serialize());
     						} else {
-    							repr[prop] = value[i];
+    							repr[prop].push(value[i]);
     						}
 
     					}
@@ -55,6 +55,7 @@ Serializable.unserialize = function(repr){
 		for (var i in repr){
 			var item = repr[i];
 		    var serializable = new Serializable.types[item.serializationType];
+		    serializable.unserialize(item);
 			list.push(serializable);
 		}
 		return list;

@@ -138,7 +138,7 @@ var MockupEditor = Class.extend({
 	  for(var name in widget.getMetadata()){
 		  var prop = widget.getMetadata()[name];
 		  if(prop.type == TYPES.Event && widget.getProperty(name).getAction() != null){
-			  var tag = $("<span class='fa fa-bolt'></span>");
+			  var tag = $("<span class='widget-tag fa fa-bolt'></span>");
 			  $(".widget-tags", widget.getWrapper()).append(tag);
 			  var msg = JSON.stringify(widget.getProperty(name).serialize());
 			  msg = msg.replace(/,/g,",<wbr>");
@@ -148,8 +148,26 @@ var MockupEditor = Class.extend({
 				  title: name,
 				  content: msg,
 				  position: "bottom"
-			  })
+			  }).data('bs.popover')
+			  .tip()
+			  .addClass('widget-tag-popover');
 		  }
+	  }
+	  for(var i in widget.getAnnotations()){
+		  var annotation = widget.getAnnotations()[i];
+		  var tag = $("<span class='widget-tag fa fa-tag'></span>");
+		  $(".widget-tags", widget.getWrapper()).append(tag);
+		  var msg = annotation.getText();
+		  msg = msg.replace(/,/g,",<wbr>");
+		  tag.popover({
+			  trigger: "click",
+			  html: true,
+			  title: annotation.getName(),
+			  content: msg,
+			  position: "bottom"
+		  }).data('bs.popover')
+		  .tip()
+		  .addClass('widget-tag-popover');
 	  }
   },
   
