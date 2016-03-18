@@ -1,6 +1,6 @@
-<%@tag description="Base page layout" pageEncoding="UTF-8"%>
-<%@attribute name="title" fragment="true" %>
-<%@attribute name="head" fragment="true" %>
+<%@ tag description="Base page layout" pageEncoding="UTF-8" %>
+<%@ attribute name="title" fragment="true" %>
+<%@ attribute name="head" fragment="true" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,8 +17,6 @@
   </head>
   <body>
   	<jsp:include page="/WEB-INF/templates/parts/navbar.jsp" />
-    <div id="body">
-      <jsp:doBody/>
-    </div>
+    <jsp:doBody/>
   </body>
 </html>

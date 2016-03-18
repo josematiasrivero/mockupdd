@@ -97,6 +97,7 @@ th {
 	background-color: #EEE;	
 }
 
+/* TODO : remove
 h2.parentsAccess {
 	margin-bottom: 20px;
 	margin-left: 8px;
@@ -105,6 +106,7 @@ h2.parentsAccess {
 	font-size: 20px;
 	line-height: 10px;
 }
+*/
 
 h3 {
 	color: gray;
@@ -182,4 +184,8 @@ input.code {
 
 .widget-tag-popover{
 	min-width: 200px;
+}
+
+.mk-navbar {
+	margin-bottom: 0px;
 }

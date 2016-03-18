@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:baseLayout>
   <jsp:attribute name="title">${mockup.name}</jsp:attribute>
   <jsp:attribute name="head">
@@ -52,6 +52,7 @@
       </div>
       <div class="sidebar-wrapper widgetbar" style="width:<c:out value="${widgetWidth*2+17}"/>px;">
         <div class="sidebar-nav" style="width: 100%;">
+
           <div style="position: absolute; top: <c:out value="${widgetHeight*0}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px;">
           	<div style="text-align: center;">
           		<label class="control-label">Title:</label>
@@ -65,6 +66,7 @@
               })
             </script>
           </div>
+
           <div style="position: absolute; top: <c:out value="${widgetHeight*0}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
             <div style="text-align: center;">
             	<label class="control-label">Label:</label>
@@ -78,6 +80,7 @@
               })
             </script>
           </div>
+
           <div style="position: absolute; top: <c:out value="${widgetHeight*1}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
             <div style="text-align: center;">
             	<label class="control-label">Input</label>
@@ -91,6 +94,7 @@
               })
             </script>
           </div>
+
           <div style="position: absolute; top: <c:out value="${widgetHeight*1}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
             <div style="text-align: center;">
             	<label class="control-label">Button</label>
@@ -104,6 +108,7 @@
               })
             </script>
           </div>
+
           <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: 0px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
             <div style="text-align: center;">
             	<label class="control-label">Panel</label>
@@ -121,6 +126,7 @@
               })
             </script>
           </div>
+
            <div style="position: absolute; top: <c:out value="${widgetHeight*2}"/>px; left: <c:out value="${widgetWidth}"/>px; width:<c:out value="${widgetWidth}"/>px; padding:<c:out value="${widgetWidth*0.05}"/>px">
             <div style="text-align: center;">
             	<label class="control-label">TextArea</label>

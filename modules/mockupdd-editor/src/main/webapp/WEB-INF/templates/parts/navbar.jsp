@@ -12,7 +12,7 @@
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
 </style>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default mk-navbar">
 	<sec:authorize access="isAuthenticated()">
 		<a class="navbar-brand" href="/projects/">MockupDD</a>
 
