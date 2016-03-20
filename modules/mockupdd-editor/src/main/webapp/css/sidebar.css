@@ -1,7 +1,7 @@
 
 /* Sidebar Styles */
 .mk-sidebar {
-	margin: 0px;
+	margin: -1px 0 0 0;
 }
 
 .mk-state {
@@ -16,6 +16,7 @@
 .mk-widget-list {
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;
+	border-top: 0;
 	font-weight: bold;
 	color: grey;
 }
