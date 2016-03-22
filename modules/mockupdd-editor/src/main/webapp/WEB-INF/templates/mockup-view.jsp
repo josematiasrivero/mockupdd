@@ -10,11 +10,11 @@
     <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
   </jsp:attribute>
   <jsp:body>
-    <div class="row">
-      <div class="col-md-3">
-        <jsp:include page="/WEB-INF/templates/parts/sidebar.jsp" />
+    <div>
+      <div>
+        <jsp:include page="/WEB-INF/templates/parts/sidebar.jsp"/>
       </div>
-      <div id="page" class="col-md-8"></div>
+      <div id="page"></div>
     </div>
   </jsp:body>
 </t:baseLayout>

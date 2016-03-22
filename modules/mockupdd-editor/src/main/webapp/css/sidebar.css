@@ -1,12 +1,21 @@
-
 /* Sidebar Styles */
-.mk-sidebar {
-	margin: -1px 0 0 0;
+#mk-sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #fafafa;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
 }
 
 .mk-state {
-	background-color: #f8f8f8;
-	border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
 	line-height: 50px;
 	font-weight: bold;
 	font-size: 18px;
@@ -14,9 +23,6 @@
 }
 
 .mk-widget-list {
-	background-color: #f8f8f8;
-	border: 1px solid #ccc;
-	border-top: 0;
 	font-weight: bold;
 	color: grey;
 }
@@ -27,4 +33,8 @@
 	padding: 5px;
 	background-color: white;
 	cursor: pointer;
+}
+
+.mk-sidebar-item {
+    padding: 10px;
 }
