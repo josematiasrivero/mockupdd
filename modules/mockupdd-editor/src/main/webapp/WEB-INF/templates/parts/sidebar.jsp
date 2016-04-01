@@ -5,6 +5,7 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
+<script src="/scripts/widget-creation.js"></script>
 <div id="main-container">
   <div id="mk-sidebar">
     <div class="col-md-12">
@@ -29,9 +30,8 @@
 
     <!-- Widgets printed in pairs -->
     <div class="col-md-12 mk-widget-list">
-      <!-- First pair -->
       <div class="row mk-sidebar-item">
-        <div class="col-md-6">
+        <div id="title" class="col-md-6">
           <div class="text-center">
             <label class="control-label">Title:</label>
           </div>
@@ -39,7 +39,8 @@
             This is a title
           </div>
         </div>
-        <div class="col-md-6">
+
+        <div id="label" class="col-md-6">
           <div class="text-center">
             <label class="control-label">Label:</label>
           </div>
@@ -48,8 +49,9 @@
           </div>
         </div>
       </div>
+
       <div class="row mk-sidebar-item">
-        <div class="col-md-6">
+        <div id="input" class="col-md-6">
           <div class="text-center">
             <label class="control-label">Input</label>
           </div>
@@ -57,7 +59,8 @@
             <span class="form-control"></span>
           </div>
         </div>
-        <div class="col-md-6">
+
+        <div id="button" class="col-md-6">
           <div class="text-center">
             <label class="control-label">Button</label>
           </div>
@@ -66,8 +69,9 @@
           </div>
         </div>
       </div>
+
       <div class="row mk-sidebar-item">
-        <div class="col-md-6">
+        <div id="panel" class="col-md-6">
           <div class="text-center">
             <label class="control-label">Panel</label>
           </div>
@@ -79,7 +83,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+
+        <div id="textarea" class="col-md-6">
           <div class="text-center">
             <label class="control-label">TextArea</label>
           </div>
@@ -88,6 +93,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
   <div id="main-content">
