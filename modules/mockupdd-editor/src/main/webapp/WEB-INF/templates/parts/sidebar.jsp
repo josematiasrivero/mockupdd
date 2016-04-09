@@ -23,7 +23,7 @@
           </label>
         </div>
         <div class="col-md-5 text-left">
-          <label>Saved</label>
+          <label id="mockupState">Saved</label>
         </div>
       </div>
     </div>

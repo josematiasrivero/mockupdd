@@ -1,4 +1,4 @@
-/// Prerequisites: MockupRepository.js, GenericRepository.js, Preconditions.js
+/// Prerequisites: MockupRepository.js, GenericRepository.js, Preconditions.js, MockupStateController.js
 
 var timeToReload = 5000; // in milliseconds.
 
@@ -7,14 +7,17 @@ var MockupAutosaveService = function() {
   var mockupId = $('#mockupId').val();
   var mockupName = $('#mockupName').val();
   var interval = setInterval(function() {
+    MockupStateController.update('SAVING');
     mockupRepository.save(mockupId, mockupName, {
         html: $('#page').html()
       },
       function() {
+        MockupStateController.update('SAVED');
         console.log('Success saving mockup ' + mockupId);
       },
       function() {
         console.log('Error saving mockup ' + mockupId);
+        MockupStateController.update('DIRTY');
         alert('Couldn\'t save mockup ' + mockupId);
       });
   }, timeToReload);
