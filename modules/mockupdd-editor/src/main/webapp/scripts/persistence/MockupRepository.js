@@ -5,9 +5,9 @@ var MockupRepository = function() {
   return _.extend(instance, {
     save: function(id, name, jsonData, okCallback, errorCallback) {
       try {
-        Preconditions.check(id, 'string', 'id');
-        Preconditions.check(name, 'string', 'name');
-        Preconditions.check(jsonData, 'object', 'jsonData');
+        Preconditions.checkType(id, 'string', 'id');
+        Preconditions.checkType(name, 'string', 'name');
+        Preconditions.checkType(jsonData, 'object', 'jsonData');
       } catch (err) {
         throw 'Exception in MockupRepository: ' + err;
       }

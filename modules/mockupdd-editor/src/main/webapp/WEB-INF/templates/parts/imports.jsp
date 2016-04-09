@@ -15,4 +15,4 @@
 <script src="/scripts/utils/Preconditions.js"></script>
 <script src="/scripts/persistence/GenericRepository.js"></script>
 <script src="/scripts/persistence/MockupRepository.js"></script>
-<script src="/scripts/persistence/MockupPersistanceService.js"></script>
+<script src="/scripts/persistence/MockupAutosaveService.js"></script>
