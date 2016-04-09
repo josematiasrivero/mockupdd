@@ -1,0 +1,23 @@
+
+#mk-floating-panel {
+    z-index: -1;
+    position: absolute;
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 4px 4px 10px #ccc;
+}
+
+#mk-floating-panel .panel-heading {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 4px 10px 4px 10px;
+}
+
+.draggable {
+    cursor: pointer;
+}
+
+#mk-floating-panel .form-control {
+    width: auto;
+}

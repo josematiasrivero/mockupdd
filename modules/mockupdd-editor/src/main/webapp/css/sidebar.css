@@ -1,61 +1,40 @@
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Toggle Styles */
-.sidebar-wrapper {
-	z-index: 1000;
-	position: fixed;
-	overflow-y: auto;  
-	background-color: #f8f8f8;
-	border: 1px solid #ccc;
-}
-
-.sidebar-wrapper.statebar {
-	height: 75px;
-	top:51px;
-}
-
-.sidebar-wrapper.widgetbar {
-	top: 115px;
-	height: auto;
-	overflow: auto;
-	bottom: 0;
-}
-
-.widget-selector {
-	text-align: center;
-	display: block !important;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#page-content-wrapper {
-	width: 100%;
-	position: absolute;
-	padding: 15px;
-}
-
 /* Sidebar Styles */
-.sidebar-nav {
-	position: absolute;
-	top: 0;
-	margin: 0;
-	padding: 0;
-	list-style: none;
+#mk-sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #fafafa;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
 }
 
-.sidebar-nav>.sidebar-brand {
-	height: 65px;
+.mk-state {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+	line-height: 50px;
+	font-weight: bold;
 	font-size: 18px;
-	line-height: 60px;
-	padding-left: 15px;
 	color: grey;
 }
 
-.sidebar-nav .control-label{
+.mk-widget-list {
+	font-weight: bold;
 	color: grey;
-	padding-left: 8px;
+}
+
+.mk-widget-selector {
+	border: 1px dashed #444;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: white;
+	cursor: pointer;
+}
+
+.mk-sidebar-item {
+    padding: 10px;
 }
