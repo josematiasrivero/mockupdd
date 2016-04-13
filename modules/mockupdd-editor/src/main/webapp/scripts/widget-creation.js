@@ -1,3 +1,17 @@
+function createWidget(dom) {
+  $(dom).dblclick(function() {
+    var annotation = prompt("Annotation")
+    var parts = annotation.split("::");
+    var tag = parts[0].toLowerCase();
+    $(dom).attr("data-mockupdd-" + tag, parts[1]);
+  })
+  redrawAnnotations(dom);
+}
+
+function redrawAnnotations(widget) {
+  
+}
+
 $(window).on("load", function(){
 
   $("#title").on("click", function(){
@@ -11,6 +25,7 @@ $(window).on("load", function(){
       'color' : 'gray',
     });
     $("#page").append(title);
+    createWidget(title);
   });
 
   $("#label").on("click", function(){
@@ -97,3 +112,4 @@ $(window).on("load", function(){
   });
 
 });
+

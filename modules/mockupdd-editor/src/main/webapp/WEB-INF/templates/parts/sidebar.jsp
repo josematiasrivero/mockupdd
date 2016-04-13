@@ -6,6 +6,7 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 <link href="/css/sidebar.css" type="text/css" rel="stylesheet">
 <script src="/scripts/widget-creation.js"></script>
+<script src="/scripts/mockup-processing.js"></script>
 <div id="main-container">
   <div id="mk-sidebar">
     <div class="col-md-12">

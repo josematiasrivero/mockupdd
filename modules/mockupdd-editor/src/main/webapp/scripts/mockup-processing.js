@@ -1,0 +1,7 @@
+MockupDD = {
+		
+		process: function(mockupDom) {
+			
+		}
+
+}
