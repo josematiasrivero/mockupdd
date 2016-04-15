@@ -19,6 +19,16 @@ var MockupRepository = function() {
         jsonData: jsonString
       };
       return this._jsonPut("/service/mockups/" + id, mockup, okCallback, errorCallback);
+    },
+    load: function(id, okCallback, errorCallback) {
+      try {
+        Preconditions.checkType(id, 'string', 'id');
+      } catch (err) {
+        throw 'Exception in MockupRepository: ' + err;
+      }
+      return this._jsonGet("/service/mockups/" + id, function(data) {
+        return okCallback(data);
+      }, errorCallback);
     }
   });
 };

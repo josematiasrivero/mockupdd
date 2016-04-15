@@ -16,3 +16,4 @@
 <script src="/scripts/persistence/GenericRepository.js"></script>
 <script src="/scripts/persistence/MockupRepository.js"></script>
 <script src="/scripts/persistence/MockupAutosaveService.js"></script>
+<script src="/scripts/persistence/MockupLoaderService.js"></script>
