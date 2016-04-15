@@ -3,6 +3,9 @@
 var timeToReload = 5000; // in milliseconds.
 
 var MockupAutosaveService = function () {
+  if(MockupStateController.isState('LOADING')){
+    return;
+  }
   var mockupRepository = new MockupRepository();
   var mockupId = $('#mockupId').val();
   var mockupName = $('#mockupName').val();
