@@ -2,20 +2,19 @@
 
 var timeToReload = 5000; // in milliseconds.
 
-var MockupAutosaveService = function() {
+var MockupAutosaveService = function () {
   var mockupRepository = new MockupRepository();
   var mockupId = $('#mockupId').val();
   var mockupName = $('#mockupName').val();
-  var interval = setInterval(function() {
+  var interval = setInterval(function () {
     MockupStateController.update('SAVING');
     mockupRepository.save(mockupId, mockupName, {
         html: $('#page').html()
       },
-      function() {
+      function () {
         MockupStateController.update('SAVED');
-        console.log('Success saving mockup ' + mockupId);
       },
-      function() {
+      function () {
         console.log('Error saving mockup ' + mockupId);
         MockupStateController.update('DIRTY');
         alert('Couldn\'t save mockup ' + mockupId);
@@ -23,6 +22,6 @@ var MockupAutosaveService = function() {
   }, timeToReload);
 };
 
-setTimeout(function() {
+setTimeout(function () {
   MockupAutosaveService();
 }, 3000);
