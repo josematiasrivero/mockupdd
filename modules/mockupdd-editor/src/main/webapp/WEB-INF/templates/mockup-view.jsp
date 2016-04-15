@@ -5,17 +5,12 @@
 <t:baseLayout>
   <jsp:attribute name="title">${mockup.name}</jsp:attribute>
   <jsp:attribute name="head">
- 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet"/>
-  <link href="/css/sidebar.css" type="text/css" rel="stylesheet"/>
-  <link href="/css/floating-panel.css" type="text/css" rel="stylesheet"/>
-  <link href="https://code.jquery.com/ui/1.11.4/themes/excite-bike/jquery-ui.css" type="text/css" rel="stylesheet"/>
-	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <jsp:include page="/WEB-INF/templates/parts/imports.jsp" />
   </jsp:attribute>
   <jsp:body>
     <div>
       <div>
-        <jsp:include page="/WEB-INF/templates/parts/sidebar.jsp"/>
+        <jsp:include page="/WEB-INF/templates/parts/sidebar.jsp" />
       </div>
       <div id="page">
       </div>
@@ -37,9 +32,9 @@
       $(function(){
         $( ".draggable" ).draggable();
       });
-
-
-
       </script>
+      <input type="hidden" value="${mockup.name}" id="mockupName" />
+      <input type="hidden" value="${mockup.id}" id="mockupId" />
+
   </jsp:body>
 </t:baseLayout>
