@@ -7,9 +7,11 @@ var MockupLoaderService = function () {
       mockupRepository.load(mockupId,
         function (json) {
           var jsonString = JSON.parse(json.jsonData);
-          $("#page").append(jsonString.html);
-          console.log('Success load mockup ' + mockupId);
-          EventAttacher.execute();
+          if (jsonString) {
+            $("#page").append(jsonString.html);
+            console.log('Success load mockup ' + mockupId);
+            EventAttacher.execute();
+          }
           MockupStateController.update('SAVED');
         },
         function () {
