@@ -5,16 +5,23 @@ public class DataAnnotation extends MockupDDAnnotation {
 	private String property;
 	private String dataType;
 
+	public DataAnnotation() {
+		super();
+	}
+
+	public DataAnnotation(String className, String property, String dataType) {
+		super();
+		this.className = className;
+		this.property = property;
+		this.dataType = dataType;
+	}
+
 	public String getClassName() {
 		return className;
 	}
 
 	public void setClassName(String className) {
 		this.className = className;
-	}
-
-	public String getProperty() {
-		return property;
 	}
 
 	public void setProperty(String property) {
@@ -27,5 +34,9 @@ public class DataAnnotation extends MockupDDAnnotation {
 
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
+	}
+
+	public String getProperty() {
+		return property;
 	}
 }
