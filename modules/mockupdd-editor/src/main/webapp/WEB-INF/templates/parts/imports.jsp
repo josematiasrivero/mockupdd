@@ -11,10 +11,10 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
-<!-- App imports -->
 <script src="${pageContext.request.contextPath}/scripts/EventAttacher.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/utils/Preconditions.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/GenericRepository.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/MockupRepository.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/MockupStateController.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/MockupAutosaveService.js"></script>
+<script src="${pageContext.request.contextPath}/scripts/persistence/MockupLoaderService.js"></script>
