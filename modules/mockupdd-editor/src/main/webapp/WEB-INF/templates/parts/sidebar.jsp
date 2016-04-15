@@ -10,7 +10,7 @@
   <div id="mk-sidebar">
     <div class="col-md-12">
       <div id="editorStatus" class="row mk-state">
-        <div class="col-md-7 text-right">
+        <div class="col-md-7 text-right" style="display:none">
           <label>Mode:
             <div class="toggle btn btn-primary off vcenter" data-toggle="toggle">
               <input id="modeToggle" type="checkbox">
@@ -23,7 +23,7 @@
           </label>
         </div>
         <div class="col-md-5 text-left">
-          <label id="mockupState">Saved</label>
+          <label>State:&nbsp;<span id="mockupState">Saved</span></label>
         </div>
       </div>
     </div>
