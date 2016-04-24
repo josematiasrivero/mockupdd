@@ -1,7 +1,6 @@
 package com.mockupdd.model.annotation;
 
-public class DataAnnotation extends MockupDDAnnotation {
-	private String className;
+public class DataAnnotation extends ClassBoundAnnotation {
 	private String property;
 	private String dataType;
 
@@ -10,18 +9,9 @@ public class DataAnnotation extends MockupDDAnnotation {
 	}
 
 	public DataAnnotation(String className, String property, String dataType) {
-		super();
-		this.className = className;
+		super(className);
 		this.property = property;
 		this.dataType = dataType;
-	}
-
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(String className) {
-		this.className = className;
 	}
 
 	public void setProperty(String property) {

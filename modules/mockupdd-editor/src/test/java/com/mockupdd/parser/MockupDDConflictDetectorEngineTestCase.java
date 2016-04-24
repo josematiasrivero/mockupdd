@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.mockupdd.conflict.MockupDDConflict;
 import com.mockupdd.conflict.MockupDDConflictDetectorEngine;
 import com.mockupdd.model.annotation.DataAnnotation;
+import com.mockupdd.model.annotation.MockupDDAnnotation;
 import com.mockupdd.model.annotation.MockupDDModel;
 
 public class MockupDDConflictDetectorEngineTestCase {

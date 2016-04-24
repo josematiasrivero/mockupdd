@@ -20,30 +20,30 @@ $(window).on("load", function(){
   }
 
   $('#title').on('click', function () {
-    var title = $('<h3 class="mk-draggable">New title</h3>');
+    var title = $('<h3 class="mk-draggable" contenteditable>New title</h3>');
     createWidget(title);
     _addToPage(title);
   });
 
   $('#label').on('click', function () {
-    var label = $('<label class="mk-draggable">New label</label>');
+    var label = $('<label class="mk-draggable" contenteditable>New label</label>');
     _addToPage(label);
   });
 
   $('#input').on('click', function () {
-    var input = $('<div class="draggable mk-draggable"></div>');
+    var input = $('<div class="draggable mk-draggable" contenteditable></div>');
     $(input).append('<input class="form-control mk-draggable" placeholder="New input">');
     _addToPage(input);
   });
 
   $('#button').on('click', function () {
-    var button = $('<button class="btn btn-primary mk-draggable">New button</button>');
+    var button = $('<button class="btn btn-primary mk-draggable" contenteditable>New button</button>');
     _addToPage(button);
   });
 
   $('#panel').on('click', function () {
-    var header = $('<div class="panel-heading">Header text</div>');
-    var body = $('<div class="panel-body">Paragraph text</div>');
+    var header = $('<div class="panel-heading"><div contenteditable>Header text</div></div>');
+    var body = $('<div class="panel-body" contenteditable>Paragraph text</div>');
     body.css('font-size', '14px');
     var panel = $('<div class="panel panel-info mk-draggable"></div>');
     $(panel).append(header);
