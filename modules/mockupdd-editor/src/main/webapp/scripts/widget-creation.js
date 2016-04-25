@@ -12,6 +12,16 @@ function redrawAnnotations(widget) {
   
 }
 
+function drawAnnotation(widget, annotation) {  
+  var annotation = $('<div class="mockupdd-annotation">' + annotation + '</div>');
+  annotation.attr("data-mockupdd-annotation-for", $(widget).attr("id"));
+  annotation.css({
+    "left": widget.offset().left + widget.width() - 10, 
+    "top": widget.offset().top + widget.height() - 10
+  });
+  $("#page").append(annotation);
+}
+
 $(window).on("load", function(){
 
   function _addToPage(element) {
