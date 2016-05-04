@@ -14,7 +14,7 @@ var EventAttacher = function () {
               $(this).data('preventBehaviour', true);
             }
           });
-          $parent.find(':input').on('mousedown', function (e) {
+          $(this).on('mousedown', function (e) {
             var mouseDown = new MouseEvent('mousedown', {
               screenX: e.screenX,
               screenY: e.screenY,
