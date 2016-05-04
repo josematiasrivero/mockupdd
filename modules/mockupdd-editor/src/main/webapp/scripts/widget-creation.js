@@ -30,24 +30,25 @@ $(window).on("load", function(){
   }
 
   $('#title').on('click', function () {
-    var title = $('<h3 class="mk-draggable" contenteditable>New title</h3>');
+    var title = $('<h3 class="mk-draggable mk-resizable" contenteditable>New title</h3>');
     createWidget(title);
     _addToPage(title);
   });
 
   $('#label').on('click', function () {
-    var label = $('<label class="mk-draggable" contenteditable>New label</label>');
+    var label = $('<label class="mk-draggable mk-resizable" contenteditable>New label</label>');
     _addToPage(label);
   });
 
   $('#input').on('click', function () {
     var input = $('<div class="input draggable mk-draggable" contenteditable></div>');
-    $(input).append('<input class="form-control mk-draggable" placeholder="New input">');
+    $(input).append('<input class="form-control mk-draggable mk-resizable" placeholder="New input">');
     _addToPage(input);
   });
 
   $('#button').on('click', function () {
-    var button = $('<button class="btn btn-primary mk-draggable" contenteditable>New button</button>');
+    var button = $('<div class="button draggable mk-draggable" contenteditable></div>');
+    button.append('<button class="mk-draggable mk-resizable">New button</button>');
     _addToPage(button);
   });
 
@@ -55,14 +56,15 @@ $(window).on("load", function(){
     var header = $('<div class="panel-heading"><div contenteditable>Header text</div></div>');
     var body = $('<div class="panel-body" contenteditable>Paragraph text</div>');
     body.css('font-size', '14px');
-    var panel = $('<div class="panel panel-info mk-draggable"></div>');
+    var panel = $('<div class="panel panel-info mk-draggable mk-resizable"></div>');
     $(panel).append(header);
     $(panel).append(body);
     _addToPage(panel);
   });
 
   $('#textarea').on('click', function () {
-    var textarea = $('<textarea class="form-control mk-draggable" placeholder="This is a Text Area"></textarea>');
+    var textarea = $('<div class="textarea draggable mk-draggable" placeholder="This is a Text Area"></div>');
+    textarea.append('<textarea class="form-control mk-draggable mk-resizable" placeholder="This is a Text Area"></textarea>');
     _addToPage(textarea);
   });
 

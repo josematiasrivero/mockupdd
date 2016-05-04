@@ -2,6 +2,25 @@
 
 var timeToReload = 5000; // in milliseconds.
 
+function getHtmlToPersist () {
+  var $page = $('#page').clone();
+  $page.find('.ui-wrapper').each(function(i, e) {
+    var $parent = $(e).parent();
+    $(e).children().each(function(i, e) {
+      if (!$(e).is('div')) {
+        $parent.append($(e).clone());
+      }
+    });
+    $(e).remove();
+  });
+  $page.find('*').each(function(i, e) {
+    $(e).attr('class', function(i, c){
+      return c.replace(/(^|\s)ui-\S+/g, '');
+    });
+  });
+  return $page;
+}
+
 var MockupAutosaveService = function () {
   if(MockupStateController.isState('LOADING')){
     return;
@@ -12,7 +31,7 @@ var MockupAutosaveService = function () {
   var interval = setInterval(function () {
     MockupStateController.update('SAVING');
     mockupRepository.save(mockupId, mockupName, {
-        html: $('#page').html()
+        html: getHtmlToPersist().html()
       },
       function () {
         MockupStateController.update('SAVED');

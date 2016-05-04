@@ -7,7 +7,7 @@ var EventAttacher = function () {
       var page = $('#page');
       page.find('.mk-draggable').each(function (i, e) {
         var tagName = e.tagName.toLowerCase();
-        if (tagName === 'input') {
+        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea') {
           var $parent = $(e).parent();
           $parent.draggable({
             start: function (event, ui) {
@@ -30,15 +30,21 @@ var EventAttacher = function () {
               $draggable.data('preventBehaviour', false)
             }
           });
-        } else if (tagName === 'textarea' || tagName === 'button') {
-          $(e).draggable({cancel: false});
         } else {
           $(e).draggable();
         }
       });
     },
+    attachResizableItems : function () {
+      var page = $('#page');
+      page.find('.mk-resizable').each(function (i, e) {
+        var tagName = e.tagName.toLowerCase();
+        $(e).resizable();
+      });
+    },
     execute: function () {
       this.attachDraggableItems();
+      this.attachResizableItems();
     }
   }
 }();
