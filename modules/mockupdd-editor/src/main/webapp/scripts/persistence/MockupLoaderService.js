@@ -11,6 +11,7 @@ var MockupLoaderService = function () {
             $("#page").append(jsonString.html);
             console.log('Success load mockup ' + mockupId);
             EventAttacher.execute();
+            EventAttacher.execute();
           }
           MockupStateController.update('SAVED');
         },

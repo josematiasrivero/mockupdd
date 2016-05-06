@@ -6,12 +6,20 @@ function getHtmlToPersist () {
   var $page = $('#page').clone();
   $page.find('.ui-wrapper').each(function(i, e) {
     var $parent = $(e).parent();
+    var $wrapper = $(e);
     $(e).children().each(function(i, e) {
       if (!$(e).is('div')) {
+        $(e).css('width', $wrapper.css('width'));
+        $(e).css('height', $wrapper.css('height'));
         $parent.append($(e).clone());
       }
     });
     $(e).remove();
+  });
+  $page.find('.ui-resizable').each(function(i, e) {
+    $(e).find('*').each(function(i, e) {
+      $(e).remove();
+    });
   });
   $page.find('*').each(function(i, e) {
     $(e).attr('class', function(i, c){
