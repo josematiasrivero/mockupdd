@@ -2,12 +2,12 @@
 
 var timeToReload = 5000; // in milliseconds.
 
-function getHtmlToPersist () {
+function getHtmlToPersist() {
   var $page = $('#page').clone();
-  $page.find('.ui-wrapper').each(function(i, e) {
+  $page.find('.ui-wrapper').each(function (i, e) {
     var $parent = $(e).parent();
     var $wrapper = $(e);
-    $(e).children().each(function(i, e) {
+    $(e).children().each(function (i, e) {
       if (!$(e).is('div')) {
         $(e).css('width', $wrapper.css('width'));
         $(e).css('height', $wrapper.css('height'));
@@ -16,13 +16,13 @@ function getHtmlToPersist () {
     });
     $(e).remove();
   });
-  $page.find('.ui-resizable').each(function(i, e) {
-    $(e).find('*').each(function(i, e) {
+  $page.find('.ui-resizable').each(function (i, e) {
+    $(e).find('*').each(function (i, e) {
       $(e).remove();
     });
   });
-  $page.find('*').each(function(i, e) {
-    $(e).attr('class', function(i, c){
+  $page.find('*').each(function (i, e) {
+    $(e).attr('class', function (i, c) {
       return c.replace(/(^|\s)ui-\S+/g, '');
     });
   });
@@ -30,7 +30,7 @@ function getHtmlToPersist () {
 }
 
 var MockupAutosaveService = function () {
-  if(MockupStateController.isState('LOADING')){
+  if (MockupStateController.isState('LOADING')) {
     return;
   }
   var mockupRepository = new MockupRepository();

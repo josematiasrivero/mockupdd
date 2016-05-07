@@ -35,10 +35,9 @@ var EventAttacher = function () {
         }
       });
     },
-    attachResizableItems : function () {
+    attachResizableItems: function () {
       var page = $('#page');
       page.find('.mk-resizable').each(function (i, e) {
-        var tagName = e.tagName.toLowerCase();
         $(e).resizable();
       });
     },
