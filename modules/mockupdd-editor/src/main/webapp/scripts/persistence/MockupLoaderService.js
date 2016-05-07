@@ -11,6 +11,7 @@ var MockupLoaderService = function () {
             $("#page").append(jsonString.html);
             console.log('Success load mockup ' + mockupId);
             EventAttacher.execute();
+            EventAttacher.execute(); // hack: the buttons show a weird bug if we call only once to execute.
           }
           MockupStateController.update('SAVED');
         },
