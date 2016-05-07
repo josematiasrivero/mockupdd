@@ -1,6 +1,6 @@
-var GenericRepository = function() {
+var GenericRepository = function () {
   return {
-    _jsonPut: function(url, data, okCallback, errorCallback) {
+    _jsonPut: function (url, data, okCallback, errorCallback) {
       return $.ajax({
         url: url,
         data: JSON.stringify(data),
@@ -12,7 +12,7 @@ var GenericRepository = function() {
       })
     },
 
-    _jsonPost: function(url, data, okCallback, errorCallback) {
+    _jsonPost: function (url, data, okCallback, errorCallback) {
       return $.ajax({
         url: url,
         data: JSON.stringify(data),
@@ -24,7 +24,7 @@ var GenericRepository = function() {
       })
     },
 
-    _jsonGet: function(url, okCallback, errorCallback) {
+    _jsonGet: function (url, okCallback, errorCallback) {
       return $.ajax({
         url: url,
         method: "GET",

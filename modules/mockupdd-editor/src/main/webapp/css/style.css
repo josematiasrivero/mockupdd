@@ -199,8 +199,8 @@ input.mk-draggable {
     top: 55px;
     position: absolute;
     cursor: pointer;
-    width: 150px;
-    height: 30px;
+    width: 5px;
+    height: 5px;
 }
 
 label.mk-draggable {
@@ -232,18 +232,35 @@ h3.mk-draggable {
 }
 
 textarea.mk-draggable {
-    left: 285px;
-    top: 55px;
     position: absolute;
     cursor: pointer;
     width: 300px;
     height: 70px;
 }
 
-button.mk-draggable {
+.textarea.mk-draggable {
     left: 285px;
     top: 55px;
     position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
+button.mk-draggable {
+    position: absolute;
+    cursor: pointer;
+    width: 300px;
+    height: 70px;
+}
+
+.button.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
 }
 
 .mockupdd-annotation {
