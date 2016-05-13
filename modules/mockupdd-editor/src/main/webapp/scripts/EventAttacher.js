@@ -41,9 +41,44 @@ var EventAttacher = function () {
         $(e).resizable();
       });
     },
+    attachContextualMenus: function () {
+      $('.mk-contextual-menu').dblclick(function() {
+        $(this).contextMenu();
+      });
+      $.contextMenu({
+        selector: '.mk-contextual-menu',
+        trigger: 'none',
+        callback: function(key, options) {
+          if (key === "delete") {
+            $(this).remove();
+          } else {
+            var tag = $(this).prop("tagName").toLowerCase();
+            var $element, $parent;
+            if (tag === "button" || tag === "textarea" || tag === "input") {
+              $element = $(this).closest("." +  tag);
+            } else {
+              $element = $(this);
+            }
+            $parent = $element.closest();
+            $element.detach();
+            if (key === "front") {
+              $parent.prepend($element);
+            } else if (key === "bottom") {
+              $parent.append($element);
+            }
+          }
+        },
+        items: {
+            "front": {name: "Bring to front", icon: ""},
+            "bottom": {name: "Send to bottom", icon: ""},
+            "delete": {name: "Delete", icon: ""}
+        }
+      });
+    },
     execute: function () {
       this.attachDraggableItems();
       this.attachResizableItems();
+      this.attachContextualMenus();
     }
   }
 }();
