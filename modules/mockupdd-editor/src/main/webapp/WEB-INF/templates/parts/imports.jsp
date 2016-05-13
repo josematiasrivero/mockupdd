@@ -18,3 +18,10 @@
 <script src="${pageContext.request.contextPath}/scripts/persistence/MockupStateController.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/MockupAutosaveService.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/MockupLoaderService.js"></script>
+
+<!-- Contextual menu -->
+<link href="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.css" rel="stylesheet" type="text/css">
+<script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.js" type="text/javascript"></script>
+<script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.ui.position.min.js" type="text/javascript"></script>
+<script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script>
+<!-- Contextual menu end -->
