@@ -59,11 +59,11 @@ var EventAttacher = function () {
             } else {
               $element = $(this);
             }
-            $parent = $element.closest();
+            $parent = $element.parent();
             $element.detach();
-            if (key === "front") {
+            if (key === "bottom") {
               $parent.prepend($element);
-            } else if (key === "bottom") {
+            } else if (key === "front") {
               $parent.append($element);
             }
           }
