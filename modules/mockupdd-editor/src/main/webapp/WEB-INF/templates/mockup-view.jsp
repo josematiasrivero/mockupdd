@@ -15,7 +15,7 @@
       <div id="page">
       </div>
     </div>
-    
+
     <div class="modal fade" tabindex="-1" role="dialog" id="conflictsModal">
      	<div class="modal-dialog">
      		<div class="modal-content">
@@ -48,7 +48,6 @@
      	<!-- /.modal-dialog -->
      </div>
      <!-- /.modal -->
-    
 
     <div id="mk-floating-panel" class="panel panel-primary draggable">
       <div class="panel-heading">
@@ -69,17 +68,17 @@
             </script>
       <input type="hidden" value="${mockup.name}" id="mockupName" />
       <input type="hidden" value="${mockup.id}" id="mockupId" />
-      
-     
-  
-	
-	
-	
-	
-	
-	
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
+
  </jsp:body>
 </t:baseLayout>
