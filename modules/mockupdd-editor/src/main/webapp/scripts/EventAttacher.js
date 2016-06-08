@@ -52,29 +52,10 @@ var EventAttacher = function () {
           if (key === "delete") {
             $(this).remove();
           } else if (key === "properties") {
-            $("#page").append(
-                 "<div id=\"dialog-form\" title=\"Widget properties\">" +
-                   "<form>" +
-                     "<fieldset>" +
-                       "<label for=\"color\">Color</label>" +
-                       "<input type=\"text\" name=\"color\" id=\"color\" value=\"Green\">" +
-                    "</fieldset>" +
-                   "</form>" +
-                 "</div>");
-            $( "#dialog-form" ).dialog({
-              autoOpen: true,
-              height: 300,
-              width: 350,
-              modal: true,
-              close: function() {
-                $("#dialog-form").remove();
-              },
-              open: function(event, ui) {
-                $(".ui-widget-overlay").bind("click", function(){
-                  $("#dialog-form").dialog("close");
-                });
-              }
-            });
+            var tag = $(this).prop("tagName").toLowerCase();
+            if (tag === 'h3') tag = "title";
+            if (tag === 'div') tag = "panel";
+            Modal[tag+"Modal"]($(this)); 
           } else { // bottom or front
             var tag = $(this).prop("tagName").toLowerCase();
             var $element, $parent;
