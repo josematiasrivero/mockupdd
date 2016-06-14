@@ -271,3 +271,7 @@ button.mk-draggable {
     padding-left: 5px;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7);
 }
+
+.mk-contextual-menu {
+  z-index: 0;
+}

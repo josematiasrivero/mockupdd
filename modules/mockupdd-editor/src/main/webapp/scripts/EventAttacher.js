@@ -41,9 +41,50 @@ var EventAttacher = function () {
         $(e).resizable();
       });
     },
+    attachContextualMenus: function () {
+      $('.mk-contextual-menu').dblclick(function() {
+        $(this).contextMenu();
+      });
+      $.contextMenu({
+        selector: '.mk-contextual-menu',
+        trigger: 'none',
+        callback: function(key, options) {
+          if (key === "delete") {
+            $(this).remove();
+          } else if (key === "properties") {
+            var tag = $(this).prop("tagName").toLowerCase();
+            if (tag === 'h3') tag = "title";
+            if (tag === 'div') tag = "panel";
+            Modal[tag+"Modal"]($(this)); 
+          } else { // bottom or front
+            var tag = $(this).prop("tagName").toLowerCase();
+            var $element, $parent;
+            if (tag === "button" || tag === "textarea" || tag === "input") {
+              $element = $(this).closest("." +  tag);
+            } else {
+              $element = $(this);
+            }
+            $parent = $element.parent();
+            $element.detach();
+            if (key === "bottom") {
+              $parent.prepend($element);
+            } else if (key === "front") {
+              $parent.append($element);
+            }
+          }
+        },
+        items: {
+            "front": {name: "Bring to front", icon: ""},
+            "bottom": {name: "Send to bottom", icon: ""},
+            "delete": {name: "Delete", icon: ""},
+            "properties": {name: "Properties", icon: ""}
+        }
+      });
+    },
     execute: function () {
       this.attachDraggableItems();
       this.attachResizableItems();
+      this.attachContextualMenus();
     }
   }
 }();

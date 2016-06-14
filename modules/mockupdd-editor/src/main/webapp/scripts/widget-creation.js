@@ -1,4 +1,5 @@
 function createWidget(dom) {
+  /*
   $(dom).dblclick(function() {
     var annotation = prompt("Annotation")
     var parts = annotation.split("::");
@@ -6,6 +7,7 @@ function createWidget(dom) {
     $(dom).attr("data-mockupdd-" + tag, parts[1]);
   })
   redrawAnnotations(dom);
+  */
 }
 
 function redrawAnnotations(widget) {
@@ -30,25 +32,25 @@ $(window).on("load", function(){
   }
 
   $('#title').on('click', function () {
-    var title = $('<h3 class="mk-draggable mk-resizable" contenteditable>New title</h3>');
+    var title = $('<h3 class="mk-draggable mk-resizable mk-contextual-menu" contenteditable>New title</h3>');
     createWidget(title);
     _addToPage(title);
   });
 
   $('#label').on('click', function () {
-    var label = $('<label class="mk-draggable mk-resizable" contenteditable>New label</label>');
+    var label = $('<label class="mk-draggable mk-resizable mk-contextual-menu" contenteditable>New label</label>');
     _addToPage(label);
   });
 
   $('#input').on('click', function () {
     var input = $('<div class="input draggable mk-draggable" contenteditable></div>');
-    $(input).append('<input class="form-control mk-draggable mk-resizable" placeholder="New input">');
+    $(input).append('<input class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="New input">');
     _addToPage(input);
   });
 
   $('#button').on('click', function () {
     var button = $('<div class="button draggable mk-draggable" contenteditable></div>');
-    button.append('<button class="mk-draggable mk-resizable">New button</button>');
+    button.append('<button class="mk-draggable mk-resizable mk-contextual-menu">New button</button>');
     _addToPage(button);
   });
 
@@ -56,7 +58,7 @@ $(window).on("load", function(){
     var header = $('<div class="panel-heading"><div contenteditable>Header text</div></div>');
     var body = $('<div class="panel-body" contenteditable>Paragraph text</div>');
     body.css('font-size', '14px');
-    var panel = $('<div class="panel panel-info mk-draggable mk-resizable"></div>');
+    var panel = $('<div class="panel panel-info mk-draggable mk-resizable mk-contextual-menu"></div>');
     $(panel).append(header);
     $(panel).append(body);
     _addToPage(panel);
@@ -64,7 +66,7 @@ $(window).on("load", function(){
 
   $('#textarea').on('click', function () {
     var textarea = $('<div class="textarea draggable mk-draggable" placeholder="This is a Text Area"></div>');
-    textarea.append('<textarea class="form-control mk-draggable mk-resizable" placeholder="This is a Text Area"></textarea>');
+    textarea.append('<textarea class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="This is a Text Area"></textarea>');
     _addToPage(textarea);
   });
 
