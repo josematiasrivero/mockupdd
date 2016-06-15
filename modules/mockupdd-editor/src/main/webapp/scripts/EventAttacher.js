@@ -55,7 +55,7 @@ var EventAttacher = function () {
             var tag = $(this).prop("tagName").toLowerCase();
             if (tag === 'h3') tag = "title";
             if (tag === 'div') tag = "panel";
-            Modal[tag+"Modal"]($(this)); 
+            Modal[tag+"Modal"]($(this));
           } else { // bottom or front
             var tag = $(this).prop("tagName").toLowerCase();
             var $element, $parent;
