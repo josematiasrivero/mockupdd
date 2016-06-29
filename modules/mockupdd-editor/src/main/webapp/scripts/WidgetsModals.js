@@ -22,11 +22,11 @@ var currentWidget;
 
 function setDialogProperties() {
   $(".modal").find(".modal-close").each(function (i, e) {
-    $(e).click(function(){
+    $(e).click(function () {
       $(".modal").remove();
     })
   });
-};
+}
 
 var Modal = {
   "titleModal": function (title) {
@@ -37,10 +37,11 @@ var Modal = {
     $(form).append(
       $.parseHTML(
         "<div class=\"form-group\">" +
-          "<label for=\"label\" class=\"control-label\">Label:</label>" +
-          "<input type=\"text\" name=\"label\" id=\"label\" value=\"" + $(title).text() + "\">" +
+        "<label for=\"label\" class=\"control-label\">Label:</label>" +
+        '<input type="text" name="label" id="label" value="' + $(title).text() +
+        '"class="form-control mk-modal-input">' +
         "</div>"));
-    $("#modal-apply").click(function(){
+    $("#modal-apply").click(function () {
       currentWidget.text($("#dialog-form").find("input[name='label']").val());
     });
     setDialogProperties();
@@ -54,10 +55,11 @@ var Modal = {
     $(form).append(
       $.parseHTML(
         "<div class=\"form-group\">" +
-          "<label for=\"label\" class=\"control-label\">Label:</label>" +
-          "<input type=\"text\" name=\"label\" id=\"label\" value=\"" + $(label).text() + "\">" +
+        "<label for=\"label\" class=\"control-label\">Label:</label>" +
+        "<input type=\"text\" name=\"label\" id=\"label\" value=\"" + $(label).text() +
+        '"class="form-control mk-modal-input">' +
         "</div>"));
-    $("#modal-apply").click(function(){
+    $("#modal-apply").click(function () {
       currentWidget.text($("#dialog-form").find("input[name='label']").val());
     });
     setDialogProperties();
@@ -71,10 +73,11 @@ var Modal = {
     $(form).append(
       $.parseHTML(
         "<div class=\"form-group\">" +
-          "<label for=\"placeholder\" class=\"control-label\">Placeholder:</label>" +
-          "<input type=\"text\" name=\"placeholder\" id=\"placeholder\" value=\"" + $(input).attr("placeholder") + "\">" +
+        "<label for=\"placeholder\" class=\"control-label\">Placeholder:</label>" +
+        "<input type=\"text\" name=\"placeholder\" id=\"placeholder\" value=\"" + $(input).attr("placeholder") +
+        '"class="form-control mk-modal-input">' +
         "</div>"));
-    $("#modal-apply").click(function(){
+    $("#modal-apply").click(function () {
       currentWidget.attr("placeholder", $("#dialog-form").find("input[name='placeholder']").val());
     });
     setDialogProperties();
@@ -88,10 +91,11 @@ var Modal = {
     $(form).append(
       $.parseHTML(
         "<div class=\"form-group\">" +
-          "<label for=\"label\" class=\"control-label\">Label:</label>" +
-          "<input type=\"text\" name=\"label\" id=\"label\" value=\"" + $(button).text() + "\">" +
+        "<label for=\"label\" class=\"control-label\">Label:</label>" +
+        "<input type=\"text\" name=\"label\" id=\"label\" value=\"" + $(button).text() +
+        '"class="form-control mk-modal-input">' +
         "</div>"));
-    $("#modal-apply").click(function(){
+    $("#modal-apply").click(function () {
       currentWidget.text($("#dialog-form").find("input[name='label']").val());
     });
     setDialogProperties();
@@ -113,12 +117,13 @@ var Modal = {
     $(form).append(
       $.parseHTML(
         "<div class=\"form-group\">" +
-          "<label for=\"placeholder\" class=\"control-label\">Placeholder:</label>" +
-          "<input type=\"text\" name=\"placeholder\" id=\"placeholder\" value=\"" + $(textarea).attr("placeholder") + "\">" +
+        "<label for=\"placeholder\" class=\"control-label\">Placeholder:</label>" +
+        "<input type=\"text\" name=\"placeholder\" id=\"placeholder\" value=\"" + $(textarea).attr("placeholder") +
+        '"class="form-control mk-modal-input">' +
         "</div>"));
-    $("#modal-apply").click(function(){
+    $("#modal-apply").click(function () {
       currentWidget.attr("placeholder", $("#dialog-form").find("input[name='placeholder']").val());
     });
     setDialogProperties();
-  },
-}
+  }
+};
