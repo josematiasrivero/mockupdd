@@ -130,12 +130,12 @@ input.code {
 }
 
 .widget-wrapper > * {
-    margin: 0px !important;
+    margin: 0 !important;
 }
 
 .edit-mode .widget {
     pointer-events: none;
-    nav-index: -1
+    nav-index: -1;
 }
 
 .edit-mode .widget-wrapper:hover {
@@ -269,9 +269,15 @@ button.mk-draggable {
     width: 200px;
     font-size: 14px;
     padding-left: 5px;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
 }
 
 .mk-contextual-menu {
-  z-index: 0;
+    z-index: 0;
+}
+
+.mk-modal-input {
+    width: 150px;
+    display: inline;
+    margin-left: 15px;
 }
