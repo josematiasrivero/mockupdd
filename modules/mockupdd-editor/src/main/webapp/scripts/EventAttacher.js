@@ -56,6 +56,8 @@ var EventAttacher = function () {
             if (tag === 'h3') tag = "title";
             if (tag === 'div') tag = "panel";
             Modal[tag+"Modal"]($(this));
+          } else if (key == "annotations") {
+            // Show the annotations modal
           } else { // bottom or front
             var tag = $(this).prop("tagName").toLowerCase();
             var $element, $parent;
@@ -77,7 +79,8 @@ var EventAttacher = function () {
             "front": {name: "Bring to front", icon: ""},
             "bottom": {name: "Send to bottom", icon: ""},
             "delete": {name: "Delete", icon: ""},
-            "properties": {name: "Properties", icon: ""}
+            "properties": {name: "Properties", icon: ""},
+            "annotations": {name: "Annotations", icon: ""}
         }
       });
     },
