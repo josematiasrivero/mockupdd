@@ -281,3 +281,13 @@ button.mk-draggable {
     display: inline;
     margin-left: 15px;
 }
+
+@media screen and (min-width: 768px) {
+    .modal-lg {
+        width: 900px;
+    }
+
+    .modal-sm {
+        width: 300px;
+    }
+}

@@ -49,22 +49,23 @@ var EventAttacher = function () {
         selector: '.mk-contextual-menu',
         trigger: 'none',
         callback: function(key, options) {
+          var $self = $(this); // Avoiding multiple computations of the same thing
           if (key === "delete") {
-            $(this).remove();
+            $self.remove();
           } else if (key === "properties") {
-            var tag = $(this).prop("tagName").toLowerCase();
+            var tag = $self.prop("tagName").toLowerCase();
             if (tag === 'h3') tag = "title";
             if (tag === 'div') tag = "panel";
-            Modal[tag+"Modal"]($(this));
+            Modal.properties[tag+"Modal"]($self);
           } else if (key == "annotations") {
-            // Show the annotations modal
+            Modal.annotations($self);
           } else { // bottom or front
-            var tag = $(this).prop("tagName").toLowerCase();
+            var tag = $self.prop("tagName").toLowerCase();
             var $element, $parent;
             if (tag === "button" || tag === "textarea" || tag === "input") {
-              $element = $(this).closest("." +  tag);
+              $element = $self.closest("." +  tag);
             } else {
-              $element = $(this);
+              $element = $self;
             }
             $parent = $element.parent();
             $element.detach();
