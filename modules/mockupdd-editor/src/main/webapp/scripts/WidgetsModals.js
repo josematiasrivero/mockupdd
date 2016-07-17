@@ -21,7 +21,14 @@ var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" ro
 var propertiesModalTemplate = common.replace("[[title]]", "Widget properties").replace("[[modalSize]]", ""),
   annotationsModalTemplate = common.replace("[[title]]", "Widget annotations").replace("[[modalSize]]", "modal-lg");
 
-var currentWidget;
+var currentWidget, templates = [
+    'Data({{className|Item type}})',
+    'List({{className|Item type}})',
+    'Save({{className|Item type}})',
+    'Delete({{className|Item type}})',
+    'Activate({{className|Item type}})',
+    'Data({{className|Item type}}.{{property|Property Name}}:{{dataType|Data type}})'],
+  attrName = ['data', 'list', 'save', 'delete', 'activate', 'data'];
 
 function setDialogProperties() {
   $(".modal").find(".modal-close").each(function (i, e) {
@@ -32,7 +39,7 @@ function setDialogProperties() {
 }
 
 var Modal = {
-  properties : {
+  properties: {
     "titleModal": function (title) {
       currentWidget = $(title);
       var modalStructure = $.parseHTML(propertiesModalTemplate);
@@ -133,35 +140,55 @@ var Modal = {
   },
   annotations: function ($html) {
     currentWidget = $html;
-    var modalStructure = $.parseHTML(annotationsModalTemplate);
-    $('body').append($(modalStructure));
-    var form = $(modalStructure).find('form');
-    $(form).append($.parseHTML(
-      '<div class="form-inline" style="margin-bottom:25px;">' +
-        '<div class="form-group">' +
+    var $modalStructure = $($.parseHTML(annotationsModalTemplate));
+    $modalStructure.find('#modal-apply').hide();
+    $('body').append($modalStructure);
+    var form = $modalStructure.find('form');
+    $(form).append($.parseHTML(function () {
+        var res = '<div class="form-inline" style="margin-bottom:25px;">' +
+          '<div class="form-group">' +
           '<label for="addAnnotation" aria-label="Add Annotation"></label>' +
-          '<select class="form-control" id="addAnnotation">' +
-            '<option value="1">Data({{className | Item type}})</option>' +
-            '<option value="2">List({{className | Item type}})</option>' +
-            '<option value="3">Save({{className | Item type}})</option>' +
-            '<option value="4">Delete({{className | Item type}})</option>' +
-            '<option value="5">Activate({{className | Item type}})</option>' +
-            '<option value="6">Data({{className|Item type}}.{{property|Property Name}}:{{dataType|Data type}}</option>' +
-          '</select>' +
-        '</div>' +
-        '<button class="btn btn-success pull-right">Add</button>' +
-      '</div>' +
-      '<div class="form-inline">' +
-        '<div class="form-group">' +
+          '<select class="form-control" id="addAnnotation">';
+        for (var t in templates) if (templates.hasOwnProperty(t)) {
+          res += '<option value="' + t + '"> ' + templates[t] + '</option>';
+        }
+        return res + '</select>' +
+          '</div>' +
+          '<span id="acceptedAnnotation" class="fa fa-check" style="color: darkgreen; display:none;"/>' +
+          '<button id="confirmAddAnnotation" class="btn btn-success pull-right">Add</button>' +
+          '</div>' +
+          '<div class="form-inline">' +
+          '<div class="form-group">' +
           '<label for="removeAnnotation" aria-label="Remove Annotation"></label>' +
           '<select class="form-control" id="removeAnnotation">' +
             // TODO: Here should be the annotations of the widget
-            '<option value="1">Data({{className | Item type}})</option>' +
-            '<option value="2">List({{className | Item type}})</option>' +
+          '<option value="1">Data({{className | Item type}})</option>' +
+          '<option value="2">List({{className | Item type}})</option>' +
           '</select>' +
-        '</div>' +
-        '<button class="btn btn-warning pull-right">Remove</button>' +
-      '</div>'
+          '</div>' +
+          '<button class="btn btn-warning pull-right">Remove</button>' +
+          '</div>';
+      }()
     ));
+    $("#confirmAddAnnotation").click(function (e) {
+      e.preventDefault();
+      var t = $('#addAnnotation').val();
+      if (!templates.hasOwnProperty(t)) throw 't is not valid'; // For XSS.
+      var attr = $html.attr('data-mockupdd-' + attrName[t]);
+      if(!attr){
+        $html.attr('data-mockupdd-' + attrName[t], '["' + templates[t] + '"]')
+      } else {
+        // We remove the last ']' and then add the new template.
+        $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + templates[t] + '"]');
+      }
+      $('#acceptedAnnotation').show();
+      setTimeout(function () {
+        $('#acceptedAnnotation').hide();
+      }, 2000);
+    });
+    setDialogProperties();
   }
 };
+
+
+// This is a regex that catches everything between {{ and }}: \{\{(.*?)}}/g
