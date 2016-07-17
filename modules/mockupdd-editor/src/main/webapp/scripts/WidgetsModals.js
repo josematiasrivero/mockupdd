@@ -152,19 +152,30 @@ var Modal = {
         for (var t in templates) if (templates.hasOwnProperty(t)) {
           res += '<option value="' + t + '"> ' + templates[t] + '</option>';
         }
-        return res + '</select>' +
+        res += '</select>' +
           '</div>' +
-          '<span id="acceptedAnnotation" class="fa fa-check" style="color: darkgreen; display:none;"/>' +
+          '<span id="acceptedAnnotation" class="fa fa-check" title="Annotation added successfully" style="color: darkgreen; display:none;"/>' +
           '<button id="confirmAddAnnotation" class="btn btn-success pull-right">Add</button>' +
           '</div>' +
           '<div class="form-inline">' +
           '<div class="form-group">' +
           '<label for="removeAnnotation" aria-label="Remove Annotation"></label>' +
-          '<select class="form-control" id="removeAnnotation">' +
-            // TODO: Here should be the annotations of the widget
-          '<option value="1">Data({{className | Item type}})</option>' +
-          '<option value="2">List({{className | Item type}})</option>' +
-          '</select>' +
+          '<select class="form-control" id="removeAnnotation">';
+
+        var id = 0;
+
+        function _addData(attr) {
+          var s = $html.attr('data-mockupdd-' + attr);
+          if (!s) return;
+          JSON.parse(s).forEach(function (v) {
+            res += '<option value="' + (id++) + '">' + v + '</option>';
+          });
+        }
+
+        for (var i = 0; i < attrName.length - 1; i++) {
+          _addData(attrName[i]);
+        }
+        return res + '</select>' +
           '</div>' +
           '<button class="btn btn-warning pull-right">Remove</button>' +
           '</div>';
@@ -175,16 +186,18 @@ var Modal = {
       var t = $('#addAnnotation').val();
       if (!templates.hasOwnProperty(t)) throw 't is not valid'; // For XSS.
       var attr = $html.attr('data-mockupdd-' + attrName[t]);
-      if(!attr){
+      if (!attr) {
         $html.attr('data-mockupdd-' + attrName[t], '["' + templates[t] + '"]')
       } else {
         // We remove the last ']' and then add the new template.
         $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + templates[t] + '"]');
       }
-      $('#acceptedAnnotation').show();
+      // Note that this code below is quick and dirty.
+      var $acceptedAnnotation = $('#acceptedAnnotation');
+      $acceptedAnnotation.show();
       setTimeout(function () {
-        $('#acceptedAnnotation').hide();
-      }, 2000);
+        $acceptedAnnotation.hide();
+      }, 4000);
     });
     setDialogProperties();
   }
