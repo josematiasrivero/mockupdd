@@ -26,10 +26,18 @@ function drawAnnotation(widget, annotation) {
 
 $(window).on("load", function(){
 
+
+  //Add a new widget to the main page.
   function _addToPage(element) {
     $('#page').append(element);
     EventAttacher.execute();
   }
+
+  /*
+   * All the functions behind add an OnClick event handler to the selection
+   * widgets from the sidebar, so that when clicking on them, a new widget is
+   * created and added to the main page.
+   */
 
   $('#title').on('click', function () {
     var title = $('<h3 class="mk-draggable mk-resizable mk-contextual-menu" contenteditable>New title</h3>');
