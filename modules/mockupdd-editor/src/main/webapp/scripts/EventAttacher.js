@@ -1,12 +1,18 @@
-/**
- * Attach events to elements in the mockup.
+/*
+ * Document: EventAttacher.js
+ * Description: Attach events to widgets in the mockup.
  */
+
 var EventAttacher = function () {
   return {
     attachDraggableItems: function () {
       var page = $('#page');
       page.find('.mk-draggable').each(function (i, e) {
         var tagName = e.tagName.toLowerCase();
+        /*
+         * Widgets such as inputboxes, buttons, and textareas, need a more complicated
+         * way of making them draggable, so that they can maintain they original behavior.
+         */
         if (tagName === 'input' || tagName === 'button' || tagName == 'textarea') {
           var $parent = $(e).parent();
           $parent.draggable({
@@ -62,6 +68,10 @@ var EventAttacher = function () {
           } else { // bottom or front
             var tag = $self.prop("tagName").toLowerCase();
             var $element, $parent;
+            /*
+             * As some widgets, as button, textarea, and inputboxes, have a div
+             * containing them, that div is what it has to be move to bottom/front
+             */
             if (tag === "button" || tag === "textarea" || tag === "input") {
               $element = $self.closest("." +  tag);
             } else {
@@ -76,6 +86,7 @@ var EventAttacher = function () {
             }
           }
         },
+        // Here goes all the options of the context menu
         items: {
             "front": {name: "Bring to front", icon: ""},
             "bottom": {name: "Send to bottom", icon: ""},
