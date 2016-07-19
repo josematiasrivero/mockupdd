@@ -1,6 +1,6 @@
 /*
  * Document: MockupLoaderService.js
- * Description: it is used to load the mockup from the db when the page is loaded.
+ * Description: a service used to load the mockup from the db when the page is loaded.
  */
 
  /// Prerequisites: MockupStateController.js, MockupRepository.js, EventAttacher.js
