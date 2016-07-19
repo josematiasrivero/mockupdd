@@ -1,3 +1,8 @@
+/*
+ * Document: widget-creation.js
+ * Description: when the page is loaded, add all the events to create widgets.
+ */
+
 function createWidget(dom) {
   /*
   $(dom).dblclick(function() {
