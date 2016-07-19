@@ -1,3 +1,8 @@
+/*
+ * Document: MockupRepository.js
+ * Description: it is used to save and load things to and from the server, using AJAX
+ */
+
 /// Prerequisites: GenericRepository.js, Preconditions.js
 
 var MockupRepository = function () {

@@ -1,3 +1,8 @@
+/*
+ * Document: MockupAutosaveService.js
+ * Description: a service used to save the mockup in a certain time lapse.
+ */
+
 /// Prerequisites: MockupRepository.js, GenericRepository.js, Preconditions.js, MockupStateController.js
 
 var timeToReload = 5000; // in milliseconds.

@@ -1,3 +1,8 @@
+/*
+ * Document: MockupStateController.js
+ * Description: manage the state of the mockup. State means saved, saving, dirty, loading, etc.
+ */
+
 /// Preconditions: Preconditions.js
 
 var MockupState = {
