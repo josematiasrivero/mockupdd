@@ -1,3 +1,8 @@
+/*
+ * Document: GenericRepository.js
+ * Description: implements the basic fuctions to comunicate via AJAX with the server.
+ */
+
 var GenericRepository = function () {
   return {
     _jsonPut: function (url, data, okCallback, errorCallback) {
