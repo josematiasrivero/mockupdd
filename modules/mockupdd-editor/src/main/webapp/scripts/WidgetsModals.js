@@ -1,4 +1,15 @@
+/*
+ * Document: WidgetsModals.js
+ * Description: contains all the information of widget's modals for properties or annotations.
+ */
 
+
+/*
+ * 'common' is the structure of the modal for all widgets.
+ * It'll be created every time the option properties of the
+ * context menu is selected, and then removed when closing.
+ * Inside 'form' tag, will be added the options of the specify widgets.
+ */
 var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" role=\"dialog\" style=\"display: block;\">" +
                   "<div class=\"modal-dialog [[modalSize]]\">" +
                     "<div class=\"modal-content\">" +
@@ -18,9 +29,15 @@ var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" ro
                   "</div>" +
                 "</div>";
 
+// Define the modal templates for properties and annotations respectively.
 var propertiesModalTemplate = common.replace("[[title]]", "Widget properties").replace("[[modalSize]]", ""),
   annotationsModalTemplate = common.replace("[[title]]", "Widget annotations").replace("[[modalSize]]", "modal-lg");
 
+/*
+ * 'currentWidget' will contain a reference to the current widget open (for properties or annotations).
+ * 'attrName' has all the possible Annotations names.
+ * 'templates' has the default information for the Annotations.
+ */
 var currentWidget, templates = [
     'Data({{className|Item type}})',
     'List({{className|Item type}})',
@@ -38,7 +55,13 @@ function setDialogProperties() {
   });
 }
 
+
 var Modal = {
+  /*
+   * 'properties' is a dictionary, which has all the different modals for widgets
+   * properties, where the key is the widget name plus the word 'Modal'.
+   * Each widget define what it needs to have inside the modal.
+   */
   properties: {
     "titleModal": function (title) {
       currentWidget = $(title);
@@ -138,6 +161,11 @@ var Modal = {
       setDialogProperties();
     }
   },
+  
+  /*
+   * 'annotations' is a function, which has the information for widget annotations,
+   * and recieve by parameter the widget's html.
+   */
   annotations: function ($html) {
     currentWidget = $html;
     var $modalStructure = $($.parseHTML(annotationsModalTemplate));
