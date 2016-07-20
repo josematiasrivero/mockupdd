@@ -62,23 +62,11 @@
         </form>
       </div>
       <script>
-              $(function() {
-                $(".draggable").draggable();
-              });
-            </script>
+        $(function() {
+          $(".draggable").draggable();
+        });
+      </script>
       <input type="hidden" value="${mockup.name}" id="mockupName" />
       <input type="hidden" value="${mockup.id}" id="mockupId" />
-
-
-
-
-
-
-
-
-
-
-
-
  </jsp:body>
 </t:baseLayout>
