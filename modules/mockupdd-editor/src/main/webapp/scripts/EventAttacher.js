@@ -13,7 +13,7 @@ var EventAttacher = function () {
          * Widgets such as inputboxes, buttons, and textareas, need a more complicated
          * way of making them draggable, so that they can maintain they original behavior.
          */
-        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea') {
+        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'img') {
           var $parent = $(e).parent();
           $parent.draggable({
             start: function (event, ui) {
@@ -72,7 +72,7 @@ var EventAttacher = function () {
              * As some widgets, as button, textarea, and inputboxes, have a div
              * containing them, that div is what it has to be move to bottom/front
              */
-            if (tag === "button" || tag === "textarea" || tag === "input") {
+            if (tag === "button" || tag === "textarea" || tag === "input" || tag === "img") {
               $element = $self.closest("." +  tag);
             } else {
               $element = $self;

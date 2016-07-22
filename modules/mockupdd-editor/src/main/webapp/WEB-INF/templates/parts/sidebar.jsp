@@ -100,6 +100,17 @@
 				</div>
 			</div>
 
+			<div class="row mk-sidebar-item">
+				<div id="image" class="col-md-6">
+					<div class="text-center">
+						<label class="control-label">Image</label>
+					</div>
+					<div id="create-image" style>
+						<img src="<sec:authentication property="credentials.imageUrl" />" style="width: 85px; height: 80px;"/>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<div id="main-content"></div>

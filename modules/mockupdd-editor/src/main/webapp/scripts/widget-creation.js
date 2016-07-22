@@ -83,4 +83,10 @@ $(window).on("load", function(){
     _addToPage(textarea);
   });
 
+  $('#image').on('click', function () {
+    var image = $('<div class="img draggable mk-draggable" placeholder="This is an Image"></div>');
+    image.append('<img class="mk-draggable mk-resizable mk-contextual-menu" src="' + $("#create-image").find('img').attr('src') + '"/>');
+    _addToPage(image);
+  });
+
 });

@@ -159,9 +159,27 @@ var Modal = {
         currentWidget.attr("placeholder", $("#dialog-form").find("input[name='placeholder']").val());
       });
       setDialogProperties();
-    }
+    },
+
+    "imgModal": function (image) {
+      currentWidget = $(image);
+      var modalStructure = $.parseHTML(propertiesModalTemplate);
+      $("body").append($(modalStructure));
+      var form = $(modalStructure).find("form");
+      $(form).append(
+        $.parseHTML(
+          "<div class=\"form-group\">" +
+          "<label for=\"src\" class=\"control-label\">Source:</label>" +
+          "<input type=\"text\" name=\"src\" id=\"src\" value=\"" + $(image).attr('src') +
+          '"class="form-control mk-modal-input">' +
+          "</div>"));
+      $("#modal-apply").click(function () {
+        currentWidget.attr('src', $("#dialog-form").find("input[name='src']").val());
+      });
+      setDialogProperties();
+    },
   },
-  
+
   /*
    * 'annotations' is a function, which has the information for widget annotations,
    * and recieve by parameter the widget's html.
