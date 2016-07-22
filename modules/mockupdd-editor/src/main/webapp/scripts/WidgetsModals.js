@@ -191,63 +191,92 @@ var Modal = {
     $('body').append($modalStructure);
     var form = $modalStructure.find('form');
     $(form).append($.parseHTML(function () {
-        var res = '<div class="form-inline" style="margin-bottom:25px;">' +
-          '<div class="form-group">' +
-          '<label for="addAnnotation" aria-label="Add Annotation"></label>' +
-          '<select class="form-control" id="addAnnotation">';
-        for (var t in templates) if (templates.hasOwnProperty(t)) {
-          res += '<option value="' + t + '"> ' + templates[t] + '</option>';
-        }
-        res += '</select>' +
-          '</div>' +
-          '<span id="acceptedAnnotation" class="fa fa-check" title="Annotation added successfully" style="color: darkgreen; display:none;"/>' +
-          '<button id="confirmAddAnnotation" class="btn btn-success pull-right">Add</button>' +
-          '</div>' +
-          '<div class="form-inline">' +
-          '<div class="form-group">' +
-          '<label for="removeAnnotation" aria-label="Remove Annotation"></label>' +
-          '<select class="form-control" id="removeAnnotation">';
+      var res = '<div class="form-inline" style="margin-bottom:25px;">' +
+        '<div class="form-group">' +
+        '<label for="addAnnotation" aria-label="Add Annotation"></label>' +
+        '<select class="form-control" id="addAnnotation">';
+      for (var t in templates) if (templates.hasOwnProperty(t)) {
+        res += '<option value="' + t + '"> ' + templates[t] + '</option>';
+      }
+      res += '</select>' +
+        '</div>' +
+        '<span id="acceptedAnnotation" class="fa fa-check" title="Annotation added successfully" style="color: darkgreen; display:none;"/>' +
+        '<span id="rejectedAnnotation" class="fa fa-times" title="Annotation rejected" style="color: darkorange; display:none;"/>' +
+        '<button id="confirmAddAnnotation" class="btn btn-success pull-right">Add</button>' +
+        '</div>' +
+        '<div class="form-inline">' +
+        '<div class="form-group">' +
+        '<label for="removeAnnotation" aria-label="Remove Annotation"></label>' +
+        '<select class="form-control" id="removeAnnotation">';
 
-        var id = 0;
+      var id = 0;
 
-        function _addData(attr) {
-          var s = $html.attr('data-mockupdd-' + attr);
-          if (!s) return;
-          JSON.parse(s).forEach(function (v) {
-            res += '<option value="' + (id++) + '">' + v + '</option>';
-          });
-        }
+      function _addData(attr) {
+        var s = $html.attr('data-mockupdd-' + attr);
+        if (!s) return;
+        JSON.parse(s).forEach(function (v) {
+          res += '<option value="' + (id++) + '">' + v + '</option>';
+        });
+      }
 
-        for (var i = 0; i < attrName.length - 1; i++) {
-          _addData(attrName[i]);
-        }
-        return res + '</select>' +
-          '</div>' +
-          '<button class="btn btn-warning pull-right">Remove</button>' +
-          '</div>';
-      }()
-    ));
-    $("#confirmAddAnnotation").click(function (e) {
+      // We omit the last one so we do not count 'data' twice
+      for (var i = 0; i < attrName.length - 1; i++) {
+        _addData(attrName[i]);
+      }
+      return res + '</select>' +
+        '</div>' +
+        '<button class="btn btn-warning pull-right">Remove</button>' +
+        '</div>';
+    }()));
+    $('#confirmAddAnnotation').click(function (e) {
       e.preventDefault();
-      var t = $('#addAnnotation').val();
+      var t = $('#addAnnotation').val(); // The index of the template
       if (!templates.hasOwnProperty(t)) throw 't is not valid'; // For XSS.
+      var template = templates[t];
+      var placeholders = template.match(/\{\{(.*?)}}/g); // Get the substrings with between '{{' and '}}' of the template
+      for(var p in placeholders) if(placeholders.hasOwnProperty(p)) {
+        var placeholder = placeholders[p];
+        var name = placeholder.match(/\{\{(.*?)\|/g)[0];
+        name = name.substr(2, name.length - 3); // Remove the '{{' and the '|'
+        var value = '';
+        while(!value) { // While the answer is falsey, insist.
+          value = prompt('What is the value for the placeholder with name ' + name + '?');
+        }
+        template = template.replace(placeholder, value); // We complete the placeholder with the actual value.
+      }
       var attr = $html.attr('data-mockupdd-' + attrName[t]);
       if (!attr) {
-        $html.attr('data-mockupdd-' + attrName[t], '["' + templates[t] + '"]')
+        // If the attr is empty, add only the new template.
+        $html.attr('data-mockupdd-' + attrName[t], '["' + template + '"]')
       } else {
         // We remove the last ']' and then add the new template.
-        $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + templates[t] + '"]');
+        $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + template + '"]');
       }
-      // Note that this code below is quick and dirty.
-      var $acceptedAnnotation = $('#acceptedAnnotation');
-      $acceptedAnnotation.show();
-      setTimeout(function () {
-        $acceptedAnnotation.hide();
-      }, 4000);
+      acceptAnnotation();
     });
     setDialogProperties();
   }
 };
+
+/**
+ * Displays a jQuery element for <code>time</code> milliseconds.
+ */
+function displayHtml($html, time) {
+  time = time || 2000; // default time is two seconds
+  $html.show();
+  setTimeout(function () {
+    $html.hide();
+  }, time);
+}
+
+function acceptAnnotation() {
+  return displayHtml($('#acceptedAnnotation'));
+}
+
+function rejectAnnotation() {
+  return displayHtml($('#rejectedAnnotation'));
+}
+
 
 
 // This is a regex that catches everything between {{ and }}: \{\{(.*?)}}/g
