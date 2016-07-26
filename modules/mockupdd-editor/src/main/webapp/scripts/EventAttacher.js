@@ -48,8 +48,10 @@ var EventAttacher = function () {
       });
     },
     attachContextualMenus: function () {
-      $('.mk-contextual-menu').dblclick(function() {
-        $(this).contextMenu();
+      $('.mk-contextual-menu').mousedown(function() {
+        if (event.which == 3) {
+          $(this).contextMenu();
+        }
       });
       $.contextMenu({
         selector: '.mk-contextual-menu',
