@@ -77,6 +77,7 @@ var Modal = {
           "</div>"));
       $("#modal-apply").click(function () {
         currentWidget.text($("#dialog-form").find("input[name='label']").val());
+        $(".modal").remove();
       });
       setDialogProperties();
     },
@@ -95,6 +96,7 @@ var Modal = {
           "</div>"));
       $("#modal-apply").click(function () {
         currentWidget.text($("#dialog-form").find("input[name='label']").val());
+        $(".modal").remove();
       });
       setDialogProperties();
     },
@@ -113,6 +115,7 @@ var Modal = {
           "</div>"));
       $("#modal-apply").click(function () {
         currentWidget.attr("placeholder", $("#dialog-form").find("input[name='placeholder']").val());
+        $(".modal").remove();
       });
       setDialogProperties();
     },
@@ -131,6 +134,7 @@ var Modal = {
           "</div>"));
       $("#modal-apply").click(function () {
         currentWidget.text($("#dialog-form").find("input[name='label']").val());
+        $(".modal").remove();
       });
       setDialogProperties();
     },
@@ -155,6 +159,7 @@ var Modal = {
       $("#modal-apply").click(function () {
         currentWidget.find(".panel-heading").text($("#dialog-form").find("input[name='header-text']").val());
         currentWidget.find(".panel-body").text($("#dialog-form").find("input[name='paragraph-text']").val());
+        $(".modal").remove();
       });
       setDialogProperties();
     },
@@ -173,6 +178,7 @@ var Modal = {
           "</div>"));
       $("#modal-apply").click(function () {
         currentWidget.attr("placeholder", $("#dialog-form").find("input[name='placeholder']").val());
+        $(".modal").remove();
       });
       setDialogProperties();
     },
@@ -191,6 +197,7 @@ var Modal = {
           "</div>"));
       $("#modal-apply").click(function () {
         currentWidget.attr('src', $("#dialog-form").find("input[name='src']").val());
+        $(".modal").remove();
       });
       setDialogProperties();
     },
