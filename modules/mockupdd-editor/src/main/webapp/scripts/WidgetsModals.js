@@ -139,7 +139,23 @@ var Modal = {
       currentWidget = $(panel);
       var modalStructure = $.parseHTML(propertiesModalTemplate);
       $("body").append($(modalStructure));
-      // Nothing by now
+      var form = $(modalStructure).find("form");
+      $(form).append(
+        $.parseHTML(
+          "<div class=\"form-group\">" +
+            "<label for=\"header-text\" class=\"control-label\">Header text:</label>" +
+            "<input type=\"text\" name=\"header-text\" id=\"header-text\" value=\"" + $(panel).find(".panel-heading").text() +
+            '"class="form-control mk-modal-input">' +
+          "</div>" +
+          "<div class=\"form-group\">" +
+            "<label for=\"paragraph-text\" class=\"control-label\">Paragraph text:</label>" +
+            "<input type=\"text\" name=\"paragraph-text\" id=\"paragraph-text\" value=\"" + $(panel).find(".panel-body").text() +
+            '"class="form-control mk-modal-input">' +
+          "</div>"));
+      $("#modal-apply").click(function () {
+        currentWidget.find(".panel-heading").text($("#dialog-form").find("input[name='header-text']").val());
+        currentWidget.find(".panel-body").text($("#dialog-form").find("input[name='paragraph-text']").val());
+      });
       setDialogProperties();
     },
 
