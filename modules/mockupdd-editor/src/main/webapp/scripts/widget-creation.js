@@ -57,8 +57,10 @@ $(window).on("load", function(){
 
   $('#input').on('click', function () {
     var input = $('<div class="input draggable mk-draggable" contenteditable></div>');
-    $(input).append('<input class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="New input">');
+    input.append('<input class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="New input">');
     _addToPage(input);
+    input.find(".ui-wrapper").css("height", "60px").css("width", "170px");
+    input.find("input").css("height", "30px").css("width", "137px");
   });
 
   $('#button').on('click', function () {
