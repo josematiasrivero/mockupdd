@@ -91,4 +91,9 @@ $(window).on("load", function(){
     _addToPage(image);
   });
 
+  $('#link').on('click', function () {
+    var link = $('<a class="link mk-draggable mk-resizable mk-contextual-menu">New link</a>');
+    _addToPage(link);
+  });
+
 });

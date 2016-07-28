@@ -109,6 +109,14 @@
 						<img src="<sec:authentication property="credentials.imageUrl" />" style="width: 85px; height: 80px;"/>
 					</div>
 				</div>
+
+				<div id="link" class="col-md-6">
+					<div class="text-center">
+						<label class="control-label">Link:</label>
+					</div>
+					<div id="create-link" class="text-center mk-widget-selector">
+						This is a link</div>
+				</div>
 			</div>
 
 		</div>
