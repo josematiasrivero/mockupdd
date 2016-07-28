@@ -1,17 +1,5 @@
 ## Adding a new widget to the project
 
-### widget-creation.js
-
-- Add an entry so that when clicking on the id "widget-id" on the sidebar, it creates a new widget of that kind.
-Example:
-
-  ```javascript
-  $('#widget-id').on('click', function () {
-      var widget = "html of the new widget";
-      _addToPage(widget);
-    });
-  ```
-
 ### sidebar.jsp
 
 - Add inside the widget list the new widget to be clicked.
@@ -29,6 +17,40 @@ Example:
       </div>
     </div>
   </div>
+  ```
+
+### widget-creation.js
+
+- Add an entry so that when clicking on the id "widget-id" on the sidebar, it creates a new widget of that kind.
+Example:
+
+  ```javascript
+  $('#widget-id').on('click', function () {
+      var widget = "html of the new widget";
+      _addToPage(widget);
+    });
+  ```
+
+### style.css
+
+- Just in case the widget you're adding is inside a div container, you musk a special class to this css file.
+Example:
+
+  ```css
+  img.mk-draggable {
+      position: absolute;
+      cursor: pointer;
+      width: 352px;
+      height: 240px;
+  }
+  .img.mk-draggable {
+      left: 285px;
+      top: 55px;
+      position: absolute;
+      cursor: pointer;
+      width: 5px;
+      height: 5px;
+  }
   ```
 
 ### WidgetsModals.js
@@ -57,7 +79,7 @@ Example (for a label property):
 
 ### EvantAttacher.js
 
-- If the widget is not cotained into a div, don't do anything here.
+- If the widget is not contained into a div, don't do anything here.
 
 - In case it is, you must match the name of the tag, and look for the div parent. It is easy to do, just add the tag name of the widget:
   * (1) in 'attachDraggableItems' to look up the parent div
@@ -70,25 +92,3 @@ Example (for a label property):
     ```javascript
     if (tag === "button" || tag === "textarea" || tag === "input" ...)
     ```
-
-### style.css
-
-- Just in case the widget you're adding is inside a div container, you musk a special class to this css file.
-Example:
-
-  ```css
-  img.mk-draggable {
-      position: absolute;
-      cursor: pointer;
-      width: 352px;
-      height: 240px;
-  }
-  .img.mk-draggable {
-      left: 285px;
-      top: 55px;
-      position: absolute;
-      cursor: pointer;
-      width: 5px;
-      height: 5px;
-  }
-  ```
