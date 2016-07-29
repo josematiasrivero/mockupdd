@@ -225,7 +225,7 @@ var Modal = {
 
   /*
    * 'annotations' is a function, which has the information for widget annotations,
-   * and recieve by parameter the widget's html.
+   * and receive by parameter the widget's html.
    */
   annotations: function ($html) {
     currentWidget = $html;
@@ -258,7 +258,7 @@ var Modal = {
         var s = $html.attr('data-mockupdd-' + attr);
         if (!s) return;
         JSON.parse(s).forEach(function (v) {
-          res += '<option value="' + (id++) + '">' + v + '</option>';
+          res += '<option value="' + v + '">' + v + '</option>';
         });
       }
 
@@ -268,21 +268,22 @@ var Modal = {
       }
       return res + '</select>' +
         '</div>' +
-        '<button class="btn btn-warning pull-right">Remove</button>' +
+        '<button id="confirmRemoveAnnotation" class="btn btn-warning pull-right">Remove</button>' +
         '</div>';
     }()));
+
     $('#confirmAddAnnotation').click(function (e) {
       e.preventDefault();
       var t = $('#addAnnotation').val(); // The index of the template
       if (!templates.hasOwnProperty(t)) throw 't is not valid'; // For XSS.
       var template = templates[t];
       var placeholders = template.match(/\{\{(.*?)}}/g); // Get the substrings with between '{{' and '}}' of the template
-      for(var p in placeholders) if(placeholders.hasOwnProperty(p)) {
+      for (var p in placeholders) if (placeholders.hasOwnProperty(p)) {
         var placeholder = placeholders[p];
-        var name = placeholder.match(/\{\{(.*?)\|/g)[0];
+        var name = placeholder.match(/\{\{(.*?)\|/g)[0]; // Get the name of the placeholder.
         name = name.substr(2, name.length - 3); // Remove the '{{' and the '|'
         var value = '';
-        while(!value) { // While the answer is falsey, insist.
+        while (!value) { // While the answer is falsey, insist.
           value = prompt('What is the value for the placeholder with name ' + name + '?');
         }
         template = template.replace(placeholder, value); // We complete the placeholder with the actual value.
@@ -295,7 +296,21 @@ var Modal = {
         // We remove the last ']' and then add the new template.
         $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + template + '"]');
       }
+      $('#removeAnnotation').append('<option value="' + template + '">' + template + '</option>');
       acceptAnnotation();
+    });
+
+    $('#confirmRemoveAnnotation').click(function (e) {
+      e.preventDefault();
+      var element = $('#removeAnnotation').val();
+      var attr = element.match(/(.*?)\(/g)[0];
+      attr = attr.substr(0, attr.length - 1).toLowerCase();
+      var elements = JSON.parse($html.attr('data-mockupdd-' + attr));
+      elements.splice(_.findIndex(elements, function (e) {
+        return e == element;
+      }), 1); // We remove the first element equal to 'element'.
+      $html.attr('data-mockupdd-' + attr, JSON.stringify(elements));
+      $('#removeAnnotation option[value="' + element + '"]').remove(); // We remove the element from the select.
     });
     setDialogProperties();
   }
@@ -319,7 +334,3 @@ function acceptAnnotation() {
 function rejectAnnotation() {
   return displayHtml($('#rejectedAnnotation'));
 }
-
-
-
-// This is a regex that catches everything between {{ and }}: \{\{(.*?)}}/g
