@@ -58,43 +58,43 @@ var EventAttacher = function () {
         trigger: 'none',
         callback: function(key, options) {
           var $self = $(this); // Avoiding multiple computations of the same thing
-          if (key === "delete") {
+          if (key === 'delete') {
             $self.remove();
-          } else if (key === "properties") {
-            var tag = $self.prop("tagName").toLowerCase();
-            if (tag === 'h3') tag = "title";
-            if (tag === 'div') tag = "panel";
-            Modal.properties[tag+"Modal"]($self);
-          } else if (key == "annotations") {
+          } else if (key === 'properties') {
+            var tag = $self.prop('tagName').toLowerCase();
+            if (tag === 'h3') tag = 'title';
+            if (tag === 'div') tag = 'panel';
+            Modal.properties[tag+'Modal']($self);
+          } else if (key == 'annotations') {
             Modal.annotations($self);
           } else { // bottom or front
-            var tag = $self.prop("tagName").toLowerCase();
+            var tag = $self.prop('tagName').toLowerCase();
             var $element, $parent;
             /*
              * As some widgets, as button, textarea, and inputboxes, have a div
              * containing them, that div is what it has to be move to bottom/front
              */
-            if (tag === "button" || tag === "textarea" || tag === "input" || tag === "img") {
-              $element = $self.closest("." +  tag);
+            if (tag === 'button' || tag === 'textarea' || tag === 'input' || tag === 'img') {
+              $element = $self.closest('.' +  tag);
             } else {
               $element = $self;
             }
             $parent = $element.parent();
             $element.detach();
-            if (key === "bottom") {
+            if (key === 'bottom') {
               $parent.prepend($element);
-            } else if (key === "front") {
+            } else if (key === 'front') {
               $parent.append($element);
             }
           }
         },
         // Here goes all the options of the context menu
         items: {
-            "front": {name: "Bring to front", icon: ""},
-            "bottom": {name: "Send to bottom", icon: ""},
-            "delete": {name: "Delete", icon: ""},
-            "properties": {name: "Properties", icon: ""},
-            "annotations": {name: "Annotations", icon: ""}
+            'front': {name: 'Bring to front', icon: ''},
+            'bottom': {name: 'Send to bottom', icon: ''},
+            'delete': {name: 'Delete', icon: ''},
+            'properties': {name: 'Properties', icon: ''},
+            'annotations': {name: 'Annotations', icon: ''}
         }
       });
     },

@@ -15,7 +15,7 @@
       <div id="page">
       </div>
     </div>
-
+    <!-- This is not being used right now, is a mockup for a confliction modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="conflictsModal">
      	<div class="modal-dialog">
      		<div class="modal-content">
@@ -49,7 +49,7 @@
      </div>
      <!-- /.modal -->
 
-    <div id="mk-floating-panel" class="panel panel-primary draggable">
+    <div id="mk-floating-panel" class="panel panel-primary draggable" style="display:none">
       <div class="panel-heading">
         Menu
       </div>
