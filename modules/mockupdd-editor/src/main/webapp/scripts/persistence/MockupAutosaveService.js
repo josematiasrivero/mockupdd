@@ -23,11 +23,14 @@ function getHtmlToPersist() {
   });
   $page.find('.ui-resizable').each(function (i, e) {
     $(e).find('*').each(function (i, e) {
-      $(e).remove();
+      if ($(e).is('div')) {
+        $(e).remove();
+      }
     });
   });
   $page.find('*').each(function (i, e) {
     $(e).attr('class', function (i, c) {
+      if (c === undefined) return "";
       return c.replace(/(^|\s)ui-\S+/g, '');
     });
   });

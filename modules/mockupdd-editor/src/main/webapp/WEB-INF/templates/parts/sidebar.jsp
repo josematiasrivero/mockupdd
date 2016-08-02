@@ -119,6 +119,17 @@
 				</div>
 			</div>
 
+			<div class="row mk-sidebar-item">
+				<div id="checkbox" class="col-md-6">
+					<div class="text-center">
+						<label class="control-label">Checkbox</label>
+					</div>
+					<div id="create-checkbox" class="text-center mk-widget-selector">
+						<span class="form-control"></span>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<div id="main-content"></div>

@@ -221,6 +221,29 @@ var Modal = {
       setDialogProperties();
     },
 
+    "checkboxModal": function (checkbox) {
+      currentWidget = $(checkbox);
+      var modalStructure = $.parseHTML(propertiesModalTemplate);
+      $("body").append($(modalStructure));
+      var form = $(modalStructure).find("form");
+      $(form).append(
+        $.parseHTML(
+          "<div class=\"form-group\">" +
+          "<label for=\"text\" class=\"control-label\">Text:</label>" +
+          "<input type=\"text\" name=\"text\" id=\"text\" value=\"" + $(checkbox).text() +
+          '"class="form-control mk-modal-input">' +
+          "</div>"));
+      $("#modal-apply").click(function () {
+        var input = currentWidget.find("input");
+        input.text("");
+        currentWidget.find("label").text("");
+        currentWidget.find("label").append(input);
+        currentWidget.find("label").append($("#dialog-form").find("input[name='text']").val());
+        $(".modal").remove();
+      });
+      setDialogProperties();
+    },
+
   },
 
   /*

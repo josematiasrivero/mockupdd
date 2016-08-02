@@ -291,6 +291,22 @@ img.mk-draggable {
     text-decoration: underline;
 }
 
+.checkbox.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
+.checkbox.label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
 .mockupdd-annotation {
     background-color: #FFEE99;
     position: absolute;

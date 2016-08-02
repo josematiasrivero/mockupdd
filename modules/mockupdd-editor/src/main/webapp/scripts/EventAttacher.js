@@ -15,6 +15,7 @@ var EventAttacher = function () {
          */
         if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'img') {
           var $parent = $(e).parent();
+          if ($parent.attr('type') === 'checkbox') $parent = $parent.parent();
           $parent.draggable({
             start: function (event, ui) {
               $(this).data('preventBehaviour', true);
@@ -62,8 +63,9 @@ var EventAttacher = function () {
             $self.remove();
           } else if (key === "properties") {
             var tag = $self.prop("tagName").toLowerCase();
-            if (tag === 'h3') tag = "title";
-            if (tag === 'div') tag = "panel";
+            if ($self.hasClass("checkbox")) tag = "checkbox";
+            else if (tag === 'h3') tag = "title";
+            else if (tag === 'div') tag = "panel";
             Modal.properties[tag+"Modal"]($self);
           } else if (key == "annotations") {
             Modal.annotations($self);

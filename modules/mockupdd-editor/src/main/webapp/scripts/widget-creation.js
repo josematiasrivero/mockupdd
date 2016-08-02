@@ -96,4 +96,12 @@ $(window).on("load", function(){
     _addToPage(link);
   });
 
+  $('#checkbox').on('click', function () {
+    var checkbox = $('<div class="checkbox draggable mk-draggable mk-resizable mk-contextual-menu"></div>');
+    checkbox.append('<label><input type="checkbox" class="form-control" value="New checkbox">New checkbox</label>');
+    _addToPage(checkbox);
+    checkbox.find("input").css("width", "14px").css("height", "14px");
+    checkbox.css("width", "122px").css("height", "35px");
+  });
+
 });
