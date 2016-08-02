@@ -139,6 +139,17 @@
 				</div>
 			</div>
 
+			<div class="row mk-sidebar-item">
+				<div id="spinner" class="col-md-6">
+					<div class="text-center">
+						<label class="control-label">Spinner</label>
+					</div>
+					<div id="create-spinner" class="text-center mk-widget-selector">
+						<span class="form-control"></span>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<div id="main-content"></div>

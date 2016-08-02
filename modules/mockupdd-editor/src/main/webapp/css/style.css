@@ -323,6 +323,26 @@ img.mk-draggable {
     cursor: pointer;
 }
 
+.spinner.code {
+    font-family: "courier";
+}
+
+.spinner.mk-draggable {
+    position: absolute;
+    cursor: pointer;
+    width: 150px;
+    height: 30px;
+}
+
+.spinner.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
 .mockupdd-annotation {
     background-color: #FFEE99;
     position: absolute;

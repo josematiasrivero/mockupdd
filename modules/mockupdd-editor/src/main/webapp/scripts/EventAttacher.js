@@ -66,6 +66,7 @@ var EventAttacher = function () {
             var tag = $self.prop("tagName").toLowerCase();
             if ($self.hasClass("checkbox")) tag = "checkbox";
             else if ($self.hasClass("radio")) tag = "radio";
+            else if ($self.hasClass("spinner")) tag = "spinner";
             else if (tag === 'h3') tag = "title";
             else if (tag === 'div') tag = "panel";
             Modal.properties[tag+"Modal"]($self);
@@ -79,7 +80,11 @@ var EventAttacher = function () {
              * containing them, that div is what it has to be move to bottom/front
              */
             if (tag === "button" || tag === "textarea" || tag === "input" || tag === "img") {
-              $element = $self.closest("." +  tag);
+              if ($self.attr("type") === 'number') {
+                $element = $self.closest("." +  "spinner");
+              } else {
+                $element = $self.closest("." +  tag);
+              }
             } else {
               $element = $self;
             }

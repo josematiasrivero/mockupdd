@@ -358,6 +358,26 @@ var Modal = {
       $html.attr('data-mockupdd-' + attr, JSON.stringify(elements));
       $('#removeAnnotation option[value="' + element + '"]').remove(); // We remove the element from the select.
     });
+
+    "spinnerModal": function (spinner) {
+      currentWidget = $(spinner);
+      var modalStructure = $.parseHTML(propertiesModalTemplate);
+      $("body").append($(modalStructure));
+      var form = $(modalStructure).find("form");
+      $(form).append(
+        $.parseHTML(
+          "<div class=\"form-group\">" +
+          "<label for=\"placeholder\" class=\"control-label\">Placeholder:</label>" +
+          "<spinner type=\"text\" name=\"placeholder\" id=\"placeholder\" value=\"" + $(spinner).attr("placeholder") +
+          '"class="form-control mk-modal-input">' +
+          "</div>"));
+      $("#modal-apply").click(function () {
+        currentWidget.attr("placeholder", $("#dialog-form").find("input[name='placeholder']").val());
+        $(".modal").remove();
+      });
+      setDialogProperties();
+    },
+
     setDialogProperties();
   }
 };

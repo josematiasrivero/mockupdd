@@ -112,4 +112,12 @@ $(window).on("load", function(){
     radio.css("width", "122px").css("height", "35px");
   });
 
+  $('#spinner').on('click', function () {
+    var spinner = $('<div class="spinner draggable mk-draggable" contenteditable></div>');
+    spinner.append('<input type="number" class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="New input">');
+    _addToPage(spinner);
+    spinner.find(".ui-wrapper").css("height", "60px").css("width", "170px");
+    spinner.find("input").css("height", "30px").css("width", "137px");
+  });
+
 });
