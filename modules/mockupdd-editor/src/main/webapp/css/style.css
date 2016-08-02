@@ -307,6 +307,22 @@ img.mk-draggable {
     cursor: pointer;
 }
 
+.radio.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
+.radio.label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
 .mockupdd-annotation {
     background-color: #FFEE99;
     position: absolute;

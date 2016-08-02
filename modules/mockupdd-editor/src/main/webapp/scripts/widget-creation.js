@@ -104,4 +104,12 @@ $(window).on("load", function(){
     checkbox.css("width", "122px").css("height", "35px");
   });
 
+  $('#radio').on('click', function () {
+    var radio = $('<div class="radio draggable mk-draggable mk-resizable mk-contextual-menu"></div>');
+    radio.append('<label><input type="radio" class="form-control" value="New radio">New radio</label>');
+    _addToPage(radio);
+    radio.find("input").css("width", "14px").css("height", "14px");
+    radio.css("width", "122px").css("height", "35px");
+  });
+
 });

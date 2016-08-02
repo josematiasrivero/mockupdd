@@ -128,6 +128,15 @@
 						<span class="form-control"></span>
 					</div>
 				</div>
+
+				<div id="radio" class="col-md-6">
+					<div class="text-center">
+						<label class="control-label">Radio</label>
+					</div>
+					<div id="create-radio" class="text-center mk-widget-selector">
+						<span class="form-control"></span>
+					</div>
+				</div>
 			</div>
 
 		</div>
