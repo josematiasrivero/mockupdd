@@ -38,14 +38,9 @@ var propertiesModalTemplate = common.replace("[[title]]", "Widget properties").r
  * 'attrName' has all the possible Annotations names.
  * 'templates' has the default information for the Annotations.
  */
-var currentWidget, templates = [
-    'Data({{className|Item type}})',
-    'List({{className|Item type}})',
-    'Save({{className|Item type}})',
-    'Delete({{className|Item type}})',
-    'Activate({{className|Item type}})',
-    'Data({{className|Item type}}.{{property|Property Name}}:{{dataType|Data type}})'],
-  attrName = ['data', 'list', 'save', 'delete', 'activate', 'data'];
+var templatesInfo = TemplatesService.getTemplates();
+var currentWidget, templates = _.map(templatesInfo, function(t) {return t['template']}),
+  attrName = _.map(templatesInfo, function(t) {return t['name']});
 
 function setDialogProperties() {
   $(".modal").find(".modal-close").each(function (i, e) {
@@ -302,7 +297,8 @@ var Modal = {
 
     $('#confirmRemoveAnnotation').click(function (e) {
       e.preventDefault();
-      var element = $('#removeAnnotation').val();
+      var $removeAnnotation = $('#removeAnnotation');
+      var element = $removeAnnotation.val();
       var attr = element.match(/(.*?)\(/g)[0];
       attr = attr.substr(0, attr.length - 1).toLowerCase();
       var elements = JSON.parse($html.attr('data-mockupdd-' + attr));
@@ -310,7 +306,7 @@ var Modal = {
         return e == element;
       }), 1); // We remove the first element equal to 'element'.
       $html.attr('data-mockupdd-' + attr, JSON.stringify(elements));
-      $('#removeAnnotation option[value="' + element + '"]').remove(); // We remove the element from the select.
+      $removeAnnotation.find('option[value="' + element + '"]').remove(); // We remove the element from the select.
     });
     setDialogProperties();
   }

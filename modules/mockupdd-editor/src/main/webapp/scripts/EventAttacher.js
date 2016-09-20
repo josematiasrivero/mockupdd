@@ -71,8 +71,8 @@ var EventAttacher = function () {
             var tag = $self.prop('tagName').toLowerCase();
             var $element, $parent;
             /*
-             * As some widgets, as button, textarea, and inputboxes, have a div
-             * containing them, that div is what it has to be move to bottom/front
+             * Some widgets, as the button, textarea, and input boxes, have a div
+             * containing them, that div is what it has to move to bottom/front
              */
             if (tag === 'button' || tag === 'textarea' || tag === 'input' || tag === 'img') {
               $element = $self.closest('.' +  tag);

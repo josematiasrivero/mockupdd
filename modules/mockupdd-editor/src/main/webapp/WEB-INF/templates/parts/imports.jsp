@@ -13,6 +13,7 @@
 
 <script src="${pageContext.request.contextPath}/scripts/EventAttacher.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/utils/Preconditions.js"></script>
+<script src="${pageContext.request.contextPath}/scripts/persistence/TemplatesService.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/WidgetsModals.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/GenericRepository.js"></script>
 <script src="${pageContext.request.contextPath}/scripts/persistence/MockupRepository.js"></script>
