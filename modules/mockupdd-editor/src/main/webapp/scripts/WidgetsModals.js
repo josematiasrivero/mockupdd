@@ -216,6 +216,52 @@ var Modal = {
       setDialogProperties();
     },
 
+    "checkboxModal": function (checkbox) {
+      currentWidget = $(checkbox);
+      var modalStructure = $.parseHTML(propertiesModalTemplate);
+      $("body").append($(modalStructure));
+      var form = $(modalStructure).find("form");
+      $(form).append(
+        $.parseHTML(
+          "<div class=\"form-group\">" +
+          "<label for=\"text\" class=\"control-label\">Text:</label>" +
+          "<input type=\"text\" name=\"text\" id=\"text\" value=\"" + $(checkbox).text() +
+          '"class="form-control mk-modal-input">' +
+          "</div>"));
+      $("#modal-apply").click(function () {
+        var input = currentWidget.find("input");
+        input.text("");
+        currentWidget.find("label").text("");
+        currentWidget.find("label").append(input);
+        currentWidget.find("label").append($("#dialog-form").find("input[name='text']").val());
+        $(".modal").remove();
+      });
+      setDialogProperties();
+    },
+
+    "radioModal": function (radio) {
+      currentWidget = $(radio);
+      var modalStructure = $.parseHTML(propertiesModalTemplate);
+      $("body").append($(modalStructure));
+      var form = $(modalStructure).find("form");
+      $(form).append(
+        $.parseHTML(
+          "<div class=\"form-group\">" +
+          "<label for=\"text\" class=\"control-label\">Text:</label>" +
+          "<input type=\"text\" name=\"text\" id=\"text\" value=\"" + $(radio).text() +
+          '"class="form-control mk-modal-input">' +
+          "</div>"));
+      $("#modal-apply").click(function () {
+        var input = currentWidget.find("input");
+        input.text("");
+        currentWidget.find("label").text("");
+        currentWidget.find("label").append(input);
+        currentWidget.find("label").append($("#dialog-form").find("input[name='text']").val());
+        $(".modal").remove();
+      });
+      setDialogProperties();
+    },
+
   },
 
   /*
@@ -299,7 +345,7 @@ var Modal = {
       e.preventDefault();
       var $removeAnnotation = $('#removeAnnotation');
       var element = $removeAnnotation.val();
-      if(element === null) return; // Nothing was selected
+      if (element === null) return; // Nothing was selected
       var attr = element.match(/(.*?)\(/g)[0];
       attr = attr.substr(0, attr.length - 1).toLowerCase();
       var elements = JSON.parse($html.attr('data-mockupdd-' + attr));
@@ -312,6 +358,24 @@ var Modal = {
 
       // We remove the element from the select.
       $removeAnnotation.find('option[value="' + element + '"]').remove();
+    });
+    setDialogProperties();
+  },
+  "spinnerModal": function (spinner) {
+    currentWidget = $(spinner);
+    var modalStructure = $.parseHTML(propertiesModalTemplate);
+    $("body").append($(modalStructure));
+    var form = $(modalStructure).find("form");
+    $(form).append(
+      $.parseHTML(
+        "<div class=\"form-group\">" +
+        "<label for=\"placeholder\" class=\"control-label\">Placeholder:</label>" +
+        "<spinner type=\"text\" name=\"placeholder\" id=\"placeholder\" value=\"" + $(spinner).attr("placeholder") +
+        '"class="form-control mk-modal-input">' +
+        "</div>"));
+    $("#modal-apply").click(function () {
+      currentWidget.attr("placeholder", $("#dialog-form").find("input[name='placeholder']").val());
+      $(".modal").remove();
     });
     setDialogProperties();
   }

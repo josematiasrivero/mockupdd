@@ -291,6 +291,58 @@ img.mk-draggable {
     text-decoration: underline;
 }
 
+.checkbox.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
+.checkbox.label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.radio.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
+.radio.label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.spinner.code {
+    font-family: "courier";
+}
+
+.spinner.mk-draggable {
+    position: absolute;
+    cursor: pointer;
+    width: 150px;
+    height: 30px;
+}
+
+.spinner.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
 .mockupdd-annotation {
     background-color: #FFEE99;
     position: absolute;

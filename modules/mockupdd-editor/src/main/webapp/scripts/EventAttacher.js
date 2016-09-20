@@ -15,6 +15,8 @@ var EventAttacher = function () {
          */
         if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'img') {
           var $parent = $(e).parent();
+          if ($parent.attr('type') === 'checkbox' ||
+            $parent.attr('type') === 'radio') $parent = $parent.parent();
           $parent.draggable({
             start: function (event, ui) {
               $(this).data('preventBehaviour', true);
@@ -48,7 +50,7 @@ var EventAttacher = function () {
       });
     },
     attachContextualMenus: function () {
-      $('.mk-contextual-menu').mousedown(function() {
+      $('.mk-contextual-menu').mousedown(function () {
         if (event.which == 3) {
           $(this).contextMenu();
         }
@@ -56,16 +58,19 @@ var EventAttacher = function () {
       $.contextMenu({
         selector: '.mk-contextual-menu',
         trigger: 'none',
-        callback: function(key, options) {
+        callback: function (key, options) {
           var $self = $(this); // Avoiding multiple computations of the same thing
           if (key === 'delete') {
             $self.remove();
-          } else if (key === 'properties') {
-            var tag = $self.prop('tagName').toLowerCase();
-            if (tag === 'h3') tag = 'title';
-            if (tag === 'div') tag = 'panel';
-            Modal.properties[tag+'Modal']($self);
-          } else if (key == 'annotations') {
+          } else if (key === "properties") {
+            var tag = $self.prop("tagName").toLowerCase();
+            if ($self.hasClass("checkbox")) tag = "checkbox";
+            else if ($self.hasClass("radio")) tag = "radio";
+            else if ($self.hasClass("spinner")) tag = "spinner";
+            else if (tag === 'h3') tag = "title";
+            else if (tag === 'div') tag = "panel";
+            Modal.properties[tag + "Modal"]($self);
+          } else if (key == "annotations") {
             Modal.annotations($self);
           } else { // bottom or front
             var tag = $self.prop('tagName').toLowerCase();
@@ -74,8 +79,12 @@ var EventAttacher = function () {
              * Some widgets, as the button, textarea, and input boxes, have a div
              * containing them, that div is what it has to move to bottom/front
              */
-            if (tag === 'button' || tag === 'textarea' || tag === 'input' || tag === 'img') {
-              $element = $self.closest('.' +  tag);
+            if (tag === "button" || tag === "textarea" || tag === "input" || tag === "img") {
+              if ($self.attr("type") === 'number') {
+                $element = $self.closest("." + "spinner");
+              } else {
+                $element = $self.closest("." + tag);
+              }
             } else {
               $element = $self;
             }
@@ -90,11 +99,11 @@ var EventAttacher = function () {
         },
         // Here goes all the options of the context menu
         items: {
-            'front': {name: 'Bring to front', icon: ''},
-            'bottom': {name: 'Send to bottom', icon: ''},
-            'delete': {name: 'Delete', icon: ''},
-            'properties': {name: 'Properties', icon: ''},
-            'annotations': {name: 'Annotations', icon: ''}
+          'front': {name: 'Bring to front', icon: ''},
+          'bottom': {name: 'Send to bottom', icon: ''},
+          'delete': {name: 'Delete', icon: ''},
+          'properties': {name: 'Properties', icon: ''},
+          'annotations': {name: 'Annotations', icon: ''}
         }
       });
     },
