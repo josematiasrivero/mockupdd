@@ -284,7 +284,7 @@ var Modal = {
         template = template.replace(placeholder, value); // We complete the placeholder with the actual value.
       }
       var attr = $html.attr('data-mockupdd-' + attrName[t]);
-      if (!attr) {
+      if (!attr || attr === '[]') {
         // If the attr is empty, add only the new template.
         $html.attr('data-mockupdd-' + attrName[t], '["' + template + '"]')
       } else {
@@ -299,14 +299,19 @@ var Modal = {
       e.preventDefault();
       var $removeAnnotation = $('#removeAnnotation');
       var element = $removeAnnotation.val();
+      if(element === null) return; // Nothing was selected
       var attr = element.match(/(.*?)\(/g)[0];
       attr = attr.substr(0, attr.length - 1).toLowerCase();
       var elements = JSON.parse($html.attr('data-mockupdd-' + attr));
+
+      // We remove the first element equal to 'element'.
       elements.splice(_.findIndex(elements, function (e) {
         return e == element;
-      }), 1); // We remove the first element equal to 'element'.
+      }), 1);
       $html.attr('data-mockupdd-' + attr, JSON.stringify(elements));
-      $removeAnnotation.find('option[value="' + element + '"]').remove(); // We remove the element from the select.
+
+      // We remove the element from the select.
+      $removeAnnotation.find('option[value="' + element + '"]').remove();
     });
     setDialogProperties();
   }
