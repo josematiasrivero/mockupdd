@@ -343,6 +343,22 @@ img.mk-draggable {
     height: 5px;
 }
 
+.tab.mk-draggable {
+    position: absolute;
+    cursor: pointer;
+    width: 352px;
+    height: 330px;
+}
+
+.tab.mk-draggable {
+    left: 285px;
+    top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 200px;
+    height: 43px;
+}
+
 .mockupdd-annotation {
     background-color: #FFEE99;
     position: absolute;

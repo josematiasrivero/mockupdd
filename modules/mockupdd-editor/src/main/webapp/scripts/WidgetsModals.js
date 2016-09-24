@@ -262,6 +262,36 @@ var Modal = {
       setDialogProperties();
     },
 
+    "tabModal": function (tab) {
+      currentWidget = $(tab);
+      var modalStructure = $.parseHTML(propertiesModalTemplate);
+      $("body").append($(modalStructure));
+      var form = $(modalStructure).find("form");
+      var tabInfo = "";
+      $(tab).find('li').each(function(){
+        if (tabInfo.length > 0) tabInfo += ",";
+        tabInfo += $(this).text();
+      });
+      $(form).append(
+        $.parseHTML(
+          "<div class=\"form-group\">" +
+          "<label for=\"text\" class=\"control-label\">Tabs (separated by commas):</label>" +
+          "<input type=\"text\" name=\"text\" id=\"text\" value=\"" + tabInfo +
+          '"class="form-control mk-modal-input">' +
+          "</div>"));
+      $("#modal-apply").click(function () {
+        currentWidget.find('li').each(function(){
+          $(this).remove();
+        });
+        var newTabs = $("#dialog-form").find("input[name='text']").val().split(",");
+        for (li in newTabs) {
+          currentWidget.append("<li class=\"active\"><a href=\"#\">" + newTabs[li] + "</a></li>");
+        }
+        $(".modal").remove();
+      });
+      setDialogProperties();
+    },
+
   },
 
   /*

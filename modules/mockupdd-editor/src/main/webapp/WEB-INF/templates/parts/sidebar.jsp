@@ -148,6 +148,15 @@
 						<span class="form-control"></span>
 					</div>
 				</div>
+
+				<div id="tab" class="col-md-6">
+					<div class="text-center">
+						<label class="control-label">Tab</label>
+					</div>
+					<div id="create-tab" class="text-center mk-widget-selector">
+						<span class="form-control"></span>
+					</div>
+				</div>
 			</div>
 
 		</div>

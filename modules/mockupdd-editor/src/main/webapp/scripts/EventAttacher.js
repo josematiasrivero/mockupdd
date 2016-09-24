@@ -65,6 +65,7 @@ var EventAttacher = function () {
           } else if (key === "properties") {
             var tag = $self.prop("tagName").toLowerCase();
             if ($self.hasClass("checkbox")) tag = "checkbox";
+            else if ($self.hasClass("tab")) tag = "tab";
             else if ($self.hasClass("radio")) tag = "radio";
             else if ($self.hasClass("spinner")) tag = "spinner";
             else if (tag === 'h3') tag = "title";

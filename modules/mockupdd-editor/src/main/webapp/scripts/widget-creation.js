@@ -120,4 +120,9 @@ $(window).on("load", function(){
     spinner.find("input").css("height", "30px").css("width", "137px");
   });
 
+  $('#tab').on('click', function () {
+    var tab = $('<ul class="tab nav nav-tabs draggable mk-draggable mk-resizable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul>');
+    _addToPage(tab);
+  });
+
 });
