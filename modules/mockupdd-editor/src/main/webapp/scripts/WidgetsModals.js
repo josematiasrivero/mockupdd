@@ -10,7 +10,7 @@
  * context menu is selected, and then removed when closing.
  * Inside 'form' tag, will be added the options of the specify widgets.
  */
-var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" role=\"dialog\" style=\"display: block;\">" +
+var commonTemplate = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" role=\"dialog\" style=\"display: block;\">" +
                   "<div class=\"modal-dialog [[modalSize]]\">" +
                     "<div class=\"modal-content\">" +
                       "<div class=\"modal-header\">" +
@@ -18,7 +18,7 @@ var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" ro
                         "<h4 class=\"modal-title\" id=\"exampleModalLabel\">[[title]]</h4>" +
                       "</div>" +
                       "<div class=\"modal-body\">" +
-                        "<form>" +
+                        "<form id=\"modal-form\">" +
                         "</form>" +
                       "</div>" +
                       "<div class=\"modal-footer\">" +
@@ -30,8 +30,8 @@ var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" ro
                 "</div>";
 
 // Define the modal templates for properties and annotations respectively.
-var propertiesModalTemplate = common.replace("[[title]]", "Widget properties").replace("[[modalSize]]", ""),
-  annotationsModalTemplate = common.replace("[[title]]", "Widget annotations").replace("[[modalSize]]", "modal-lg");
+var propertiesModalTemplate = commonTemplate.replace("[[title]]", "Widget properties").replace("[[modalSize]]", ""),
+  annotationsModalTemplate = commonTemplate.replace("[[title]]", "Widget annotations").replace("[[modalSize]]", "modal-lg");
 
 /*
  * 'currentWidget' will contain a reference to the current widget open (for properties or annotations).
@@ -47,6 +47,11 @@ function setDialogProperties() {
     $(e).click(function () {
       $(".modal").remove();
     })
+  });
+
+  // Do not send the params when the form is submitted.
+  $("#modal-form").submit(function(e){
+    e.preventDefault();
   });
 }
 
