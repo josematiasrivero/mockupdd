@@ -299,7 +299,7 @@ var Modal = {
 
   },
 
-  /*
+  /**
    * 'annotations' is a function, which has the information for widget annotations,
    * and receive by parameter the widget's html.
    */
@@ -373,6 +373,7 @@ var Modal = {
         $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + template + '"]');
       }
       $('#removeAnnotation').append('<option value="' + template + '">' + template + '</option>');
+      $html.parent().find('.annotation-list').append('<li value="' + template + '">' + template + '</li>');
       acceptAnnotation();
     });
 
@@ -381,7 +382,7 @@ var Modal = {
       var $removeAnnotation = $('#removeAnnotation');
       var element = $removeAnnotation.val();
       if (element === null) return; // Nothing was selected
-      var attr = element.match(/(.*?)\(/g)[0];
+      var attr = element.match(/(.*?)\(/g)[0]; // Get text before first '('.
       attr = attr.substr(0, attr.length - 1).toLowerCase();
       var elements = JSON.parse($html.attr('data-mockupdd-' + attr));
 
@@ -393,6 +394,7 @@ var Modal = {
 
       // We remove the element from the select.
       $removeAnnotation.find('option[value="' + element + '"]').remove();
+      $html.parent().find('.annotation-list').find('li[value="' + element + '"]').remove();
     });
     setDialogProperties();
   },
