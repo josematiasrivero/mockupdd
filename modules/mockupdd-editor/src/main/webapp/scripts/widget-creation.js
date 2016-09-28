@@ -45,9 +45,10 @@ $(window).on("load", function(){
    */
 
   $('#title').on('click', function () {
-    var title = $('<h3 class="mk-draggable mk-resizable mk-contextual-menu" contenteditable>New title</h3>');
-    createWidget(title);
+    var title = $('<div class="title draggable mk-draggable"></div>');
+    title.append('<h3 class="mk-draggable mk-resizable mk-contextual-menu">New title</h3>');
     _addToPage(title);
+    title.find("h3").css("left", "0px").css("top", "0px");
   });
 
   $('#label').on('click', function () {

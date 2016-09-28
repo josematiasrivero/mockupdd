@@ -86,6 +86,8 @@ var EventAttacher = function () {
               } else {
                 $element = $self.closest("." + tag);
               }
+            } else if (tag === 'h3') {
+              $element = $self.closest(".title");
             } else {
               $element = $self;
             }
