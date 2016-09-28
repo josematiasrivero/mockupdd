@@ -396,3 +396,15 @@ img.mk-draggable {
         width: 300px;
     }
 }
+
+ul.annotation-list {
+    background-color: rgb(250, 150, 50);
+    border: 1px solid rgb(230, 130, 30);
+    border-bottom: 0 initial;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul.annotation-list>li {
+    border-bottom: 1px solid rgb(230, 130, 30);
+}

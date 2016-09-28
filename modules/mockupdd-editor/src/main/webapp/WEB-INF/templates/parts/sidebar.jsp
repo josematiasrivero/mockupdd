@@ -33,7 +33,9 @@
 					<label>State:&nbsp;<span id="mockupState">Saved</span></label>
 				</div>
 				<div class="col-md-6 text-left">
-					<button class="btn btn-primary btn-sm" onclick="$('#conflictsModal').modal()">Detect conflicts</button>
+					<button class="btn btn-primary btn-xs" id="annotation-toggle" onclick="AnnotationToggleHandler()">
+                        Hide annotations
+                    </button>
 				</div>
 			</div>
 		</div>
@@ -163,3 +165,4 @@
 	</div>
 	<div id="main-content"></div>
 </div>
+<script src="/scripts/AnnotationToggleHandler.js"></script>

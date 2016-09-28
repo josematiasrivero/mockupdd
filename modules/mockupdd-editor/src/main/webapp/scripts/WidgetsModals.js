@@ -10,7 +10,7 @@
  * context menu is selected, and then removed when closing.
  * Inside 'form' tag, will be added the options of the specify widgets.
  */
-var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" role=\"dialog\" style=\"display: block;\">" +
+var commonTemplate = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" role=\"dialog\" style=\"display: block;\">" +
                   "<div class=\"modal-dialog [[modalSize]]\">" +
                     "<div class=\"modal-content\">" +
                       "<div class=\"modal-header\">" +
@@ -18,7 +18,7 @@ var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" ro
                         "<h4 class=\"modal-title\" id=\"exampleModalLabel\">[[title]]</h4>" +
                       "</div>" +
                       "<div class=\"modal-body\">" +
-                        "<form>" +
+                        "<form id=\"modal-form\">" +
                         "</form>" +
                       "</div>" +
                       "<div class=\"modal-footer\">" +
@@ -30,8 +30,8 @@ var common = "<div class=\"modal fade in\" id=\"dialog-form\" tabindex=\"-1\" ro
                 "</div>";
 
 // Define the modal templates for properties and annotations respectively.
-var propertiesModalTemplate = common.replace("[[title]]", "Widget properties").replace("[[modalSize]]", ""),
-  annotationsModalTemplate = common.replace("[[title]]", "Widget annotations").replace("[[modalSize]]", "modal-lg");
+var propertiesModalTemplate = commonTemplate.replace("[[title]]", "Widget properties").replace("[[modalSize]]", ""),
+  annotationsModalTemplate = commonTemplate.replace("[[title]]", "Widget annotations").replace("[[modalSize]]", "modal-lg");
 
 /*
  * 'currentWidget' will contain a reference to the current widget open (for properties or annotations).
@@ -47,6 +47,11 @@ function setDialogProperties() {
     $(e).click(function () {
       $(".modal").remove();
     })
+  });
+
+  // Do not send the params when the form is submitted.
+  $("#modal-form").submit(function(e){
+    e.preventDefault();
   });
 }
 
@@ -296,7 +301,7 @@ var Modal = {
 
   },
 
-  /*
+  /**
    * 'annotations' is a function, which has the information for widget annotations,
    * and receive by parameter the widget's html.
    */
@@ -370,6 +375,7 @@ var Modal = {
         $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + template + '"]');
       }
       $('#removeAnnotation').append('<option value="' + template + '">' + template + '</option>');
+      $html.parent().find('.annotation-list').append('<li value="' + template + '">' + template + '</li>');
       acceptAnnotation();
     });
 
@@ -378,7 +384,7 @@ var Modal = {
       var $removeAnnotation = $('#removeAnnotation');
       var element = $removeAnnotation.val();
       if (element === null) return; // Nothing was selected
-      var attr = element.match(/(.*?)\(/g)[0];
+      var attr = element.match(/(.*?)\(/g)[0]; // Get text before first '('.
       attr = attr.substr(0, attr.length - 1).toLowerCase();
       var elements = JSON.parse($html.attr('data-mockupdd-' + attr));
 
@@ -390,6 +396,7 @@ var Modal = {
 
       // We remove the element from the select.
       $removeAnnotation.find('option[value="' + element + '"]').remove();
+      $html.parent().find('.annotation-list').find('li[value="' + element + '"]').remove();
     });
     setDialogProperties();
   },
