@@ -52,8 +52,10 @@ $(window).on("load", function(){
   });
 
   $('#label').on('click', function () {
-    var label = $('<label class="mk-draggable mk-resizable mk-contextual-menu" contenteditable>New label</label>');
+    var label = $('<div class="mk-label draggable mk-draggable"></div>');
+    label.append('<label class="mk-draggable mk-resizable mk-contextual-menu">New label</label>');
     _addToPage(label);
+    label.find("label").css("left", "0px").css("top", "0px");
   });
 
   $('#input').on('click', function () {
