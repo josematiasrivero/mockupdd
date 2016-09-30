@@ -95,8 +95,10 @@ $(window).on("load", function(){
   });
 
   $('#link').on('click', function () {
-    var link = $('<a class="link mk-draggable mk-resizable mk-contextual-menu">New link</a>');
+    var link = $('<div class="link draggable mk-draggable"></div>');
+    link.append('<a class="mk-draggable mk-resizable mk-contextual-menu">New link</a>')
     _addToPage(link);
+    link.find("link").css("left", "0px").css("top", "0px");
   });
 
   $('#checkbox').on('click', function () {

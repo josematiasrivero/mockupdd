@@ -296,7 +296,15 @@ img.mk-draggable {
     height: 5px;
 }
 
-.link {
+a.mk-draggable {
+    position: absolute;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    margin: 0px;
+}
+
+.link.mk-draggable {
     left: 285px;
     top: 55px;
     position: absolute;
