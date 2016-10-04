@@ -279,7 +279,7 @@ var Modal = {
       $("body").append($(modalStructure));
       var form = $(modalStructure).find("form");
       var tabInfo = "";
-      $(tab).find('li').each(function(){
+      $(tab).find('li').each(function () {
         if (tabInfo.length > 0) tabInfo += ",";
         tabInfo += $(this).text();
       });
@@ -291,7 +291,7 @@ var Modal = {
           '"class="form-control mk-modal-input">' +
           "</div>"));
       $("#modal-apply").click(function () {
-        currentWidget.find('li').each(function(){
+        currentWidget.find('li').each(function () {
           $(this).remove();
         });
         var newTabs = $("#dialog-form").find("input[name='text']").val().split(",");
@@ -301,8 +301,7 @@ var Modal = {
         $(".modal").remove();
       });
       setDialogProperties();
-    },
-
+    }
   },
 
   /**
@@ -379,7 +378,7 @@ var Modal = {
         $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + template + '"]');
       }
       $('#removeAnnotation').append('<option value="' + template + '">' + template + '</option>');
-      $html.parent().find('.annotation-list').append('<li value="' + template + '">' + template + '</li>');
+      addAnnotationToList($html.parent(), template);
       acceptAnnotation();
     });
 
@@ -433,6 +432,21 @@ function displayHtml($html, time) {
   setTimeout(function () {
     $html.hide();
   }, time);
+}
+
+/**
+ * Add an annotation to the list of annotations.
+ * If no list is found add it to the div as a <ul>
+ * @param $div the div to add the annotations.
+ * @param annotation the annotation to add.
+ */
+function addAnnotationToList($div, annotation) {
+  var annotations = $div.parent().find('.annotation-list');
+  if (_.isEmpty(annotations)) {
+    $div.append('<ul class="annotation-list"></ul>');
+    annotations = $div.find('.annotation-list');
+  }
+  annotations.append('<li value="' + annotation + '">' + annotation + '</li>');
 }
 
 function acceptAnnotation() {
