@@ -443,8 +443,8 @@ function displayHtml($html, time) {
 function addAnnotationToList($div, annotation) {
   var annotations = $div.parent().find('.annotation-list');
   if (_.isEmpty(annotations)) {
-    $div.append('<ul class="annotation-list"></ul>');
-    annotations = $div.find('.annotation-list');
+    $div.parent().append('<ul class="annotation-list"></ul>');
+    annotations = $div.parent().find('.annotation-list');
   }
   annotations.append('<li value="' + annotation + '">' + annotation + '</li>');
 }

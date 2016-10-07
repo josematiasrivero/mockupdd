@@ -13,7 +13,7 @@ var EventAttacher = function () {
          * Widgets such as inputboxes, buttons, and textareas, need a more complicated
          * way of making them draggable, so that they can maintain they original behavior.
          */
-        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'img') {
+        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'img' || tagName == 'h3' || tagName == 'ul') {
           var $parent = $(e).parent();
           if ($parent.attr('type') === 'checkbox' ||
             $parent.attr('type') === 'radio') $parent = $parent.parent();
@@ -46,7 +46,11 @@ var EventAttacher = function () {
     attachResizableItems: function () {
       var page = $('#page');
       page.find('.mk-resizable').each(function (i, e) {
-        $(e).resizable();
+        $(e).resizable({
+          resize: function( event, ui ) {
+            $(e).parent().parent().find('ul').css('top', $(e).css('height'));
+          }
+        });
       });
     },
     attachContextualMenus: function () {
@@ -65,9 +69,9 @@ var EventAttacher = function () {
           } else if (key === "properties") {
             var tag = $self.prop("tagName").toLowerCase();
             if ($self.hasClass("checkbox")) tag = "checkbox";
-            else if ($self.hasClass("tab")) tag = "tab";
             else if ($self.hasClass("radio")) tag = "radio";
             else if ($self.hasClass("spinner")) tag = "spinner";
+            else if (tag === 'ul') tag = "tab";
             else if (tag === 'h3') tag = "title";
             else if (tag === 'div') tag = "panel";
             Modal.properties[tag + "Modal"]($self);

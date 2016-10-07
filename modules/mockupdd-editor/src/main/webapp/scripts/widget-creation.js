@@ -70,6 +70,8 @@ $(window).on("load", function(){
     var button = $('<div class="button draggable mk-draggable" contenteditable></div>');
     button.append('<button class="mk-draggable mk-resizable mk-contextual-menu">New button</button>');
     _addToPage(button);
+    button.append('<ul class="annotation-list"></ul>');
+    button.find('ul').css('top', button.find('button').css('height'));
   });
 
   $('#panel').on('click', function () {
@@ -126,8 +128,10 @@ $(window).on("load", function(){
   });
 
   $('#tab').on('click', function () {
-    var tab = $('<ul class="tab nav nav-tabs draggable mk-draggable mk-resizable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul>');
+    var tab = $('<div class="tab draggable mk-draggable"></div>');
+    tab.append('<ul class="nav nav-tabs draggable mk-draggable mk-resizable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul>')
     _addToPage(tab);
+    tab.find("tab").css("left", "0px").css("top", "0px");
   });
 
 });
