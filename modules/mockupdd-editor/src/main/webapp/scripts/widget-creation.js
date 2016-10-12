@@ -64,6 +64,8 @@ $(window).on("load", function(){
     _addToPage(input);
     input.find(".ui-wrapper").css("height", "60px").css("width", "170px");
     input.find("input").css("height", "30px").css("width", "137px");
+    input.append('<ul class="annotation-list empty"></ul>');
+    input.find('ul').css('top', input.find('input').css('height'));
   });
 
   $('#button').on('click', function () {
