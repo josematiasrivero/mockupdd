@@ -399,7 +399,11 @@ var Modal = {
 
       // We remove the element from the select.
       $removeAnnotation.find('option[value="' + element + '"]').remove();
-      $html.parent().find('.annotation-list').find('li[value="' + element + '"]').remove();
+      if ($html.parent().find('.annotation-list').length) {
+        $html.parent().find('.annotation-list').find('li[value="' + element + '"]').remove();
+      } else {
+        $html.parent().parent().find('.annotation-list').find('li[value="' + element + '"]').remove();
+      }
     });
     setDialogProperties();
   },
