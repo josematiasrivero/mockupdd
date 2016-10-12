@@ -414,13 +414,17 @@ a.mk-draggable {
 }
 
 ul.annotation-list {
-    background-color: rgb(250, 150, 50);
     border: 1px solid rgb(230, 130, 30);
+    background-color: rgb(250, 150, 50);
     border-bottom: 0 initial;
     padding: 0;
     width: 200px;
     position: absolute;
     list-style-type: none;
+}
+
+ul.annotation-list.empty {
+    border: 0 !important;
 }
 
 ul.annotation-list>li {

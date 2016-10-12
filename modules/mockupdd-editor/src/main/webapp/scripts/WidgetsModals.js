@@ -399,11 +399,12 @@ var Modal = {
 
       // We remove the element from the select.
       $removeAnnotation.find('option[value="' + element + '"]').remove();
-      if ($html.parent().find('.annotation-list').length) {
-        $html.parent().find('.annotation-list').find('li[value="' + element + '"]').remove();
-      } else {
-        $html.parent().parent().find('.annotation-list').find('li[value="' + element + '"]').remove();
+      var $list = $html.parent().find('.annotation-list');
+      if (!$list.length) {
+        $list = $html.parent().parent().find('.annotation-list');
       }
+      $list.find('li[value="' + element + '"]').remove();
+      checkAnnotationsEmpty($list);
     });
     setDialogProperties();
   },
@@ -445,12 +446,25 @@ function displayHtml($html, time) {
  * @param annotation the annotation to add.
  */
 function addAnnotationToList($div, annotation) {
-  var annotations = $div.parent().find('.annotation-list');
-  if (_.isEmpty(annotations)) {
+  var $list = $div.parent().find('.annotation-list');
+  if (_.isEmpty($list)) {
     $div.parent().append('<ul class="annotation-list"></ul>');
-    annotations = $div.parent().find('.annotation-list');
+    $list = $div.parent().find('.annotation-list');
   }
-  annotations.append('<li value="' + annotation + '">' + annotation + '</li>');
+  $list.append('<li value="' + annotation + '">' + annotation + '</li>');
+  checkAnnotationsEmpty($list);
+}
+
+/**
+ * If annotation list is empty, then modify its css
+ * @param $list the annotations list as a ul.
+ */
+function checkAnnotationsEmpty($list) {
+  if ($list.find('li').length) {
+    $list.removeClass('empty');
+  } else {
+    $list.addClass('empty');
+  }
 }
 
 function acceptAnnotation() {

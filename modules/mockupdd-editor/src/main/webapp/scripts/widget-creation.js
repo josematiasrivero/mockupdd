@@ -70,7 +70,7 @@ $(window).on("load", function(){
     var button = $('<div class="button draggable mk-draggable" contenteditable></div>');
     button.append('<button class="mk-draggable mk-resizable mk-contextual-menu">New button</button>');
     _addToPage(button);
-    button.append('<ul class="annotation-list"></ul>');
+    button.append('<ul class="annotation-list empty"></ul>');
     button.find('ul').css('top', button.find('button').css('height'));
   });
 
