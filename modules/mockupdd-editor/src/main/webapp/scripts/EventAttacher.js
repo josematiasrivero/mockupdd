@@ -65,7 +65,14 @@ var EventAttacher = function () {
         callback: function (key, options) {
           var $self = $(this); // Avoiding multiple computations of the same thing
           if (key === 'delete') {
-            $self.remove();
+            if ($self.parent().attr('id') === 'page') {
+              $self.remove();
+            } else if ($self.parent().parent().attr('id') === 'page') {
+              $self.parent().remove();
+            } else {
+              $self.parent().parent().remove();
+            }
+            return;
           } else if (key === "properties") {
             var tag = $self.prop("tagName").toLowerCase();
             if ($self.hasClass("checkbox")) tag = "checkbox";
