@@ -84,6 +84,8 @@ $(window).on("load", function(){
     $(panel).append(header);
     $(panel).append(body);
     _addToPage(panel);
+    panel.append('<ul class="annotation-list empty"></ul>');
+    panel.find('ul').css('top', panel.css('height'));
   });
 
   $('#textarea').on('click', function () {

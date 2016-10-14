@@ -378,7 +378,7 @@ var Modal = {
         $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + template + '"]');
       }
       $('#removeAnnotation').append('<option value="' + template + '">' + template + '</option>');
-      addAnnotationToList($html.parent(), template);
+      addAnnotationToList($html, template);
       acceptAnnotation();
     });
 
@@ -400,11 +400,13 @@ var Modal = {
       // We remove the element from the select.
       $removeAnnotation.find('option[value="' + element + '"]').remove();
       var $list = $html.parent().find('.annotation-list');
-      if (!$list.length) {
+      if ($html.hasClass('panel')) {
+        $list = $html.find('.annotation-list');
+      } else if (_.isEmpty($list)) {
         $list = $html.parent().parent().find('.annotation-list');
       }
       $list.find('li[value="' + element + '"]').remove();
-      checkAnnotationsEmpty($list);
+      checkAnnotationListIsEmpty($list);
     });
     setDialogProperties();
   },
@@ -446,20 +448,25 @@ function displayHtml($html, time) {
  * @param annotation the annotation to add.
  */
 function addAnnotationToList($div, annotation) {
-  var $list = $div.parent().find('.annotation-list');
-  if (_.isEmpty($list)) {
-    $div.parent().append('<ul class="annotation-list"></ul>');
-    $list = $div.parent().find('.annotation-list');
+  var $list;
+  if($div.hasClass('panel')) {
+    $list = $div.find('.annotation-list');
+  } else {
+    $list = $div.parent().parent().find('.annotation-list');
+    if (_.isEmpty($list)) {
+      $div.parent().parent().append('<ul class="annotation-list"></ul>');
+      $list = $div.parent().parent().find('.annotation-list');
+    }
   }
   $list.append('<li value="' + annotation + '">' + annotation + '</li>');
-  checkAnnotationsEmpty($list);
+  checkAnnotationListIsEmpty($list);
 }
 
 /**
  * If annotation list is empty, then modify its css
  * @param $list the annotations list as a ul.
  */
-function checkAnnotationsEmpty($list) {
+function checkAnnotationListIsEmpty($list) {
   if ($list.find('li').length) {
     $list.removeClass('empty');
   } else {
