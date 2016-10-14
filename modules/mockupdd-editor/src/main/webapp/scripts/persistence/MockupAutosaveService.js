@@ -22,6 +22,7 @@ function getHtmlToPersist() {
     $(e).remove();
   });
   $page.find('.ui-resizable').each(function (i, e) {
+    if($(e).hasClass('panel')) return;
     $(e).find('*').each(function (i, e) {
       if ($(e).is('div')) {
         $(e).remove();
