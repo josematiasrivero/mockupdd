@@ -105,6 +105,8 @@ $(window).on("load", function(){
     _addToPage(radio);
     radio.find('input').css('width', '14px').css('height', '14px');
     radio.css('width', '122px').css('height', '35px');
+    radio.append('<ul class="annotation-list empty"></ul>');
+    radio.find('ul').css('top', radio.css('height'));
   });
 
   $('#spinner').on('click', function () {
