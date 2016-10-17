@@ -46,9 +46,11 @@ $(window).on("load", function(){
 
   $('#title').on('click', function () {
     var title = $('<div class="title draggable mk-draggable"></div>');
-    title.append('<h3 class="mk-draggable mk-resizable mk-contextual-menu">New title</h3>');
+    title.append('<div class="mk-resizable" style="width: 200px; height: 22px;"><h3 class="mk-draggable mk-contextual-menu">New title</h3></div>');
     _addToPage(title);
     title.find("h3").css("left", "0px").css("top", "0px");
+    title.append('<ul class="annotation-list empty"></ul>');
+    title.find('ul').css('top', title.find('h3').css('height'));
   });
 
   $('#label').on('click', function () {

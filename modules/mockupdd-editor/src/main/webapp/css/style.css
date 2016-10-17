@@ -190,8 +190,6 @@ input.code {
 h3.mk-draggable {
     position: absolute;
     cursor: pointer;
-    width: 300px;
-    height: 70px;
     margin: 0px;
 }
 

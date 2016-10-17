@@ -76,9 +76,7 @@ var Modal = {
           '"class="form-control mk-modal-input">' +
           "</div>"));
       $("#modal-apply").click(function () {
-        currentWidget.resizable('destroy');
         currentWidget.text($("#dialog-form").find("input[name='label']").val());
-        currentWidget.resizable();
         $(".modal").remove();
       });
       setDialogProperties();
