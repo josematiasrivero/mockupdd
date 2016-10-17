@@ -47,15 +47,15 @@ var EventAttacher = function () {
     attachResizableItems: function () {
       var page = $('#page');
       page.find('.mk-resizable').each(function (i, e) {
-        if ($(e).is("button") || $(e).is("textarea")) {
+        if ($(e).is('button') || $(e).is('textarea') || $(e).is('img')) {
           $(e).resizable({
-            resize: function( event, ui ) {
+            resize: function (event, ui) {
               $(e).parent().parent().find('ul').css('top', $(e).css('height'));
             }
           });
         } else {
           $(e).resizable({
-            resize: function( event, ui ) {
+            resize: function (event, ui) {
               $(e).parent().find('ul').css('top', $(e).css('height'));
             }
           });
@@ -81,17 +81,16 @@ var EventAttacher = function () {
             } else {
               $self.parent().parent().remove();
             }
-            return;
-          } else if (key === "properties") {
-            var tag = $self.prop("tagName").toLowerCase();
-            if ($self.hasClass("checkbox")) tag = "checkbox";
-            else if ($self.hasClass("radio")) tag = "radio";
-            else if ($self.hasClass("spinner")) tag = "spinner";
-            else if (tag === 'ul') tag = "tab";
-            else if (tag === 'h3') tag = "title";
-            else if (tag === 'div') tag = "panel";
-            Modal.properties[tag + "Modal"]($self);
-          } else if (key == "annotations") {
+          } else if (key === 'properties') {
+            var tag = $self.prop('tagName').toLowerCase();
+            if ($self.hasClass('checkbox')) tag = 'checkbox';
+            else if ($self.hasClass('radio')) tag = 'radio';
+            else if ($self.hasClass('spinner')) tag = 'spinner';
+            else if (tag === 'ul') tag = 'tab';
+            else if (tag === 'h3') tag = 'title';
+            else if (tag === 'div') tag = 'panel';
+            Modal.properties[tag + 'Modal']($self);
+          } else if (key === 'annotations') {
             Modal.annotations($self);
           } else { // bottom or front
             var tag = $self.prop('tagName').toLowerCase();
@@ -100,14 +99,14 @@ var EventAttacher = function () {
              * Some widgets, as the button, textarea, and input boxes, have a div
              * containing them, that div is what it has to move to bottom/front
              */
-            if (tag === "button" || tag === "textarea" || tag === "input" || tag === "img") {
-              if ($self.attr("type") === 'number') {
-                $element = $self.closest("." + "spinner");
+            if (tag === 'button' || tag === 'textarea' || tag === 'input' || tag === 'img') {
+              if ($self.attr('type') === 'number') {
+                $element = $self.closest('.spinner');
               } else {
-                $element = $self.closest("." + tag);
+                $element = $self.closest('.' + tag);
               }
             } else if (tag === 'h3') {
-              $element = $self.closest(".title");
+              $element = $self.closest('.title');
             } else {
               $element = $self;
             }

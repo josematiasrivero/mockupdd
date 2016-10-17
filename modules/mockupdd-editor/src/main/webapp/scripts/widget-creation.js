@@ -3,32 +3,6 @@
  * Description: when the page is loaded, add all the events to create widgets.
  */
 
-function createWidget(dom) {
-  /*
-  $(dom).dblclick(function() {
-    var annotation = prompt("Annotation")
-    var parts = annotation.split("::");
-    var tag = parts[0].toLowerCase();
-    $(dom).attr("data-mockupdd-" + tag, parts[1]);
-  })
-  redrawAnnotations(dom);
-  */
-}
-
-function redrawAnnotations(widget) {
-
-}
-
-function drawAnnotation(widget, annotation) {
-  var annotation = $('<div class="mockupdd-annotation">' + annotation + '</div>');
-  annotation.attr("data-mockupdd-annotation-for", $(widget).attr("id"));
-  annotation.css({
-    "left": widget.offset().left + widget.width() - 10,
-    "top": widget.offset().top + widget.height() - 10
-  });
-  $("#page").append(annotation);
-}
-
 $(window).on("load", function(){
 
 
@@ -102,13 +76,15 @@ $(window).on("load", function(){
 
   $('#image').on('click', function () {
     var image = $('<div class="img draggable mk-draggable" placeholder="This is an Image"></div>');
-    image.append('<img class="mk-draggable mk-resizable mk-contextual-menu" src="' + $("#create-image").find('img').attr('src') + '"/>');
+    image.append('<img class="mk-draggable mk-resizable mk-contextual-menu" src="' + $('#create-image').find('img').attr('src') + '"/>');
     _addToPage(image);
+    image.append('<ul class="annotation-list empty"></ul>');
+    image.find('ul').css('top', image.find('.ui-wrapper').css('height'));
   });
 
   $('#link').on('click', function () {
     var link = $('<div class="link draggable mk-draggable"></div>');
-    link.append('<a class="mk-draggable mk-resizable mk-contextual-menu">New link</a>')
+    link.append('<a class="mk-draggable mk-resizable mk-contextual-menu">New link</a>');
     _addToPage(link);
     link.find("link").css("left", "0px").css("top", "0px");
   });
@@ -139,7 +115,7 @@ $(window).on("load", function(){
 
   $('#tab').on('click', function () {
     var tab = $('<div class="tab draggable mk-draggable"></div>');
-    tab.append('<ul class="nav nav-tabs draggable mk-draggable mk-resizable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul>')
+    tab.append('<ul class="nav nav-tabs draggable mk-draggable mk-resizable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul>');
     _addToPage(tab);
     tab.find("tab").css("left", "0px").css("top", "0px");
   });
