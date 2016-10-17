@@ -96,6 +96,8 @@ $(window).on("load", function(){
     var textarea = $('<div class="textarea draggable mk-draggable" placeholder="This is a Text Area"></div>');
     textarea.append('<textarea class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="This is a Text Area"></textarea>');
     _addToPage(textarea);
+    textarea.append('<ul class="annotation-list empty"></ul>');
+    textarea.find('ul').css('top', textarea.find('textarea').css('height'));
   });
 
   $('#image').on('click', function () {
