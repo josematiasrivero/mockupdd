@@ -97,9 +97,7 @@ var Modal = {
           '"class="form-control mk-modal-input">' +
           "</div>"));
       $("#modal-apply").click(function () {
-        currentWidget.resizable('destroy');
         currentWidget.text($("#dialog-form").find("input[name='label']").val());
-        currentWidget.resizable();
         $(".modal").remove();
       });
       setDialogProperties();
@@ -378,7 +376,7 @@ var Modal = {
         $html.attr('data-mockupdd-' + attrName[t], attr.substr(0, attr.length - 1) + ', "' + template + '"]');
       }
       $('#removeAnnotation').append('<option value="' + template + '">' + template + '</option>');
-      addAnnotationToList($html, template);
+      addAnnotationToList($html.parent(), template);
       acceptAnnotation();
     });
 
@@ -400,13 +398,11 @@ var Modal = {
       // We remove the element from the select.
       $removeAnnotation.find('option[value="' + element + '"]').remove();
       var $list = $html.parent().find('.annotation-list');
-      if ($html.hasClass('panel')) {
-        $list = $html.find('.annotation-list');
-      } else if (_.isEmpty($list)) {
+      if (!$list.length) {
         $list = $html.parent().parent().find('.annotation-list');
       }
       $list.find('li[value="' + element + '"]').remove();
-      checkAnnotationListIsEmpty($list);
+      checkAnnotationsEmpty($list);
     });
     setDialogProperties();
   },
@@ -444,29 +440,24 @@ function displayHtml($html, time) {
 /**
  * Add an annotation to the list of annotations.
  * If no list is found add it to the div as a <ul>
- * @param $div the div to add the annotations.
+ * @param $div the div to adé d the annotations.
  * @param annotation the annotation to add.
  */
 function addAnnotationToList($div, annotation) {
-  var $list;
-  if($div.hasClass('panel')) {
-    $list = $div.find('.annotation-list');
-  } else {
-    $list = $div.parent().parent().find('.annotation-list');
-    if (_.isEmpty($list)) {
-      $div.parent().parent().append('<ul class="annotation-list"></ul>');
-      $list = $div.parent().parent().find('.annotation-list');
-    }
+  var $list = $div.parent().find('.annotation-list');
+  if (_.isEmpty($list)) {
+    $div.parent().append('<ul class="annotation-list"></ul>');
+    $list = $div.parent().find('.annotation-list');
   }
   $list.append('<li value="' + annotation + '">' + annotation + '</li>');
-  checkAnnotationListIsEmpty($list);
+  checkAnnotationsEmpty($list);
 }
 
 /**
  * If annotation list is empty, then modify its css
  * @param $list the annotations list as a ul.
  */
-function checkAnnotationListIsEmpty($list) {
+function checkAnnotationsEmpty($list) {
   if ($list.find('li').length) {
     $list.removeClass('empty');
   } else {

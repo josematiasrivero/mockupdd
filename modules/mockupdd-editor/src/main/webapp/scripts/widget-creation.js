@@ -53,9 +53,11 @@ $(window).on("load", function(){
 
   $('#label').on('click', function () {
     var label = $('<div class="mk-label draggable mk-draggable"></div>');
-    label.append('<label class="mk-draggable mk-resizable mk-contextual-menu">New label</label>');
+    label.append('<div class="mk-resizable" style="width: 200px; height: 22px;"><label class="mk-draggable mk-contextual-menu">New label</label></div>');
     _addToPage(label);
     label.find("label").css("left", "0px").css("top", "0px");
+    label.append('<ul class="annotation-list empty"></ul>');
+    label.find('ul').css('top', label.find('label').css('height'));
   });
 
   $('#input').on('click', function () {

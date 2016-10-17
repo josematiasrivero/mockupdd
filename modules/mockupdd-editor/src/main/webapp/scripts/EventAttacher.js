@@ -13,10 +13,11 @@ var EventAttacher = function () {
          * Widgets such as inputboxes, buttons, and textareas, need a more complicated
          * way of making them draggable, so that they can maintain they original behavior.
          */
-        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'img' || tagName == 'h3' || tagName == 'ul') {
+        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'label' || tagName == 'img' || tagName == 'h3' || tagName == 'ul') {
           var $parent = $(e).parent();
-          if ($parent.attr('type') === 'checkbox' ||
-            $parent.attr('type') === 'radio') $parent = $parent.parent();
+          if ($parent.attr('type') === 'checkbox' || $parent.attr('type') === 'radio' || tagName == 'label') {
+            $parent = $parent.parent();
+          }
           $parent.draggable({
             start: function (event, ui) {
               $(this).data('preventBehaviour', true);
