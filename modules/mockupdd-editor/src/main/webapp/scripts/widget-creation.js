@@ -86,38 +86,40 @@ $(window).on("load", function(){
     var link = $('<div class="link draggable mk-draggable"></div>');
     link.append('<a class="mk-draggable mk-resizable mk-contextual-menu">New link</a>');
     _addToPage(link);
-    link.find("link").css("left", "0px").css("top", "0px");
+    link.find('link').css('left', '0px').css('top', '0px');
   });
 
   $('#checkbox').on('click', function () {
     var checkbox = $('<div class="checkbox draggable mk-draggable mk-resizable mk-contextual-menu"></div>');
     checkbox.append('<label><input type="checkbox" class="form-control" value="New checkbox">New checkbox</label>');
     _addToPage(checkbox);
-    checkbox.find("input").css("width", "14px").css("height", "14px");
-    checkbox.css("width", "122px").css("height", "35px");
+    checkbox.find('input').css('width', '14px').css('height', '14px');
+    checkbox.css('width', '122px').css('height', '35px');
+    checkbox.append('<ul class="annotation-list empty"></ul>');
+    checkbox.find('ul').css('top', checkbox.css('height'));
   });
 
   $('#radio').on('click', function () {
     var radio = $('<div class="radio draggable mk-draggable mk-resizable mk-contextual-menu"></div>');
     radio.append('<label><input type="radio" class="form-control" value="New radio">New radio</label>');
     _addToPage(radio);
-    radio.find("input").css("width", "14px").css("height", "14px");
-    radio.css("width", "122px").css("height", "35px");
+    radio.find('input').css('width', '14px').css('height', '14px');
+    radio.css('width', '122px').css('height', '35px');
   });
 
   $('#spinner').on('click', function () {
     var spinner = $('<div class="spinner draggable mk-draggable" contenteditable></div>');
     spinner.append('<input type="number" class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="New input">');
     _addToPage(spinner);
-    spinner.find(".ui-wrapper").css("height", "60px").css("width", "170px");
-    spinner.find("input").css("height", "30px").css("width", "137px");
+    spinner.find('.ui-wrapper').css('height', '60px').css('width', '170px');
+    spinner.find('input').css('height', '30px').css('width', '137px');
   });
 
   $('#tab').on('click', function () {
     var tab = $('<div class="tab draggable mk-draggable"></div>');
     tab.append('<ul class="nav nav-tabs draggable mk-draggable mk-resizable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul>');
     _addToPage(tab);
-    tab.find("tab").css("left", "0px").css("top", "0px");
+    tab.find('tab').css('left', '0px').css('top', '0px');
   });
 
 });
