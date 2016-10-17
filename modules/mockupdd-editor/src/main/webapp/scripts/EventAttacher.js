@@ -47,7 +47,7 @@ var EventAttacher = function () {
     attachResizableItems: function () {
       var page = $('#page');
       page.find('.mk-resizable').each(function (i, e) {
-        if ($(e).is('button') || $(e).is('textarea') || $(e).is('img')) {
+        if ($(e).is('button') || $(e).is('textarea') || $(e).is('img') || $(e).hasClass('spinner-input')) {
           $(e).resizable({
             resize: function (event, ui) {
               $(e).parent().parent().find('ul').css('top', $(e).css('height'));

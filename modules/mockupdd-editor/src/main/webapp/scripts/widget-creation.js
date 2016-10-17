@@ -111,10 +111,12 @@ $(window).on("load", function(){
 
   $('#spinner').on('click', function () {
     var spinner = $('<div class="spinner draggable mk-draggable" contenteditable></div>');
-    spinner.append('<input type="number" class="form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="New input">');
+    spinner.append('<input type="number" class="spinner-input form-control mk-draggable mk-resizable mk-contextual-menu" placeholder="New input">');
     _addToPage(spinner);
     spinner.find('.ui-wrapper').css('height', '60px').css('width', '170px');
     spinner.find('input').css('height', '30px').css('width', '137px');
+    spinner.append('<ul class="annotation-list empty"></ul>');
+    spinner.find('ul').css('top', spinner.find('input').css('height'));
   });
 
   $('#tab').on('click', function () {
