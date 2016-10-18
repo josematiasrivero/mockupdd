@@ -83,10 +83,11 @@ $(window).on("load", function(){
   });
 
   $('#link').on('click', function () {
-    var link = $('<div class="link draggable mk-draggable"></div>');
-    link.append('<a class="mk-draggable mk-resizable mk-contextual-menu">New link</a>');
+    var link = $('<div class="link draggable mk-draggable mk-resizable mk-contextual-menu"></div>');
+    link.append('<a>New link</a>');
     _addToPage(link);
-    link.find('link').css('left', '0px').css('top', '0px');
+    link.append('<ul class="annotation-list empty"></ul>');
+    link.find('ul').css('top', link.css('height'));
   });
 
   $('#checkbox').on('click', function () {
