@@ -135,8 +135,8 @@
 					<div class="text-center">
 						<label class="control-label">Radio</label>
 					</div>
-					<div id="create-radio" class="text-center mk-widget-selector">
-						<span class="form-control"></span>
+					<div id="create-radio" class="radio text-center mk-widget-selector">
+						<label><input type="radio" class="form-control" value="Check" style="width: 14px; height: 14px; margin-left: 0px; cursor: pointer;" disabled>Check</label>
 					</div>
 				</div>
 			</div>
