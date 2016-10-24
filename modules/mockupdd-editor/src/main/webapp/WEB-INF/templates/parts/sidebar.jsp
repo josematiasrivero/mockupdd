@@ -126,8 +126,8 @@
 					<div class="text-center">
 						<label class="control-label">Checkbox</label>
 					</div>
-					<div id="create-checkbox" class="text-center mk-widget-selector">
-						<span class="form-control"></span>
+					<div id="create-checkbox" class="checkbox text-center mk-widget-selector">
+						<label><input type="checkbox" class="form-control" value="Check" style="width: 14px; height: 14px; margin-left: 0px; cursor: pointer;" disabled>Check</label>
 					</div>
 				</div>
 
