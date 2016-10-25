@@ -376,6 +376,15 @@ a.mk-draggable {
     height: 5px;
 }
 
+.spinner.input {
+    cursor: pointer;
+}
+
+input[type=number]:hover::-webkit-inner-spin-button,
+input[type=number]:hover::-webkit-outer-spin-button {
+   opacity: 1;
+}
+
 .tab.mk-draggable {
     position: absolute;
     cursor: pointer;

@@ -147,7 +147,7 @@
 						<label class="control-label">Spinner</label>
 					</div>
 					<div id="create-spinner" class="text-center mk-widget-selector">
-						<span class="form-control"></span>
+						<input type="number" class="form-control" style="width: 88px; cursor: pointer; color: white;">
 					</div>
 				</div>
 
