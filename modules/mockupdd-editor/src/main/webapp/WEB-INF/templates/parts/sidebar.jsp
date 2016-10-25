@@ -156,7 +156,11 @@
 						<label class="control-label">Tab</label>
 					</div>
 					<div id="create-tab" class="text-center mk-widget-selector">
-						<span class="form-control"></span>
+						<ul class="nav nav-tabs">
+						  <li class="active">
+						    <a href="#">Tab</a>
+						  </li>
+						</ul>
 					</div>
 				</div>
 			</div>
