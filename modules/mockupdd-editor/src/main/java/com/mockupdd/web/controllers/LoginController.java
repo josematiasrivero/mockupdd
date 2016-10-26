@@ -16,4 +16,9 @@ public class LoginController extends BaseController {
     return this.getView("login");
   }
 
+  @RequestMapping("/")
+  public ModelAndView allReadyLogged() {
+    return new ModelAndView("redirect:/projects/");
+  }
+
 }
