@@ -122,9 +122,11 @@ $(window).on("load", function(){
 
   $('#tab').on('click', function () {
     var tab = $('<div class="tab draggable mk-draggable"></div>');
-    tab.append('<ul class="nav nav-tabs draggable mk-draggable mk-resizable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul>');
+    tab.append('<div class="mk-resizable" style="width: 200px; height: 55px;"><ul class="nav nav-tabs mk-draggable mk-contextual-menu"><li class="active"><a href="#">Tab1</a></li></ul></div>');
     _addToPage(tab);
     tab.find('tab').css('left', '0px').css('top', '0px');
+    tab.append('<ul class="annotation-list empty"></ul>');
+    tab.find('ul').css('top', tab.find('.nav-tabs').css('height'));
   });
 
 });
