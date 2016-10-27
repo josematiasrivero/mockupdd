@@ -244,9 +244,16 @@ label.mk-draggable {
     font-size: 16px;
 }
 
-.panel.mk-draggable {
+.mk-panel.mk-draggable {
     left: 285px;
     top: 55px;
+    position: absolute;
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+}
+
+.panel.mk-draggable {
     position: absolute;
     cursor: pointer;
     width: 300px;

@@ -443,6 +443,7 @@ function displayHtml($html, time) {
  */
 function addAnnotationToList($div, annotation) {
   var $list = $div.parent().find('.annotation-list');
+  if ($div.hasClass('mk-panel')) $list = $div.find('.annotation-list');
   if (_.isEmpty($list)) {
     $div.parent().append('<ul class="annotation-list"></ul>');
     $list = $div.parent().find('.annotation-list');

@@ -55,15 +55,17 @@ $(window).on("load", function(){
   });
 
   $('#panel').on('click', function () {
+    var container = $('<div class="mk-panel draggable mk-draggable"></div>')
     var header = $('<div class="panel-heading"><div contenteditable>Header text</div></div>');
     var body = $('<div class="panel-body" contenteditable>Paragraph text</div>');
     body.css('font-size', '14px');
-    var panel = $('<div class="panel panel-info mk-draggable mk-resizable mk-contextual-menu"></div>');
+    var panel = $('<div class="panel panel-info mk-draggable mk-contextual-menu"></div>');
     $(panel).append(header);
     $(panel).append(body);
-    _addToPage(panel);
-    panel.append('<ul class="annotation-list empty"></ul>');
-    panel.find('ul').css('top', panel.css('height'));
+    $(container).append(panel);
+    _addToPage(container);
+    container.append('<ul class="annotation-list empty"></ul>');
+    container.find('ul').css('top', container.find('.panel').css('height'));
   });
 
   $('#textarea').on('click', function () {

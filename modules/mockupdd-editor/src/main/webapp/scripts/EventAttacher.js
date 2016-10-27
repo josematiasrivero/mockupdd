@@ -13,7 +13,7 @@ var EventAttacher = function () {
          * Widgets such as inputboxes, buttons, and textareas, need a more complicated
          * way of making them draggable, so that they can maintain they original behavior.
          */
-        if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'h3' || tagName == 'label' || tagName == 'img' || tagName == 'h3' || tagName == 'ul') {
+        if ($(e).hasClass('panel') || tagName === 'input' || tagName === 'button' || tagName == 'textarea' || tagName == 'h3' || tagName == 'label' || tagName == 'img' || tagName == 'h3' || tagName == 'ul') {
           var $parent = $(e).parent();
           if ($parent.attr('type') === 'checkbox' || $parent.attr('type') === 'radio' || tagName == 'h3' || tagName == 'label') {
             $parent = $parent.parent();
