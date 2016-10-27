@@ -86,9 +86,10 @@ var EventAttacher = function () {
             if ($self.hasClass('checkbox')) tag = 'checkbox';
             else if ($self.hasClass('radio')) tag = 'radio';
             else if ($self.hasClass('spinner')) tag = 'spinner';
+            else if ($self.hasClass('panel')) tag = 'panel';
+            else if ($self.hasClass('link')) tag = 'link';
             else if (tag === 'ul') tag = 'tab';
             else if (tag === 'h3') tag = 'title';
-            else if (tag === 'div') tag = 'panel';
             Modal.properties[tag + 'Modal']($self);
           } else if (key === 'annotations') {
             Modal.annotations($self);

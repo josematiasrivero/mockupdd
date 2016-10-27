@@ -202,23 +202,23 @@ var Modal = {
       setDialogProperties();
     },
 
-    "aModal": function (link) {
+    "linkModal": function (link) {
       currentWidget = $(link);
       var modalStructure = $.parseHTML(propertiesModalTemplate);
-      $("body").append($(modalStructure));
-      var form = $(modalStructure).find("form");
+      $('body').append($(modalStructure));
+      var form = $(modalStructure).find('form');
       $(form).append(
         $.parseHTML(
-          "<div class=\"form-group\">" +
-          "<label for=\"text\" class=\"control-label\">Text:</label>" +
-          "<input type=\"text\" name=\"text\" id=\"text\" value=\"" + $(link).text() +
-          '"class="form-control mk-modal-input">' +
-          "</div>"));
-      $("#modal-apply").click(function () {
+          '<div class="form-group">' +
+          '<label for="text" class="control-label">Text:</label>' +
+          '<input type="text" name="text" id="text" value="' + $(link).text() + '" ' +
+          'class="form-control mk-modal-input">' +
+          '</div>'));
+      $('#modal-apply').click(function () {
         currentWidget.resizable('destroy');
-        currentWidget.text($("#dialog-form").find("input[name='text']").val());
+        currentWidget.find('a').text($('#dialog-form').find("input[name='text']").val());
         currentWidget.resizable();
-        $(".modal").remove();
+        $('.modal').remove();
       });
       setDialogProperties();
     },
