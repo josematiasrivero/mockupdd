@@ -95,6 +95,10 @@ var EventAttacher = function () {
             Modal.annotations($self);
           } else { // bottom or front
             var tag = $self.prop('tagName').toLowerCase();
+            if($self.hasClass('panel')) {
+              $self = $self.parent();
+              tag = 'panel';
+            }
             var $element, $parent;
             /*
              * Some widgets, as the button, textarea, and input boxes, have a div
