@@ -21,14 +21,18 @@ Example:
 
 ### widget-creation.js
 
-- Add an entry so that when clicking on the id "widget-id" on the sidebar, it creates a new widget of that kind.
+- Add an entry so that when clicking on the id "widget-id" on the sidebar, it creates a new widget of that kind. Widgets must be within a div container, that wraps the widget, with some special classes to make it draggable.
 Example:
 
   ```javascript
   $('#widget-id').on('click', function () {
-      var widget = "html of the new widget";
-      _addToPage(widget);
-    });
+    var widget = $('<div class="mk-widget draggable mk-draggable"></div>');
+    widget.append('<div class="mk-resizable" style="width: 200px; height: 22px;"><widget class="mk-draggable mk-contextual-menu">New widget</widget></div>');
+    _addToPage(widget);
+    widget.find("widget-id").css("left", "0px").css("top", "0px");
+    widget.append('<ul class="annotation-list empty"></ul>');
+    widget.find('ul').css('top', widget.find('widget').css('height'));
+  });
   ```
 
 ### style.css
@@ -37,19 +41,28 @@ Example:
 Example:
 
   ```css
-  img.mk-draggable {
+  widget.mk-draggable {
       position: absolute;
       cursor: pointer;
-      width: 352px;
-      height: 240px;
+      margin: 0px;
   }
-  .img.mk-draggable {
+  .widget.mk-draggable {
       left: 285px;
       top: 55px;
       position: absolute;
       cursor: pointer;
       width: 5px;
       height: 5px;
+  }
+  .mk-widget.mk-draggable {
+      left: 285px;
+      top: 55px;
+      position: absolute;
+      cursor: pointer;
+      width: 5px;
+      height: 5px;
+      color: black;
+      font-size: 16px;
   }
   ```
 
@@ -58,37 +71,43 @@ Example:
 Example (for a label property):
 
   ```javascript
-  "widget-nameModal": function (widget-name) {
-    currentWidget = $(widget-name);
+  "widgetModal": function (widget) {
+    currentWidget = $(widget);
     var modalStructure = $.parseHTML(propertiesModalTemplate);
     $("body").append($(modalStructure));
     var form = $(modalStructure).find("form");
     $(form).append(
       $.parseHTML(
         "<div class=\"form-group\">" +
-        "<label for=\"label\" class=\"control-label\">Label:</label>" +
-        "<input type=\"text\" name=\"label\" id=\"label\" value=\"" + $(label).text() +
+        "<label for=\"widget\" class=\"control-label\">Label:</label>" +
+        "<input type=\"text\" name=\"widget\" id=\"widget\" value=\"" + $(widget).text() +
         '"class="form-control mk-modal-input">' +
         "</div>"));
     $("#modal-apply").click(function () {
-      currentWidget.text($("#dialog-form").find("input[name='label']").val());
+      currentWidget.text($("#dialog-form").find("input[name='widget']").val());
+      $(".modal").remove();
     });
     setDialogProperties();
-  }
+  },
   ```
 
 ### EvantAttacher.js
 
-- If the widget is not contained into a div, don't do anything here.
-
-- In case it is, you must match the name of the tag, and look for the div parent. It is easy to do, just add the tag name of the widget:
+- The widget need to be identify in some way, so that it can look for the div parent. To perform this, just add the tag name of the widget (or class, or something that identify it):
   * (1) in 'attachDraggableItems' to look up the parent div
     this line ->
-    ```javascript
-    if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' ...)
-    ```
+  ```javascript
+  if (tagName === 'input' || tagName === 'button' || tagName == 'textarea' ...)
+  ```
   * (2) in the callback of the contextMenu for front/bottom option
     this line ->
-    ```javascript
-    if (tag === "button" || tag === "textarea" || tag === "input" ...)
-    ```
+  ```javascript
+  if (tag === "button" || tag === "textarea" || tag === "input" ...)
+  ```
+
+- Moreover, if the widget doesn't have a representative name, you must match the name, with the same you've used in the modal for properties, in attachContextualMenus, just as:
+  ```javascript
+  if ($self.hasClass('checkbox')) tag = 'checkbox';
+  else if ($self.hasClass('radio')) tag = 'radio';
+  else if ($self.hasClass('spinner')) tag = 'spinner';
+  ```
