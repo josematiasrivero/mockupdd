@@ -21,7 +21,7 @@ Example:
 
 ### widget-creation.js
 
-- Add an entry so that when clicking on the id "widget-id" on the sidebar, it creates a new widget of that kind. Widgets must be within a div container, that wraps the widget, with some special classes to make it draggable.
+- Add an entry so that when clicking on the id "widget-id" on the sidebar, it creates a new widget of that kind. Widgets must be within a `div` container, that wraps the widget, with some special classes to make it draggable.
 Example:
 
   ```javascript
@@ -37,7 +37,7 @@ Example:
 
 ### style.css
 
-- Just in case the widget you're adding is inside a div container, you musk a special class to this css file.
+- If the widget you are adding is inside a `div` container, you must add a special class to this css file.
 Example:
 
   ```css
@@ -67,8 +67,7 @@ Example:
   ```
 
 ### WidgetsModals.js
-- Add a new entry in properties array
-Example (for a label property):
+- Add a new entry in properties array. Example (for a `label` property):
 
   ```javascript
   "widgetModal": function (widget) {
@@ -93,7 +92,7 @@ Example (for a label property):
 
 ### EvantAttacher.js
 
-- The widget need to be identify in some way, so that it can look for the div parent. To perform this, just add the tag name of the widget (or class, or something that identify it):
+- The widget need to be identify in some way, so that it can look for the `div` parent. To perform this, just add the tag name of the widget (or class, or something that identify it):
   * (1) in 'attachDraggableItems' to look up the parent div
     this line ->
   ```javascript
